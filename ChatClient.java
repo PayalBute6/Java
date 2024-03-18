@@ -1,28 +1,92 @@
-//Q6 Write a program for a simple GUI based chat application between client and server.
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
 import java.io.*;
 import java.net.*;
 
-public class ChatClient
-{
-  public static void main(String[] args) throws Exception
-  {
-     Socket sock = new Socket("127.0.0.1", 3000);                          
-     BufferedReader keyRead = new BufferedReader(new InputStreamReader(System.in));                             
-     OutputStream ostream = sock.getOutputStream(); 
-     PrintWriter pwrite = new PrintWriter(ostream, true);                            
-     InputStream istream = sock.getInputStream();
-     BufferedReader receiveRead = new BufferedReader(new InputStreamReader(istream)); 
-     System.out.println("Start the chitchat, type and press Enter key");
-     String receiveMessage, sendMessage;               
-     while(true)
-     {
-        sendMessage = keyRead.readLine();  // keyboard reading
-        pwrite.println(sendMessage);       // sending to server
-        pwrite.flush();                    // flush the data
-        if((receiveMessage = receiveRead.readLine()) != null) //receive from server
-        {
-            System.out.println(receiveMessage); // displaying at DOS prompt
-        }         
-     }               
-   }                    
-}                        
+public class ChatClient extends JFrame {
+
+    private Socket socket;
+    private PrintWriter out;
+    private BufferedReader in;
+
+    private JTextArea chatArea;
+    private JTextField messageField;
+    private JButton sendButton;
+
+    public ChatClient() {
+        setTitle("Chat Client");
+        setSize(400, 300);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
+
+        chatArea = new JTextArea();
+        chatArea.setEditable(false);
+        JScrollPane scrollPane = new JScrollPane(chatArea);
+        add(scrollPane, BorderLayout.CENTER);
+
+        JPanel bottomPanel = new JPanel(new BorderLayout());
+        messageField = new JTextField();
+        bottomPanel.add(messageField, BorderLayout.CENTER);
+
+        sendButton = new JButton("Send");
+        sendButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                sendMessage();
+            }
+        });
+        bottomPanel.add(sendButton, BorderLayout.EAST);
+
+        add(bottomPanel, BorderLayout.SOUTH);
+
+        setVisible(true);
+
+        connectToServer();
+    }
+
+    private void connectToServer() {
+        try {
+            socket = new Socket("localhost", 8888);
+            out = new PrintWriter(socket.getOutputStream(), true);
+            in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+
+            Thread receivingThread = new Thread(new Runnable() {
+                public void run() {
+                    try {
+                        String message;
+                        while ((message = in.readLine()) != null) {
+                            appendMessage("Server: " + message);
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+            receivingThread.start();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void sendMessage() {
+        String message = messageField.getText().trim();
+        if (!message.isEmpty()) {
+            out.println(message);
+            appendMessage("Me: " + message);
+            messageField.setText("");
+        }
+    }
+
+    private void appendMessage(String message) {
+        chatArea.append(message + "\n");
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                new ChatClient();
+            }
+        });
+    }
+}
+

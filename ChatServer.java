@@ -1,27 +1,31 @@
 import java.io.*;
 import java.net.*;
-public class ChatServer
-{
- public static void main(String[] args) throws Exception
- {
-      ServerSocket sersock = new ServerSocket(3000);
-      System.out.println("Server  ready for chatting");
-      Socket sock = sersock.accept( );                          
-	BufferedReader keyRead = new BufferedReader(new InputStreamReader(System.in));
-	OutputStream ostream = sock.getOutputStream(); 
-	PrintWriter pwrite = new PrintWriter(ostream, true);
-	InputStream istream = sock.getInputStream();
-	BufferedReader receiveRead = new BufferedReader(new InputStreamReader(istream));
-	String receiveMessage, sendMessage;               
-	while(true)
-      {
-        if((receiveMessage = receiveRead.readLine()) != null)  
-        {
-           System.out.println(receiveMessage);         
-        }         
-        sendMessage = keyRead.readLine(); 
-        pwrite.println(sendMessage);             
-        pwrite.flush();
-      }               
-   }                    
-} 
+
+public class ChatServer {
+    public static void main(String[] args) {
+        try {
+            ServerSocket serverSocket = new ServerSocket(8888);
+            System.out.println("Server started. Waiting for a client...");
+
+            Socket clientSocket = serverSocket.accept();
+            System.out.println("Client connected.");
+
+            BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+            PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
+
+            String inputLine;
+            while ((inputLine = in.readLine()) != null) {
+                System.out.println("Client: " + inputLine);
+                out.println(inputLine);
+            }
+
+            in.close();
+            out.close();
+            clientSocket.close();
+            serverSocket.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+
