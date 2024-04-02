@@ -1,3 +1,5 @@
+/*Q1. Write a multithreading program in java to display all the vowels from a given String.*/
+
 import java.util.Scanner;
 
 class Vowel extends Thread {
