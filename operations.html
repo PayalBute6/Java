@@ -1,0 +1,22 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Arithmetic Operations</title>
+</head>
+<body>
+    <h1>Arithmetic Operations</h1>
+    <form method="post" action="result.jsp">
+        Enter first number: <input type="number" name="num1"><br><br>
+        Enter second number: <input type="number" name="num2"><br><br>
+        Select operation:<br>
+        <input type="radio" name="operation" value="addition" checked> Addition<br>
+        <input type="radio" name="operation" value="subtraction"> Subtraction<br>
+        <input type="radio" name="operation" value="multiplication"> Multiplication<br>
+        <input type="radio" name="operation" value="division"> Division<br><br>
+        <input type="submit" value="Calculate">
+    </form>
+</body>
+</html>
