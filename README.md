@@ -1,4 +1,3 @@
-# Java
 # Java Practice Repository
 
 A comprehensive collection of Java programming exercises and examples covering core concepts, networking, multithreading, GUI programming, and web development with JSP.
