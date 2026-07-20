@@ -3,7 +3,7 @@
 
 A comprehensive collection of Java programming exercises and examples covering core concepts, networking, multithreading, GUI programming, and web development with JSP.
 
-## 📚 Topics Covered
+## Topics Covered
 
 ### **Networking & Socket Programming**
 - Client-Server communication implementations
@@ -40,7 +40,7 @@ A comprehensive collection of Java programming exercises and examples covering c
 - SQL query execution
 - Data manipulation and retrieval
 
-## 🛠️ Technologies Used
+## Technologies Used
 - **Java** - Core programming language
 - **Java Networking** - Socket programming
 - **Java Threads** - Multithreading and concurrency
@@ -49,10 +49,10 @@ A comprehensive collection of Java programming exercises and examples covering c
 - **JDBC** - Database connectivity
 - **PostgreSQL** - Database management
 
-## 📝 Purpose
+## Purpose
 This repository serves as a learning resource and reference for Java programming concepts, demonstrating practical implementations of various computer science fundamentals and real-world applications.
 
-## 🚀 Usage
+## Usage
 Each Java file can be compiled and run independently:
 ```bash
 javac Filename.java
