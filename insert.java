@@ -5,14 +5,14 @@ public class insert
 {
   public static void main(String args[])
   {
-    try
+     try
     {
-	  Class.forName("org.postgresql.Driver");
+	  Class.forName("org.mysql.Driver");
 	  Connection conn=null ; 
 	  Statement stmt=null; 
 	
 
-       Connection con = DriverManager.getConnection("jdbc:postgresql:java","postgres", "");
+       Connection con = DriverManager.getConnection("jdbc:mysql//localhost:3306/java","Payal","1510");
 
 
 	  if(con==null)
