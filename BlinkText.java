@@ -40,4 +40,3 @@ public class BlinkText extends Frame implements Runnable
                         new BlinkText();
             }
 }
-
