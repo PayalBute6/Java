@@ -2,60 +2,52 @@
 
 A comprehensive collection of Java programming exercises and examples covering core concepts, networking, multithreading, GUI programming, and web development with JSP.
 
-## Topics Covered
+## Directory Structure
 
-### **Networking & Socket Programming**
-- Client-Server communication implementations
-- Chat application (ChatServer/ChatClient)
-- Date and time services (DateServer/DateClient)
-- File listing and text transfer services
-- Network utilities (IP detection, URL handling)
+The repository is organized into the following logical folders:
 
-### **Multithreading & Concurrency**
-- Producer-Consumer problem with thread synchronization
-- Thread demonstrations and join operations
-- Sleep-based thread coordination
-- Concurrent programming patterns
+### 📂 [Networking/](file:///f:/1.Java%20Practice/Java/Networking)
+- **Sockets & Client-Server Communication**: Chat, date/time, and file listing services.
+- **Utilities**: Echo server, IP address lookup, and URL handling.
 
-### **Algorithm & Problem Solving**
-- Array manipulation (ReverseArray, SecondLargestElement)
-- String operations (Palindrome, Vowel counting, PigLatin)
-- Mathematical problems (TwoSum, MaxNumber, FizzBuzz)
-- Frequency counting and data processing
+### 📂 [Multithreading/](file:///f:/1.Java%20Practice/Java/Multithreading)
+- **Concurrency Examples**: Producer-Consumer problem, join/sleep demonstrations, and custom multi-threaded calculations.
 
-### **GUI & Applet Programming**
-- Animated text effects (BlinkText, MovingText)
-- Graphics and animations (BouncingBall)
-- Interactive simulations (TrafficSignal)
+### 📂 [GUI_Applets/](file:///f:/1.Java%20Practice/Java/GUI_Applets)
+- **AWT & Applets**: Graphical animations (Bouncing Ball), interactive simulations (Traffic Signal), and animated/blinking text.
 
-### **Web Development (JSP)**
-- Database connectivity with PostgreSQL
-- CRUD operations (Insert, Update, Delete, Records)
-- Form handling and user input processing
-- Dynamic web page generation
+### 📂 [Database_JSP/](file:///f:/1.Java%20Practice/Java/Database_JSP)
+- **Web & DB Operations**: JSP files for dynamic web page generation and JDBC scripts demonstrating CRUD operations (Insert, Update, Delete, Records retrieval).
 
-### **Database Operations**
-- JDBC implementations
-- SQL query execution
-- Data manipulation and retrieval
+### 📂 [BasicPrograms/](file:///f:/1.Java%20Practice/Java/BasicPrograms)
+- **Core Java & Algorithms**: Basic math (Prime numbers, Armstrong numbers, Palindromes, Fibonacci/Factorial), array/matrix manipulation, string exercises (Pig Latin, Vowel counting), and OOP demonstrations (ATM system, Constructor usage, Employee/Student classes).
+
+---
 
 ## Technologies Used
-- **Java** - Core programming language
+- **Java SE** - Core programming language
 - **Java Networking** - Socket programming
 - **Java Threads** - Multithreading and concurrency
 - **Java AWT/Applet** - GUI programming
 - **JSP (JavaServer Pages)** - Web development
 - **JDBC** - Database connectivity
-- **PostgreSQL** - Database management
-
-## Purpose
-This repository serves as a learning resource and reference for Java programming concepts, demonstrating practical implementations of various computer science fundamentals and real-world applications.
+- **PostgreSQL / MySQL** - Database management
 
 ## Usage
-Each Java file can be compiled and run independently:
-```bash
-javac Filename.java
-java Filename
-```
 
-For JSP files, deploy to a web server (Apache Tomcat) with PostgreSQL database configured.
+Each Java file can be compiled and run independently from its folder:
+
+1. **Navigate to the subdirectory**:
+   ```bash
+   cd BasicPrograms
+   ```
+2. **Compile the program**:
+   ```bash
+   javac TwoSum.java
+   ```
+3. **Run the program**:
+   ```bash
+   java TwoSum
+   ```
+
+For JSP files, deploy them to a web application server (such as Apache Tomcat) and ensure the PostgreSQL/MySQL database server is configured as required by the JDBC connection strings.

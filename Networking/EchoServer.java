@@ -1,7 +1,7 @@
 import java.io.*;
 import java.net.*;
 
-public class ChatServer {
+public class EchoServer {
     public static void main(String[] args) {
         try {
             ServerSocket serverSocket = new ServerSocket(8888);
@@ -28,4 +28,3 @@ public class ChatServer {
         }
     }
 }
-
