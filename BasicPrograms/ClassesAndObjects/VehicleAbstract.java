@@ -1,39 +1,47 @@
-abstract class VehicleDemo{
+abstract class VehicleDemo {
     abstract void start();
-    void stop(){
+
+    void stop() {
         System.out.println("Vehicle stopped");
     }
 }
 
-class Car extends VehicleAbstract{
+class Car extends VehicleDemo {
     @Override
-    void start(){
+    void start() {
         System.out.println("Car started");
     }
 }
-class Bike extends VehicleAbstract{
+
+class Bike extends VehicleDemo {
     @Override
-    void start(){
+    void start() {
         System.out.println("Bike started");
     }
 }
-class Bus extends VehicleAbstract{
+
+class Bus extends VehicleDemo {
     @Override
-    void start(){
+    void start() {
         System.out.println("Bus started");
     }
 }
-class VehicleAbstract{
-    public static void main(String[] args){
+
+// Public class matching filename VehicleAbstract.java (Entry Point)
+public class VehicleAbstract {
+    public static void main(String[] args) {
         VehicleDemo v;
+
         v = new Car();
         v.start();
         v.stop();
+
         v = new Bike();
         v.start();
         v.stop();
+
         v = new Bus();
         v.start();
         v.stop();
     }
-}
+}
