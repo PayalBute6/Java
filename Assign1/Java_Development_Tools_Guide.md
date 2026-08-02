@@ -4,7 +4,7 @@ This document provides a detailed, step-by-step breakdown of Java core developme
 
 ---
 
-## 📌 Procedure Overview & Explanation of Each Step
+##  Procedure Overview & Explanation of Each Step
 
 ### **Step 1: Source Code Creation (`.java` File)**
 * **Concept:** Java is an object-oriented, strongly typed language. Java source code is saved with the `.java` file extension.
@@ -72,7 +72,7 @@ This document provides a detailed, step-by-step breakdown of Java core developme
 
 ---
 
-## 🛠️ Complete Hands-on Example: `Calculator.java`
+##  Complete Hands-on Example: `Calculator.java`
 
 To demonstrate these tools on a custom Java program, we created [Calculator.java](file:///f:/1.Java%20Practice/Java/Assign1/Calculator.java).
 
@@ -192,7 +192,7 @@ javadoc -d doc Calculator.java
 
 ---
 
-## 📊 Summary of JDK Tools
+##  Summary of JDK Tools
 
 | Tool | Purpose / Description | Syntax | Example |
 | :--- | :--- | :--- | :--- |
