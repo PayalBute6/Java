@@ -1,0 +1,22 @@
+public class Relational{
+    public static void main(String args[]){
+        int a = 10;
+        int b = 20;
+        int c = 25;
+        int d = 25;
+
+        System.out.println(a<b);
+        System.out.println(c>b);
+        System.out.println(c<=d);
+        System.out.println(c>=d);
+        System.out.println(c==d);
+        // System.out.println(c%a);
+        // System.out.println(a++);
+        // System.out.println(a--);
+        // System.out.println(d++);
+        // System.out.println(++d);
+
+        //System.out.println(a++);
+        //System.out.println(++a);
+    }
+}
