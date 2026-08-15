@@ -34,7 +34,7 @@ class Rectangle {
     }
 }
 
-public class P23_RectangleOOP {
+public class P23RectangleOOP {
 
     public static void main(String[] args) {
         System.out.println("==========================================");

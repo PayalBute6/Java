@@ -7,7 +7,7 @@
  * 2. Check if the original number is a Palindrome (reads same forwards and backwards).
  */
 
-public class P09_ReverseNumberAndPalindrome {
+public class P09ReverseNumberAndPalindrome {
 
     public static void main(String[] args) {
         int originalNum = 12321;

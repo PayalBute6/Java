@@ -7,10 +7,10 @@
  * and display the student's name, age, and percentage.
  * 
  * Execution example:
- * java P19_CommandLineArguments "Alice" 20 88.5
+ * java P19CommandLineArguments "Alice" 20 88.5
  */
 
-public class P19_CommandLineArguments {
+public class P19CommandLineArguments {
 
     public static void main(String[] args) {
         System.out.println("==========================================");

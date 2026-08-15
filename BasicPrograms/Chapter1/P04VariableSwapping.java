@@ -7,7 +7,7 @@
  * 2. Without using a third variable (using addition and subtraction).
  */
 
-public class P04_VariableSwapping {
+public class P04VariableSwapping {
 
     public static void main(String[] args) {
         System.out.println("==========================================");

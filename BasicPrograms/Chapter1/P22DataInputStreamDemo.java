@@ -10,7 +10,7 @@ import java.io.DataInputStream;
 import java.io.IOException;
 
 @SuppressWarnings("deprecation") // Suppress warning for DataInputStream.readLine()
-public class P22_DataInputStreamDemo {
+public class P22DataInputStreamDemo {
 
     public static void main(String[] args) {
         DataInputStream dis = new DataInputStream(System.in);

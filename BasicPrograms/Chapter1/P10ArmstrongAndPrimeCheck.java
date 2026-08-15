@@ -7,7 +7,7 @@
  * 2. Check whether a given number is a Prime number.
  */
 
-public class P10_ArmstrongAndPrimeCheck {
+public class P10ArmstrongAndPrimeCheck {
 
     public static void main(String[] args) {
         int number = 153;

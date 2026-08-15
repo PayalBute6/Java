@@ -6,7 +6,7 @@
  * Display the target's index position if found, or report if it is absent.
  */
 
-public class P15_LinearSearchArray {
+public class P15LinearSearchArray {
 
     public static void main(String[] args) {
         int[] dataset = { 15, 42, 8, 99, 63, 27, 74 };

@@ -6,7 +6,7 @@
  * (Addition, Subtraction, Multiplication, Division, Modulus) using switch-case.
  */
 
-public class P07_MenuDrivenCalculator {
+public class P07MenuDrivenCalculator {
 
     public static void main(String[] args) {
         double a = 20.0;

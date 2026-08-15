@@ -8,7 +8,7 @@
  * 3. Character to ASCII integer conversion and vice versa.
  */
 
-public class P03_TypeCastingDemo {
+public class P03TypeCastingDemo {
 
     public static void main(String[] args) {
         System.out.println("==========================================");

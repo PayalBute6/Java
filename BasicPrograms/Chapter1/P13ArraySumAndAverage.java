@@ -6,7 +6,7 @@
  * of its elements, and find the minimum and maximum values in the array.
  */
 
-public class P13_ArraySumAndAverage {
+public class P13ArraySumAndAverage {
 
     public static void main(String[] args) {
         int[] numbers = { 23, 45, 12, 67, 89, 34, 90, 11 };

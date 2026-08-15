@@ -7,7 +7,7 @@
  * 2. Generate and display the multiplication table for a given number.
  */
 
-public class P08_FactorialAndTable {
+public class P08FactorialAndTable {
 
     public static void main(String[] args) {
         int n = 5;

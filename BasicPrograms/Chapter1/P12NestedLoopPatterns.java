@@ -16,7 +16,7 @@
  * 1 2 3 4
  */
 
-public class P12_NestedLoopPatterns {
+public class P12NestedLoopPatterns {
 
     public static void main(String[] args) {
         int rows = 5;

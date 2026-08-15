@@ -10,10 +10,10 @@
  */
 
 /**
- * The P01_BasicStructureAndComments class demonstrates the fundamental structure of a Java program.
+ * The P01BasicStructureAndComments class demonstrates the fundamental structure of a Java program.
  * Every standard Java application requires a main method inside a class.
  */
-public class P01_BasicStructureAndComments {
+public class P01BasicStructureAndComments {
 
     /**
      * Main method - The entry point of any standalone Java application.

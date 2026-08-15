@@ -6,7 +6,7 @@
  * using the two-pointer technique (without creating a second array).
  */
 
-public class P14_ReverseArrayInPlace {
+public class P14ReverseArrayInPlace {
 
     public static void main(String[] args) {
         int[] arr = { 10, 20, 30, 40, 50, 60 };

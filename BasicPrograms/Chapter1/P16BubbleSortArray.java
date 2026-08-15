@@ -6,7 +6,7 @@
  * using the Bubble Sort algorithm.
  */
 
-public class P16_BubbleSortArray {
+public class P16BubbleSortArray {
 
     public static void main(String[] args) {
         int[] arr = { 64, 34, 25, 12, 22, 11, 90 };

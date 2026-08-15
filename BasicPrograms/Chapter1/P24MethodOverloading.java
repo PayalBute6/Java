@@ -6,7 +6,7 @@
  * methods to compute the area of a Circle, Rectangle, and Triangle based on parameters.
  */
 
-public class P24_MethodOverloading {
+public class P24MethodOverloading {
 
     // Overloaded method 1: Area of Circle (1 double parameter)
     public static double area(double radius) {

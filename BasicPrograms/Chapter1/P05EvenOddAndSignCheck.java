@@ -7,7 +7,7 @@
  * 2. Check whether a given integer is Even or Odd using the modulus operator (%).
  */
 
-public class P05_EvenOddAndSignCheck {
+public class P05EvenOddAndSignCheck {
 
     public static void main(String[] args) {
         int number = -14;

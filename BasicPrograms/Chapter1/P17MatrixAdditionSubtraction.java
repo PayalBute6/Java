@@ -6,7 +6,7 @@
  * and compute their Matrix Addition and Subtraction.
  */
 
-public class P17_MatrixAdditionSubtraction {
+public class P17MatrixAdditionSubtraction {
 
     public static void main(String[] args) {
         int[][] matrixA = {

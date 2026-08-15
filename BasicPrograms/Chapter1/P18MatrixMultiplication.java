@@ -6,7 +6,7 @@
  * after verifying dimension compatibility (cols of A == rows of B).
  */
 
-public class P18_MatrixMultiplication {
+public class P18MatrixMultiplication {
 
     public static void main(String[] args) {
         // Matrix A: 2x3

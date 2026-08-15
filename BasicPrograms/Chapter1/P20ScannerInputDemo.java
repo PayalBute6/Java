@@ -8,7 +8,7 @@
 
 import java.util.Scanner;
 
-public class P20_ScannerInputDemo {
+public class P20ScannerInputDemo {
 
     public static void main(String[] args) {
         // Create Scanner object attached to System.in (standard input stream)

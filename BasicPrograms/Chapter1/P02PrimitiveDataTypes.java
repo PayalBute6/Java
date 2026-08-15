@@ -7,7 +7,7 @@
  * and print their size in bytes using wrapper class constants.
  */
 
-public class P02_PrimitiveDataTypes {
+public class P02PrimitiveDataTypes {
 
     public static void main(String[] args) {
         // 1. Integer types (Integral numbers)

@@ -7,7 +7,7 @@
  * 2. Ternary Operator (? :).
  */
 
-public class P06_LargestOfThreeNumbers {
+public class P06LargestOfThreeNumbers {
 
     public static void main(String[] args) {
         int num1 = 45;
