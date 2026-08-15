@@ -1,40 +1,29 @@
 import java.util.Scanner;
 
-// Program to accept array elements from the user and display them in reverse order
 public class ReverseArray {
     public static void main(String[] args) {
-        // Create Scanner object to read input from keyboard
         Scanner sc = new Scanner(System.in);
 
-        // 1. Ask the user for the size of the array
-        System.out.print("Enter the size of the array: ");
-        int size = sc.nextInt();
+        // Step 1: Ask how many elements to store in the array
+        System.out.print("Enter how many numbers you want to enter: ");
+        int n = sc.nextInt();
 
-        // 2. Declare array of the specified size
-        int[] arr = new int[size];
+        // Step 2: Create an array of size n
+        int[] arr = new int[n];
 
-        // 3. Accept array elements from user input
-        System.out.println("\nEnter " + size + " elements:");
-        for (int i = 0; i < size; i++) {
-            System.out.print("Enter element at index " + i + ": ");
+        // Step 3: Take input from the user for the array
+        System.out.println("Enter " + n + " numbers:");
+        for (int i = 0; i < n; i++) {
             arr[i] = sc.nextInt();
         }
 
-        // 4. Display original array elements
-        System.out.print("\nOriginal Array: ");
-        for (int i = 0; i < size; i++) {
-            System.out.print(arr[i] + " ");
-        }
-
-        // 5. Display array elements in REVERSE order
-        // Loop starts from the last index (size - 1) down to index 0
-        System.out.print("\nReversed Array: ");
-        for (int i = size - 1; i >= 0; i--) {
+        // Step 4: Print elements in reverse order
+        System.out.println("\nNumbers in reverse order:");
+        for (int i = n - 1; i >= 0; i--) {
             System.out.print(arr[i] + " ");
         }
         System.out.println();
 
-        // Close scanner resource
         sc.close();
     }
 }
