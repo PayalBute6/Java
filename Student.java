@@ -1,33 +1,28 @@
-import java.util.Scanner;
-
 class Student
 {
-    int rollNo;
-    String name;
-    double marks;
+    private int rollNo = 101;
+    String name = "Amit";       // default
+    protected int marks = 80;
+    public String college = "ABC College";
 
     void display()
     {
         System.out.println("Roll No: " + rollNo);
         System.out.println("Name: " + name);
         System.out.println("Marks: " + marks);
+        System.out.println("College: " + college);
     }
 
     public static void main(String[] args)
     {
-        Scanner sc = new Scanner(System.in);
+        Student s = new Student();
 
-        Student s1 = new Student();
+        s.display();
 
-        System.out.print("Enter Roll No: ");
-        s1.rollNo = sc.nextInt();
+        System.out.println(s.name);
+        System.out.println(s.marks);
+        System.out.println(s.college);
 
-        System.out.print("Enter Name: ");
-        s1.name = sc.next();
-
-        System.out.print("Enter Marks: ");
-        s1.marks = sc.nextDouble();
-
-        s1.display();
+        // System.out.println(s.rollNo); // Error: private
     }
 }
