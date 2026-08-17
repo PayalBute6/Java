@@ -1,9 +1,25 @@
-public class MyClass {
-    public static void main(String[] args) {
-        System.out.println("Hello from MyClass!");
-        int a = 10;
-        int b = 20;
-        int c = a + b;
-        System.out.println("Sum: " + c);
+public class MyClass 
+    { 
+        int num; 
+        public MyClass() 
+        { 
+            num=0; 
+        } 
+        public MyClass(int num) 
+        { 
+            this.num = num; 
+        } 
+        public static void main(String[] args) 
+        { 
+            MyClass m1 = new MyClass(); 
+            if(args.length > 0) 
+            { 
+                int n = Integer.parseInt(args[0]); 
+                MyClass m2 = new MyClass(n); 
+                System.out.println(m1.num); 
+                System.out.println(m2.num); 
+            } 
+            else 
+            System.out.println("Insufficient arguments"); 
+        } 
     }
-}
