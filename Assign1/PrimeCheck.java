@@ -7,7 +7,7 @@ public class PrimeCheck {
         System.out.print("Enter a number: ");
         int num = sc.nextInt();
 
-        int count = 0;
+        int count=0;
 
         // Count how many numbers divide 'num' completely
         for (int i = 1; i <= num; i++) {
