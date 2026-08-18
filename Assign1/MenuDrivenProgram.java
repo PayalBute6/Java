@@ -3,46 +3,73 @@ import java.util.Scanner;
 public class MenuDrivenProgram {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int ch;
+        int choice;
 
         do {
-            System.out.println("\n1. Volume of Cylinder  2. Factorial  3. Armstrong Check  4. Exit");
-            System.out.print("Enter choice: ");
-            ch = sc.nextInt();
+            // Display Menu
+            System.out.println("\n1. Calculate Volume of Cylinder");
+            System.out.println("2. Find Factorial of a Number");
+            System.out.println("3. Check if Number is Armstrong");
+            System.out.println("4. Exit");
+            System.out.print("Enter your choice (1-4): ");
+            
+            choice = sc.nextInt();
 
-            switch (ch) {
+            switch (choice) {
                 case 1:
-                    System.out.print("Enter radius & height: ");
-                    double r = sc.nextDouble(), h = sc.nextDouble();
-                    System.out.println("Volume = " + (Math.PI * r * r * h));
+                    // Formula: Volume = π * r * r * h
+                    System.out.print("Enter radius: ");
+                    double radius = sc.nextDouble();
+
+                    System.out.print("Enter height: ");
+                    double height = sc.nextDouble();
+
+                    double volume = 3.14159 * radius * radius * height;
+                    System.out.println("Volume of Cylinder = " + volume);
                     break;
 
                 case 2:
-                    System.out.print("Enter number: ");
-                    int n = sc.nextInt();
+                    // Factorial Calculation
+                    System.out.print("Enter a number: ");
+                    int num = sc.nextInt();
+
                     long fact = 1;
-                    for (int i = 1; i <= n; i++) fact *= i;
-                    System.out.println("Factorial = " + fact);
+                    for (int i = 1; i <= num; i++) {
+                        fact = fact * i;
+                    }
+                    System.out.println("Factorial of " + num + " = " + fact);
                     break;
 
                 case 3:
-                    System.out.print("Enter number: ");
-                    int num = sc.nextInt(), temp = num, sum = 0, d = String.valueOf(num).length();
+                    // Armstrong Number Calculation
+                    System.out.print("Enter a number: ");
+                    int number = sc.nextInt();
+
+                    int temp = number;
+                    int sum = 0;
+
                     while (temp > 0) {
-                        sum += Math.pow(temp % 10, d);
-                        temp /= 10;
+                        int remainder = temp % 10;
+                        sum = sum + (remainder * remainder * remainder);
+                        temp = temp / 10;
                     }
-                    System.out.println(num + (sum == num ? " is Armstrong" : " is NOT Armstrong"));
+
+                    if (sum == number) {
+                        System.out.println(number + " is an Armstrong number.");
+                    } else {
+                        System.out.println(number + " is NOT an Armstrong number.");
+                    }
                     break;
 
                 case 4:
-                    System.out.println("Exiting...");
+                    System.out.println("Exiting the program. Goodbye!");
                     break;
 
                 default:
-                    System.out.println("Invalid choice!");
+                    System.out.println("Invalid choice! Please choose between 1 and 4.");
             }
-        } while (ch != 4);
+
+        } while (choice != 4);
 
         sc.close();
     }
