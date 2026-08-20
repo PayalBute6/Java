@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Java Practical Lab Assignment Manual - Set C</title>
+<style>
+    @page {
+        size: A4;
+        margin: 12mm 12mm 12mm 12mm;
+    }
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+        font-size: 9.5pt;
+        line-height: 1.4;
+        color: #222222;
+        background-color: #ffffff;
+        margin: 0;
+        padding: 20px;
+    }
+    .container {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+    h1.title {
+        text-align: center;
+        background-color: #2b6cb0;
+        color: #ffffff;
+        padding: 10px;
+        border-radius: 4px;
+        margin-top: 0;
+        margin-bottom: 15px;
+        font-size: 16pt;
+        text-transform: uppercase;
+    }
+    h1.section {
+        font-size: 13pt;
+        color: #1a365d;
+        border-bottom: 2px solid #2b6cb0;
+        padding-bottom: 3px;
+        margin-top: 15px;
+        margin-bottom: 10px;
+        text-transform: uppercase;
+    }
+    h2 {
+        font-size: 11pt;
+        color: #2b6cb0;
+        border-left: 4px solid #2b6cb0;
+        padding-left: 8px;
+        margin-top: 15px;
+        margin-bottom: 6px;
+    }
+    p { margin-top: 0; margin-bottom: 6px; }
+    hr { border: none; border-top: 1px solid #e2e8f0; margin: 12px 0; }
+    pre {
+        background-color: #f8fafc;
+        border: 1px solid #cbd5e1;
+        border-radius: 4px;
+        padding: 8px 10px;
+        font-family: "Courier New", Courier, monospace;
+        font-size: 8.5pt;
+        line-height: 1.3;
+        color: #0f172a;
+        margin: 6px 0 10px 0;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+    }
+    code {
+        font-family: "Courier New", Courier, monospace;
+        font-size: 8.5pt;
+        background-color: #edf2f7;
+        color: #b91c1c;
+        padding: 1px 4px;
+        border-radius: 3px;
+    }
+    pre code { background-color: transparent; color: inherit; padding: 0; }
+    ul, ol { margin: 4px 0 8px 0; padding-left: 20px; }
+    li { margin-bottom: 4px; }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 8px 0;
+        font-size: 9pt;
+    }
+    th, td {
+        border: 1px solid #cbd5e1;
+        padding: 6px 8px;
+        text-align: left;
+    }
+    th {
+        background-color: #f1f5f9;
+        color: #1e293b;
+        font-weight: 600;
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+<h1 class="title">Java Practical Lab Assignment Manual</h1>
+<h1 class="section">SET C - Conceptual & Applied Questions</h1>
+
+<h2>Set C - Question (a)</h2>
+<p><strong>What is the difference between implicit type conversion and explicit type conversion in Java? Demonstration with examples.</strong></p>
+<ul>
+    <li><strong>Implicit Conversion (Automatic / Widening):</strong> Performed automatically by Java when converting a smaller data type to a larger data type (e.g. <code>int</code> to <code>double</code>). No data loss occurs.</li>
+    <li><strong>Explicit Conversion (Manual / Narrowing):</strong> Performed manually by the programmer using the cast operator <code>(type)</code> when converting a larger data type to a smaller data type (e.g. <code>double</code> to <code>int</code>). Decimal digits or precision may be lost.</li>
+</ul>
+
+<h3>Code Example</h3>
+<pre><code>public class TypeConversionDemo {
+    public static void main(String[] args) {
+        // 1. Implicit Conversion (int to double)
+        int num = 10;
+        double result = num; // Automatically converts 10 -> 10.0
+        System.out.println("Implicit (int to double): " + result);
+
+        // 2. Explicit Conversion (double to int)
+        double price = 9.99;
+        int roundedPrice = (int) price; // Truncates decimal .99
+        System.out.println("Explicit (double to int): " + roundedPrice);
+    }
+}</code></pre>
+
+<hr>
+
+<h2>Set C - Question (b)</h2>
+<p><strong>Which data type should be used for storing a person's age, annual salary, and grade respectively? Justify your answer.</strong></p>
+
+<table>
+    <thead>
+        <tr>
+            <th>Field</th>
+            <th>Data Type</th>
+            <th>Example Declaration</th>
+            <th>Justification</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>Person's Age</strong></td>
+            <td><code>byte</code></td>
+            <td><code>byte age = 22;</code></td>
+            <td>Human age ranges from 0 to 120. A <code>byte</code> stores -128 to 127 using only 1 byte of memory.</td>
+        </tr>
+        <tr>
+            <td><strong>Annual Salary</strong></td>
+            <td><code>double</code></td>
+            <td><code>double salary = 75000.50;</code></td>
+            <td>Salaries can be large numbers with fractional decimal points. <code>double</code> provides 64-bit precision.</td>
+        </tr>
+        <tr>
+            <td><strong>Grade</strong></td>
+            <td><code>char</code></td>
+            <td><code>char grade = 'A';</code></td>
+            <td>Grades are single letters ('A', 'B', 'C'). A <code>char</code> uses 2 bytes to store single Unicode characters.</td>
+        </tr>
+    </tbody>
+</table>
+
+<hr>
+
+<h2>Set C - Question (c)</h2>
+<p><strong>What modifications are required to handle invalid user choices in a menu-driven application?</strong></p>
+<ol>
+    <li><strong>Add a <code>default:</code> case in the <code>switch</code> statement:</strong> Handles invalid numeric options entered outside the expected range (e.g. choice 9 when options are 1–4).</li>
+    <li><strong>Input Validation using <code>sc.hasNextInt()</code>:</strong> Prevents program crashes (<code>InputMismatchException</code>) when a user enters non-numeric text like "abc".</li>
+</ol>
+
+<h3>Code Example</h3>
+<pre><code>import java.util.Scanner;
+
+public class MenuValidationDemo {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter choice (1-4): ");
+
+        // Check if input is a valid number
+        if (sc.hasNextInt()) {
+            int choice = sc.nextInt();
+
+            switch (choice) {
+                case 1: System.out.println("Option 1 selected"); break;
+                case 2: System.out.println("Option 2 selected"); break;
+                case 3: System.out.println("Option 3 selected"); break;
+                case 4: System.out.println("Exiting..."); break;
+                default: System.out.println("Invalid choice! Choose between 1 and 4."); break;
+            }
+        } else {
+            System.out.println("Error: Invalid input! Please enter a valid number.");
+        }
+
+        sc.close();
+    }
+}</code></pre>
+
+<hr>
+
+<h2>Set C - Question (d)</h2>
+<p><strong>Compare the execution behavior of <code>for</code>, <code>while</code>, and <code>do-while</code> loops.</strong></p>
+
+<table>
+    <thead>
+        <tr>
+            <th>Feature</th>
+            <th><code>for</code> loop</th>
+            <th><code>while</code> loop</th>
+            <th><code>do-while</code> loop</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>Control Type</strong></td>
+            <td>Entry-Controlled</td>
+            <td>Entry-Controlled</td>
+            <td>Exit-Controlled</td>
+        </tr>
+        <tr>
+            <td><strong>Condition Check</strong></td>
+            <td>Before loop execution</td>
+            <td>Before loop execution</td>
+            <td>After loop execution</td>
+        </tr>
+        <tr>
+            <td><strong>Minimum Executions</strong></td>
+            <td>0 times</td>
+            <td>0 times</td>
+            <td><strong>1 time (guaranteed)</strong></td>
+        </tr>
+        <tr>
+            <td><strong>Best Use Case</strong></td>
+            <td>When exact iteration count is known</td>
+            <td>When iteration depends on a condition</td>
+            <td>When menu or loop must run at least once</td>
+        </tr>
+    </tbody>
+</table>
+
+<h3>Code Example</h3>
+<pre><code>// 1. for loop (known count)
+for (int i = 1; i <= 3; i++) {
+    System.out.println("for loop count: " + i);
+}
+
+// 2. while loop (condition checked first)
+int count = 1;
+while (count <= 3) {
+    System.out.println("while loop count: " + count);
+    count++;
+}
+
+// 3. do-while loop (runs at least once)
+int choice = 4;
+do {
+    System.out.println("do-while executes at least once!");
+} while (choice != 4);</code></pre>
+
+<hr>
+
+<h2>Set C - Question (e)</h2>
+<p><strong>What modifications are required to find the second largest element in an array?</strong></p>
+<p>Maintain two variables <code>first</code> (largest) and <code>second</code> (second largest). Iterate through the array once in O(n) time:</p>
+
+<h3>Code Example</h3>
+<pre><code>public class SecondLargestDemo {
+    public static void main(String[] args) {
+        int[] arr = {10, 5, 20, 8, 15};
+
+        int first = Integer.MIN_VALUE;
+        int second = Integer.MIN_VALUE;
+
+        for (int num : arr) {
+            if (num > first) {
+                second = first; // Demote old max to second max
+                first = num;    // Assign new max
+            } else if (num > second && num != first) {
+                second = num;   // Assign new second max
+            }
+        }
+
+        System.out.println("Second Largest Element = " + second); // Output: 15
+    }
+}</code></pre>
+
+</div>
+</body>
+</html>
