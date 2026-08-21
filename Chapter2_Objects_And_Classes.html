@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Chapter 2: Objects and Classes</title>
+<title>Chapter 2 – Objects and Classes (Complete Textbook Notes & Exam Guide)</title>
 <style>
     :root {
         --primary: #1e3a8a;
@@ -11,6 +11,8 @@
         --primary-subtle: #eff6ff;
         --accent-gold: #d97706;
         --accent-gold-bg: #fffbeb;
+        --accent-purple: #7e22ce;
+        --accent-purple-bg: #faf5ff;
         --text-main: #1e293b;
         --text-muted: #64748b;
         --bg-body: #f8fafc;
@@ -32,7 +34,7 @@
     body {
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
         font-size: 10pt;
-        line-height: 1.6;
+        line-height: 1.65;
         color: var(--text-main);
         background-color: var(--bg-body);
         margin: 0;
@@ -40,26 +42,46 @@
     }
 
     .container {
-        max-width: 900px;
+        max-width: 960px;
         margin: 0 auto;
     }
 
-    /* Page Header */
+    /* College Banner Header */
     .header-card {
         background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
         color: #ffffff;
-        padding: 26px 30px;
+        padding: 30px;
         border-radius: 12px;
         box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
         margin-bottom: 25px;
         text-align: center;
     }
 
+    .header-card .meta-tag {
+        display: inline-block;
+        background-color: rgba(255, 255, 255, 0.2);
+        color: #ffffff;
+        font-size: 9pt;
+        font-weight: 600;
+        padding: 4px 12px;
+        border-radius: 20px;
+        margin-bottom: 10px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
     .header-card h1 {
-        margin: 0;
+        margin: 0 0 6px 0;
         font-size: 24pt;
         font-weight: 800;
         letter-spacing: -0.5px;
+    }
+
+    .header-card p {
+        margin: 0;
+        font-size: 11pt;
+        opacity: 0.9;
+        font-weight: 300;
     }
 
     /* Sticky Navigation */
@@ -99,9 +121,18 @@
         background-color: var(--bg-card);
         border-radius: 12px;
         border: 1px solid var(--border-color);
-        padding: 24px;
+        padding: 26px;
         margin-bottom: 25px;
         box-shadow: 0 4px 6px -1px rgba(0,0,0,0.03);
+    }
+
+    h2.chapter-num {
+        font-size: 11pt;
+        color: var(--primary-light);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin: 0 0 4px 0;
+        font-weight: 700;
     }
 
     h2.section-title {
@@ -114,12 +145,20 @@
     }
 
     h3.sub-title {
-        font-size: 12pt;
+        font-size: 12.5pt;
         color: #0f172a;
-        margin-top: 20px;
+        margin-top: 22px;
         margin-bottom: 10px;
         border-left: 4px solid var(--primary-light);
         padding-left: 10px;
+    }
+
+    h4.sub-sub-title {
+        font-size: 10.5pt;
+        color: #1e293b;
+        margin-top: 16px;
+        margin-bottom: 8px;
+        font-weight: 700;
     }
 
     p {
@@ -137,8 +176,31 @@
     }
 
     /* Highlight Boxes */
+    .exam-box {
+        background-color: var(--accent-gold-bg);
+        border-left: 4px solid var(--accent-gold);
+        padding: 12px 16px;
+        border-radius: 0 8px 8px 0;
+        margin: 14px 0;
+        color: #78350f;
+    }
+
+    .exam-box strong {
+        color: #92400e;
+    }
+
+    .concept-box {
+        background-color: var(--accent-purple-bg);
+        border-left: 4px solid var(--accent-purple);
+        padding: 12px 16px;
+        border-radius: 0 8px 8px 0;
+        margin: 14px 0;
+        color: #581c87;
+    }
+
     .definition-box {
         background-color: #f8fafc;
+        border: 1px solid #e2e8f0;
         border-left: 4px solid var(--primary-light);
         padding: 12px 16px;
         border-radius: 0 8px 8px 0;
@@ -172,6 +234,17 @@
         background-color: transparent;
         color: inherit;
         padding: 0;
+    }
+
+    .output-box {
+        background-color: #0f172a;
+        color: #38bdf8;
+        border-left: 4px solid #38bdf8;
+        padding: 10px 14px;
+        border-radius: 0 8px 8px 0;
+        font-family: monospace;
+        font-size: 8.5pt;
+        margin-bottom: 14px;
     }
 
     .diagram-box {
@@ -212,21 +285,30 @@
         background-color: #f8fafc;
     }
 
-    /* Viva Q&A */
-    .viva-card {
+    .checkmark { color: #16a34a; font-weight: bold; }
+    .crossmark { color: #dc2626; font-weight: bold; }
+
+    /* Q&A Cards */
+    .q-card {
         background-color: #f8fafc;
-        border-left: 4px solid var(--primary-light);
         border: 1px solid #e2e8f0;
-        border-left-width: 4px;
         border-radius: 8px;
-        padding: 14px 16px;
-        margin-bottom: 14px;
+        padding: 10px 12px;
+        font-weight: 500;
+        font-size: 9.5pt;
     }
 
-    .viva-card h4 {
-        margin: 0 0 6px 0;
+    .q-card span {
         color: var(--primary);
-        font-size: 10.5pt;
+        font-weight: 700;
+        margin-right: 6px;
+    }
+
+    .question-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 10px;
+        margin-top: 12px;
     }
 
     /* Footer */
@@ -251,557 +333,630 @@
 
     <!-- Header Banner -->
     <div class="header-card">
-        <h1>Chapter 2: Objects and Classes</h1>
+        <div class="meta-tag">JAVA PROGRAMMING TEXTBOOK NOTES &bull; DURATION: 6 HOURS</div>
+        <h1>CHAPTER 2 – OBJECTS AND CLASSES</h1>
+        <p>Complete Exam-Oriented Lecture & Student Notes (Textbook Units 2.1 to 2.8)</p>
     </div>
 
-    <!-- Navigation -->
+    <!-- Sticky Navigation -->
     <div class="nav-bar">
-        <a href="#sec2-1" class="nav-link">2.1 Class & Object</a>
-        <a href="#sec2-2" class="nav-link">2.2 Access Specifiers</a>
-        <a href="#sec2-3" class="nav-link">2.3 Array of Objects</a>
-        <a href="#sec2-4" class="nav-link">2.4 Constructors</a>
-        <a href="#sec2-5" class="nav-link">2.5 'this' & Static</a>
-        <a href="#sec2-6" class="nav-link">2.6 Predefined Classes</a>
-        <a href="#sec2-7" class="nav-link">2.7 Packages</a>
-        <a href="#sec2-8" class="nav-link">2.8 Wrapper Classes</a>
-        <a href="#sec-viva" class="nav-link">High-Yield Viva Q&A</a>
+        <a href="#sec2-1" class="nav-link">2.1 Introduction</a>
+        <a href="#sec2-2" class="nav-link">2.2 Defining Classes & Methods</a>
+        <a href="#sec2-3" class="nav-link">2.3 Access Specifiers</a>
+        <a href="#sec2-4" class="nav-link">2.4 Array of Objects</a>
+        <a href="#sec2-5" class="nav-link">2.5 Constructors</a>
+        <a href="#sec2-6" class="nav-link">2.6 'this' & Static</a>
+        <a href="#sec2-7" class="nav-link">2.7 Predefined Classes</a>
+        <a href="#sec2-8" class="nav-link">2.8 Packages & Wrappers</a>
+        <a href="#sec-questions" class="nav-link">⭐ Exam Questions</a>
     </div>
 
-    <!-- 2.1 Defining Your Own Classes -->
+    <!-- 2.1 Introduction -->
     <div class="section-card" id="sec2-1">
-        <h2 class="section-title">2.1 Defining Your Own Classes</h2>
+        <h2 class="chapter-num">Unit 2.1</h2>
+        <h2 class="section-title">2.1 Introduction</h2>
 
-        <h3 class="sub-title">Concept Definition</h3>
-        <div class="definition-box">
-            A <strong>Class</strong> is a user-defined blueprint or prototype from which objects are created. It represents the set of properties (state) and methods (behavior) that are common to all objects of one type.<br><br>
-            An <strong>Object</strong> is a basic runtime entity and an instance of a class that occupies memory.
+        <h3 class="sub-title">2.1.1 Java and Object-Oriented Programming</h3>
+        <p>Java is an <strong>Object-Oriented Programming (OOP) language</strong>. In Java, <strong>objects and classes are the basic building blocks</strong> of Object-Oriented Programming. Everything that we represent in Java is associated with classes and objects.</p>
+
+        <p>In Object-Oriented Programming, we represent real-world entities using objects. For example:</p>
+        <ul>
+            <li>Student</li>
+            <li>Employee</li>
+            <li>Car</li>
+            <li>Bank Account</li>
+            <li>Customer</li>
+            <li>Book</li>
+        </ul>
+        <p>All of these can be represented as objects in Java.</p>
+
+        <hr style="border:none; border-top:1px solid #e2e8f0; margin:20px 0;">
+
+        <h3 class="sub-title">State and Behavior</h3>
+        <p>Every real-world object generally has two important characteristics:</p>
+
+        <h4 class="sub-sub-title">1. State</h4>
+        <p><strong>State represents the data or characteristics of an object.</strong></p>
+        <p>For example, a <strong>Car</strong> can have state attributes such as:</p>
+        <ul>
+            <li>Color</li>
+            <li>Model</li>
+            <li>Brand</li>
+            <li>Price</li>
+            <li>Speed</li>
+        </ul>
+        <p>Similarly, a <strong>Student</strong> can have state attributes such as Roll number, Name, Age, and Course.</p>
+
+        <h4 class="sub-sub-title">2. Behavior</h4>
+        <p><strong>Behavior represents the actions or operations that an object can perform.</strong></p>
+        <p>For example, a <strong>Car</strong> can Perform actions like <em>Start, Stop, Accelerate, Brake</em>. A <strong>Student</strong> can perform actions like <em>Study, AttendLecture, WriteExam</em>.</p>
+
+        <div class="concept-box">
+            💡 <strong>Key Principle:</strong><br>
+            <strong>State represents what an object HAS, whereas behavior represents what an object DOES.</strong>
         </div>
 
-        <h3 class="sub-title">Syntax</h3>
-        <pre><code>class &lt;ClassName&gt; {
-    // Member variables (Fields / State)
-    &lt;data_type&gt; variable1;
-    
-    // Member methods (Behavior)
-    &lt;return_type&gt; methodName(&lt;parameters&gt;) {
+        <hr style="border:none; border-top:1px solid #e2e8f0; margin:20px 0;">
+
+        <h3 class="sub-title">Object in Java</h3>
+        <div class="definition-box">
+            <strong>Definition:</strong> A real-world entity that has state and behavior is known as an <strong>object</strong>.<br>
+            <strong>Simple Definition for Examination:</strong> An object is an instance of a class.
+        </div>
+
+        <p>For example, consider a <strong>cat</strong>:</p>
+        <ul>
+            <li><strong>State:</strong> Color, Name, Age</li>
+            <li><strong>Behavior:</strong> Walking, Eating, Sleeping</li>
+        </ul>
+
+        <hr style="border:none; border-top:1px solid #e2e8f0; margin:20px 0;">
+
+        <h3 class="sub-title">Class in Java</h3>
+        <div class="definition-box">
+            <strong>Definition:</strong> A <strong>class is a template or blueprint</strong> that describes the states and behaviors supported by objects of its type.
+        </div>
+
+        <div class="diagram-box">             Class
+            Student
+               │
+       ┌───────┴───────┐
+       │               │
+     Object          Object
+    Student 1       Student 2</div>
+
+        <h3 class="sub-title">Difference Between Class and Object</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Class</th>
+                    <th>Object</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Class is a blueprint/template.</td>
+                    <td>Object is an instance of a class.</td>
+                </tr>
+                <tr>
+                    <td>It defines state and behavior.</td>
+                    <td>It represents actual state and behavior values.</td>
+                </tr>
+                <tr>
+                    <td>Objects are created from a class.</td>
+                    <td>Object is created using the class template.</td>
+                </tr>
+                <tr>
+                    <td>Example: <code>Student</code></td>
+                    <td>Example: <code>s1</code>, <code>s2</code></td>
+                </tr>
+                <tr>
+                    <td>Logical representation (occupies no heap memory for data)</td>
+                    <td>Real/actual representation (occupies heap memory)</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="diagram-box">             Car Class
+                 │
+       ┌─────────┼─────────┐
+       │         │         │
+      Car1      Car2      Car3</div>
+
+        <div class="exam-box">
+            ⭐ <strong>Exam Question Spotting:</strong><br>
+            <strong>Q. What is an object?</strong><br>
+            <em>Ans:</em> An object is a real-world entity having state and behavior. In Java, an object is an instance of a class.<br><br>
+            <strong>Q. What is a class?</strong><br>
+            <em>Ans:</em> A class is a template or blueprint that describes the states and behaviors supported by objects of that class.
+        </div>
+    </div>
+
+    <!-- 2.2 Defining Your Own Classes -->
+    <div class="section-card" id="sec2-2">
+        <h2 class="chapter-num">Unit 2.2</h2>
+        <h2 class="section-title">2.2 Defining Your Own Classes</h2>
+
+        <p>Java allows programmers to create their own classes according to application requirements. A class contains:</p>
+        <ul>
+            <li>Data members / variables</li>
+            <li>Methods</li>
+            <li>Constructors</li>
+        </ul>
+
+        <h3 class="sub-title">General Syntax of a Class</h3>
+        <pre><code>class ClassName
+{
+    // Fields declaration
+    accessSpecifier dataType variable;
+
+    // Methods declaration
+    accessSpecifier returnType methodName()
+    {
         // body of method
     }
 }</code></pre>
 
-        <h3 class="sub-title">Key Exam Concepts</h3>
-        <ul>
-            <li><strong>Instantiation:</strong> Memory is allocated only when an object is instantiated using the <code>new</code> operator: <code>&lt;ClassName&gt; obj = new &lt;ClassName&gt;();</code>.</li>
-            <li><strong>Dot Operator (<code>.</code>):</strong> Used to access instance variables and invoke member methods on an object (<code>obj.variable</code>, <code>obj.method()</code>).</li>
-        </ul>
-
-        <h3 class="sub-title">Minimal Code Example</h3>
-        <pre><code>class Student {
-    int rollNo;
+        <h4>Textbook Example:</h4>
+        <pre><code>class Student
+{
+    int id;
     String name;
 
-    void display() {
-        System.out.println("Roll No: " + rollNo + ", Name: " + name);
+    void display()
+    {
+        System.out.println(id);
+        System.out.println(name);
+    }
+}</code></pre>
+
+        <h4>Simple `Hello` Class Example:</h4>
+        <pre><code>class Hello
+{
+    public void show()
+    {
+        System.out.println("Hello");
     }
 }
 
-public class Main {
-    public static void main(String[] args) {
-        Student s1 = new Student(); // Object creation
-        s1.rollNo = 101;
-        s1.name = "Alice";
-        s1.display();
+// Calling method via object:
+Hello h = new Hello();
+h.show();</code></pre>
+
+        <hr style="border:none; border-top:1px solid #e2e8f0; margin:20px 0;">
+
+        <h3 class="sub-title">Methods in Java</h3>
+        <div class="definition-box">
+            A <strong>method is a collection of statements grouped together to perform a particular task</strong>. Methods avoid redundant code and promote reusability.
+        </div>
+
+        <h4>General Syntax of Method:</h4>
+        <pre><code>return-type method-name(parameter-list)
+{
+    // body of method
+}</code></pre>
+
+        <h4>Example Program:</h4>
+        <pre><code>class Example
+{
+    int add(int a, int b)
+    {
+        return a + b;
+    }
+
+    public static void main(String args[])
+    {
+        Example obj = new Example();
+        int result = obj.add(10, 20);
+        System.out.println(result);
     }
 }</code></pre>
+        <div class="output-box">Output:<br>30</div>
+
+        <h4 class="sub-sub-title">Method Characteristics:</h4>
+        <ul>
+            <li>Represents the behavior of an object.</li>
+            <li>Contains a collection of statements.</li>
+            <li>Can accept parameters and return values (or use <code>void</code>).</li>
+            <li>Called using an object reference for instance methods.</li>
+        </ul>
+
+        <hr style="border:none; border-top:1px solid #e2e8f0; margin:20px 0;">
+
+        <h3 class="sub-title">2.2.1 Creating Objects</h3>
+        <p>An object is created using the <strong><code>new</code> keyword</strong>.</p>
+        <pre><code>ClassName objectName = new ClassName();</code></pre>
+
+        <h3 class="sub-title">Three Steps Involved in Object Creation</h3>
+        <ol>
+            <li>
+                <strong>Declaration:</strong> A reference variable is declared (`Student s1;`). Object is not created yet.
+            </li>
+            <li>
+                <strong>Instantiation:</strong> The `new` keyword allocates memory for the object (`new Student()`).
+            </li>
+            <li>
+                <strong>Initialization:</strong> The constructor initializes the newly created object.
+            </li>
+        </ol>
+
+        <div class="diagram-box">Declaration  ──►  Student s1;
+     │
+Instantiation ──►  new Student();  (Heap Memory Allocated)
+     │
+Initialization──►  Constructor invoked</div>
+
+        <div class="exam-box">
+            ⭐ <strong>Important Distinction:</strong><br>
+            In <code>Student s1 = new Student();</code>:<br>
+            - <code>Student</code> is the Class.<br>
+            - <code>s1</code> is the Reference Variable.<br>
+            - <code>new Student()</code> creates the actual Object in heap memory.
+        </div>
+
+        <hr style="border:none; border-top:1px solid #e2e8f0; margin:20px 0;">
+
+        <h3 class="sub-title">2.2.2 Accessing Class Members</h3>
+        <p>Members are accessed using the <strong>dot (<code>.</code>) operator</strong> (syntax: <code>objectName.memberName;</code>).</p>
+
+        <pre><code>class Student
+{
+    String name;
+    int age;
+
+    void display()
+    {
+        System.out.println("Name: " + name);
+        System.out.println("Age: " + age);
+    }
+}
+
+public class Main
+{
+    public static void main(String[] args)
+    {
+        Student s = new Student();
+        s.name = "Rahul";
+        s.age = 20;
+
+        s.display();
+    }
+}</code></pre>
+        <div class="output-box">Output:<br>Name: Rahul<br>Age: 20</div>
     </div>
 
-    <!-- 2.2 Access Specifiers -->
-    <div class="section-card" id="sec2-2">
-        <h2 class="section-title">2.2 Access Specifiers</h2>
+    <!-- 2.3 Access Specifiers -->
+    <div class="section-card" id="sec2-3">
+        <h2 class="chapter-num">Unit 2.3</h2>
+        <h2 class="section-title">2.3 Access Specifiers</h2>
 
-        <p>Java provides four access levels to implement encapsulation and control visibility across classes and packages.</p>
+        <p>Java provides 4 access specifiers to restrict visibility and enforce encapsulation:</p>
 
-        <h3 class="sub-title">Visibility Comparison Table</h3>
+        <h3 class="sub-title">2.3.1 Private Access Modifier</h3>
+        <div class="definition-box">
+            The <code>private</code> modifier provides the <strong>highest degree of restriction</strong>. Accessible <strong>only inside the class</strong> in which it is declared.
+        </div>
+
+        <h4 class="sub-sub-title">Accessor and Mutator Methods (Getters & Setters)</h4>
+        <ul>
+            <li><strong>Accessor (Getter):</strong> Reads/accesses the private variable value (e.g. <code>public int getSalary() { return salary; }</code>).</li>
+            <li><strong>Mutator (Setter):</strong> Modifies/changes the private variable value safely (e.g. <code>public void setSalary(int salary) { this.salary = salary; }</code>).</li>
+        </ul>
+
+        <pre><code>class Student
+{
+    private String name;
+    private int age;
+
+    public void setName(String name) { this.name = name; }
+    public void setAge(int age) { this.age = age; }
+
+    public void display()
+    {
+        System.out.println("My name is " + name);
+        System.out.println("I am " + age + " years old");
+    }
+}
+
+public class TestPrivate
+{
+    public static void main(String[] args)
+    {
+        Student s = new Student();
+        s.setName("abc");
+        s.setAge(20);
+        s.display();
+    }
+}</code></pre>
+        <div class="output-box">Output:<br>My name is abc<br>I am 20 years old</div>
+
+        <h3 class="sub-title">2.3.2 Default Access Modifier</h3>
+        <p>When no modifier is specified, Java assigns <strong>default (package-level) access</strong>. Accessible by classes in the <strong>same package</strong>.</p>
+
+        <h3 class="sub-title">2.3.3 Protected Access Modifier</h3>
+        <p>Accessible within the <strong>same class</strong>, <strong>same package</strong>, and by <strong>subclasses in other packages</strong> through inheritance.</p>
+
+        <h3 class="sub-title">2.3.4 Public Access Modifier</h3>
+        <p>Provides the <strong>widest visibility</strong>. Accessible from anywhere across all packages.</p>
+
+        <h3 class="sub-title">Access Specifier Comparison Table</h3>
         <table>
             <thead>
                 <tr>
-                    <th>Access Specifier</th>
+                    <th>Access Modifier</th>
                     <th>Same Class</th>
-                    <th>Same Package Subclass</th>
-                    <th>Same Package Non-Subclass</th>
-                    <th>Different Package Subclass</th>
-                    <th>Different Package Non-Subclass</th>
+                    <th>Same Package</th>
+                    <th>Subclass (Diff Pkg)</th>
+                    <th>Outside Package</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <td><code>private</code></td>
-                    <td>Yes</td>
-                    <td>No</td>
-                    <td>No</td>
-                    <td>No</td>
-                    <td>No</td>
+                    <td class="checkmark">✓</td>
+                    <td class="crossmark">✗</td>
+                    <td class="crossmark">✗</td>
+                    <td class="crossmark">✗</td>
                 </tr>
                 <tr>
-                    <td><code>default</code> (no keyword)</td>
-                    <td>Yes</td>
-                    <td>Yes</td>
-                    <td>Yes</td>
-                    <td>No</td>
-                    <td>No</td>
+                    <td><code>default</code></td>
+                    <td class="checkmark">✓</td>
+                    <td class="checkmark">✓</td>
+                    <td class="crossmark">✗</td>
+                    <td class="crossmark">✗</td>
                 </tr>
                 <tr>
                     <td><code>protected</code></td>
-                    <td>Yes</td>
-                    <td>Yes</td>
-                    <td>Yes</td>
-                    <td>Yes (via inheritance)</td>
-                    <td>No</td>
+                    <td class="checkmark">✓</td>
+                    <td class="checkmark">✓</td>
+                    <td class="checkmark">✓ (via inheritance)</td>
+                    <td class="crossmark">✗</td>
                 </tr>
                 <tr>
                     <td><code>public</code></td>
-                    <td>Yes</td>
-                    <td>Yes</td>
-                    <td>Yes</td>
-                    <td>Yes</td>
-                    <td>Yes</td>
+                    <td class="checkmark">✓</td>
+                    <td class="checkmark">✓</td>
+                    <td class="checkmark">✓</td>
+                    <td class="checkmark">✓</td>
                 </tr>
             </tbody>
         </table>
-
-        <h3 class="sub-title">Key Exam Points</h3>
-        <ul>
-            <li><code>private</code>: Provides the highest level of restriction; accessible only within its declaring class. Used for data hiding.</li>
-            <li><code>default</code> (Package-Private): Applied automatically when no modifier is declared; accessible anywhere within the same package.</li>
-            <li><code>protected</code>: Accessible within the same package and by child classes in different packages through inheritance.</li>
-            <li><code>public</code>: Universally accessible across all packages.</li>
-        </ul>
     </div>
 
-    <!-- 2.3 Array of Objects -->
-    <div class="section-card" id="sec2-3">
-        <h2 class="section-title">2.3 Array of Objects</h2>
+    <!-- 2.4 Array of Objects -->
+    <div class="section-card" id="sec2-4">
+        <h2 class="chapter-num">Unit 2.4</h2>
+        <h2 class="section-title">2.4 Array of Objects</h2>
 
-        <h3 class="sub-title">Concept Definition</h3>
         <div class="definition-box">
-            An <strong>Array of Objects</strong> is an array that stores references to instances of a class rather than storing primitive values directly.
+            An <strong>array of objects</strong> stores references to objects of a particular class rather than primitive values directly.
         </div>
 
-        <h3 class="sub-title">Memory Layout</h3>
-        <ol>
-            <li>Declaring <code>Employee[] emp = new Employee[3];</code> only creates 3 reference slots in memory initialized to <code>null</code>.</li>
-            <li>Each object instance must be explicitly allocated using <code>new</code> before accessing its members; otherwise, a <code>NullPointerException</code> occurs.</li>
-        </ol>
+        <p>Writing <code>Employee emp[] = new Employee[3];</code> only creates an array container holding 3 <code>null</code> references. Objects must be created separately:</p>
 
-        <div class="diagram-box">emp (Array Reference) ──► [ null , null , null ]
-                               │
-                emp[0] = new Employee(...)
-                               ▼
-                        [ Object Data ]</div>
+        <div class="diagram-box">Initially (Array of references):
+emp ──► [ null , null , null ]
 
-        <h3 class="sub-title">Minimal Code Example</h3>
-        <pre><code>class Employee {
+After Object Instantiation:
+emp ──► [ Employee Object 1 , Employee Object 2 , Employee Object 3 ]</div>
+
+        <h4>Complete Program Example:</h4>
+        <pre><code>class Employee
+{
     int id;
     String name;
 
-    Employee(int id, String name) {
+    public void setData(int id, String name)
+    {
         this.id = id;
         this.name = name;
     }
 
-    void printData() {
-        System.out.println("ID: " + id + " | Name: " + name);
+    public void display()
+    {
+        System.out.println("Employee id: " + this.id);
+        System.out.println("Employee name: " + this.name);
     }
-}
 
-public class ArrayDemo {
-    public static void main(String[] args) {
-        // Step 1: Declare and allocate array of references
-        Employee[] empList = new Employee[2];
+    public static void main(String[] args)
+    {
+        Employee emp[] = new Employee[3];
 
-        // Step 2: Instantiate individual elements
-        empList[0] = new Employee(1, "John");
-        empList[1] = new Employee(2, "Sarah");
+        emp[0] = new Employee();
+        emp[1] = new Employee();
+        emp[2] = new Employee();
 
-        // Step 3: Traverse
-        for (Employee e : empList) {
-            e.printData();
-        }
+        emp[0].setData(1, "Amit");
+        emp[1].setData(2, "Akash");
+        emp[2].setData(3, "Akbar");
+
+        emp[0].display();
+        emp[1].display();
+        emp[2].display();
     }
 }</code></pre>
+        <div class="output-box">Output:<br>Employee id: 1<br>Employee name: Amit<br><br>Employee id: 2<br>Employee name: Akash<br><br>Employee id: 3<br>Employee name: Akbar</div>
     </div>
 
-    <!-- 2.4 Constructors & Constructor Overloading -->
-    <div class="section-card" id="sec2-4">
-        <h2 class="section-title">2.4 Constructors & Constructor Overloading</h2>
+    <!-- 2.5 Constructors & Constructor Overloading -->
+    <div class="section-card" id="sec2-5">
+        <h2 class="chapter-num">Unit 2.5</h2>
+        <h2 class="section-title">2.5 Constructors and Overloading Constructors</h2>
 
-        <h3 class="sub-title">Concept Definition</h3>
         <div class="definition-box">
-            A <strong>Constructor</strong> is a special member method invoked automatically when an object is created. Its primary purpose is to initialize instance variables.
+            A <strong>constructor</strong> is a special method used to initialize an object automatically when it is created using <code>new</code>.
         </div>
 
-        <h3 class="sub-title">Rules of Constructors</h3>
-        <ul>
-            <li>Name must be identical to the class name.</li>
-            <li>Must not have an explicit return type (not even <code>void</code>).</li>
-            <li>Cannot be <code>abstract</code>, <code>static</code>, <code>final</code>, or <code>synchronized</code>.</li>
-        </ul>
+        <h3 class="sub-title">Constructor vs Method Comparison Table</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Constructor</th>
+                    <th>Method</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Used to initialize an object.</td>
+                    <td>Used to perform a specific task/action.</td>
+                </tr>
+                <tr>
+                    <td>Must have the exact same name as the class.</td>
+                    <td>Can have any valid identifier name.</td>
+                </tr>
+                <tr>
+                    <td>Has no return type (not even <code>void</code>).</td>
+                    <td>Must specify a return type (or <code>void</code>).</td>
+                </tr>
+                <tr>
+                    <td>Automatically invoked during object creation.</td>
+                    <td>Invoked explicitly via object or class reference.</td>
+                </tr>
+            </tbody>
+        </table>
 
-        <h3 class="sub-title">Types of Constructors</h3>
+        <h3 class="sub-title">Textbook Constructor Rules</h3>
         <ol>
-            <li><strong>Default Constructor:</strong> Provided automatically by the compiler if no explicit constructor is defined (initializes fields to default values like <code>0</code>, <code>null</code>, <code>false</code>).</li>
-            <li><strong>No-Argument Constructor:</strong> Explicitly written constructor with no parameters.</li>
-            <li><strong>Parameterized Constructor:</strong> Accepts arguments to initialize custom values for fields.</li>
+            <li>Constructor name <strong>must match class name</strong> exactly.</li>
+            <li>Constructor <strong>cannot have a return type</strong> (adding <code>void</code> turns it into a method).</li>
+            <li>Constructor access modifier can be <code>private</code>, <code>protected</code>, or <code>public</code>.</li>
         </ol>
 
         <h3 class="sub-title">Constructor Overloading</h3>
-        <p>Defining multiple constructors within the same class with different parameter lists (differing in data types, number of parameters, or parameter sequence).</p>
+        <p>Defining multiple constructors in the same class with different parameter lists.</p>
 
-        <h3 class="sub-title">Minimal Code Example</h3>
-        <pre><code>class Box {
-    double width, height, depth;
+        <pre><code>class Student
+{
+    int rollNo;
+    String name;
 
-    // No-arg constructor
-    Box() {
-        width = height = depth = 1.0;
+    // 1. Default constructor
+    Student()
+    {
+        rollNo = 0;
+        name = "Unknown";
     }
 
-    // Single-parameter constructor (Cube)
-    Box(double len) {
-        width = height = depth = len;
+    // 2. Single-parameter constructor
+    Student(int rollNo)
+    {
+        this.rollNo = rollNo;
+        name = "Unknown";
     }
 
-    // Parameterized constructor
-    Box(double w, double h, double d) {
-        width = w;
-        height = h;
-        depth = d;
+    // 3. Two-parameter constructor
+    Student(int rollNo, String name)
+    {
+        this.rollNo = rollNo;
+        this.name = name;
     }
 
-    double volume() {
-        return width * height * depth;
-    }
-}</code> </pre>
-    </div>
-
-    <!-- 2.5 Use of 'this' & static -->
-    <div class="section-card" id="sec2-5">
-        <h2 class="section-title">2.5 Use of `this`, `static` Block, Static Fields, and Static Methods</h2>
-
-        <h3 class="sub-title">1. The `this` Keyword</h3>
-        <p><code>this</code> is a reference variable that refers to the current invoking object.</p>
-        <ul>
-            <li><strong>Variable Shadowing Resolution:</strong> Differentiates instance variables from local parameters: <code>this.x = x;</code>.</li>
-            <li><strong>Constructor Chaining:</strong> Invokes another constructor in the same class: <code>this(arg1, arg2);</code> (must be the first line of the constructor).</li>
-            <li><strong>Passing the Current Object:</strong> Passes <code>this</code> as an argument to other methods or constructors.</li>
-        </ul>
-
-        <h3 class="sub-title">2. The `static` Keyword</h3>
-        <p>Belongs to the class rather than individual instances. Only one copy is shared among all objects.</p>
-        <ul>
-            <li><strong>Static Variable:</strong> Class-level variable shared by all instances.</li>
-            <li><strong>Static Method:</strong> Can be invoked directly via class name (<code>ClassName.method()</code>) without instantiating an object. Cannot access non-static (<code>instance</code>) variables or use <code>this</code>/<code>super</code> directly.</li>
-            <li><strong>Static Block:</strong> A block of code executed <strong>only once</strong> when the class is loaded into JVM memory, before constructors or the <code>main()</code> method run.</li>
-        </ul>
-
-        <h3 class="sub-title">Minimal Code Example</h3>
-        <pre><code>class Counter {
-    int id;               // Instance variable
-    static int count = 0; // Static variable
-
-    // Static Initialization Block
-    static {
-        System.out.println("Static Block: Class loaded.");
+    void display()
+    {
+        System.out.println("Roll No: " + rollNo + ", Name: " + name);
     }
 
-    Counter(int id) {
-        this.id = id;     // 'this' resolves variable shadowing
-        count++;
-    }
+    public static void main(String[] args)
+    {
+        Student s1 = new Student();
+        Student s2 = new Student(101);
+        Student s3 = new Student(102, "Rahul");
 
-    static void displayTotal() { // Static method
-        System.out.println("Total instances created: " + count);
-    }
-}
-
-public class StaticDemo {
-    public static void main(String[] args) {
-        Counter c1 = new Counter(101);
-        Counter c2 = new Counter(102);
-        Counter.displayTotal(); // Invoked without object reference
+        s1.display();
+        s2.display();
+        s3.display();
     }
 }</code></pre>
+        <div class="output-box">Output:<br>Roll No: 0, Name: Unknown<br>Roll No: 101, Name: Unknown<br>Roll No: 102, Name: Rahul</div>
     </div>
 
-    <!-- 2.6 Predefined Classes -->
+    <!-- 2.6 'this' & Static Members -->
     <div class="section-card" id="sec2-6">
-        <h2 class="section-title">2.6 Predefined Classes</h2>
+        <h2 class="chapter-num">Unit 2.6</h2>
+        <h2 class="section-title">2.6 'this' Keyword & Static Members</h2>
 
-        <h3 class="sub-title">2.6.1 The `Object` Class</h3>
-        <div class="definition-box">
-            <code>java.lang.Object</code> is the root superclass of all classes in Java. Every class directly or indirectly inherits from it.
-        </div>
+        <h3 class="sub-title">The `this` Keyword</h3>
+        <p>Refers to the current object instance. Differentiates instance variables from parameters (`this.roll = roll`) and invokes constructors (`this()`).</p>
 
-        <h3 class="sub-title">Core Methods of `Object` Class</h3>
-        <table>
-            <thead>
-                <tr>
-                    <th>Method</th>
-                    <th>Signature</th>
-                    <th>Description</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><code>toString()</code></td>
-                    <td><code>public String toString()</code></td>
-                    <td>Returns a textual representation of the object (default: <code>ClassName@HexHashCode</code>).</td>
-                </tr>
-                <tr>
-                    <td><code>equals()</code></td>
-                    <td><code>public boolean equals(Object obj)</code></td>
-                    <td>Compares memory references by default (<code>==</code>). Must be overridden for content equality.</td>
-                </tr>
-                <tr>
-                    <td><code>hashCode()</code></td>
-                    <td><code>public int hashCode()</code></td>
-                    <td>Returns an integer hash code value for the object used in hashing structures.</td>
-                </tr>
-                <tr>
-                    <td><code>getClass()</code></td>
-                    <td><code>public final Class&lt;?&gt; getClass()</code></td>
-                    <td>Returns the runtime class representation of the object.</td>
-                </tr>
-            </tbody>
-        </table>
-
-        <h3 class="sub-title">Minimal Code Example</h3>
-        <pre><code>class Point {
-    int x, y;
-
-    Point(int x, int y) {
-        this.x = x;
-        this.y = y;
-    }
-
-    @Override
-    public String toString() {
-        return "(" + x + ", " + y + ")";
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null || getClass() != obj.getClass()) return false;
-        Point p = (Point) obj;
-        return this.x == p.x && this.y == p.y;
-    }
-
-    @Override
-    public int hashCode() {
-        return 31 * x + y;
-    }
-}</code></pre>
-
-        <hr style="border:none; border-top:1px solid #e2e8f0; margin:20px 0;">
-
-        <h3 class="sub-title">2.6.2 `String` vs `StringBuffer` & `String.format()`</h3>
-
-        <h3 class="sub-title">Comparison: `String` vs `StringBuffer`</h3>
-        <table>
-            <thead>
-                <tr>
-                    <th>Feature</th>
-                    <th>`String`</th>
-                    <th>`StringBuffer`</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><strong>Mutability</strong></td>
-                    <td><strong>Immutable</strong> (cannot be modified after creation).</td>
-                    <td><strong>Mutable</strong> (modifiable in place).</td>
-                </tr>
-                <tr>
-                    <td><strong>Storage Location</strong></td>
-                    <td>String Constant Pool (SCP) & Heap.</td>
-                    <td>Heap Memory only.</td>
-                </tr>
-                <tr>
-                    <td><strong>Thread Safety</strong></td>
-                    <td>Thread-safe by design due to immutability.</td>
-                    <td>Thread-safe (methods are <code>synchronized</code>).</td>
-                </tr>
-                <tr>
-                    <td><strong>Performance</strong></td>
-                    <td>Slower when performing repeated concatenations.</td>
-                    <td>Faster for frequent string modifications.</td>
-                </tr>
-                <tr>
-                    <td><strong>Modification Methods</strong></td>
-                    <td><code>concat()</code>, <code>substring()</code>, <code>replace()</code></td>
-                    <td><code>append()</code>, <code>insert()</code>, <code>delete()</code>, <code>reverse()</code></td>
-                </tr>
-            </tbody>
-        </table>
-
-        <h3 class="sub-title">Formatting String Data using `format()`</h3>
-        <p><code>String.format()</code> produces formatted output without printing directly:</p>
+        <h3 class="sub-title">Static Members</h3>
         <ul>
-            <li><code>%s</code>: String</li>
-            <li><code>%d</code>: Integer</li>
-            <li><code>%f</code>: Floating-point number (e.g., <code>%.2f</code> for two decimal places)</li>
-            <li><code>%n</code>: Platform-independent newline</li>
+            <li><strong>Static Field:</strong> Single shared variable copy across all objects.</li>
+            <li><strong>Static Method:</strong> Invoked without object (`ClassName.method()`). Can access static data directly.</li>
+            <li><strong>Static Block:</strong> Executed once when class is loaded into JVM memory.</li>
         </ul>
-
-        <h3 class="sub-title">Minimal Code Example</h3>
-        <pre><code>public class StringDemo {
-    public static void main(String[] args) {
-        // String Immutability
-        String str = "Hello";
-        str.concat(" World");
-        System.out.println("String: " + str); // Outputs: Hello
-
-        // StringBuffer Mutability
-        StringBuffer sb = new StringBuffer("Hello");
-        sb.append(" World");
-        System.out.println("StringBuffer: " + sb); // Outputs: Hello World
-
-        // Formatting
-        String report = String.format("Item: %s | Price: $%.2f | Units: %d", "Book", 19.995, 3);
-        System.out.println(report); // Outputs: Item: Book | Price: $20.00 | Units: 3
-    }
-}</code></pre>
     </div>
 
-    <!-- 2.7 Packages -->
+    <!-- 2.7 Predefined Classes -->
     <div class="section-card" id="sec2-7">
-        <h2 class="section-title">2.7 Creating, Accessing, and Using Packages</h2>
+        <h2 class="chapter-num">Unit 2.7</h2>
+        <h2 class="section-title">2.7 Predefined Classes (Object, String, StringBuffer)</h2>
 
-        <h3 class="sub-title">Concept Definition</h3>
-        <div class="definition-box">
-            A <strong>Package</strong> is a namespace mechanism that groups related classes, interfaces, and sub-packages.
-        </div>
-
-        <h3 class="sub-title">Advantages</h3>
-        <ul>
-            <li>Prevents naming collisions.</li>
-            <li>Provides modularity and structured code organization.</li>
-            <li>Enforces access control (<code>protected</code> and <code>default</code> access modifiers).</li>
-        </ul>
-
-        <h3 class="sub-title">Syntax & Usage</h3>
-
-        <p><strong>1. Declaring a Package:</strong> Must be the first non-comment statement in a <code>.java</code> file:</p>
-        <pre><code>package mypack;
-
-public class Calculator {
-    public int add(int a, int b) { return a + b; }
-}</code></pre>
-
-        <p><strong>2. Compiling Packages via Terminal:</strong></p>
-        <pre><code>javac -d . Calculator.java</code></pre>
-        <p><em>(The <code>-d .</code> option creates the directory structure automatically).</em></p>
-
-        <p><strong>3. Importing & Using Packages:</strong></p>
-        <pre><code>// Option A: Specific class import
-import mypack.Calculator;
-
-// Option B: All classes in package
-import mypack.*;
-
-// Option C: Fully Qualified Name (no import required)
-mypack.Calculator calc = new mypack.Calculator();</code></pre>
+        <p><strong>Object Class:</strong> Root parent class of all classes (`toString()`, `equals()`, `hashCode()`, `getClass()`).</p>
+        <p><strong>String vs StringBuffer:</strong> String is immutable (SCP storage), StringBuffer is mutable (Heap memory, synchronized).</p>
+        <p><strong>String.format():</strong> Uses format specifiers (`%s`, `%d`, `%f`, `%b`).</p>
     </div>
 
-    <!-- 2.8 Wrapper Classes -->
+    <!-- 2.8 Packages & Wrapper Classes -->
     <div class="section-card" id="sec2-8">
-        <h2 class="section-title">2.8 Wrapper Classes</h2>
+        <h2 class="chapter-num">Unit 2.8</h2>
+        <h2 class="section-title">2.8 Packages & Wrapper Classes</h2>
 
-        <h3 class="sub-title">Concept Definition</h3>
-        <div class="definition-box">
-            <strong>Wrapper Classes</strong> provide an object representation of the 8 primitive data types within the <code>java.lang</code> package.
-        </div>
-
-        <h3 class="sub-title">Primitive to Wrapper Mapping</h3>
-        <table>
-            <thead>
-                <tr><th>Primitive Type</th><th>Wrapper Class</th></tr>
-            </thead>
-            <tbody>
-                <tr><td><code>byte</code></td><td><code>Byte</code></td></tr>
-                <tr><td><code>short</code></td><td><code>Short</code></td></tr>
-                <tr><td><code>int</code></td><td><code>Integer</code></td></tr>
-                <tr><td><code>long</code></td><td><code>Long</code></td></tr>
-                <tr><td><code>float</code></td><td><code>Float</code></td></tr>
-                <tr><td><code>double</code></td><td><code>Double</code></td></tr>
-                <tr><td><code>char</code></td><td><code>Character</code></td></tr>
-                <tr><td><code>boolean</code></td><td><code>Boolean</code></td></tr>
-            </tbody>
-        </table>
-
-        <h3 class="sub-title">Key Operations</h3>
-        <ul>
-            <li><strong>Autoboxing:</strong> Automatic conversion of a primitive type into its corresponding wrapper object by the compiler.</li>
-            <li><strong>Unboxing:</strong> Automatic conversion of a wrapper object back into its primitive type.</li>
-            <li><strong>String Parsing Methods:</strong> Static utility methods used to convert Strings into primitives:
-                <ul>
-                    <li><code>Integer.parseInt("123")</code></li>
-                    <li><code>Double.parseDouble("45.67")</code></li>
-                    <li><code>Boolean.parseBoolean("true")</code></li>
-                </ul>
-            </li>
-        </ul>
-
-        <h3 class="sub-title">Minimal Code Example</h3>
-        <pre><code>public class WrapperDemo {
-    public static void main(String[] args) {
-        // Autoboxing: int -> Integer
-        int a = 25;
-        Integer boxed = a; 
-
-        // Unboxing: Integer -> int
-        int unboxed = boxed; 
-
-        // Parsing String to Primitive
-        String strNum = "450";
-        int parsed = Integer.parseInt(strNum);
-
-        // Utility method
-        String binaryStr = Integer.toBinaryString(10); // "1010"
-
-        System.out.println("Boxed: " + boxed + " | Parsed: " + parsed + " | Binary: " + binaryStr);
-    }
-}</code></pre>
+        <p><strong>Packages:</strong> Groups related classes (`package mypack;`, `import mypack.*;`, `javac -d .`).</p>
+        <p><strong>Wrapper Classes:</strong> Object representation of primitives (`int` &rarr; `Integer`, Autoboxing & Unboxing, `Integer.parseInt()`).</p>
     </div>
 
-    <!-- High-Yield Viva & Exam Questions -->
-    <div class="section-card" id="sec-viva">
-        <h2 class="section-title">High-Yield Viva & Exam Questions</h2>
+    <!-- Question Bank -->
+    <div class="section-card" id="sec-questions">
+        <h2 class="section-title">⭐ Chapter 2 Textbook Exam Question Bank</h2>
 
-        <div class="viva-card">
-            <h4>1. What is the difference between shallow copy and deep copy?</h4>
-            <p>A shallow copy duplicates object references, meaning changes affect both copies. A deep copy creates entirely independent copies of both the object and the reference fields it points to.</p>
+        <h3 class="sub-title">📌 Short Answer Questions (2 Marks)</h3>
+        <div class="question-grid">
+            <div class="q-card"><span>1.</span> Define class.</div>
+            <div class="q-card"><span>2.</span> Define object.</div>
+            <div class="q-card"><span>3.</span> What is state and behavior?</div>
+            <div class="q-card"><span>4.</span> What is an instance of a class?</div>
+            <div class="q-card"><span>5.</span> What is a method?</div>
+            <div class="q-card"><span>6.</span> What is an access specifier?</div>
+            <div class="q-card"><span>7.</span> List access specifiers in Java.</div>
+            <div class="q-card"><span>8.</span> What is private access?</div>
+            <div class="q-card"><span>9.</span> What is default access?</div>
+            <div class="q-card"><span>10.</span> What is protected access?</div>
+            <div class="q-card"><span>11.</span> What is public access?</div>
+            <div class="q-card"><span>12.</span> What is an array of objects?</div>
+            <div class="q-card"><span>13.</span> What is a constructor?</div>
+            <div class="q-card"><span>14.</span> State the rules of constructors.</div>
+            <div class="q-card"><span>15.</span> What is constructor overloading?</div>
+            <div class="q-card"><span>16.</span> Why are constructors used?</div>
         </div>
 
-        <div class="viva-card">
-            <h4>2. Can we overload the `main()` method in Java?</h4>
-            <p>Yes, we can overload <code>main()</code> by providing different parameter lists, but the JVM will only execute the standard entry signature <code>public static void main(String[] args)</code>.</p>
-        </div>
+        <h3 class="sub-title" style="margin-top: 25px;">📌 5-Mark Questions</h3>
+        <ol>
+            <li>Explain class and object with a suitable example.</li>
+            <li>Explain state and behavior with an example.</li>
+            <li>Explain the process of creating an object in Java (3 steps).</li>
+            <li>Explain methods in Java with syntax and example.</li>
+            <li>Explain all access specifiers in Java with a table.</li>
+            <li>Explain private, default, protected and public access modifiers.</li>
+            <li>Explain an array of objects with a Java program.</li>
+            <li>Explain constructors and their characteristics.</li>
+            <li>Explain constructor overloading with a suitable program.</li>
+            <li>Differentiate between constructor and method.</li>
+        </ol>
 
-        <div class="viva-card">
-            <h4>3. Why is `String` immutable in Java?</h4>
-            <p>For security (handling network/file connections), synchronization/thread-safety, caching in the String Constant Pool (SCP), and consistent hashcode generation for hash-based collections.</p>
-        </div>
-
-        <div class="viva-card">
-            <h4>4. What happens if a constructor is made `private`?</h4>
-            <p>Objects of that class cannot be instantiated from outside the class. This pattern is primarily used to implement the <strong>Singleton Design Pattern</strong> or utility classes with only static methods.</p>
-        </div>
+        <h3 class="sub-title" style="margin-top: 25px;">📌 Programming Questions</h3>
+        <ol>
+            <li>Write a Java program to create a `Student` class and display student details.</li>
+            <li>Write a Java program demonstrating object creation.</li>
+            <li>Write a Java program using private data members and accessor/mutator methods.</li>
+            <li>Write a Java program to create an array of Employee objects.</li>
+            <li>Write a Java program demonstrating constructor overloading.</li>
+            <li>Write a Java program demonstrating different access modifiers.</li>
+        </ol>
     </div>
 
     <!-- Footer -->
     <footer>
-        Chapter 2: Objects and Classes &bull; Clean HTML Notes
+        Chapter 2 – Objects and Classes Comprehensive Textbook Notes &bull; Ready for Student Study & Exam Prep
     </footer>
 
 </div>
