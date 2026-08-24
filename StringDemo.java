@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class StringDemo
 {
     public static void main(String[] args)
@@ -22,6 +24,7 @@ public class StringDemo
         System.out.println("IsEmpty: " + s.isEmpty());
         System.out.println("Intern: " + s.intern());
         System.out.println("Join: " + String.join("-", "Java", "Python"));
+        System.out.println("Split: " + Arrays.toString(s.split(" ")));
 
         // Append using StringBuilder
         StringBuilder sb = new StringBuilder(s);
