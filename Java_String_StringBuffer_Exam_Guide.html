@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java String & StringBuffer - Master Exam Guide</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 20px;
+            line-height: 1.5;
+            color: #111;
+            background-color: #fff;
+        }
+
+        h1 {
+            color: #003366;
+            border-bottom: 2px solid #003366;
+            padding-bottom: 5px;
+            font-size: 24px;
+        }
+
+        h2 {
+            color: #003366;
+            margin-top: 25px;
+            font-size: 18px;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 4px;
+        }
+
+        .search-box {
+            width: 100%;
+            max-width: 450px;
+            padding: 8px 10px;
+            font-size: 14px;
+            border: 1px solid #666;
+            margin: 15px 0;
+            box-sizing: border-box;
+        }
+
+        .note-box {
+            background-color: #ffffdd;
+            border: 1px solid #e6e600;
+            padding: 12px 15px;
+            margin: 15px 0;
+            font-size: 14px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            margin-bottom: 25px;
+            font-size: 13px;
+        }
+
+        th, td {
+            border: 1px solid #555;
+            padding: 9px 11px;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        th {
+            background-color: #e6f2ff;
+            color: #003366;
+            font-weight: bold;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        code, pre {
+            font-family: Consolas, "Courier New", monospace;
+            font-size: 13px;
+        }
+
+        code {
+            background-color: #eee;
+            padding: 2px 4px;
+        }
+
+        pre {
+            background-color: #f4f4f4;
+            padding: 6px;
+            margin: 3px 0;
+            white-space: pre-wrap;
+            border: 1px solid #ddd;
+        }
+
+        .desc-text {
+            color: #222;
+            font-size: 13px;
+            margin-bottom: 5px;
+        }
+
+        .trap-box {
+            background-color: #fff0f0;
+            border-left: 3px solid #cc0000;
+            padding: 5px 8px;
+            margin-top: 5px;
+            color: #990000;
+            font-size: 12px;
+        }
+
+        .trap-title {
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 11px;
+            color: #cc0000;
+        }
+
+        .output {
+            color: #006600;
+            font-weight: bold;
+            font-family: Consolas, "Courier New", monospace;
+        }
+
+        .q-card {
+            border: 1px solid #888;
+            background: #fafafa;
+            padding: 12px 15px;
+            margin-bottom: 15px;
+        }
+
+        .q-title {
+            font-weight: bold;
+            color: #003366;
+            margin-bottom: 5px;
+        }
+
+        .highlight-row {
+            background-color: #f0f7ff !important;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Java String & StringBuffer - Master Exam Guide</h1>
+    <p>Textbook reference featuring all syllabus methods with simple explanations, common exam traps to avoid, code examples, and expected outputs.</p>
+
+    <!-- Key Rules -->
+    <div class="note-box">
+        <strong>3 Golden Rules for Exams:</strong>
+        <ul style="margin: 5px 0 0 20px;">
+            <li><strong>String Immutability:</strong> String values CANNOT be changed in memory. Calling <code>s.concat("X")</code> creates a new String object. If you don't assign it back (<code>s = s.concat("X")</code>), original <code>s</code> remains unchanged!</li>
+            <li><strong>StringBuffer Mutability:</strong> Modifies text directly inside the same memory address. All mutator methods are <code>synchronized</code> (thread-safe).</li>
+            <li><strong>Capacity Rule:</strong> Default StringBuffer capacity is <code>16 + string_length</code>. When capacity overflows, new capacity formula is <code>(oldCapacity * 2) + 2</code>.</li>
+        </ul>
+    </div>
+
+    <!-- Search Bar -->
+    <input type="text" id="searchInput" class="search-box" placeholder="Search any method or exam concept (e.g. 'substring', 'equals', 'capacity')...">
+
+    <!-- Section 1: String Methods -->
+    <h2>1. java.lang.String Class Methods (Main Syllabus List - 14 Methods)</h2>
+
+    <table id="stringTable">
+        <thead>
+            <tr>
+                <th width="4%">#</th>
+                <th width="22%">Method Signature</th>
+                <th width="9%">Return</th>
+                <th width="35%">Simple Description & Common Exam Trap</th>
+                <th width="20%">Example Code</th>
+                <th width="10%">Output</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="highlight-row">
+                <td>1</td>
+                <td><code>length()</code></td>
+                <td><code>int</code></td>
+                <td>
+                    <div class="desc-text">Counts the total number of characters in the string (including spaces and symbols).</div>
+                    <div class="trap-box"><span class="trap-title">⚠️ Common Mistake / Exam Trap:</span> Arrays use <code>arr.length</code> (variable without brackets), while String uses <code>str.length()</code> (method with brackets)!</div>
+                </td>
+                <td><code>String s = "Hello World";<br>int len = s.length();</code></td>
+                <td><span class="output">11</span></td>
+            </tr>
+            <tr class="highlight-row">
+                <td>2</td>
+                <td><code>charAt(int index)</code></td>
+                <td><code>char</code></td>
+                <td>
+                    <div class="desc-text">Fetches the single character at the specified 0-based index position.</div>
+                    <div class="trap-box"><span class="trap-title">⚠️ Common Mistake / Exam Trap:</span> If index is negative or &gt;= <code>length()</code>, Java throws <code>StringIndexOutOfBoundsException</code>!</div>
+                </td>
+                <td><code>String s = "Java";<br>char c = s.charAt(2);</code></td>
+                <td><span class="output">'v'</span></td>
+            </tr>
+            <tr class="highlight-row">
+                <td>3</td>
+                <td><code>substring(int beginIndex)</code></td>
+                <td><code>String</code></td>
+                <td>
+                    <div class="desc-text">Cuts out a new string starting from <code>beginIndex</code> to the end of string.</div>
+                    <div class="trap-box"><span class="trap-title">⚠️ Common Mistake / Exam Trap:</span> Original string remains unchanged because Strings are immutable.</div>
+                </td>
+                <td><code>"HelloWorld".substring(5)</code></td>
+                <td><span class="output">"World"</span></td>
+            </tr>
+            <tr class="highlight-row">
+                <td>4</td>
+                <td><code>substring(int begin, int end)</code></td>
+                <td><code>String</code></td>
+                <td>
+                    <div class="desc-text">Cuts out text from <code>beginIndex</code> up to <code>endIndex - 1</code>.</div>
+                    <div class="trap-box"><span class="trap-title">⚠️ Common Mistake / Exam Trap:</span> <code>endIndex</code> is EXCLUSIVE! <code>substring(0, 5)</code> extracts indices 0,1,2,3,4 (length = 5 - 0 = 5).</div>
+                </td>
+                <td><code>"HelloWorld".substring(0, 5)</code></td>
+                <td><span class="output">"Hello"</span></td>
+            </tr>
+            <tr class="highlight-row">
+                <td>5</td>
+                <td><code>equals(Object obj)</code></td>
+                <td><code>boolean</code></td>
+                <td>
+                    <div class="desc-text">Compares if two strings contain the exact same text characters in exact same order (Case-Sensitive).</div>
+                    <div class="trap-box"><span class="trap-title">⚠️ Common Mistake / Exam Trap:</span> <code>==</code> compares memory addresses (SCP vs Heap). <code>.equals()</code> compares actual text content!</div>
+                </td>
+                <td><code>String s1 = "Java";<br>String s2 = new String("Java");<br>boolean r = s1.equals(s2);</code></td>
+                <td><span class="output">true</span></td>
+            </tr>
+            <tr class="highlight-row">
+                <td>6</td>
+                <td><code>equalsIgnoreCase(String str)</code></td>
+                <td><code>boolean</code></td>
+                <td>
+                    <div class="desc-text">Compares string text while ignoring uppercase or lowercase differences.</div>
+                    <div class="trap-box"><span class="trap-title">⚠️ Common Mistake / Exam Trap:</span> <code>"JAVA".equalsIgnoreCase("java")</code> returns <code>true</code>.</div>
+                </td>
+                <td><code>String s1 = "Java";<br>String s2 = "JAVA";<br>boolean r = s1.equalsIgnoreCase(s2);</code></td>
+                <td><span class="output">true</span></td>
+            </tr>
+            <tr class="highlight-row">
+                <td>7</td>
+                <td><code>toUpperCase()</code></td>
+                <td><code>String</code></td>
+                <td>
+                    <div class="desc-text">Converts all letters in string to uppercase.</div>
+                    <div class="trap-box"><span class="trap-title">⚠️ Common Mistake / Exam Trap:</span> Returns a NEW string. Does not modify original string.</div>
+                </td>
+                <td><code>"java".toUpperCase();</code></td>
+                <td><span class="output">"JAVA"</span></td>
+            </tr>
+            <tr class="highlight-row">
+                <td>8</td>
+                <td><code>toLowerCase()</code></td>
+                <td><code>String</code></td>
+                <td>
+                    <div class="desc-text">Converts all letters in string to lowercase.</div>
+                    <div class="trap-box"><span class="trap-title">⚠️ Common Mistake / Exam Trap:</span> Does NOT alter numbers, spaces, or punctuation symbols.</div>
+                </td>
+                <td><code>"JAVA".toLowerCase();</code></td>
+                <td><span class="output">"java"</span></td>
+            </tr>
+            <tr class="highlight-row">
+                <td>9</td>
+                <td><code>trim()</code></td>
+                <td><code>String</code></td>
+                <td>
+                    <div class="desc-text">Removes blank spaces from both beginning and end of string.</div>
+                    <div class="trap-box"><span class="trap-title">⚠️ Common Mistake / Exam Trap:</span> Does NOT remove spaces between words in the middle! (e.g. <code>"a  b"</code> stays <code>"a  b"</code>).</div>
+                </td>
+                <td><code>"  Hello  ".trim()</code></td>
+                <td><span class="output">"Hello"</span></td>
+            </tr>
+            <tr class="highlight-row">
+                <td>10</td>
+                <td><code>replace(char old, char new)</code></td>
+                <td><code>String</code></td>
+                <td>
+                    <div class="desc-text">Replaces all occurrences of <code>old</code> character with <code>new</code> character.</div>
+                    <div class="trap-box"><span class="trap-title">⚠️ Common Mistake / Exam Trap:</span> Replaces ALL matching occurrences, not just the first one.</div>
+                </td>
+                <td><code>"foo".replace('o', 'a')</code></td>
+                <td><span class="output">"faa"</span></td>
+            </tr>
+            <tr class="highlight-row">
+                <td>11</td>
+                <td><code>contains(CharSequence s)</code></td>
+                <td><code>boolean</code></td>
+                <td>
+                    <div class="desc-text">Checks if target text exists anywhere inside the string.</div>
+                    <div class="trap-box"><span class="trap-title">⚠️ Common Mistake / Exam Trap:</span> Does NOT accept regular expressions (regex). Case-sensitive search.</div>
+                </td>
+                <td><code>"Hello World".contains("World")</code></td>
+                <td><span class="output">true</span></td>
+            </tr>
+            <tr class="highlight-row">
+                <td>12</td>
+                <td><code>indexOf(String str)</code></td>
+                <td><code>int</code></td>
+                <td>
+                    <div class="desc-text">Finds index position of FIRST occurrence of target text.</div>
+                    <div class="trap-box"><span class="trap-title">⚠️ Common Mistake / Exam Trap:</span> Returns <code>-1</code> if target text is NOT found inside string!</div>
+                </td>
+                <td><code>"banana".indexOf("na")</code></td>
+                <td><span class="output">2</span></td>
+            </tr>
+            <tr class="highlight-row">
+                <td>13</td>
+                <td><code>toString()</code></td>
+                <td><code>String</code></td>
+                <td>
+                    <div class="desc-text">Returns the String itself.</div>
+                    <div class="trap-box"><span class="trap-title">⚠️ Common Mistake / Exam Trap:</span> For String objects, <code>s.toString()</code> simply returns <code>s</code> reference itself.</div>
+                </td>
+                <td><code>String s = "Hello";<br>String r = s.toString();</code></td>
+                <td><span class="output">"Hello"</span></td>
+            </tr>
+            <tr class="highlight-row">
+                <td>14</td>
+                <td><code>toCharArray()</code></td>
+                <td><code>char[]</code></td>
+                <td>
+                    <div class="desc-text">Creates a new character array <code>char[]</code> containing every character from the string.</div>
+                    <div class="trap-box"><span class="trap-title">⚠️ Common Mistake / Exam Trap:</span> Modifying elements of the returned <code>char[]</code> array does NOT change the original String.</div>
+                </td>
+                <td><code>String s = "JAVA";<br>char[] arr = s.toCharArray();</code></td>
+                <td><span class="output">['J','A','V','A']</span></td>
+            </tr>
+            <!-- Additional Useful String Methods -->
+            <tr>
+                <td>15</td>
+                <td><code>isEmpty()</code></td>
+                <td><code>boolean</code></td>
+                <td>
+                    <div class="desc-text">Checks if string length is 0 (i.e. <code>""</code>).</div>
+                    <div class="trap-box"><span class="trap-title">⚠️ Common Mistake / Exam Trap:</span> A string containing spaces <code>" "</code> is NOT empty!</div>
+                </td>
+                <td><code>"".isEmpty()</code></td>
+                <td><span class="output">true</span></td>
+            </tr>
+            <tr>
+                <td>16</td>
+                <td><code>isBlank()</code></td>
+                <td><code>boolean</code></td>
+                <td>
+                    <div class="desc-text">Checks if string is empty OR contains only whitespace (Java 11+).</div>
+                    <div class="trap-box"><span class="trap-title">⚠️ Common Mistake / Exam Trap:</span> <code>"   ".isEmpty()</code> is false, but <code>"   ".isBlank()</code> is true.</div>
+                </td>
+                <td><code>"   ".isBlank()</code></td>
+                <td><span class="output">true</span></td>
+            </tr>
+            <tr>
+                <td>17</td>
+                <td><code>compareTo(String str)</code></td>
+                <td><code>int</code></td>
+                <td>
+                    <div class="desc-text">Compares two strings alphabetically based on Unicode ASCII values.</div>
+                    <div class="trap-box"><span class="trap-title">⚠️ Common Mistake / Exam Trap:</span> Returns 0 if equal, negative if 1st precedes, positive if 1st follows.</div>
+                </td>
+                <td><code>"apple".compareTo("banana")</code></td>
+                <td><span class="output">Negative (-1)</span></td>
+            </tr>
+            <tr>
+                <td>18</td>
+                <td><code>startsWith(String prefix)</code> / <code>endsWith(String suffix)</code></td>
+                <td><code>boolean</code></td>
+                <td>
+                    <div class="desc-text">Checks if string starts with prefix or ends with suffix.</div>
+                    <div class="trap-box"><span class="trap-title">⚠️ Common Mistake / Exam Trap:</span> Search is case-sensitive.</div>
+                </td>
+                <td><code>"doc.pdf".endsWith(".pdf")</code></td>
+                <td><span class="output">true</span></td>
+            </tr>
+            <tr>
+                <td>19</td>
+                <td><code>split(String regex)</code></td>
+                <td><code>String[]</code></td>
+                <td>
+                    <div class="desc-text">Splits string into array <code>String[]</code> using specified regex.</div>
+                    <div class="trap-box"><span class="trap-title">⚠️ Common Mistake / Exam Trap:</span> Dot <code>"."</code> is regex special char! Use <code>split("\\.")</code>.</div>
+                </td>
+                <td><code>"a,b,c".split(",")</code></td>
+                <td><span class="output">["a","b","c"]</span></td>
+            </tr>
+            <tr>
+                <td>20</td>
+                <td><code>concat(String str)</code></td>
+                <td><code>String</code></td>
+                <td>
+                    <div class="desc-text">Attaches <code>str</code> to end of string and returns a NEW String.</div>
+                    <div class="trap-box"><span class="trap-title">⚠️ Common Mistake / Exam Trap:</span> Must reassign <code>s = s.concat("X")</code> to update `s`.</div>
+                </td>
+                <td><code>"Hello".concat(" World")</code></td>
+                <td><span class="output">"Hello World"</span></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Section 2: StringBuffer Methods -->
+    <h2>2. java.lang.StringBuffer Class Methods (Main Syllabus List - 9 Methods)</h2>
+
+    <table id="bufferTable">
+        <thead>
+            <tr>
+                <th width="4%">#</th>
+                <th width="22%">Method Signature</th>
+                <th width="9%">Return</th>
+                <th width="35%">Simple Description & Common Exam Trap</th>
+                <th width="20%">Example Code</th>
+                <th width="10%">Output</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="highlight-row">
+                <td>1</td>
+                <td><code>append(String str / primitives)</code></td>
+                <td><code>StringBuffer</code></td>
+                <td>
+                    <div class="desc-text">Attaches text or primitive data to end of buffer IN-PLACE.</div>
+                    <div class="trap-box"><span class="trap-title">⚠️ Common Mistake / Exam Trap:</span> Modifies the SAME object in memory and returns reference to <code>this</code>.</div>
+                </td>
+                <td><code>StringBuffer sb = new StringBuffer("Hello");<br>sb.append(" World");</code></td>
+                <td><span class="output">"Hello World"</span></td>
+            </tr>
+            <tr class="highlight-row">
+                <td>2</td>
+                <td><code>insert(int offset, String str)</code></td>
+                <td><code>StringBuffer</code></td>
+                <td>
+                    <div class="desc-text">Inserts text into buffer at specified index position, pushing existing text right.</div>
+                    <div class="trap-box"><span class="trap-title">⚠️ Common Mistake / Exam Trap:</span> Throws <code>StringIndexOutOfBoundsException</code> if offset is negative or &gt; length().</div>
+                </td>
+                <td><code>StringBuffer sb = new StringBuffer("Hello World");<br>sb.insert(5, ",");</code></td>
+                <td><span class="output">"Hello, World"</span></td>
+            </tr>
+            <tr class="highlight-row">
+                <td>3</td>
+                <td><code>replace(int start, int end, String str)</code></td>
+                <td><code>StringBuffer</code></td>
+                <td>
+                    <div class="desc-text">Replaces text in range <code>[start, end)</code> with new string <code>str</code>.</div>
+                    <div class="trap-box"><span class="trap-title">⚠️ Common Mistake / Exam Trap:</span> Replacement string <code>str</code> does NOT need to be same length as deleted range!</div>
+                </td>
+                <td><code>StringBuffer sb = new StringBuffer("Hello World");<br>sb.replace(6, 11, "Java");</code></td>
+                <td><span class="output">"Hello Java"</span></td>
+            </tr>
+            <tr class="highlight-row">
+                <td>4</td>
+                <td><code>delete(int start, int end)</code></td>
+                <td><code>StringBuffer</code></td>
+                <td>
+                    <div class="desc-text">Deletes character range from <code>start</code> index up to <code>end - 1</code>.</div>
+                    <div class="trap-box"><span class="trap-title">⚠️ Common Mistake / Exam Trap:</span> <code>end</code> index is EXCLUSIVE! <code>delete(5, 11)</code> deletes indices 5,6,7,8,9,10.</div>
+                </td>
+                <td><code>StringBuffer sb = new StringBuffer("Hello World");<br>sb.delete(5, 11);</code></td>
+                <td><span class="output">"Hello"</span></td>
+            </tr>
+            <tr class="highlight-row">
+                <td>5</td>
+                <td><code>reverse()</code></td>
+                <td><code>StringBuffer</code></td>
+                <td>
+                    <div class="desc-text">Flips character order in-place (e.g. <code>"Java"</code> becomes <code>"avaJ"</code>).</div>
+                    <div class="trap-box"><span class="trap-title">⚠️ Common Mistake / Exam Trap:</span> Permanently reverses original buffer content.</div>
+                </td>
+                <td><code>StringBuffer sb = new StringBuffer("Java");<br>sb.reverse();</code></td>
+                <td><span class="output">"avaJ"</span></td>
+            </tr>
+            <tr class="highlight-row">
+                <td>6</td>
+                <td><code>length()</code></td>
+                <td><code>int</code></td>
+                <td>
+                    <div class="desc-text">Returns actual character count stored inside the buffer.</div>
+                    <div class="trap-box"><span class="trap-title">⚠️ Common Mistake / Exam Trap:</span> <code>length()</code> is character count, while <code>capacity()</code> is total allocated buffer size!</div>
+                </td>
+                <td><code>StringBuffer sb = new StringBuffer("Hello");<br>int len = sb.length();</code></td>
+                <td><span class="output">5</span></td>
+            </tr>
+            <tr class="highlight-row">
+                <td>7</td>
+                <td><code>capacity()</code></td>
+                <td><code>int</code></td>
+                <td>
+                    <div class="desc-text">Returns total allocated memory buffer capacity size.</div>
+                    <div class="trap-box"><span class="trap-title">⚠️ Common Mistake / Exam Trap:</span> Default capacity = <code>16 + initial_string_length</code>. For <code>"Java"</code> (4), capacity is 16+4 = 20.</div>
+                </td>
+                <td><code>StringBuffer sb = new StringBuffer("Java");<br>int cap = sb.capacity();</code></td>
+                <td><span class="output">20 (16 + 4)</span></td>
+            </tr>
+            <tr class="highlight-row">
+                <td>8</td>
+                <td><code>charAt(int index)</code></td>
+                <td><code>char</code></td>
+                <td>
+                    <div class="desc-text">Returns character at specified 0-based index position inside buffer.</div>
+                    <div class="trap-box"><span class="trap-title">⚠️ Common Mistake / Exam Trap:</span> Throws <code>StringIndexOutOfBoundsException</code> if index is invalid.</div>
+                </td>
+                <td><code>StringBuffer sb = new StringBuffer("Java");<br>char c = sb.charAt(1);</code></td>
+                <td><span class="output">'a'</span></td>
+            </tr>
+            <tr class="highlight-row">
+                <td>9</td>
+                <td><code>setCharAt(int index, char ch)</code></td>
+                <td><code>void</code></td>
+                <td>
+                    <div class="desc-text">Replaces single character at index position with new character <code>ch</code>.</div>
+                    <div class="trap-box"><span class="trap-title">⚠️ Common Mistake / Exam Trap:</span> Return type is <code>void</code>! You CANNOT method-chain <code>.setCharAt()</code>.</div>
+                </td>
+                <td><code>StringBuffer sb = new StringBuffer("Java");<br>sb.setCharAt(0, 'Y');</code></td>
+                <td><span class="output">"Yava"</span></td>
+            </tr>
+            <!-- Additional Useful StringBuffer Methods -->
+            <tr>
+                <td>10</td>
+                <td><code>deleteCharAt(int index)</code></td>
+                <td><code>StringBuffer</code></td>
+                <td>
+                    <div class="desc-text">Deletes a single character at specified index position.</div>
+                    <div class="trap-box"><span class="trap-title">⚠️ Common Mistake / Exam Trap:</span> Remaining characters shift left to fill gap. Length decreases by 1.</div>
+                </td>
+                <td><code>StringBuffer sb = new StringBuffer("Java");<br>sb.deleteCharAt(2);</code></td>
+                <td><span class="output">"Jaa"</span></td>
+            </tr>
+            <tr>
+                <td>11</td>
+                <td><code>ensureCapacity(int minCap)</code></td>
+                <td><code>void</code></td>
+                <td>
+                    <div class="desc-text">Guarantees buffer capacity is at least <code>minCap</code>.</div>
+                    <div class="trap-box"><span class="trap-title">⚠️ Common Mistake / Exam Trap:</span> If <code>minCap &gt; currentCapacity</code>, new capacity formula is <code>(oldCapacity * 2) + 2</code>!</div>
+                </td>
+                <td><code>StringBuffer sb = new StringBuffer();<br>sb.ensureCapacity(20);</code></td>
+                <td><span class="output">capacity = 34</span></td>
+            </tr>
+            <tr>
+                <td>12</td>
+                <td><code>substring(int start, int end)</code></td>
+                <td><code>String</code></td>
+                <td>
+                    <div class="desc-text">Extracts a portion of text from buffer and returns it as a <code>String</code>.</div>
+                    <div class="trap-box"><span class="trap-title">⚠️ Common Mistake / Exam Trap:</span> Returns an IMMUTABLE <code>java.lang.String</code>, NOT a <code>StringBuffer</code>!</div>
+                </td>
+                <td><code>StringBuffer sb = new StringBuffer("HelloWorld");<br>String s = sb.substring(0, 5);</code></td>
+                <td><span class="output">"Hello"</span></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Section 3: Exam Qs -->
+    <h2>3. Important Exam Output Traces</h2>
+
+    <div class="q-card">
+        <div class="q-title">Q1: String Immutability Trap</div>
+        <pre>String s = "Java";
+s.concat(" SE");
+System.out.println(s);</pre>
+        <strong>Output:</strong> <code>Java</code><br>
+        <em>Explanation: Because String is immutable, s.concat() creates a new string but s was not reassigned (s = s.concat(" SE")), so original s remains "Java".</em>
+    </div>
+
+    <div class="q-card">
+        <div class="q-title">Q2: == vs .equals() Comparison</div>
+        <pre>String s1 = "Hello";
+String s2 = new String("Hello");
+System.out.println(s1 == s2);
+System.out.println(s1.equals(s2));</pre>
+        <strong>Output:</strong> <code>false</code> then <code>true</code><br>
+        <em>Explanation: s1 points to String Constant Pool, s2 points to Heap memory. == compares memory addresses (false), whereas .equals() compares actual text values (true).</em>
+    </div>
+
+    <div class="q-card">
+        <div class="q-title">Q3: StringBuffer Capacity Calculation</div>
+        <pre>StringBuffer sb = new StringBuffer("Java");
+System.out.println(sb.capacity());</pre>
+        <strong>Output:</strong> <code>20</code><br>
+        <em>Explanation: Default initial capacity is 16 + string length (4) = 20.</em>
+    </div>
+
+    <script>
+        const searchInput = document.getElementById('searchInput');
+        const rows = document.querySelectorAll('table tbody tr');
+        const qCards = document.querySelectorAll('.q-card');
+
+        searchInput.addEventListener('input', function(e) {
+            const q = e.target.value.toLowerCase().trim();
+
+            rows.forEach(row => {
+                const text = row.textContent.toLowerCase();
+                row.style.display = text.includes(q) ? '' : 'none';
+            });
+
+            qCards.forEach(card => {
+                const text = card.textContent.toLowerCase();
+                card.style.display = text.includes(q) ? 'block' : 'none';
+            });
+        });
+    </script>
+</body>
+</html>
