@@ -1,5 +1,5 @@
-import java.util.Date;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class EasyDateDemo {
     public static void main(String[] args) {
@@ -12,7 +12,7 @@ public class EasyDateDemo {
 
         // Step 3: Format 2 - Time (hh:mm:ss a)
         SimpleDateFormat timeFmt = new SimpleDateFormat("hh:mm:ss a");
-        System.out.println("Current Time : " + timeFmt.format(currentDate));
+        System.out.println("Current Time : " +  timeFmt.format(currentDate));
 
         // Step 4: Format 3 - Day and Date (EEEE, MMMM dd, yyyy)
         SimpleDateFormat fullFmt = new SimpleDateFormat("EEEE, MMMM dd, yyyy");
