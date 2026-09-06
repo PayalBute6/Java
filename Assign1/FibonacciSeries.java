@@ -23,5 +23,5 @@ public class FibonacciSeries {
         System.out.println();
 
         sc.close();
-    }
+        }
 }
