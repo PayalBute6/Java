@@ -15,7 +15,7 @@ public class FibonacciSeries {
         for (int i = 1; i <= n; i++) {
             System.out.print(first + " ");
 
-            // Calculate next term
+            // Calculate next term 
             int next = first + second;
             first = second;
             second = next;
