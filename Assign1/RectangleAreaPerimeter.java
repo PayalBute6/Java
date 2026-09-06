@@ -19,6 +19,6 @@ public class RectangleAreaPerimeter {
         System.out.println("Area of Rectangle = " + area);
         System.out.println("Perimeter of Rectangle = " + perimeter);
 
-        sc.close();
+        sc.close(); 
     }
 }

@@ -71,6 +71,6 @@ public class MenuDrivenProgram {
 
         } while (choice != 4);
 
-        sc.close();
+        sc.close(); 
     }
 }

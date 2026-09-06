@@ -14,6 +14,6 @@ public class MultiplicationTables1To15 {
             System.out.println();
         }
 
-        sc.close();
+        sc.close(); 
     }
 }
