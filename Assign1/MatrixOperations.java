@@ -1,128 +1,129 @@
 import java.util.Scanner;
 
 public class MatrixOperations {
-
-    // Helper method to input matrix elements
-    public static int[][] readMatrix(Scanner sc, String name, int rows, int cols) {
-        int[][] matrix = new int[rows][cols];
-        System.out.println("Enter elements for Matrix " + name + " (" + rows + "x" + cols + "):");
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < cols; j++) {
-                matrix[i][j] = sc.nextInt();
-            }
-        }
-        return matrix;
-    }
-
-    // Helper method to display a matrix
-    public static void displayMatrix(int[][] matrix) {
-        for (int i = 0; i < matrix.length; i++) {
-            for (int j = 0; j < matrix[0].length; j++) {
-                System.out.print(matrix[i][j] + "\t");
-            }
-            System.out.println();
-        }
-    }
-
     public static void main(String[] args) {
+
         Scanner sc = new Scanner(System.in);
         int choice;
 
         do {
-            System.out.println("\n==============================================");
-            System.out.println("          MATRIX OPERATIONS MENU              ");
-            System.out.println("==============================================");
-            System.out.println("1. Matrix Addition");
-            System.out.println("2. Matrix Multiplication");
-            System.out.println("3. Transpose of Matrix");
+            System.out.println("\n--- MATRIX MENU ---");
+            System.out.println("1. Addition");
+            System.out.println("2. Multiplication");
+            System.out.println("3. Transpose");
             System.out.println("4. Exit");
-            System.out.println("==============================================");
-            System.out.print("Enter your choice (1-4): ");
+            System.out.print("Enter your choice: ");
             choice = sc.nextInt();
 
             switch (choice) {
+
                 case 1:
-                    // i. Addition
-                    System.out.print("Enter rows and columns for matrices: ");
+                    // Matrix Addition
+                    System.out.print("Enter rows and columns: ");
                     int r = sc.nextInt();
                     int c = sc.nextInt();
 
-                    int[][] a1 = readMatrix(sc, "A", r, c);
-                    int[][] b1 = readMatrix(sc, "B", r, c);
-
+                    int[][] a = new int[r][c];
+                    int[][] b = new int[r][c];
                     int[][] sum = new int[r][c];
-                    for (int i = 0; i < r; i++) {
-                        for (int j = 0; j < c; j++) {
-                            sum[i][j] = a1[i][j] + b1[i][j];
-                        }
-                    }
 
-                    System.out.println("\nResult of Matrix Addition (A + B):");
-                    displayMatrix(sum);
+                    System.out.println("Enter Matrix A:");
+                    for (int i = 0; i < r; i++)
+                        for (int j = 0; j < c; j++)
+                            a[i][j] = sc.nextInt();
+
+                    System.out.println("Enter Matrix B:");
+                    for (int i = 0; i < r; i++)
+                        for (int j = 0; j < c; j++)
+                            b[i][j] = sc.nextInt();
+
+                    for (int i = 0; i < r; i++)
+                        for (int j = 0; j < c; j++)
+                            sum[i][j] = a[i][j] + b[i][j];
+
+                    System.out.println("Addition:");
+                    for (int i = 0; i < r; i++) {
+                        for (int j = 0; j < c; j++)
+                            System.out.print(sum[i][j] + "\t");
+                        System.out.println();
+                    }
                     break;
 
+
                 case 2:
-                    // ii. Multiplication
-                    System.out.print("Enter rows and columns for Matrix A: ");
+                    // Matrix Multiplication
+                    System.out.print("Enter rows and columns of Matrix A: ");
                     int r1 = sc.nextInt();
                     int c1 = sc.nextInt();
 
-                    System.out.print("Enter rows and columns for Matrix B: ");
+                    System.out.print("Enter rows and columns of Matrix B: ");
                     int r2 = sc.nextInt();
                     int c2 = sc.nextInt();
 
                     if (c1 != r2) {
-                        System.out.println("Error: Matrix multiplication not possible!");
-                        System.out.println("Columns of Matrix A (" + c1 + ") must equal Rows of Matrix B (" + r2 + ").");
+                        System.out.println("Multiplication not possible.");
                         break;
                     }
 
-                    int[][] a2 = readMatrix(sc, "A", r1, c1);
-                    int[][] b2 = readMatrix(sc, "B", r2, c2);
+                    a = new int[r1][c1];
+                    b = new int[r2][c2];
+                    int[][] product = new int[r1][c2];
 
-                    int[][] prod = new int[r1][c2];
+                    System.out.println("Enter Matrix A:");
+                    for (int i = 0; i < r1; i++)
+                        for (int j = 0; j < c1; j++)
+                            a[i][j] = sc.nextInt();
+
+                    System.out.println("Enter Matrix B:");
+                    for (int i = 0; i < r2; i++)
+                        for (int j = 0; j < c2; j++)
+                            b[i][j] = sc.nextInt();
+
                     for (int i = 0; i < r1; i++) {
                         for (int j = 0; j < c2; j++) {
-                            prod[i][j] = 0;
-                            for (int k = 0; k < c1; k++) {
-                                prod[i][j] += a2[i][k] * b2[k][j];
-                            }
+                            for (int k = 0; k < c1; k++)
+                                product[i][j] += a[i][k] * b[k][j];
                         }
                     }
 
-                    System.out.println("\nResult of Matrix Multiplication (A * B):");
-                    displayMatrix(prod);
+                    System.out.println("Multiplication:");
+                    for (int i = 0; i < r1; i++) {
+                        for (int j = 0; j < c2; j++)
+                            System.out.print(product[i][j] + "\t");
+                        System.out.println();
+                    }
                     break;
+
 
                 case 3:
-                    // iii. Transpose
-                    System.out.print("Enter rows and columns for Matrix: ");
-                    int rows = sc.nextInt();
-                    int cols = sc.nextInt();
+                    // Matrix Transpose
+                    System.out.print("Enter rows and columns: ");
+                    r = sc.nextInt();
+                    c = sc.nextInt();
 
-                    int[][] mat = readMatrix(sc, "A", rows, cols);
+                    a = new int[r][c];
 
-                    int[][] transpose = new int[cols][rows];
-                    for (int i = 0; i < rows; i++) {
-                        for (int j = 0; j < cols; j++) {
-                            transpose[j][i] = mat[i][j];
-                        }
+                    System.out.println("Enter Matrix:");
+                    for (int i = 0; i < r; i++)
+                        for (int j = 0; j < c; j++)
+                            a[i][j] = sc.nextInt();
+
+                    System.out.println("Transpose:");
+
+                    for (int j = 0; j < c; j++) {
+                        for (int i = 0; i < r; i++)
+                            System.out.print(a[i][j] + "\t");
+                        System.out.println();
                     }
-
-                    System.out.println("\nOriginal Matrix:");
-                    displayMatrix(mat);
-
-                    System.out.println("\nTranspose Matrix:");
-                    displayMatrix(transpose);
                     break;
 
+
                 case 4:
-                    // iv. Exit
-                    System.out.println("Exiting Matrix Operations program. Goodbye!");
+                    System.out.println("Exiting...");
                     break;
 
                 default:
-                    System.out.println("Invalid choice! Please select between 1 and 4.");
+                    System.out.println("Invalid choice!");
             }
 
         } while (choice != 4);
