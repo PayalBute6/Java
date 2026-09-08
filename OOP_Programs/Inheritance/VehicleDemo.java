@@ -25,7 +25,6 @@ public class VehicleDemo {
     public static void main(String args[]) {
 
         Scanner sc = new Scanner(System.in);
-
         Car c = new Car();
 
         System.out.print("Enter company: ");
@@ -33,8 +32,6 @@ public class VehicleDemo {
 
         System.out.print("Enter price: ");
         c.price = sc.nextInt();
-
-        sc.nextLine();
 
         System.out.print("Enter model: ");
         c.model = sc.nextLine();
@@ -48,3 +45,6 @@ public class VehicleDemo {
         sc.close();
     }
 }
+
+
+
