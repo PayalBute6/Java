@@ -1,6 +1,8 @@
+
 import java.util.Scanner;
 
 class Vehicle {
+
     String company;
     int price;
 
@@ -11,6 +13,7 @@ class Vehicle {
 }
 
 class Car extends Vehicle {
+
     String model;
     int seats;
 
@@ -22,6 +25,7 @@ class Car extends Vehicle {
 }
 
 public class VehicleDemo {
+
     public static void main(String args[]) {
 
         Scanner sc = new Scanner(System.in);
@@ -45,6 +49,3 @@ public class VehicleDemo {
         sc.close();
     }
 }
-
-
-
