@@ -35,13 +35,13 @@ public class MultiLevelDemo {
         Scanner sc = new Scanner(System.in);
         Place p = demo.new Place();
         System.out.print("Enter continent: ");
-        p.continent = sc.nextLine().trim();
+        p.continent = sc.nextLine();
         System.out.print("Enter country: ");
-        p.country = sc.nextLine().trim();
+        p.country = sc.nextLine();
         System.out.print("Enter state: ");
-        p.state = sc.nextLine().trim();
+        p.state = sc.nextLine();
         System.out.print("Enter place: ");
-        p.place = sc.nextLine().trim();
+        p.place = sc.nextLine();
         System.out.println("\n--- Location Information ---");
         p.display();
         sc.close();
