@@ -105,7 +105,7 @@ public class OrderDemo
         for(int i = 0; i < 3; i++)
         {
             System.out.println("\nSales Order " + (i + 1));
-            s[i].display();
+            s[i].display(); 
         }
     }
 }
