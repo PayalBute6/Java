@@ -62,6 +62,6 @@ public class StaffDemo {
             staffArray[i].display();
         }
 
-        scanner.close();        
+        scanner.close();       
     }
 }
