@@ -28,8 +28,11 @@ public class SimpleCalcDemo {
         System.out.print("Enter second number: ");
         int num2 = scanner.nextInt();
 
-        System.out.println("Addition (" + num1 + " + " + num2 + "): " + calc.add(num1, num2));
-        System.out.println("Subtraction (" + num1 + " - " + num2 + "): " + calc.subtract(num1, num2));
+        int sum = calc.add(num1, num2);
+        int difference = calc.subtract(num1, num2);
+
+        System.out.println("Addition: " + sum);
+        System.out.println("Subtraction: " + difference);
         
         scanner.close();
     }
