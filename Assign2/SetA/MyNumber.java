@@ -43,10 +43,10 @@ public class MyNumber {
             return;
         }
         
-        int val = Integer.parseInt(args[0]);
-        MyNumber myNum = new MyNumber(val);
+        int n = Integer.parseInt(args[0]);
+        MyNumber myNum = new MyNumber(n);
         
-        System.out.println("Number: " + val);
+        System.out.println("Number: " + n);
         System.out.println("isNegative: " + myNum.isNegative());
         System.out.println("isPositive: " + myNum.isPositive());
         System.out.println("isZero: " + myNum.isZero());
