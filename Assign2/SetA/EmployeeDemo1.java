@@ -31,7 +31,7 @@ class Employee {
         objectCount++;
     }
 
-    static void displayObjectCount() {
+    void displayObjectCount() {
         System.out.println("Object count: " + objectCount);
     }
 
@@ -59,7 +59,7 @@ public class EmployeeDemo1 {
         double salary1 = sc.nextDouble();
         
         Employee e1 = new Employee(id1, name1, dept1, salary1);
-        Employee.displayObjectCount();
+        e1.displayObjectCount();
         e1.display();
 
         System.out.println("\n--- Enter Employee 2 Details ---");
@@ -74,8 +74,20 @@ public class EmployeeDemo1 {
         double salary2 = sc.nextDouble();
         
         Employee e2 = new Employee(id2, name2, dept2, salary2);
-        Employee.displayObjectCount();
+        e2.displayObjectCount();
         e2.display();
+
+        Employee e3 = new Employee(id2, name2, dept2, salary2);
+        e3.displayObjectCount();
+        e3.display();
+
+        Employee e4 = new Employee(id2, name2, dept2, salary2);
+        e4.displayObjectCount();
+        e4.display();
+
+        Employee e5 = new Employee(id2, name2, dept2, salary2);
+        e5.displayObjectCount();
+        e5.display();
         
         sc.close();
     }
