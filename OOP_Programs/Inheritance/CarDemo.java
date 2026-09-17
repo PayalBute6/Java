@@ -45,5 +45,6 @@ public class CarDemo {
         System.out.println("\n--- Car Information ---");
         car.display();
         sc.close();
+        
     }
 }
