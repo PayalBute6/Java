@@ -44,7 +44,6 @@ public class CarDemo {
         Car car = new Car(company, price, seats, type);
         System.out.println("\n--- Car Information ---");
         car.display();
-        sc.close();
-        
+        sc.close();     
     }
 }
