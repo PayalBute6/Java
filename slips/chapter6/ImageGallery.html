@@ -1,0 +1,51 @@
+<!-- 
+Question: Create an image gallery using HTML5 and CSS3 with hover effects, responsive images and Flexbox/Grid layout.
+-->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Responsive Image Gallery</title>
+    <style>
+        /* 1. Flexbox layout */
+        .gallery-container {
+            display: flex;
+            flex-wrap: wrap; /* Makes it responsive */
+        }
+
+        .gallery-item {
+            margin: 5px;
+        }
+
+        /* 2. Responsive Images */
+        img {
+            width: 250px; 
+            max-width: 100%; /* Ensures image doesn't overflow container */
+        }
+
+        /* 3. Hover Effect */
+        img:hover {
+            opacity: 0.7; /* Fades the image slightly on hover */
+        }
+    </style>
+</head>
+<body>
+
+    <h2>My Image Gallery</h2>
+    
+    <div class="gallery-container">
+        <div class="gallery-item">
+            <img src="https://picsum.photos/id/10/400/300" alt="Image 1">
+        </div>
+        <div class="gallery-item">
+            <img src="https://picsum.photos/id/11/400/300" alt="Image 2">
+        </div>
+        <div class="gallery-item">
+            <img src="https://picsum.photos/id/12/400/300" alt="Image 3">
+        </div>
+        <div class="gallery-item">
+            <img src="https://picsum.photos/id/13/400/300" alt="Image 4">
+        </div>
+    </div>
+
+</body>
+</html>
