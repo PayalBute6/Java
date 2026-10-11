@@ -1,0 +1,208 @@
+<!-- 
+Question: Design a College/School Registration Form using HTML5 and CSS3 and apply appropriate HTML5 validation attributes.
+-->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>College Registration Form</title>
+    <style>
+        body {
+            background-color: #ffffe0; /* Pale yellow */
+            font-family: "Times New Roman", Times, serif;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 5px;
+            font-size: 28px;
+        }
+
+        p {
+            text-align: center;
+            font-size: 14px;
+            margin-top: 5px;
+            margin-bottom: 30px;
+        }
+
+        table {
+            margin: 0 auto;
+            border-spacing: 0 15px; /* Spacing between rows */
+        }
+
+        td.label {
+            text-align: left;
+            font-size: 16px;
+            width: 140px;
+        }
+
+        /* Style the input boxes */
+        input[type="text"], 
+        input[type="date"], 
+        input[type="number"], 
+        input[type="email"], 
+        input[type="password"], 
+        input[type="time"],
+        select,
+        textarea {
+            width: 320px;
+            padding: 4px;
+            border: 1px solid #a9a9a9;
+        }
+
+        select {
+            width: 330px; /* Select needs slightly more width to match due to box-sizing */
+        }
+
+        /* Error styling */
+        td.error {
+            color: red;
+            font-size: 13px;
+            text-align: left;
+            visibility: hidden;
+            padding-left: 10px;
+        }
+
+        .buttons-row {
+            text-align: center;
+            padding-top: 15px;
+        }
+
+        button {
+            padding: 5px 25px;
+            background-color: #efefef;
+            border: 1px solid #777;
+            cursor: pointer;
+            margin: 0 10px;
+            font-family: Arial, sans-serif;
+            font-size: 13px;
+        }
+
+        .declaration {
+            padding-top: 25px;
+            padding-bottom: 10px;
+            padding-left: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>My-Future College / School</h2>
+    <p>Please Fill Below Detail In Student Registration Form</p>
+
+    <form action="#" id="regForm">
+        <table>
+            <tr>
+                <td class="label">Student name :</td>
+                <td><input type="text" required minlength="3" maxlength="10"></td>
+                <td class="error">Min 3 & Max 10 letter is allow</td>
+            </tr>
+            <tr>
+                <td class="label">Date of birth :</td>
+                <td><input type="date" required></td>
+                <td class="error">Valid Date is allow</td>
+            </tr>
+            <tr>
+                <td class="label">Mobile no. :</td>
+                <td><input type="number" required></td>
+                <td class="error">Only integer is allow</td>
+            </tr>
+            <tr>
+                <td class="label">Email id :</td>
+                <td><input type="email" required></td>
+                <td class="error">Valid Email Id is allow</td>
+            </tr>
+            <tr>
+                <td class="label">Password :</td>
+                <td><input type="password" required minlength="8"></td>
+                <td class="error">Min 8 digit is allow</td>
+            </tr>
+            <tr>
+                <td class="label">Gender :</td>
+                <td>
+                    <input type="radio" name="gender" value="Male" required> Male &nbsp;
+                    <input type="radio" name="gender" value="Female" required> Female
+                </td>
+                <td class="error"></td>
+            </tr>
+            <tr>
+                <td class="label">Hobbies :</td>
+                <td>
+                    <input type="checkbox" name="hobbies" value="Drawing"> Drawing
+                    <input type="checkbox" name="hobbies" value="Singing"> Singing
+                    <input type="checkbox" name="hobbies" value="Dancing"> Dancing
+                    <input type="checkbox" name="hobbies" value="Sketch"> Sketch
+                    <input type="checkbox" name="hobbies" value="Sports"> Sports
+                </td>
+                <td class="error"></td>
+            </tr>
+            <tr>
+                <td class="label">Course :</td>
+                <td>
+                    <select required>
+                        <option value="">------------- Select Admission Course's -------------</option>
+                        <option value="Science">Science</option>
+                        <option value="Commerce">Commerce</option>
+                        <option value="Arts">Arts</option>
+                    </select>
+                </td>
+                <td class="error"></td>
+            </tr>
+            <tr>
+                <td class="label">Student photo :</td>
+                <td>
+                    <input type="file" required style="width: auto; border: none;">
+                </td>
+                <td class="error"></td>
+            </tr>
+            <tr>
+                <td class="label">Register Time:</td>
+                <td><input type="time" required></td>
+                <td class="error"></td>
+            </tr>
+            <tr>
+                <td class="label" style="vertical-align: top;">Address :</td>
+                <td><textarea required rows="4"></textarea></td>
+                <td class="error"></td>
+            </tr>
+            <tr>
+                <td colspan="3" class="declaration">
+                    <input type="checkbox" required> I hereby declare that above information provided is correct
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3" class="buttons-row">
+                    <button type="submit" onclick="showErrors()">Register</button>
+                    <button type="reset" onclick="hideErrors()">Reset</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+
+    <script>
+        function showErrors() {
+            var rows = document.querySelectorAll("tr");
+            
+            for (var i = 0; i < rows.length; i++) {
+                var input = rows[i].querySelector("input, select, textarea");
+                var errorTd = rows[i].querySelector(".error");
+                
+                if (input && errorTd) {
+                    var isInvalid = rows[i].querySelector(":invalid");
+                    if (isInvalid) {
+                        errorTd.style.visibility = "visible";
+                    } else {
+                        errorTd.style.visibility = "hidden"; 
+                    }
+                }
+            }
+        }
+
+        function hideErrors() {
+            var errors = document.querySelectorAll(".error");
+            for (var i = 0; i < errors.length; i++) {
+                errors[i].style.visibility = "hidden";
+            }
+        }
+    </script>
+</body>
+</html>
