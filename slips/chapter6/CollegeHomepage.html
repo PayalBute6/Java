@@ -1,0 +1,86 @@
+<!-- 
+Question: Create a responsive webpage using CSS Flexbox for a college homepage containing header, 
+navigation, content and footer. Use appropriate Flexbox alignment and distribution properties.
+-->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>College Homepage</title>
+    <style>
+        /* ONLY essential Flexbox CSS layout properties are used below */
+
+        body {
+            /* 1. Flexbox to stack the sections vertically */
+            display: flex;
+            flex-direction: column;
+            
+            /* Required so the body takes up the whole screen height */
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        header {
+            /* 2. Flexbox to center the header text */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        nav ul {
+            /* 3. Flexbox to align navigation links in a row */
+            display: flex;
+            justify-content: center;
+            
+            /* flex-wrap makes it responsive (links move to next line if screen is small) */
+            flex-wrap: wrap; 
+        }
+
+        nav li {
+            /* Basic spacing for the links */
+            margin: 0 15px; 
+            list-style: none;
+        }
+
+        main {
+            /* flex: 1 makes the main area grow, pushing the footer to the bottom */
+            flex: 1;
+            
+            /* 4. Flexbox inside the main area to center its content */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        footer {
+            /* 5. Flexbox to center the footer text */
+            display: flex;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>My College Name</h1>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Courses</a></li>
+            <li><a href="#">Contact Us</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <h2>Welcome to Our College</h2>
+        <p>This is a responsive college homepage created using only CSS Flexbox properties.</p>
+    </main>
+
+    <footer>
+        <p>Copyright 2026. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
