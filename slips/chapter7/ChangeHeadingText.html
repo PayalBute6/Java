@@ -1,0 +1,31 @@
+<!-- 
+Question: Create a webpage containing a heading and a button. When the button is clicked, change the heading text from “Hello! Welcome” to “Text Changed Successfully!”.
+-->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Change Heading Text</title>
+
+</head>
+<body>
+
+    <!-- 1. The heading. We give it an 'id' so JavaScript can find it easily -->
+    <h2 id="myHeading">Hello! Welcome</h2>
+
+    <!-- 2. The button. The 'onclick' attribute tells it to run our JavaScript function when clicked -->
+    <button onclick="changeText()">Click me to change the text</button>
+
+    <!-- 3. The JavaScript code -->
+    <script>
+        // This function is triggered when the button is clicked
+        function changeText() {
+            
+            // Step 1: Find the heading using its id ("myHeading")
+            // Step 2: Change the text inside it using .innerText
+            document.getElementById("myHeading").innerText = "Text Changed Successfully!";
+            
+        }
+    </script>
+
+</body>
+</html>
