@@ -1,0 +1,53 @@
+<!-- 
+Question: Create an unordered list of Programming Language names and apply different styles to the first and last list items.(Use :first-child and :last-child)
+-->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>First and Last Child Styling</title>
+    <style>
+        /* 
+           This is the normal look for ALL list items (the <li> tag). 
+        */
+        li {
+            font-size: 20px;
+            color: black;
+            margin-bottom: 10px; /* Add some space between each item */
+        }
+
+        /* 
+           The :first-child tells the browser to change the style 
+           ONLY for the very FIRST item in the list.
+        */
+        li:first-child {
+            color: red; /* Change the first item's text color to red */
+            font-weight: bold; /* Make the text bold */
+            background-color: yellow; /* Put a yellow box behind the text */
+        }
+
+        /* 
+           The :last-child tells the browser to change the style 
+           ONLY for the very LAST item in the list.
+        */
+        li:last-child {
+            color: blue; /* Change the last item's text color to blue */
+            font-style: italic; /* Make the text slanted (italic) */
+            text-decoration: underline; /* Put a line under the text */
+        }
+    </style>
+</head>
+<body>
+
+    <h2>List of Programming Languages</h2>
+    
+    <!-- This creates an unordered (bulleted) list -->
+    <ul>
+        <li>Java</li>
+        <li>Python</li>
+        <li>C++</li>
+        <li>JavaScript</li>
+        <li>Ruby</li>
+    </ul>
+
+</body>
+</html>
