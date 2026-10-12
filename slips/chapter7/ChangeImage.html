@@ -1,0 +1,43 @@
+<!-- 
+Question: Create a webpage using JavaScript DOM manipulation and event handling with an image and a button. When the button is clicked, replace the displayed image with another image.
+-->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Change Image with JavaScript</title>
+    <style>
+        img {
+            width: 400px;
+            height: 300px;
+            display: block;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>JavaScript Image Replacer</h2>
+
+    <!-- 1. The image. We give it an 'id' so JavaScript can find it easily -->
+    <!-- It starts by loading a random forest image from picsum.photos -->
+    <img id="myImage" src="https://picsum.photos/id/10/400/300" alt="First Image">
+
+    <!-- 2. The button. The 'onclick' event handler tells it to run our function when clicked -->
+    <button onclick="changeImage()">Click to Change Image</button>
+
+    <!-- 3. The JavaScript code (DOM Manipulation) -->
+    <script>
+        // This function runs when the button is clicked
+        function changeImage() {
+            
+            // Step 1: Find the image element using its id ("myImage")
+            var imgElement = document.getElementById("myImage");
+            
+            // Step 2: Replace the 'src' (source) attribute with a brand new image link
+            imgElement.src = "https://picsum.photos/id/11/400/300";
+            
+        }
+    </script>
+
+</body>
+</html>
