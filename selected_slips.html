@@ -1,0 +1,1259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selected Practice Questions</title>
+    
+    <style>
+        p{
+            font-weight: bold;
+            text-decoration: double;
+            color: rgb(12, 118, 211);
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Java Programs</h1>
+    
+    <div class="question-card">
+        <p><strong class="slip-title">Question 1:</strong> Write a Java program to print the sum of elements of the array. Also display array elements in ascending order.</p>
+<pre><code class="language-java">import java.util.Scanner;
+import java.util.Arrays;
+
+class ArraySumSort
+{
+    public static void main(String args[])
+    {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter number of elements: ");
+        int n = sc.nextInt();
+
+        int a[] = new int[n];
+        int sum = 0;
+
+        // Accept array elements and calculate sum
+        System.out.println("Enter array elements:");
+        for(int i = 0; i &lt; n; i++)
+        {
+            a[i] = sc.nextInt();
+            sum = sum + a[i];
+        }
+
+        // Display sum
+        System.out.println("Sum of array elements = " + sum);
+
+        // Sort array in ascending order
+        Arrays.sort(a);
+
+        // Display sorted array
+        System.out.println("Array elements in ascending order:");
+        for(int i = 0; i &lt; n; i++)
+        {
+            System.out.print(a[i] + " ");
+        }
+
+        sc.close();
+    }
+}</code></pre>
+<h4>Steps and Output:</h4>
+        <pre>Save &gt; ArraySumSort.java
+Compile &gt; javac ArraySumSort.java
+Run &gt; java ArraySumSort
+
+Output:
+Enter number of elements: 5
+Enter array elements:
+10 5 8 20 3
+Sum of array elements = 46
+Array elements in ascending order:
+3 5 8 10 20 </pre>
+    </div>
+    
+    <div class="question-card">
+        <p><strong class="slip-title">Question 2:</strong> Write a Java Program to Display Armstrong Numbers Between range. Accept range from user.</p>
+<pre><code class="language-java">import java.util.Scanner;
+
+public class ArmstrongRange {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        
+        System.out.print("Enter starting number: ");
+        int start = sc.nextInt();
+        
+        System.out.print("Enter ending number: ");
+        int end = sc.nextInt();
+        
+        System.out.println("Armstrong numbers between " + start + " and " + end + " are:");
+        
+        // Check every number in the range
+        for (int i = start; i &lt;= end; i++) {
+            
+            int temp = i;
+            int sum = 0;
+
+            while (temp &gt; 0) {
+                int remainder = temp % 10;
+                sum = sum + (remainder * remainder * remainder);
+                temp = temp / 10;
+            }
+            
+            // If the sum equals the original number, it is an Armstrong number
+            if (sum == i) {
+                System.out.print(i + " ");
+            }
+        }
+        
+        System.out.println();
+        sc.close();
+    }
+}
+</code></pre>
+<h4>Steps and Output:</h4>
+        <pre>Save &gt; ArmstrongRange.java
+Compile &gt; javac ArmstrongRange.java
+Run &gt; java ArmstrongRange
+
+Output:
+Enter starting number: 1
+Enter ending number: 500
+Armstrong numbers between 1 and 500 are:
+1 153 370 371 407 </pre>
+    </div>
+    
+    <div class="question-card">
+        <p><strong class="slip-title">Question 3:</strong> Write a package for String operation which has two classes Con and Comp. Con class has to concatenate two strings and comp class compares two strings. Also display proper messages on execution.</p>
+<pre><code class="language-java">// string_operation/Con.java
+package string_operation;
+public class Con {
+    public void concatenate(String str1, String str2) {
+        String result = str1 + str2;
+        System.out.println("Concatenated String: " + result);
+    }
+}
+
+// string_operation/Comp.java
+package string_operation;
+public class Comp {
+    public void compare(String str1, String str2) {
+        if (str1.equals(str2)) {
+            System.out.println("Comparison Result: The strings are equal.");
+        } else {
+            System.out.println("Comparison Result: The strings are not equal.");
+        }
+    }
+}
+
+// StringOperationDemo.java
+import string_operation.Con;
+import string_operation.Comp;
+import java.util.Scanner;
+
+public class StringOperationDemo {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter the first string: ");
+        String s1 = sc.nextLine();
+        System.out.print("Enter the second string: ");
+        String s2 = sc.nextLine();
+        System.out.println("\n--- String Operations ---");
+        
+        // Use the Con class from the string_operation package
+        Con conObj = new Con();
+        conObj.concatenate(s1, s2);
+        
+        // Use the Comp class from the string_operation package
+        Comp compObj = new Comp();
+        compObj.compare(s1, s2);
+        
+        sc.close();
+    }
+}</code></pre>
+<h4>Steps and Output:</h4>
+        <pre>1. Create a folder named "string_operation".
+2. Save > string_operation/Con.java and string_operation/Comp.java
+3. Save > StringOperationDemo.java (outside the folder)
+4. Compile > javac string_operation/Con.java string_operation/Comp.java StringOperationDemo.java
+5. Run > java StringOperationDemo
+
+Output:
+Enter the first string: Java
+Enter the second string: Programming
+
+--- String Operations ---
+Concatenated String: JavaProgramming
+Comparison Result: The strings are not equal.</pre>
+    </div>
+    
+    <div class="question-card">
+        <p><strong class="slip-title">Question 4:</strong> Write a menu driven program to perform the following operations on multidimensional array ie matrix:</p>
+        <ol class="nested-list" type="i">
+            <li>Addition</li>
+            <li>Multiplication</li>
+            <li>Transpose of any matrix</li>
+            <li>Exit</li>
+        </ol>
+<pre><code class="language-java">import java.util.Scanner;
+
+public class MatrixOperations {
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+        int choice;
+
+        do {
+            System.out.println("\n--- MATRIX MENU ---");
+            System.out.println("1. Addition");
+            System.out.println("2. Multiplication");
+            System.out.println("3. Transpose");
+            System.out.println("4. Exit");
+            System.out.print("Enter your choice: ");
+            choice = sc.nextInt();
+
+            switch (choice) {
+
+                case 1:
+                    // Matrix Addition
+                    System.out.print("Enter rows and columns: ");
+                    int r = sc.nextInt();
+                    int c = sc.nextInt();
+
+                    int[][] a = new int[r][c];
+                    int[][] b = new int[r][c];
+                    int[][] sum = new int[r][c];
+
+                    System.out.println("Enter Matrix A:");
+                    for (int i = 0; i &lt; r; i++)
+                        for (int j = 0; j &lt; c; j++)
+                            a[i][j] = sc.nextInt();
+
+                    System.out.println("Enter Matrix B:");
+                    for (int i = 0; i &lt; r; i++)
+                        for (int j = 0; j &lt; c; j++)
+                            b[i][j] = sc.nextInt();
+
+                    for (int i = 0; i &lt; r; i++)
+                        for (int j = 0; j &lt; c; j++)
+                            sum[i][j] = a[i][j] + b[i][j];
+
+                    System.out.println("Addition:");
+                    for (int i = 0; i &lt; r; i++) {
+                        for (int j = 0; j &lt; c; j++)
+                            System.out.print(sum[i][j] + "\t");
+                        System.out.println();
+                    }
+                    break;
+
+
+                case 2:
+                    // Matrix Multiplication
+                    System.out.print("Enter rows and columns of Matrix A: ");
+                    int r1 = sc.nextInt();
+                    int c1 = sc.nextInt();
+
+                    System.out.print("Enter rows and columns of Matrix B: ");
+                    int r2 = sc.nextInt();
+                    int c2 = sc.nextInt();
+
+                    if (c1 != r2) {
+                        System.out.println("Multiplication not possible.");
+                        break;
+                    }
+
+                    a = new int[r1][c1];
+                    b = new int[r2][c2];
+                    int[][] product = new int[r1][c2];
+
+                    System.out.println("Enter Matrix A:");
+                    for (int i = 0; i &lt; r1; i++)
+                        for (int j = 0; j &lt; c1; j++)
+                            a[i][j] = sc.nextInt();
+
+                    System.out.println("Enter Matrix B:");
+                    for (int i = 0; i &lt; r2; i++)
+                        for (int j = 0; j &lt; c2; j++)
+                            b[i][j] = sc.nextInt();
+
+                    for (int i = 0; i &lt; r1; i++) {
+                        for (int j = 0; j &lt; c2; j++) {
+                            for (int k = 0; k &lt; c1; k++)
+                                product[i][j] += a[i][k] * b[k][j];
+                        }
+                    }
+
+                    System.out.println("Multiplication:");
+                    for (int i = 0; i &lt; r1; i++) {
+                        for (int j = 0; j &lt; c2; j++)
+                            System.out.print(product[i][j] + "\t");
+                        System.out.println();
+                    }
+                    break;
+
+
+                case 3:
+                    // Matrix Transpose
+                    System.out.print("Enter rows and columns: ");
+                    r = sc.nextInt();
+                    c = sc.nextInt();
+
+                    a = new int[r][c];
+
+                    System.out.println("Enter Matrix:");
+                    for (int i = 0; i &lt; r; i++)
+                        for (int j = 0; j &lt; c; j++)
+                            a[i][j] = sc.nextInt();
+
+                    System.out.println("Transpose:");
+
+                    for (int j = 0; j &lt; c; j++) {
+                        for (int i = 0; i &lt; r; i++)
+                            System.out.print(a[i][j] + "\t");
+                        System.out.println();
+                    }
+                    break;
+
+
+                case 4:
+                    System.out.println("Exiting...");
+                    break;
+
+                default:
+                    System.out.println("Invalid choice!");
+            }
+
+        } while (choice != 4);
+
+        sc.close();
+    }
+}
+</code></pre>
+<h4>Steps and Output:</h4>
+        <pre>Save &gt; MatrixOperations.java
+Compile &gt; javac MatrixOperations.java
+Run &gt; java MatrixOperations
+
+Output:
+--- MATRIX MENU ---
+1. Addition
+2. Multiplication
+3. Transpose
+4. Exit
+Enter your choice: 1
+Enter rows and columns: 2 2
+Enter Matrix A:
+1 2
+3 4
+Enter Matrix B:
+5 6
+7 8
+Addition:
+6	8	
+10	12	
+
+--- MATRIX MENU ---
+1. Addition
+2. Multiplication
+3. Transpose
+4. Exit
+Enter your choice: 2
+Enter rows and columns of Matrix A: 2 2
+Enter rows and columns of Matrix B: 2 2
+Enter Matrix A:
+1 2
+3 4
+Enter Matrix B:
+5 6
+7 8
+Multiplication:
+19	22	
+43	50	
+
+--- MATRIX MENU ---
+1. Addition
+2. Multiplication
+3. Transpose
+4. Exit
+Enter your choice: 3
+Enter rows and columns: 2 2
+Enter Matrix:
+1 2
+3 4
+Transpose:
+1	3	
+2	4	
+
+--- MATRIX MENU ---
+1. Addition
+2. Multiplication
+3. Transpose
+4. Exit
+Enter your choice: 4
+Exiting...</pre>
+    </div>
+    
+    <div class="question-card">
+        <p><strong class="slip-title">Question 5:</strong> Write a program to define a class Account having members custname, accno. Define default and parameterized constructor. Create a subclass called SavingAccount with members savingbal, minbal. Create a derived class AccountDetail that extends the class SavingAccount with members, depositamt and withdrawalamt. Write a appropriate method to display customer details.</p>
+<pre><code class="language-java">// Base Class
+class Account {
+    String customerName;
+    int accountNumber;
+
+    // Default constructor
+    public Account() {
+        customerName = "Unknown";
+        accountNumber = 0;
+    }
+
+    // Parameterized constructor
+    public Account(String name, int number) {
+        customerName = name;
+        accountNumber = number;
+    }
+}
+
+// Subclass 1
+class SavingAccount extends Account {
+    double savingBalance;
+    double minimumBalance;
+
+    // Default constructor
+    public SavingAccount() {
+        super(); 
+        savingBalance = 0.0;
+        minimumBalance = 0.0;
+    }
+
+    // Parameterized constructor
+    public SavingAccount(String name, int number, double balance, double minBalance) {
+        super(name, number); 
+        savingBalance = balance;
+        minimumBalance = minBalance;
+    }
+}
+
+// Subclass 2 (Final derived class)
+public class AccountDetail extends SavingAccount {
+    double depositAmount;
+    double withdrawalAmount;
+
+    // Default constructor
+    public AccountDetail() {
+        super(); 
+        depositAmount = 0.0;
+        withdrawalAmount = 0.0;
+    }
+
+    // Parameterized constructor
+    public AccountDetail(String name, int number, double balance, double minBalance, double deposit, double withdraw) {
+        super(name, number, balance, minBalance); 
+        depositAmount = deposit;
+        withdrawalAmount = withdraw;
+        
+        // Calculate the final balance
+        savingBalance = savingBalance + depositAmount - withdrawalAmount;
+    }
+
+    // Display details
+    public void displayDetails() {
+        System.out.println("Name: " + customerName);
+        System.out.println("Account No: " + accountNumber);
+        System.out.println("Current Balance: Rs. " + savingBalance);
+    }
+
+    public static void main(String[] args) {
+        // Create customer object
+        AccountDetail cust = new AccountDetail("Radha", 101, 5000.0, 1000.0, 2000.0, 1500.0);
+        
+        // Display details
+        cust.displayDetails();
+    }
+}
+</code></pre>
+<h4>Steps and Output:</h4>
+        <pre>Save &gt; AccountDetail.java
+Compile &gt; javac AccountDetail.java
+Run &gt; java AccountDetail
+
+Output:
+Name: Radha
+Account No: 101
+Current Balance: Rs. 5500.0</pre>
+    </div>
+    
+    <div class="question-card">
+        <p><strong class="slip-title">Question 6:</strong> Write a class Driver with attributes license_no, name, address and age. Initialize values through the parameterized constructor. If age of Driver is less than 18 then user-defined exception should be generated &mdash;Age is below 18 years&mdash;</p>
+<pre><code>class AgeException extends Exception {
+    AgeException(String msg) {
+        super(msg);
+    }
+}
+
+class Driver {
+    int license_no, age;
+    String name, address;
+    
+    Driver(int l, String n, String addr, int a) throws AgeException {
+        if (a < 18) {
+            throw new AgeException("Age is below 18 years");
+        }
+        license_no = l;
+        name = n;
+        address = addr;
+        age = a;
+        System.out.println("Driver " + name + " created successfully.");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        try {
+            Driver d1 = new Driver(123, "Raju", "Pune", 16);
+        } catch (AgeException e) {
+            System.out.println("Exception: " + e.getMessage());
+        }
+    }
+}</code></pre>
+    </div>
+    
+    <div class="question-card">
+        <p><strong class="slip-title">Question 7:</strong> Write a program to create an abstract class named Shape that contains two integers and an empty method named <code>printArea()</code>. Provide three classes named Rectangle, Triangle and Circle such that each one of the classes extends the class Shape. Each one of the classes contain only the method <code>printArea()</code> that prints the area of the given shape. (use method overriding).</p>
+<pre><code class="language-java">// Abstract Class
+abstract class Shape {
+    int dim1;
+    int dim2;
+
+    abstract void printArea();
+}
+
+// Rectangle
+class Rectangle extends Shape {
+    public Rectangle(int length, int width) {
+        dim1 = length;
+        dim2 = width;
+    }
+
+    void printArea() {
+        int area = dim1 * dim2;
+        System.out.println("Area of Rectangle is: " + area);
+    }
+}
+
+// Triangle
+class Triangle extends Shape {
+    public Triangle(int base, int height) {
+        dim1 = base;
+        dim2 = height;
+    }
+
+    void printArea() {
+        double area = 0.5 * dim1 * dim2;
+        System.out.println("Area of Triangle is: " + area);
+    }
+}
+
+// Circle
+class Circle extends Shape {
+    public Circle(int radius) {
+        dim1 = radius;
+        dim2 = 0; // Not used
+    }
+
+    void printArea() {
+        double area = 3.14 * dim1 * dim1;
+        System.out.println("Area of Circle is: " + area);
+    }
+}
+
+public class ShapeDemo {
+    public static void main(String[] args) {
+        Shape rect = new Rectangle(10, 5);
+        rect.printArea();
+
+        Shape tri = new Triangle(10, 8);
+        tri.printArea();
+
+        Shape circ = new Circle(7);
+        circ.printArea();
+    }
+}
+</code></pre>
+<h4>Steps and Output:</h4>
+        <pre>Save &gt; ShapeDemo.java
+Compile &gt; javac ShapeDemo.java
+Run &gt; java ShapeDemo
+
+Output:
+Area of Rectangle is: 50
+Area of Triangle is: 40.0
+Area of Circle is: 153.86</pre>
+    </div>
+    
+    <div class="question-card">
+        <p><strong class="slip-title">Question 8:</strong> Write a program which define class Employee with data member as id, name and salary Store the information of 'n' employees and display the name of employee having maximum salary (Use array of object)</p>
+<pre><code class="language-java">import java.util.Scanner;
+
+class Employee {
+    int id;
+    String name;
+    double salary;
+
+    // Constructor to initialize the employee details
+    public Employee(int id, String name, double salary) {
+        this.id = id;
+        this.name = name;
+        this.salary = salary;
+    }
+}
+
+public class EmployeeMaxSalary {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        
+        System.out.print("Enter the number of employees (n): ");
+        int n = sc.nextInt();
+        
+        // Create an array of objects to store 'n' Employees
+        Employee[] emps = new Employee[n];
+        
+        // Loop to accept information for 'n' employees
+        for (int i = 0; i &lt; n; i++) {
+            System.out.println("\nEnter details for Employee " + (i + 1) + ":");
+            
+            System.out.print("ID: ");
+            int id = sc.nextInt();
+            
+            // Consume the newline character left by nextInt() so nextLine() works properly
+            sc.nextLine(); 
+            
+            System.out.print("Name: ");
+            String name = sc.nextLine();
+            
+            System.out.print("Salary: ");
+            double salary = sc.nextDouble();
+            
+            // Create the object and store it in the array
+            emps[i] = new Employee(id, name, salary);
+        }
+        
+        // Logic to find the employee with the maximum salary
+        // Start by assuming the first employee has the highest salary
+        Employee maxSalaryEmp = emps[0];
+        
+        for (int i = 1; i &lt; n; i++) {
+            if (emps[i].salary &gt; maxSalaryEmp.salary) {
+                maxSalaryEmp = emps[i]; // Update if we find a higher salary
+            }
+        }
+        
+        // Display the name of the employee with the maximum salary
+        System.out.println("\n-------------------------------------------------");
+        System.out.println("Employee with the MAXIMUM salary is: " + maxSalaryEmp.name);
+        System.out.println("Maximum Salary amount: " + maxSalaryEmp.salary);
+        System.out.println("-------------------------------------------------");
+        
+        sc.close();
+    }
+}
+</code></pre>
+<h4>Steps and Output:</h4>
+        <pre>Save &gt; EmployeeMaxSalary.java
+Compile &gt; javac EmployeeMaxSalary.java
+Run &gt; java EmployeeMaxSalary
+
+Output:
+Enter the number of employees (n): 2
+
+Enter details for Employee 1:
+ID: 101
+Name: Radha
+Salary: 55000
+
+Enter details for Employee 2:
+ID: 102
+Name: Bob
+Salary: 65000
+
+-------------------------------------------------
+Employee with the MAXIMUM salary is: Bob
+Maximum Salary amount: 65000.0
+-------------------------------------------------</pre>
+    </div>
+    
+    <div class="question-card">
+        <p><strong class="slip-title">Question 9:</strong> Define a "Clock" class that does the following;</p>
+        <ol type="a" class="nested-list">
+            <li>Accept Hours, Minutes and Seconds</li>
+            <li>Check the validity of numbers</li>
+            <li>Set the time to AM/PM mode</li>
+        </ol>
+<pre><code class="language-java">public class Clock {
+    // Meaningful variable names are easier for beginners to understand
+    int hours;
+    int minutes;
+    int seconds;
+
+    // Constructor to set the initial time when a new Clock object is created
+    public Clock(int h, int m, int s) {
+        hours = h; 
+        minutes = m; 
+        seconds = s;
+    }
+
+    // Method to check if the time entered is valid
+    public boolean isValid() {
+        // Hours must be between 0 and 23. Minutes and seconds must be between 0 and 59.
+        if (hours &gt;= 0 &amp;&amp; hours &lt; 24 &amp;&amp; minutes &gt;= 0 &amp;&amp; minutes &lt; 60 &amp;&amp; seconds &gt;= 0 &amp;&amp; seconds &lt; 60) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    // Method to convert 24-hour time to 12-hour AM/PM format and print it
+    public void showAMPM() {
+        // Step 1: Check if the time is valid first
+        if (isValid() == false) {
+            System.out.println("Invalid Time");
+            return; // Stop the method here if time is invalid
+        }
+        
+        String period;
+        int displayHours = hours;
+
+        // Step 2: Determine if it is AM or PM
+        if (hours &gt;= 12) {
+            period = "PM";
+        } else {
+            period = "AM";
+        }
+
+        // Step 3: Convert 24-hour format to 12-hour format
+        if (hours == 0) {
+            displayHours = 12;         // Midnight is 12 AM, not 0 AM
+        } else if (hours &gt; 12) {
+            displayHours = hours - 12; // Example: 14 - 12 = 2 PM
+        }
+        
+        // Step 4: Print the final result
+        System.out.println(displayHours + ":" + minutes + ":" + seconds + " " + period);
+    }
+
+    // Main method to test our Clock class
+    public static void main(String[] args) {
+        // Test Case 1: A valid time (14:30:45 is 2:30:45 PM)
+        Clock validClock = new Clock(14, 30, 45); 
+        System.out.print("Time 1 (14:30:45): ");
+        validClock.showAMPM();
+        
+        // Test Case 2: An invalid time (25 hours is not possible)
+        Clock invalidClock = new Clock(25, 0, 0); 
+        System.out.print("Time 2 (25:00:00): ");
+        invalidClock.showAMPM();
+    }
+}
+</code></pre>
+<h4>Steps and Output:</h4>
+        <pre>Save &gt; Clock.java
+Compile &gt; javac Clock.java
+Run &gt; java Clock
+
+Output:
+Time 1 (14:30:45): 2:30:45 PM
+Time 2 (25:00:00): Invalid Time</pre>
+    </div>
+
+    <!-- <div class="question-card">
+        <p><strong class="slip-title">Question 10:</strong> Write a program to accept a text file from user and display the contents of a file in reverse order and change its case.</p>
+<pre><code>import java.io.File;
+import java.util.Scanner;
+
+public class FileReverseCase {
+    public static void main(String[] args) throws Exception {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter file name: ");
+        String path = sc.nextLine();
+        
+        Scanner fileSc = new Scanner(new File(path));
+        StringBuilder text = new StringBuilder();
+        while (fileSc.hasNextLine()) {
+            text.append(fileSc.nextLine()).append("\\n");
+        }
+        
+        text.reverse();
+        
+        for (int i = 0; i < text.length(); i++) {
+            char c = text.charAt(i);
+            if (Character.isUpperCase(c)) {
+                System.out.print(Character.toLowerCase(c));
+            } else {
+                System.out.print(Character.toUpperCase(c));
+            }
+        }
+    }
+}</code></pre>
+<h4>Steps and Output:</h4>
+        <pre>1. Create a text file named "input.txt" in the same folder and add some text (e.g., "Hello World").
+2. Save &gt; FileReverseCase.java
+3. Compile &gt; javac FileReverseCase.java
+4. Run &gt; java FileReverseCase
+
+Output:
+Enter file name: input.txt
+DLROw OLLEh</pre>
+    </div> -->
+    
+    <div class="question-card">
+        <p><strong class="slip-title">Question 10:</strong> Write a program to read the contents of &ldquo;abc.txt&rdquo; file. Display the contents of file in uppercase as output.</p>
+<pre><code class="language-java">import java.io.File;
+import java.util.Scanner;
+
+public class ReadUpperCase {
+    public static void main(String[] args) throws Exception {
+        Scanner fileSc = new Scanner(new File("abc.txt"));
+        while (fileSc.hasNextLine()) {
+            System.out.println(fileSc.nextLine().toUpperCase());
+        }
+    }
+}</code></pre>
+<h4>Steps and Output:</h4>
+        <pre>1. Create a text file named "abc.txt" in the same folder.
+2. Add some sample lowercase text into it:
+   (e.g., "hello world, this is a java test.")
+3. Compile &gt; javac ReadUpperCase.java
+4. Run     &gt; java ReadUpperCase
+
+Output:
+HELLO WORLD, THIS IS A JAVA TEST.</pre>
+    </div>
+
+    <h1>HTML Programs</h1>
+    
+    <div class="question-card">
+        <p><strong class="slip-title">Question 1 & 2:</strong> Design a College/School/Student Registration Form using HTML5 and CSS3 and apply appropriate HTML5 validation attributes.</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;style&gt;
+        form { max-width: 400px; margin: auto; padding: 20px; border: 1px solid #ccc; border-radius: 5px; }
+        input { width: 100%; padding: 8px; margin: 10px 0; box-sizing: border-box; }
+        button { background: blue; color: white; padding: 10px; border: none; width: 100%; cursor: pointer; }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;form&gt;
+        &lt;h3&gt;Registration Form&lt;/h3&gt;
+        &lt;label&gt;Name:&lt;/label&gt;
+        &lt;input type="text" required pattern="[A-Za-z ]+" title="Letters only"&gt;
+        
+        &lt;label&gt;Email:&lt;/label&gt;
+        &lt;input type="email" required&gt;
+        
+        &lt;label&gt;Age:&lt;/label&gt;
+        &lt;input type="number" min="16" max="30" required&gt;
+        
+        &lt;button type="submit"&gt;Register&lt;/button&gt;
+    &lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Steps and Output:</h4>
+        <pre>Save &gt; index.html
+Run &gt; Double-click index.html to open it in any Web Browser.</pre>
+    </div>
+    
+    <div class="question-card">
+        <p><strong class="slip-title">Question 3:</strong> Create a responsive webpage using CSS Flexbox for a college homepage containing header, navigation, content and footer.</p>
+<pre><code class="language-markup">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;College Homepage&lt;/title&gt;
+    &lt;style&gt;
+        /* ONLY essential Flexbox CSS layout properties are used below */
+
+        body {
+            /* 1. Flexbox to stack the sections vertically */
+            display: flex;
+            flex-direction: column;
+            
+            /* Required so the body takes up the whole screen height */
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        header {
+            /* 2. Flexbox to center the header text */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        nav ul {
+            /* 3. Flexbox to align navigation links in a row */
+            display: flex;
+            justify-content: center;
+            
+            /* flex-wrap makes it responsive (links move to next line if screen is small) */
+            flex-wrap: wrap; 
+        }
+
+        nav li {
+            /* Basic spacing for the links */
+            margin: 0 15px; 
+            list-style: none;
+        }
+
+        main {
+            /* flex: 1 makes the main area grow, pushing the footer to the bottom */
+            flex: 1;
+            
+            /* 4. Flexbox inside the main area to center its content */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        footer {
+            /* 5. Flexbox to center the footer text */
+            display: flex;
+            justify-content: center;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+    &lt;header&gt;
+        &lt;h1&gt;My College Name&lt;/h1&gt;
+    &lt;/header&gt;
+
+    &lt;nav&gt;
+        &lt;ul&gt;
+            &lt;li&gt;&lt;a href="#"&gt;Home&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#"&gt;About Us&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#"&gt;Courses&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#"&gt;Contact Us&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/nav&gt;
+
+    &lt;main&gt;
+        &lt;h2&gt;Welcome to Our College&lt;/h2&gt;
+        &lt;p&gt;This is a responsive college homepage created using only CSS Flexbox properties.&lt;/p&gt;
+    &lt;/main&gt;
+
+    &lt;footer&gt;
+        &lt;p&gt;Copyright 2026. All rights reserved.&lt;/p&gt;
+    &lt;/footer&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<h4>Output:</h4>
+        <pre>&gt; Open CollegeHomepage.html directly in your web browser to view the webpage.</pre>
+    </div>
+    
+    <div class="question-card">
+        <p><strong class="slip-title">Question 4:</strong> Create a webpage containing a button and link. Change their appearance when the mouse pointer moves over them. (Use :hover Pseudo-Class)</p>
+<pre><code class="language-markup">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Hover Pseudo-Class&lt;/title&gt;
+    &lt;style&gt;
+        /* 
+           This is the normal look for our link (the &lt;a&gt; tag).
+        */
+        a {
+            color: blue; /* Make the text blue */
+            text-decoration: underline; /* Put a line under the text */
+        }
+
+        /* 
+           The :hover part tells the browser to change the style ONLY when 
+           the mouse pointer moves over the link.
+        */
+        a:hover {
+            color: red; /* Change the text color to red */
+            background-color: yellow; /* Put a yellow box behind the text */
+            text-decoration: none; /* Remove the underline */
+        }
+
+        /* 
+           This is the normal look for our button (the &lt;button&gt; tag).
+        */
+        button {
+            background-color: lightgray; /* Make the button gray */
+            color: black; /* Make the text inside the button black */
+            padding: 10px; /* Add some space inside the button so it looks bigger */
+        }
+
+        /* 
+           This tells the browser to change the style ONLY when 
+           the mouse pointer moves over the button.
+        */
+        button:hover {
+            background-color: green; /* Change the button color to green */
+            color: white; /* Change the text color to white */
+            cursor: pointer; /* Change the mouse arrow to a pointing hand */
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+    &lt;h2&gt;Hover Effects Example&lt;/h2&gt;
+    
+    &lt;!-- This creates the link on the page --&gt;
+    &lt;p&gt;
+        Here is a link: &lt;a href="#"&gt;Move your mouse over me!&lt;/a&gt;
+    &lt;/p&gt;
+
+    &lt;br&gt;
+
+    &lt;!-- This creates the button on the page --&gt;
+    &lt;p&gt;
+        Here is a button: &lt;button&gt;Move your mouse over me!&lt;/button&gt;
+    &lt;/p&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<h4>Output:</h4>
+        <pre>&gt; Open HoverEffects.html directly in your web browser to view the webpage.</pre>
+    </div>
+    
+    <div class="question-card">
+        <p><strong class="slip-title">Question 5:</strong> Create an unordered list of Programming Language names and apply different styles to the first and last list items.(Use :first-child and :last-child)</p>
+<pre><code class="language-markup">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;First and Last Child Styling&lt;/title&gt;
+    &lt;style&gt;
+        /* 
+           This is the normal look for ALL list items (the &lt;li&gt; tag). 
+        */
+        li {
+            font-size: 20px;
+            color: black;
+            margin-bottom: 10px; /* Add some space between each item */
+        }
+
+        /* 
+           The :first-child tells the browser to change the style 
+           ONLY for the very FIRST item in the list.
+        */
+        li:first-child {
+            color: red; /* Change the first item's text color to red */
+            font-weight: bold; /* Make the text bold */
+            background-color: yellow; /* Put a yellow box behind the text */
+        }
+
+        /* 
+           The :last-child tells the browser to change the style 
+           ONLY for the very LAST item in the list.
+        */
+        li:last-child {
+            color: blue; /* Change the last item's text color to blue */
+            font-style: italic; /* Make the text slanted (italic) */
+            text-decoration: underline; /* Put a line under the text */
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+    &lt;h2&gt;List of Programming Languages&lt;/h2&gt;
+    
+    &lt;!-- This creates an unordered (bulleted) list --&gt;
+    &lt;ul&gt;
+        &lt;li&gt;Java&lt;/li&gt;
+        &lt;li&gt;Python&lt;/li&gt;
+        &lt;li&gt;C++&lt;/li&gt;
+        &lt;li&gt;JavaScript&lt;/li&gt;
+        &lt;li&gt;Ruby&lt;/li&gt;
+    &lt;/ul&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<h4>Output:</h4>
+        <pre>&gt; Open ListStyles.html directly in your web browser to view the webpage.</pre>
+    </div>
+    
+    <div class="question-card">
+        <p><strong class="slip-title">Question 6:</strong> Create a webpage containing a heading and a button. When the button is clicked, change the heading text from &ldquo;Hello! Welcome&rdquo; to &ldquo;Text Changed Successfully!&rdquo;.</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;body&gt;
+    &lt;h1 id="heading"&gt;Hello! Welcome&lt;/h1&gt;
+    &lt;button onclick="document.getElementById('heading').innerText = 'Text Changed Successfully!'"&gt;Click Me&lt;/button&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Steps and Output:</h4>
+        <pre>Save &gt; index.html
+Run &gt; Double-click index.html to open it in any Web Browser.</pre>
+    </div>
+    
+    <div class="question-card">
+        <p><strong class="slip-title">Question 7:</strong> Create a webpage using JavaScript DOM manipulation and event handling with an image and a button. When the button is clicked, replace the displayed image with another image.</p>
+<pre><code class="language-markup">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Change Image with JavaScript&lt;/title&gt;
+    &lt;style&gt;
+        img {
+            width: 400px;
+            height: 300px;
+            display: block;
+            margin-bottom: 10px;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+    &lt;h2&gt;JavaScript Image Replacer&lt;/h2&gt;
+
+    &lt;!-- 1. The image. We give it an 'id' so JavaScript can find it easily --&gt;
+    &lt;!-- It starts by loading a random forest image from picsum.photos --&gt;
+    &lt;img id="myImage" src="https://picsum.photos/id/10/400/300" alt="First Image"&gt;
+
+    &lt;!-- 2. The button. The 'onclick' event handler tells it to run our function when clicked --&gt;
+    &lt;button onclick="changeImage()"&gt;Click to Change Image&lt;/button&gt;
+
+    &lt;!-- 3. The JavaScript code (DOM Manipulation) --&gt;
+    &lt;script&gt;
+        // This function runs when the button is clicked
+        function changeImage() {
+            
+            // Step 1: Find the image element using its id ("myImage")
+            var imgElement = document.getElementById("myImage");
+            
+            // Step 2: Replace the 'src' (source) attribute with a brand new image link
+            imgElement.src = "https://picsum.photos/id/11/400/300";
+            
+        }
+    &lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Steps and Output:</h4>
+        <pre>Save &gt; index.html
+Run &gt; Double-click index.html to open it in any Web Browser.</pre>
+    </div>
+
+    <h1>Node JS Programs</h1>
+    
+    <div class="question-card">
+        <p><strong class="slip-title">Question 1:</strong> Write a JavaScript program to demonstrate Arrow Functions for addition, subtraction, multiplication and division.</p>
+<pre><code class="language-javascript">// 1. Arrow function for Addition
+const add = (a, b) =&gt; a + b;
+
+// 2. Arrow function for Subtraction
+const subtract = (a, b) =&gt; a - b;
+
+// 3. Arrow function for Multiplication
+const multiply = (a, b) =&gt; a * b;
+
+// 4. Arrow function for Division
+const divide = (a, b) =&gt; a / b;
+
+// Let's test them with two numbers
+let num1 = 20;
+let num2 = 5;
+
+// Calculate results by calling the arrow functions
+let resultAdd = add(num1, num2);
+let resultSub = subtract(num1, num2);
+let resultMul = multiply(num1, num2);
+let resultDiv = divide(num1, num2);
+
+// Print the results to the console
+console.log("Addition (20 + 5) = " + resultAdd);
+console.log("Subtraction (20 - 5) = " + resultSub);
+console.log("Multiplication (20 * 5) = " + resultMul);
+console.log("Division (20 / 5) = " + resultDiv);
+</code></pre>
+<h4>Steps and Output:</h4>
+        <pre>Save &gt; ArrowFunctions.js
+Run &gt; node ArrowFunctions.js
+
+Output:
+Addition (20 + 5) = 25
+Subtraction (20 - 5) = 15
+Multiplication (20 * 5) = 100
+Division (20 / 5) = 4</pre>
+    </div>
+    
+    <div class="question-card">
+        <p><strong class="slip-title">Question 2:</strong> Write a JavaScript program to swap two numbers without using a third variable using array destructuring</p>
+<pre><code class="language-javascript">// 1. Initialize two variables
+let a = 10;
+let b = 25;
+
+console.log("Before swapping:");
+console.log("a = " + a + ", b = " + b);
+console.log("------------------");
+
+/* 
+   2. Swap the numbers using Array Destructuring 
+   The syntax [a, b] = [b, a] instantly swaps the values 
+   without needing a temporary third variable.
+*/
+[a, b] = [b, a];
+
+// 3. Display the final swapped results
+console.log("After swapping:");
+console.log("a = " + a + ", b = " + b);
+</code></pre>
+<h4>Steps and Output:</h4>
+        <pre>Save &gt; SwapNumbers.js
+Run &gt; node SwapNumbers.js
+
+Output:
+Before swapping:
+a = 10, b = 25
+------------------
+After swapping:
+a = 25, b = 10</pre>
+    </div>
+    
+    <div class="question-card">
+        <p><strong class="slip-title">Question 3:</strong> Write a JavaScript program to store student information and marks in variables and generate a formatted student report using template literals</p>
+<pre><code>const name = "Radha";
+const rollNo = 101;
+const math = 85;
+const science = 92;
+const english = 88;
+
+const total = math + science + english;
+const avg = total / 3;
+
+const report = `
+----- Student Report -----
+Name   : ${name}
+Roll No: ${rollNo}
+--------------------------
+Math   : ${math}
+Science: ${science}
+English: ${english}
+--------------------------
+Total  : ${total}
+Average: ${avg.toFixed(2)}
+`;
+
+console.log(report);</code></pre>
+<h4>Output:</h4>
+        <pre>Save &gt; student_report.js
+Run &gt; node student_report.js
+
+--- Student Report ---
+Name: Radha
+Roll No: 101
+
+Marks:
+Subject 1: 85
+Subject 2: 90
+Subject 3: 78
+
+Total Marks: 253
+----------------------</pre>
+    </div>
+
+</body>
+</html>
