@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment 2 - Set A Solutions</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 40px auto;
+            max-width: 1000px;
+            background-color: #f4f7f6;
+            color: #333;
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 40px;
+            font-size: 2.5em;
+        }
+        .question {
+            background: #fff;
+            padding: 15px 20px;
+            border-left: 5px solid #e74c3c;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            font-size: 1.1em;
+        }
+        .code-container {
+            background: #282c34;
+            color: #abb2bf;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin-bottom: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .command-block {
+            background: #eef2f5;
+            padding: 10px 15px;
+            border-left: 4px solid #3498db;
+            margin-bottom: 20px;
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: 0.95em;
+            color: #2c3e50;
+        }
+        .command-block strong {
+            color: #2980b9;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: block;
+            margin-bottom: 5px;
+        }
+        .filename {
+            font-weight: bold;
+            color: #98c379;
+            margin-bottom: 15px;
+            display: inline-block;
+            border-bottom: 1px solid #555;
+            padding-bottom: 5px;
+        }
+        pre {
+            margin: 0;
+        }
+        code {
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: 0.95em;
+        }
+        .keyword { color: #c678dd; }
+        .type { color: #e5c07b; }
+        .string { color: #98c379; }
+        .comment { color: #5c6370; font-style: italic; }
+    </style>
+</head>
+<body>
+
+    <h1>Assignment 2 - Set A Solutions</h1>
+
+    <!-- Set A - a -->
+    <div class="question">
+        <strong>a.</strong> Create an employee class (id,name,deptname,salary). Define a default and parameterized constructor. Use ‘this’ keyword to initialize instance variables. Keep a count of objects created. Create objects using parameterized constructors and display the object count after each object is created. (Use static member and method). Also display the contents of each object.
+    </div>
+    
+    <div class="code-container">
+        <span class="filename">SetA/EmployeeDemo1.java</span>
+        <pre><code><span class="keyword">import</span> java.util.Scanner;
+
+<span class="keyword">class</span> <span class="type">Employee</span> {
+    <span class="type">int</span> id;
+    <span class="type">String</span> name;
+    <span class="type">String</span> deptname;
+    <span class="type">double</span> salary;
+    <span class="keyword">static int</span> objectCount = 0;
+
+    Employee() {
+        <span class="keyword">this</span>.id = 0;
+        <span class="keyword">this</span>.name = <span class="string">""</span>;
+        <span class="keyword">this</span>.deptname = <span class="string">""</span>;
+        <span class="keyword">this</span>.salary = 0.0;
+        objectCount++;
+    }
+
+    Employee(<span class="type">int</span> id, <span class="type">String</span> name, <span class="type">String</span> deptname, <span class="type">double</span> salary) {
+        <span class="keyword">this</span>.id = id;
+        <span class="keyword">this</span>.name = name;
+        <span class="keyword">this</span>.deptname = deptname;
+        <span class="keyword">this</span>.salary = salary;
+        objectCount++;
+    }
+
+    <span class="keyword">void</span> displayObjectCount() {
+        System.out.println(<span class="string">"Object count: "</span> + objectCount);
+    }
+
+    <span class="keyword">void</span> display() {
+        System.out.println(<span class="string">"ID: "</span> + <span class="keyword">this</span>.id);
+        System.out.println(<span class="string">"Name: "</span> + <span class="keyword">this</span>.name);
+        System.out.println(<span class="string">"Dept: "</span> + <span class="keyword">this</span>.deptname);
+        System.out.println(<span class="string">"Salary: "</span> + <span class="keyword">this</span>.salary);
+    }
+}
+
+<span class="keyword">public class</span> <span class="type">EmployeeDemo1</span> {
+    <span class="keyword">public static void</span> main(<span class="type">String</span>[] args) {
+        Scanner sc = <span class="keyword">new</span> Scanner(System.in);
+        
+        System.out.println(<span class="string">"--- Enter Employee 1 Details ---"</span>);
+        System.out.print(<span class="string">"ID: "</span>);
+        <span class="type">int</span> id1 = sc.nextInt();
+        sc.nextLine(); <span class="comment">// consume the leftover newline</span>
+        System.out.print(<span class="string">"Name: "</span>);
+        <span class="type">String</span> name1 = sc.nextLine();
+        System.out.print(<span class="string">"Department: "</span>);
+        <span class="type">String</span> dept1 = sc.nextLine();
+        System.out.print(<span class="string">"Salary: "</span>);
+        <span class="type">double</span> salary1 = sc.nextDouble();
+        
+        Employee e1 = <span class="keyword">new</span> Employee(id1, name1, dept1, salary1);
+        e1.displayObjectCount();
+        e1.display();
+
+        <span class="comment">// Similar logic for other objects</span>
+        Employee e2 = <span class="keyword">new</span> Employee(id1, name1, dept1, salary1);
+        e2.displayObjectCount();
+        e2.display();
+        
+        sc.close();
+    }
+}</code></pre>
+    </div>
+    
+    <div class="command-block">
+        <strong>Commands to compile and run:</strong>
+        javac EmployeeDemo1.java<br>
+        java EmployeeDemo1
+    </div>
+
+    <!-- Set A - b -->
+    <div class="question">
+        <strong>b.</strong> Write a program to display the Employee(Empid, Empname, Empdesignation, Empsal) information using toString().
+    </div>
+    
+    <div class="code-container">
+        <span class="filename">SetA/EmployeeDemo2.java</span>
+        <pre><code><span class="keyword">import</span> java.util.Scanner;
+
+<span class="keyword">class</span> <span class="type">Employee</span> {
+    <span class="type">int</span> Empid;
+    <span class="type">String</span> Empname;
+    <span class="type">String</span> Empdesignation;
+    <span class="type">double</span> Empsal;
+
+    <span class="keyword">public</span> Employee(<span class="type">int</span> empid, <span class="type">String</span> empname, <span class="type">String</span> empdesignation, <span class="type">double</span> empsal) {
+        <span class="keyword">this</span>.Empid = empid;
+        <span class="keyword">this</span>.Empname = empname;
+        <span class="keyword">this</span>.Empdesignation = empdesignation;
+        <span class="keyword">this</span>.Empsal = empsal;
+    }
+
+    @Override
+    <span class="keyword">public</span> <span class="type">String</span> toString() {
+        <span class="keyword">return</span> <span class="string">"Employee [Empid="</span> + Empid + <span class="string">", Empname="</span> + Empname + <span class="string">", Empdesignation="</span> + Empdesignation + <span class="string">", Empsal="</span> + Empsal + <span class="string">"]"</span>;
+    }
+}
+
+<span class="keyword">public class</span> <span class="type">EmployeeDemo2</span> {
+    <span class="keyword">public static void</span> main(<span class="type">String</span>[] args) {
+        Scanner sc = <span class="keyword">new</span> Scanner(System.in);
+        System.out.println(<span class="string">"--- Enter Employee Details ---"</span>);
+        System.out.print(<span class="string">"ID: "</span>);
+        <span class="type">int</span> id = sc.nextInt();
+        sc.nextLine(); <span class="comment">// consume the leftover newline</span>
+        System.out.print(<span class="string">"Name: "</span>);
+        <span class="type">String</span> name = sc.nextLine();
+        System.out.print(<span class="string">"Designation: "</span>);
+        <span class="type">String</span> designation = sc.nextLine();
+        System.out.print(<span class="string">"Salary: "</span>);
+        <span class="type">double</span> salary = sc.nextDouble();
+        
+        Employee emp = <span class="keyword">new</span> Employee(id, name, designation, salary);
+        System.out.println(<span class="string">"\nEmployee Info: "</span>);
+        System.out.println(emp.toString());
+        sc.close();
+    }
+}</code></pre>
+    </div>
+
+    <div class="command-block">
+        <strong>Commands to compile and run:</strong>
+        javac EmployeeDemo2.java<br>
+        java EmployeeDemo2
+    </div>
+
+    <!-- Set A - c -->
+    <div class="question">
+        <strong>c.</strong> Define a class MyNumber having one private int data member. Write a default constructor to initialize it to 0 and another constructor to initialize it to a value (Use this). Write methods isNegative, isPositive, isZero, isOdd, isEven. Create an object in main. Use command line arguments to pass a value to the Object.
+    </div>
+    
+    <div class="code-container">
+        <span class="filename">SetA/MyNumber.java</span>
+        <pre><code><span class="keyword">public class</span> <span class="type">MyNumber</span> {
+    <span class="keyword">private int</span> number;
+
+    <span class="keyword">public</span> MyNumber() {
+        <span class="keyword">this</span>.number = 0;
+    }
+
+    <span class="keyword">public</span> MyNumber(<span class="type">int</span> number) {
+        <span class="keyword">this</span>.number = number;
+    }
+
+    <span class="keyword">public boolean</span> isNegative() {
+        <span class="keyword">return this</span>.number &lt; 0;
+    }
+
+    <span class="keyword">public boolean</span> isPositive() {
+        <span class="keyword">return this</span>.number &gt; 0;
+    }
+
+    <span class="keyword">public boolean</span> isZero() {
+        <span class="keyword">return this</span>.number == 0;
+    }
+
+    <span class="keyword">public boolean</span> isOdd() {
+        <span class="keyword">return this</span>.number % 2 != 0;
+    }
+
+    <span class="keyword">public boolean</span> isEven() {
+        <span class="keyword">return this</span>.number % 2 == 0;
+    }
+
+    <span class="keyword">public static void</span> main(<span class="type">String</span>[] args) {
+        <span class="keyword">if</span> (args.length == 0) {
+            System.out.println(<span class="string">"Please provide a number as a command line argument."</span>);
+            <span class="keyword">return</span>;
+        }
+        
+        <span class="type">int</span> n = Integer.parseInt(args[0]);
+        MyNumber myNum = <span class="keyword">new</span> MyNumber(n);
+        
+        System.out.println(<span class="string">"Number: "</span> + n);
+        System.out.println(<span class="string">"isNegative: "</span> + myNum.isNegative());
+        System.out.println(<span class="string">"isPositive: "</span> + myNum.isPositive());
+        System.out.println(<span class="string">"isZero: "</span> + myNum.isZero());
+        System.out.println(<span class="string">"isOdd: "</span> + myNum.isOdd());
+        System.out.println(<span class="string">"isEven: "</span> + myNum.isEven());
+    }
+}</code></pre>
+    </div>
+
+    <div class="command-block">
+        <strong>Commands to compile and run:</strong>
+        javac MyNumber.java<br>
+        java MyNumber 5
+    </div>
+
+    <!-- Set A - d -->
+    <div class="question">
+        <strong>d.</strong> Write a program to define class Person with data members as Personname,Aadharno, Panno. Accept information for 5 objects and display appropriate information (use this keyword).
+    </div>
+    
+    <div class="code-container">
+        <span class="filename">SetA/PersonDemo.java</span>
+        <pre><code><span class="keyword">import</span> java.util.Scanner;
+
+<span class="keyword">class</span> <span class="type">Person</span> {
+    <span class="type">String</span> Personname;
+    <span class="type">String</span> Aadharno;
+    <span class="type">String</span> Panno;
+
+    <span class="keyword">public</span> Person(<span class="type">String</span> personname, <span class="type">String</span> aadharno, <span class="type">String</span> panno) {
+        <span class="keyword">this</span>.Personname = personname;
+        <span class="keyword">this</span>.Aadharno = aadharno;
+        <span class="keyword">this</span>.Panno = panno;
+    }
+
+    <span class="keyword">public void</span> display() {
+        System.out.println(<span class="string">"Name: "</span> + Personname);
+        System.out.println(<span class="string">"Aadhar No: "</span> + Aadharno);
+        System.out.println(<span class="string">"PAN No: "</span> + Panno);
+    }
+}
+
+<span class="keyword">public class</span> <span class="type">PersonDemo</span> {
+    <span class="keyword">public static void</span> main(<span class="type">String</span>[] args) {
+        Scanner sc = <span class="keyword">new</span> Scanner(System.in);
+        Person[] p = <span class="keyword">new</span> Person[5];
+
+        <span class="keyword">for</span> (<span class="type">int</span> i = 0; i &lt; 5; i++) {
+            System.out.println(<span class="string">"Enter information for Person "</span> + (i + 1) + <span class="string">":"</span>);
+            System.out.print(<span class="string">"Name: "</span>);
+            <span class="type">String</span> name = sc.nextLine();
+            System.out.print(<span class="string">"Aadhar No: "</span>);
+            <span class="type">String</span> aadhar = sc.nextLine();
+            System.out.print(<span class="string">"PAN No: "</span>);
+            <span class="type">String</span> pan = sc.nextLine();
+
+            p[i] = <span class="keyword">new</span> Person(name, aadhar, pan);
+        }
+
+        System.out.println(<span class="string">"\n--- Person Information ---"</span>);
+        <span class="keyword">for</span> (<span class="type">int</span> i = 0; i &lt; 5; i++) {
+            p[i].display();
+        }
+
+        sc.close();
+    }
+}</code></pre>
+    </div>
+
+    <div class="command-block">
+        <strong>Commands to compile and run:</strong>
+        javac PersonDemo.java<br>
+        java PersonDemo
+    </div>
+
+    <!-- Set A - e -->
+    <div class="question">
+        <strong>e.</strong> Create a class Sphere, to calculate the volume and surface area of the sphere. (Hint : Surface area=4*3.14(r*r), Volume=(4/3)3.14(r*r*r))
+    </div>
+    
+    <div class="code-container">
+        <span class="filename">SetA/Sphere.java</span>
+        <pre><code><span class="keyword">import</span> java.util.Scanner;
+
+<span class="keyword">class</span> <span class="type">Sphere</span> {
+    <span class="type">double</span> radius;
+    <span class="keyword">final double</span> PI = 3.14;
+
+    Sphere(<span class="type">double</span> radius) {
+        <span class="keyword">this</span>.radius = radius;
+    }
+
+    <span class="type">double</span> calculateSurfaceArea() {
+        <span class="keyword">return</span> 4 * PI * (radius * radius);
+    }
+
+    <span class="type">double</span> calculateVolume() {
+        <span class="keyword">return</span> (4.0 / 3.0) * PI * (radius * radius * radius);
+    }
+
+    <span class="keyword">public static void</span> main(<span class="type">String</span>[] args) {
+        Scanner sc = <span class="keyword">new</span> Scanner(System.in);
+        System.out.print(<span class="string">"Enter the radius of the sphere: "</span>);
+        <span class="type">double</span> r = sc.nextDouble();
+
+        Sphere sphere = <span class="keyword">new</span> Sphere(r);
+        
+        System.out.println(<span class="string">"Surface Area: "</span> + sphere.calculateSurfaceArea());
+        System.out.println(<span class="string">"Volume: "</span> + sphere.calculateVolume());
+        
+        sc.close();
+    }
+}</code></pre>
+    </div>
+
+    <div class="command-block">
+        <strong>Commands to compile and run:</strong>
+        javac Sphere.java<br>
+        java Sphere
+    </div>
+
+</body>
+</html>
