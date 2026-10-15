@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment 2 - Set B Solutions</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 40px auto;
+            max-width: 1000px;
+            background-color: #f4f7f6;
+            color: #333;
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 40px;
+            font-size: 2.5em;
+        }
+        .question {
+            background: #fff;
+            padding: 15px 20px;
+            border-left: 5px solid #e74c3c;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            font-size: 1.1em;
+        }
+        .code-container {
+            background: #282c34;
+            color: #abb2bf;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin-bottom: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .command-block {
+            background: #eef2f5;
+            padding: 10px 15px;
+            border-left: 4px solid #3498db;
+            margin-bottom: 20px;
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: 0.95em;
+            color: #2c3e50;
+        }
+        .command-block strong {
+            color: #2980b9;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: block;
+            margin-bottom: 5px;
+        }
+        .filename {
+            font-weight: bold;
+            color: #98c379;
+            margin-bottom: 15px;
+            display: inline-block;
+            border-bottom: 1px solid #555;
+            padding-bottom: 5px;
+        }
+        pre {
+            margin: 0;
+        }
+        code {
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: 0.95em;
+        }
+        .keyword { color: #c678dd; }
+        .type { color: #e5c07b; }
+        .string { color: #98c379; }
+        .comment { color: #5c6370; font-style: italic; }
+    </style>
+</head>
+<body>
+
+    <h1>Assignment 2 - Set B Solutions</h1>
+
+    <!-- Set B - a -->
+    <div class="question">
+        <strong>a.</strong> Write a Java program to create a Package “SY” which has a class SYMarks (members ComputerTotal, MathsTotal, and ElectronicsTotal). Create another package TY which has a class TYMarks (members Theory, Practicals). Create n objects of Student class (having rollNumber, name, SYMarks and TYMarks). Add the marks of SY and TY computer subjects and calculate the Grade(‘A’ for &gt;= 70, ‘B’ for &gt;= 60, ‘C’for &gt;= 50 , Pass Class for &gt; =40 else “FAIL”) and display the result of the student in proper format.
+    </div>
+
+    <div class="code-container">
+        <span class="filename">SetB/SY/SYMarks.java</span>
+        <pre><code><span class="keyword">package</span> SY;
+
+<span class="keyword">public class</span> <span class="type">SYMarks</span> {
+    <span class="keyword">public int</span> ComputerTotal;
+    <span class="keyword">public int</span> MathsTotal;
+    <span class="keyword">public int</span> ElectronicsTotal;
+
+    <span class="keyword">public</span> SYMarks(<span class="type">int</span> computerTotal, <span class="type">int</span> mathsTotal, <span class="type">int</span> electronicsTotal) {
+        <span class="keyword">this</span>.ComputerTotal = computerTotal;
+        <span class="keyword">this</span>.MathsTotal = mathsTotal;
+        <span class="keyword">this</span>.ElectronicsTotal = electronicsTotal;
+    }
+}</code></pre>
+    </div>
+
+    <div class="code-container">
+        <span class="filename">SetB/TY/TYMarks.java</span>
+        <pre><code><span class="keyword">package</span> TY;
+
+<span class="keyword">public class</span> <span class="type">TYMarks</span> {
+    <span class="keyword">public int</span> Theory;
+    <span class="keyword">public int</span> Practicals;
+
+    <span class="keyword">public</span> TYMarks(<span class="type">int</span> theory, <span class="type">int</span> practicals) {
+        <span class="keyword">this</span>.Theory = theory;
+        <span class="keyword">this</span>.Practicals = practicals;
+    }
+}</code></pre>
+    </div>
+
+    <div class="code-container">
+        <span class="filename">SetB/StudentDemo.java</span>
+        <pre><code><span class="keyword">import</span> SY.SYMarks;
+<span class="keyword">import</span> TY.TYMarks;
+<span class="keyword">import</span> java.util.Scanner;
+
+<span class="keyword">class</span> <span class="type">Student</span> {
+    <span class="keyword">private int</span> rollNumber;
+    <span class="keyword">private String</span> name;
+    <span class="keyword">private</span> SYMarks syMarks;
+    <span class="keyword">private</span> TYMarks tyMarks;
+
+    <span class="keyword">public</span> Student(<span class="type">int</span> rollNumber, <span class="type">String</span> name, SYMarks syMarks, TYMarks tyMarks) {
+        <span class="keyword">this</span>.rollNumber = rollNumber;
+        <span class="keyword">this</span>.name = name;
+        <span class="keyword">this</span>.syMarks = syMarks;
+        <span class="keyword">this</span>.tyMarks = tyMarks;
+    }
+
+    <span class="keyword">public void</span> displayResult() {
+        <span class="type">int</span> totalComputerMarks = syMarks.ComputerTotal + tyMarks.Theory + tyMarks.Practicals; 
+        
+        <span class="type">double</span> percentage = (<span class="type">double</span>) totalComputerMarks / 3; 
+        <span class="type">String</span> grade = <span class="string">""</span>;
+        
+        <span class="keyword">if</span> (percentage &gt;= 70) {
+            grade = <span class="string">"A"</span>;
+        } <span class="keyword">else if</span> (percentage &gt;= 60) {
+            grade = <span class="string">"B"</span>;
+        } <span class="keyword">else if</span> (percentage &gt;= 50) {
+            grade = <span class="string">"C"</span>;
+        } <span class="keyword">else if</span> (percentage &gt;= 40) {
+            grade = <span class="string">"Pass Class"</span>;
+        } <span class="keyword">else</span> {
+            grade = <span class="string">"FAIL"</span>;
+        }
+
+        System.out.println(<span class="string">"Roll Number: "</span> + rollNumber);
+        System.out.println(<span class="string">"Name: "</span> + name);
+        System.out.println(<span class="string">"Computer Total: "</span> + totalComputerMarks);
+        System.out.println(<span class="string">"Grade: "</span> + grade);
+        System.out.println(<span class="string">"-------------------------"</span>);
+    }
+}
+
+<span class="keyword">public class</span> <span class="type">StudentDemo</span> {
+    <span class="keyword">public static void</span> main(<span class="type">String</span>[] args) {
+        Scanner scanner = <span class="keyword">new</span> Scanner(System.in);
+        
+        System.out.print(<span class="string">"Enter number of students: "</span>);
+        <span class="type">int</span> n = scanner.nextInt();
+        scanner.nextLine();
+        
+        Student[] students = <span class="keyword">new</span> Student[n];
+        
+        <span class="keyword">for</span> (<span class="type">int</span> i = 0; i &lt; n; i++) {
+            System.out.println(<span class="string">"Enter details for Student "</span> + (i + 1) + <span class="string">":"</span>);
+            System.out.print(<span class="string">"Roll Number: "</span>);
+            <span class="type">int</span> roll = scanner.nextInt();
+            scanner.nextLine();
+            System.out.print(<span class="string">"Name: "</span>);
+            <span class="type">String</span> name = scanner.nextLine();
+            
+            System.out.println(<span class="string">"Enter SY Marks (Computer, Maths, Electronics):"</span>);
+            SYMarks sy = <span class="keyword">new</span> SYMarks(scanner.nextInt(), scanner.nextInt(), scanner.nextInt());
+            
+            System.out.println(<span class="string">"Enter TY Marks (Theory, Practicals):"</span>);
+            TYMarks ty = <span class="keyword">new</span> TYMarks(scanner.nextInt(), scanner.nextInt());
+            scanner.nextLine();
+            
+            students[i] = <span class="keyword">new</span> Student(roll, name, sy, ty);
+        }
+        
+        System.out.println(<span class="string">"\n--- Student Results ---"</span>);
+        <span class="keyword">for</span> (Student s : students) {
+            s.displayResult();
+        }
+        
+        scanner.close();
+    }
+}</code></pre>
+    </div>
+
+    <div class="command-block">
+        <strong>Commands to compile and run:</strong>
+        javac SY/SYMarks.java<br>
+        javac TY/TYMarks.java<br>
+        javac StudentDemo.java<br>
+        java StudentDemo
+    </div>
+
+    <!-- Set B - c -->
+    <div class="question">
+        <strong>c.</strong> Define a class CricketPlayer (name,no_of_innings, no_of_times_notout total total runs, bat_avg). Create an array of n player objects. Calculate the batting average for each player using static method avg(). Define a static sort method which sorts the array on the basis of average. Display the player details in sorted order.
+    </div>
+
+    <div class="code-container">
+        <span class="filename">SetB/CricketPlayerDemo.java</span>
+        <pre><code><span class="keyword">import</span> java.util.Scanner;
+
+<span class="keyword">class</span> <span class="type">CricketPlayer</span> {
+    <span class="type">String</span> name;
+    <span class="type">int</span> no_of_innings;
+    <span class="type">int</span> no_of_times_notout;
+    <span class="type">int</span> total_runs;
+    <span class="type">double</span> bat_avg;
+
+    <span class="keyword">public</span> CricketPlayer(<span class="type">String</span> name, <span class="type">int</span> no_of_innings, <span class="type">int</span> no_of_times_notout, <span class="type">int</span> total_runs) {
+        <span class="keyword">this</span>.name = name;
+        <span class="keyword">this</span>.no_of_innings = no_of_innings;
+        <span class="keyword">this</span>.no_of_times_notout = no_of_times_notout;
+        <span class="keyword">this</span>.total_runs = total_runs;
+        <span class="keyword">this</span>.bat_avg = 0.0;
+    }
+
+    <span class="keyword">public static void</span> avg(CricketPlayer p) {
+        <span class="type">int</span> times_out = p.no_of_innings - p.no_of_times_notout;
+        <span class="keyword">if</span> (times_out &gt; 0) {
+            p.bat_avg = (<span class="type">double</span>) p.total_runs / times_out;
+        } <span class="keyword">else</span> {
+            p.bat_avg = p.total_runs;
+        }
+    }
+
+    <span class="keyword">public static void</span> sort(CricketPlayer[] players) {
+        <span class="keyword">for</span> (<span class="type">int</span> i = 0; i &lt; players.length - 1; i++) {
+            <span class="keyword">for</span> (<span class="type">int</span> j = 0; j &lt; players.length - i - 1; j++) {
+                <span class="keyword">if</span> (players[j].bat_avg &gt; players[j + 1].bat_avg) {
+                    CricketPlayer temp = players[j];
+                    players[j] = players[j + 1];
+                    players[j + 1] = temp;
+                }
+            }
+        }
+    }
+
+    <span class="keyword">public void</span> display() {
+        System.out.printf(<span class="string">"Name: %-15s Innings: %-5d NotOut: %-5d Runs: %-5d Avg: %.2f\n"</span>, 
+                          name, no_of_innings, no_of_times_notout, total_runs, bat_avg);
+    }
+}
+
+<span class="keyword">public class</span> <span class="type">CricketPlayerDemo</span> {
+    <span class="keyword">public static void</span> main(<span class="type">String</span>[] args) {
+        Scanner sc = <span class="keyword">new</span> Scanner(System.in);
+        System.out.print(<span class="string">"Enter number of players: "</span>);
+        <span class="type">int</span> n = sc.nextInt();
+        sc.nextLine();
+
+        CricketPlayer[] players = <span class="keyword">new</span> CricketPlayer[n];
+
+        <span class="keyword">for</span> (<span class="type">int</span> i = 0; i &lt; n; i++) {
+            System.out.println(<span class="string">"Enter details for Player "</span> + (i + 1) + <span class="string">":"</span>);
+            System.out.print(<span class="string">"Name: "</span>);
+            <span class="type">String</span> name = sc.nextLine();
+            System.out.print(<span class="string">"No of innings: "</span>);
+            <span class="type">int</span> innings = sc.nextInt();
+            System.out.print(<span class="string">"No of times not out: "</span>);
+            <span class="type">int</span> notOut = sc.nextInt();
+            System.out.print(<span class="string">"Total runs: "</span>);
+            <span class="type">int</span> runs = sc.nextInt();
+            sc.nextLine();
+
+            players[i] = <span class="keyword">new</span> CricketPlayer(name, innings, notOut, runs);
+            CricketPlayer.avg(players[i]);
+        }
+
+        CricketPlayer.sort(players);
+
+        System.out.println(<span class="string">"\n--- Player Details (Sorted by Batting Average) ---"</span>);
+        <span class="keyword">for</span> (CricketPlayer p : players) {
+            p.display();
+        }
+
+        sc.close();
+    }
+}</code></pre>
+    </div>
+
+    <div class="command-block">
+        <strong>Commands to compile and run:</strong>
+        javac CricketPlayerDemo.java<br>
+        java CricketPlayerDemo
+    </div>
+
+    <!-- Set B - d -->
+    <div class="question">
+        <strong>d.</strong> Define a “Clock” class that does the following;<br>
+        a. Accept Hours, Minutes and Seconds<br>
+        b. Check the validity of numbers<br>
+        c. Set the time to AM/PM mode<br>
+        Use the necessary constructors and methods to do the above task
+    </div>
+
+    <div class="code-container">
+        <span class="filename">SetB/Clock.java</span>
+        <pre><code><span class="keyword">import</span> java.util.Scanner;
+
+<span class="keyword">public class</span> <span class="type">Clock</span> {
+    <span class="keyword">private int</span> hours;
+    <span class="keyword">private int</span> minutes;
+    <span class="keyword">private int</span> seconds;
+    <span class="keyword">private String</span> mode; <span class="comment">// AM or PM</span>
+
+    <span class="keyword">public</span> Clock(<span class="type">int</span> hours, <span class="type">int</span> minutes, <span class="type">int</span> seconds) {
+        <span class="keyword">if</span> (isValid(hours, minutes, seconds)) {
+            <span class="keyword">this</span>.hours = hours;
+            <span class="keyword">this</span>.minutes = minutes;
+            <span class="keyword">this</span>.seconds = seconds;
+            setTimeMode();
+        } <span class="keyword">else</span> {
+            System.out.println(<span class="string">"Invalid time entered!"</span>);
+            <span class="keyword">this</span>.hours = 0;
+            <span class="keyword">this</span>.minutes = 0;
+            <span class="keyword">this</span>.seconds = 0;
+            <span class="keyword">this</span>.mode = <span class="string">"AM"</span>;
+        }
+    }
+
+    <span class="keyword">private boolean</span> isValid(<span class="type">int</span> h, <span class="type">int</span> m, <span class="type">int</span> s) {
+        <span class="keyword">return</span> (h &gt;= 0 && h &lt; 24) && (m &gt;= 0 && m &lt; 60) && (s &gt;= 0 && s &lt; 60);
+    }
+
+    <span class="keyword">private void</span> setTimeMode() {
+        <span class="keyword">if</span> (<span class="keyword">this</span>.hours &gt;= 12) {
+            <span class="keyword">this</span>.mode = <span class="string">"PM"</span>;
+            <span class="keyword">if</span> (<span class="keyword">this</span>.hours &gt; 12) {
+                <span class="keyword">this</span>.hours -= 12;
+            }
+        } <span class="keyword">else</span> {
+            <span class="keyword">this</span>.mode = <span class="string">"AM"</span>;
+            <span class="keyword">if</span> (<span class="keyword">this</span>.hours == 0) {
+                <span class="keyword">this</span>.hours = 12;
+            }
+        }
+    }
+
+    <span class="keyword">public void</span> display() {
+        System.out.printf(<span class="string">"Time: %02d:%02d:%02d %s\n"</span>, <span class="keyword">this</span>.hours, <span class="keyword">this</span>.minutes, <span class="keyword">this</span>.seconds, <span class="keyword">this</span>.mode);
+    }
+
+    <span class="keyword">public static void</span> main(<span class="type">String</span>[] args) {
+        Scanner sc = <span class="keyword">new</span> Scanner(System.in);
+        System.out.println(<span class="string">"Enter time in 24-hour format:"</span>);
+        System.out.print(<span class="string">"Hours: "</span>);
+        <span class="type">int</span> h = sc.nextInt();
+        System.out.print(<span class="string">"Minutes: "</span>);
+        <span class="type">int</span> m = sc.nextInt();
+        System.out.print(<span class="string">"Seconds: "</span>);
+        <span class="type">int</span> s = sc.nextInt();
+
+        Clock clock = <span class="keyword">new</span> Clock(h, m, s);
+        clock.display();
+        
+        sc.close();
+    }
+}</code></pre>
+    </div>
+
+    <div class="command-block">
+        <strong>Commands to compile and run:</strong>
+        javac Clock.java<br>
+        java Clock
+    </div>
+
+    <!-- Set B - e -->
+    <div class="question">
+        <strong>e.</strong> Write a package for Operation, which has two classes, Addition and Maximum. Addition has two methods add () and subtract (), which are used to add two integers and subtract two, float values respectively. Maximum has a method max () to display the maximum of two Integers.
+    </div>
+
+    <div class="code-container">
+        <span class="filename">SetB/Operation/Addition.java</span>
+        <pre><code><span class="keyword">package</span> Operation;
+
+<span class="keyword">public class</span> <span class="type">Addition</span> {
+    <span class="keyword">public int</span> add(<span class="type">int</span> a, <span class="type">int</span> b) {
+        <span class="keyword">return</span> a + b;
+    }
+
+    <span class="keyword">public float</span> subtract(<span class="type">float</span> a, <span class="type">float</span> b) {
+        <span class="keyword">return</span> a - b;
+    }
+}</code></pre>
+    </div>
+
+    <div class="code-container">
+        <span class="filename">SetB/Operation/Maximum.java</span>
+        <pre><code><span class="keyword">package</span> Operation;
+
+<span class="keyword">public class</span> <span class="type">Maximum</span> {
+    <span class="keyword">public void</span> max(<span class="type">int</span> a, <span class="type">int</span> b) {
+        <span class="keyword">if</span> (a &gt; b) {
+            System.out.println(<span class="string">"Maximum is: "</span> + a);
+        } <span class="keyword">else</span> {
+            System.out.println(<span class="string">"Maximum is: "</span> + b);
+        }
+    }
+}</code></pre>
+    </div>
+
+    <div class="code-container">
+        <span class="filename">SetB/OperationDemo.java</span>
+        <pre><code><span class="keyword">import</span> Operation.Addition;
+<span class="keyword">import</span> Operation.Maximum;
+<span class="keyword">import</span> java.util.Scanner;
+
+<span class="keyword">public class</span> <span class="type">OperationDemo</span> {
+    <span class="keyword">public static void</span> main(<span class="type">String</span>[] args) {
+        Scanner scanner = <span class="keyword">new</span> Scanner(System.in);
+        Addition addObj = <span class="keyword">new</span> Addition();
+        Maximum maxObj = <span class="keyword">new</span> Maximum();
+
+        System.out.println(<span class="string">"Enter two integers for addition:"</span>);
+        <span class="type">int</span> a = scanner.nextInt();
+        <span class="type">int</span> b = scanner.nextInt();
+        System.out.println(<span class="string">"Addition of "</span> + a + <span class="string">" and "</span> + b + <span class="string">": "</span> + addObj.add(a, b));
+
+        System.out.println(<span class="string">"Enter two floats for subtraction:"</span>);
+        <span class="type">float</span> f1 = scanner.nextFloat();
+        <span class="type">float</span> f2 = scanner.nextFloat();
+        System.out.println(<span class="string">"Subtraction of "</span> + f1 + <span class="string">" and "</span> + f2 + <span class="string">": "</span> + addObj.subtract(f1, f2));
+
+        System.out.println(<span class="string">"Enter two integers to find maximum:"</span>);
+        <span class="type">int</span> m1 = scanner.nextInt();
+        <span class="type">int</span> m2 = scanner.nextInt();
+        System.out.print(<span class="string">"Maximum of "</span> + m1 + <span class="string">" and "</span> + m2 + <span class="string">": "</span>);
+        maxObj.max(m1, m2);
+        
+        scanner.close();
+    }
+}</code></pre>
+    </div>
+
+    <div class="command-block">
+        <strong>Commands to compile and run:</strong>
+        javac Operation/Addition.java<br>
+        javac Operation/Maximum.java<br>
+        javac OperationDemo.java<br>
+        java OperationDemo
+    </div>
+
+</body>
+</html>
