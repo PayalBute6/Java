@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 2 Java Programs</title>
+
+    <!-- <style> 
+        .question-highlight{
+            color: rgb(7, 7, 7);
+            background-color: rgb(227, 207, 27);
+            border-radius: 2px;
+            padding: 2px;
+
+        }
+    
+        /* Override Prism.js grey background */
+        pre[class*="language-"],
+        code[class*="language-"] {
+            background: transparent !important;
+        }
+    
+        /* Make code comments italic and distinct */
+        .token.comment,
+        .token.block-comment,
+        .token.prolog,
+        .token.doctype,
+        .token.cdata {
+            font-style: italic !important;
+            color: #7a7a7a !important;
+        }
+    </style> -->
+
+    <!-- Prism.js for Syntax Highlighting -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-java.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>
+</head>
+
+<body>
+
+    <h1>Assignment 2: Java Programs</h1>
+
+    <!-- StringOperationDemo.java -->
+    <div class="question-highlight"><strong>Question 1:</strong> Write a package for String operation which has two classes Con and Comp. Con class has to concatenate two strings and comp class compares two strings. Also display proper messages on execution.</div>
+        
+    <div class="program-container">
+        <h2>string_operation/Con.java</h2>
+        <pre><code>package string_operation;
+
+public class Con {
+    public void concatenate(String str1, String str2) {
+        String result = str1 + str2;
+        System.out.println("Concatenated String: " + result);
+    }
+}
+</code></pre>
+
+        <h2>string_operation/Comp.java</h2>
+        <pre><code>package string_operation;
+
+public class Comp {
+    public void compare(String str1, String str2) {
+        if (str1.equals(str2)) {
+            System.out.println("Comparison Result: The strings are equal.");
+        } else {
+            System.out.println("Comparison Result: The strings are not equal.");
+        }
+    }
+}
+</code></pre>
+
+        <h2>StringOperationDemo.java</h2>
+        <pre><code>import string_operation.Con;
+import string_operation.Comp;
+import java.util.Scanner;
+
+public class StringOperationDemo {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        
+        System.out.print("Enter the first string: ");
+        String s1 = sc.nextLine();
+        
+        System.out.print("Enter the second string: ");
+        String s2 = sc.nextLine();
+        
+        System.out.println("\n--- String Operations ---");
+        
+        // Use the Con class from the string_operation package
+        Con conObj = new Con();
+        conObj.concatenate(s1, s2);
+        
+        // Use the Comp class from the string_operation package
+        Comp compObj = new Comp();
+        compObj.compare(s1, s2);
+        
+        sc.close();
+    }
+}
+</code></pre>
+        <h4>Output:</h4>
+        <pre>
+$ javac StringOperationDemo.java
+$ java StringOperationDemo
+Enter the first string: Hello
+Enter the second string: World
+
+--- String Operations ---
+Concatenated String: HelloWorld
+Comparison Result: The strings are not equal.</pre>
+    </div>
+
+    <!-- EmployeeMaxSalary.java -->
+    <div class="program-container">
+        <h2>EmployeeMaxSalary.java</h2>
+        <div class="question-highlight"><strong>Question 2:</strong> Write a program which define class Employee with data member as id, name and salary 
+Store the information of 'n' employees and display the name of employee having maximum salary (Use array of object)</div>
+        <pre><code>import java.util.Scanner;
+
+class Employee {
+    int id;
+    String name;
+    double salary;
+
+    // Constructor to initialize the employee details
+    public Employee(int id, String name, double salary) {
+        this.id = id;
+        this.name = name;
+        this.salary = salary;
+    }
+}
+
+public class EmployeeMaxSalary {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        
+        System.out.print("Enter the number of employees (n): ");
+        int n = sc.nextInt();
+        
+        // Create an array of objects to store 'n' Employees
+        Employee[] emps = new Employee[n];
+        
+        // Loop to accept information for 'n' employees
+        for (int i = 0; i &lt; n; i++) {
+            System.out.println("\nEnter details for Employee " + (i + 1) + ":");
+            
+            System.out.print("ID: ");
+            int id = sc.nextInt();
+            
+            // Consume the newline character left by nextInt() so nextLine() works properly
+            sc.nextLine(); 
+            
+            System.out.print("Name: ");
+            String name = sc.nextLine();
+            
+            System.out.print("Salary: ");
+            double salary = sc.nextDouble();
+            
+            // Create the object and store it in the array
+            emps[i] = new Employee(id, name, salary);
+        }
+        
+        // Logic to find the employee with the maximum salary
+        // Start by assuming the first employee has the highest salary
+        Employee maxSalaryEmp = emps[0];
+        
+        for (int i = 1; i &lt; n; i++) {
+            if (emps[i].salary &gt; maxSalaryEmp.salary) {
+                maxSalaryEmp = emps[i]; // Update if we find a higher salary
+            }
+        }
+        
+        // Display the name of the employee with the maximum salary
+        System.out.println("\n-------------------------------------------------");
+        System.out.println("Employee with the MAXIMUM salary is: " + maxSalaryEmp.name);
+        System.out.println("Maximum Salary amount: " + maxSalaryEmp.salary);
+        System.out.println("-------------------------------------------------");
+        
+        sc.close();
+    }
+}
+</code></pre>
+        <h4>Output:</h4>
+        <pre>&gt; javac EmployeeMaxSalary.java
+&gt; java EmployeeMaxSalary
+Enter the number of employees (n): 2
+
+Enter details for Employee 1:
+ID: 101
+Name: Alice
+Salary: 55000
+
+Enter details for Employee 2:
+ID: 102
+Name: Bob
+Salary: 65000
+
+-------------------------------------------------
+Employee with the MAXIMUM salary is: Bob
+Maximum Salary amount: 65000.0
+-------------------------------------------------</pre>
+    </div>
+
+    <!-- Clock.java -->
+    <div class="program-container">
+        <h2>Clock.java</h2>
+        <div class="question-highlight"><strong>Question 3:</strong> Define a “Clock” class that does the following; 
+a. Accept Hours, Minutes and Seconds 
+b. Check the validity of numbers 
+c. Set the time to AM/PM mode 
+Use the necessary constructors and methods to do the above task</div>
+        <pre><code>public class Clock {
+    // Meaningful variable names are easier for beginners to understand
+    int hours;
+    int minutes;
+    int seconds;
+
+    // Constructor to set the initial time when a new Clock object is created
+    public Clock(int h, int m, int s) {
+        hours = h; 
+        minutes = m; 
+        seconds = s;
+    }
+
+    // Method to check if the time entered is valid
+    public boolean isValid() {
+        // Hours must be between 0 and 23. Minutes and seconds must be between 0 and 59.
+        if (hours &gt;= 0 &amp;&amp; hours &lt; 24 &amp;&amp; minutes &gt;= 0 &amp;&amp; minutes &lt; 60 &amp;&amp; seconds &gt;= 0 &amp;&amp; seconds &lt; 60) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    // Method to convert 24-hour time to 12-hour AM/PM format and print it
+    public void showAMPM() {
+        // Step 1: Check if the time is valid first
+        if (isValid() == false) {
+            System.out.println("Invalid Time");
+            return; // Stop the method here if time is invalid
+        }
+        
+        String period;
+        int displayHours = hours;
+
+        // Step 2: Determine if it is AM or PM
+        if (hours &gt;= 12) {
+            period = "PM";
+        } else {
+            period = "AM";
+        }
+
+        // Step 3: Convert 24-hour format to 12-hour format
+        if (hours == 0) {
+            displayHours = 12;         // Midnight is 12 AM, not 0 AM
+        } else if (hours &gt; 12) {
+            displayHours = hours - 12; // Example: 14 - 12 = 2 PM
+        }
+        
+        // Step 4: Print the final result
+        System.out.println(displayHours + ":" + minutes + ":" + seconds + " " + period);
+    }
+
+    // Main method to test our Clock class
+    public static void main(String[] args) {
+        // Test Case 1: A valid time (14:30:45 is 2:30:45 PM)
+        Clock validClock = new Clock(14, 30, 45); 
+        System.out.print("Time 1 (14:30:45): ");
+        validClock.showAMPM();
+        
+        // Test Case 2: An invalid time (25 hours is not possible)
+        Clock invalidClock = new Clock(25, 0, 0); 
+        System.out.print("Time 2 (25:00:00): ");
+        invalidClock.showAMPM();
+    }
+}
+</code></pre>
+        <h4>Output:</h4>
+        <pre>&gt; javac Clock.java
+&gt; java Clock
+Time 1 (14:30:45): 2:30:45 PM
+Time 2 (25:00:00): Invalid Time</pre>
+    </div>
+
+    <!-- PersonDemo.java -->
+    <!-- <div class="program-container">
+        <h2>PersonDemo.java</h2>
+        <pre><code class="language-java">import java.util.Scanner;
+
+/*
+ Write a program to define class Person with data members as Personname, Aadharno, Panno. 
+ Accept information for 5 objects and display appropriate information (use this keyword).
+*/
+class Person {
+
+    String Personname;
+    String Aadharno;
+    String Panno;
+
+    public Person(String personname, String aadharno, String panno) {
+        this.Personname = personname;
+        this.Aadharno = aadharno;
+        this.Panno = panno;
+    }
+
+    public void display() {
+        System.out.println("Name: " + Personname);
+        System.out.println("Aadhar No: " + Aadharno);
+        System.out.println("PAN No: " + Panno);
+    }
+}
+
+public class PersonDemo {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        Person[] p = new Person[5];
+
+        for (int i = 0; i &lt; 5; i++) {
+            System.out.println("Enter information for Person " + (i + 1) + ":");
+            System.out.print("Name: ");
+            String name = sc.nextLine();
+            System.out.print("Aadhar No: ");
+            String aadhar = sc.nextLine();
+            System.out.print("PAN No: ");
+            String pan = sc.nextLine();
+
+            p[i] = new Person(name, aadhar, pan);
+        }
+
+        System.out.println("\n--- Person Information ---");
+        for (int i = 0; i &lt; 5; i++) {
+            p[i].display();
+        }
+
+        sc.close();
+    }
+}
+</code></pre>
+        <h4>Output:</h4>
+        <pre>&gt; javac PersonDemo.java
+&gt; java PersonDemo
+Enter information for Person 1:
+Name: John Doe
+Aadhar No: 123412341234
+PAN No: ABCDE1234F
+Enter information for Person 2:
+Name: Jane Smith
+Aadhar No: 432143214321
+PAN No: XYZAB9876C
+... (input continues for 5 persons) ...
+
+--- Person Information ---
+Name: John Doe
+Aadhar No: 123412341234
+PAN No: ABCDE1234F
+Name: Jane Smith
+Aadhar No: 432143214321
+PAN No: XYZAB9876C
+... (output continues for 5 persons) ...</pre>
+    </div> -->
+
+</body>
+</html>
