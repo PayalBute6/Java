@@ -1,0 +1,2199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Assignments</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet" />
+    <!-- <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            padding: 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .program-container {
+            background: #fff;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .question-highlight, .program-container > div:nth-child(2) {
+            color: rgb(7, 7, 7);
+            background-color: rgb(227, 207, 27);
+            border-radius: 2px;
+            padding: 8px;
+            margin-bottom: 15px;
+        }
+        pre[class*="language-"], code[class*="language-"], pre code {
+            background: transparent !important;
+            padding: 10px;
+            border-radius: 4px;
+            display: block;
+            overflow-x: auto;
+        }
+        /* Override Prism.js grey background */
+        pre[class*="language-"],
+        code[class*="language-"] {
+            background: #f5f2f0 !important;
+        }
+    
+        /* Make code comments italic and distinct */
+        .token.comment,
+        .token.block-comment,
+        .token.prolog,
+        .token.doctype,
+        .token.cdata {
+            font-style: italic !important;
+            color: #7a7a7a !important;
+        }
+    </style> -->
+</head>
+<body>
+    <!-- <h1 style="text-align:center; font-size: 3em; color: #d84315;">All Assignments Master File</h1> -->
+
+
+    
+
+    <!-- ArmstrongRange.java -->
+    <div class="program-container">
+        <h2>ArmstrongRange.java</h2>
+        <div class="question-highlight"><strong>Question:</strong> Write a Java Program to Display Armstrong Numbers Between range. Accept range from user.</div>
+        <pre><code>import java.util.Scanner;
+
+public class ArmstrongRange {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        
+        System.out.print("Enter starting number: ");
+        int start = sc.nextInt();
+        
+        System.out.print("Enter ending number: ");
+        int end = sc.nextInt();
+        
+        System.out.println("Armstrong numbers between " + start + " and " + end + " are:");
+        
+        // Check every number in the range
+        for (int i = start; i &lt;= end; i++) {
+            
+            int temp = i;
+            int sum = 0;
+
+            while (temp &gt; 0) {
+                int remainder = temp % 10;
+                sum = sum + (remainder * remainder * remainder);
+                temp = temp / 10;
+            }
+            
+            // If the sum equals the original number, it is an Armstrong number
+            if (sum == i) {
+                System.out.print(i + " ");
+            }
+        }
+        
+        System.out.println();
+        sc.close();
+    }
+}
+</code></pre>
+        <h4>Output:</h4>
+        <pre>&gt; javac ArmstrongRange.java
+&gt; java ArmstrongRange
+Enter starting number: 1
+Enter ending number: 500
+Armstrong numbers between 1 and 500 are:
+1 153 370 371 407 </pre>
+    </div>
+
+    <!-- ArraySumAndSort.java -->
+    <div class="program-container">
+        <h2>ArraySumAndSort.java</h2>
+        <div class="question-highlight"><strong>Question:</strong> Write a Java program to print the sum of elements of the array. Also display array elements in ascending order.</div>
+        <pre><code>import java.util.Arrays;
+import java.util.Scanner;
+
+public class ArraySumAndSort {
+    public static void main(String[] args) {
+        // Step 1: Create a Scanner to read input from the user
+        Scanner sc = new Scanner(System.in);
+        
+        // Step 2: Ask the user for the number of elements
+        System.out.print("Enter the number of elements: ");
+        int n = sc.nextInt();
+        
+        // Step 3: Create an array of that size
+        int[] arr = new int[n];
+        
+        // Step 4: Ask the user to enter the elements
+        System.out.println("Enter " + n + " elements:");
+        for (int i = 0; i &lt; n; i++) {
+            arr[i] = sc.nextInt();
+        }
+        
+        // Step 5: Calculate the sum of all elements
+        int sum = 0;
+        for (int i = 0; i &lt; n; i++) {
+            sum = sum + arr[i];
+        }
+        System.out.println("\nSum of the elements: " + sum);
+        
+        // Step 6: Sort the array in ascending order
+        Arrays.sort(arr);
+        
+        // Step 7: Print the sorted array
+        System.out.println("Array elements in ascending order:");
+        for (int i = 0; i &lt; n; i++) {
+            System.out.print(arr[i] + " ");
+        }
+        System.out.println(); // Print a new line at the end
+        
+        // Close the sc when we are done
+        sc.close();
+    }
+}
+</code></pre>
+        <h4>Output:</h4>
+        <pre>&gt; javac ArraySumAndSort.java
+&gt; java ArraySumAndSort
+Enter the number of elements: 5
+Enter 5 elements:
+10
+5
+8
+20
+3
+
+Sum of the elements: 46
+Array elements in ascending order:
+3 5 8 10 20 </pre>
+    </div>
+
+    <!-- MatrixOperations.java -->
+    <div class="program-container">
+        <h2>MatrixOperations.java</h2>
+        <div><strong>Question:</strong> Write a menu driven program to perform the following operations on multidimensional array ie matrix:
+ 1. Addition
+ 2. Multiplication
+ 3. Transpose of any matrix
+ 4. Exit</div>
+        <pre><code>import java.util.Scanner;
+
+public class MatrixOperations {
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+        int choice;
+
+        do {
+            System.out.println("\n--- MATRIX MENU ---");
+            System.out.println("1. Addition");
+            System.out.println("2. Multiplication");
+            System.out.println("3. Transpose");
+            System.out.println("4. Exit");
+            System.out.print("Enter your choice: ");
+            choice = sc.nextInt();
+
+            switch (choice) {
+
+                case 1:
+                    // Matrix Addition
+                    System.out.print("Enter rows and columns: ");
+                    int r = sc.nextInt();
+                    int c = sc.nextInt();
+
+                    int[][] a = new int[r][c];
+                    int[][] b = new int[r][c];
+                    int[][] sum = new int[r][c];
+
+                    System.out.println("Enter Matrix A:");
+                    for (int i = 0; i &lt; r; i++)
+                        for (int j = 0; j &lt; c; j++)
+                            a[i][j] = sc.nextInt();
+
+                    System.out.println("Enter Matrix B:");
+                    for (int i = 0; i &lt; r; i++)
+                        for (int j = 0; j &lt; c; j++)
+                            b[i][j] = sc.nextInt();
+
+                    for (int i = 0; i &lt; r; i++)
+                        for (int j = 0; j &lt; c; j++)
+                            sum[i][j] = a[i][j] + b[i][j];
+
+                    System.out.println("Addition:");
+                    for (int i = 0; i &lt; r; i++) {
+                        for (int j = 0; j &lt; c; j++)
+                            System.out.print(sum[i][j] + "\t");
+                        System.out.println();
+                    }
+                    break;
+
+
+                case 2:
+                    // Matrix Multiplication
+                    System.out.print("Enter rows and columns of Matrix A: ");
+                    int r1 = sc.nextInt();
+                    int c1 = sc.nextInt();
+
+                    System.out.print("Enter rows and columns of Matrix B: ");
+                    int r2 = sc.nextInt();
+                    int c2 = sc.nextInt();
+
+                    if (c1 != r2) {
+                        System.out.println("Multiplication not possible.");
+                        break;
+                    }
+
+                    a = new int[r1][c1];
+                    b = new int[r2][c2];
+                    int[][] product = new int[r1][c2];
+
+                    System.out.println("Enter Matrix A:");
+                    for (int i = 0; i &lt; r1; i++)
+                        for (int j = 0; j &lt; c1; j++)
+                            a[i][j] = sc.nextInt();
+
+                    System.out.println("Enter Matrix B:");
+                    for (int i = 0; i &lt; r2; i++)
+                        for (int j = 0; j &lt; c2; j++)
+                            b[i][j] = sc.nextInt();
+
+                    for (int i = 0; i &lt; r1; i++) {
+                        for (int j = 0; j &lt; c2; j++) {
+                            for (int k = 0; k &lt; c1; k++)
+                                product[i][j] += a[i][k] * b[k][j];
+                        }
+                    }
+
+                    System.out.println("Multiplication:");
+                    for (int i = 0; i &lt; r1; i++) {
+                        for (int j = 0; j &lt; c2; j++)
+                            System.out.print(product[i][j] + "\t");
+                        System.out.println();
+                    }
+                    break;
+
+
+                case 3:
+                    // Matrix Transpose
+                    System.out.print("Enter rows and columns: ");
+                    r = sc.nextInt();
+                    c = sc.nextInt();
+
+                    a = new int[r][c];
+
+                    System.out.println("Enter Matrix:");
+                    for (int i = 0; i &lt; r; i++)
+                        for (int j = 0; j &lt; c; j++)
+                            a[i][j] = sc.nextInt();
+
+                    System.out.println("Transpose:");
+
+                    for (int j = 0; j &lt; c; j++) {
+                        for (int i = 0; i &lt; r; i++)
+                            System.out.print(a[i][j] + "\t");
+                        System.out.println();
+                    }
+                    break;
+
+
+                case 4:
+                    System.out.println("Exiting...");
+                    break;
+
+                default:
+                    System.out.println("Invalid choice!");
+            }
+
+        } while (choice != 4);
+
+        sc.close();
+    }
+}
+</code></pre>
+        <h4>Output:</h4>
+        <pre>&gt; javac MatrixOperations.java
+&gt; java MatrixOperations
+--- MATRIX MENU ---
+1. Addition
+2. Multiplication
+3. Transpose
+4. Exit
+Enter your choice: 1
+Enter rows and columns: 2 2
+Enter Matrix A:
+1 2
+3 4
+Enter Matrix B:
+5 6
+7 8
+Addition:
+6	8	
+10	12	
+
+--- MATRIX MENU ---
+1. Addition
+2. Multiplication
+3. Transpose
+4. Exit
+Enter your choice: 2
+Enter rows and columns of Matrix A: 2 2
+Enter rows and columns of Matrix B: 2 2
+Enter Matrix A:
+1 2
+3 4
+Enter Matrix B:
+5 6
+7 8
+Multiplication:
+19	22	
+43	50	
+
+--- MATRIX MENU ---
+1. Addition
+2. Multiplication
+3. Transpose
+4. Exit
+Enter your choice: 3
+Enter rows and columns: 2 2
+Enter Matrix:
+1 2
+3 4
+Transpose:
+1	3	
+2	4	
+
+--- MATRIX MENU ---
+1. Addition
+2. Multiplication
+3. Transpose
+4. Exit
+Enter your choice: 4
+Exiting...</pre>
+    </div>
+
+    <!-- MyNumber.java -->
+    <div class="program-container">
+        <h2>MyNumber.java</h2>
+        <div class="question-highlight"><strong>Question:</strong> Define a class MyNumber having one private int data member. Write a default constructor to initialize 
+it to 0 and another constructor to initialize it to a value (Use this). Write methods isNegative, isPositive, 
+isZero, isOdd, isEven. Create an object in main. Use command line arguments to pass a value to the 
+Object.</div>
+        <pre><code>public class MyNumber {
+    private int number;
+
+    public MyNumber() {
+        this.number = 0;
+    }
+
+    public MyNumber(int number) {
+        this.number = number;
+    }
+
+    public boolean isNegative() {
+        return this.number &lt; 0;
+    }
+
+    public boolean isPositive() {
+        return this.number &gt; 0;
+    }
+
+    public boolean isZero() {
+        return this.number == 0;
+    }
+
+    public boolean isOdd() {
+        return this.number % 2 != 0;
+    }
+
+    public boolean isEven() {
+        return this.number % 2 == 0;
+    }
+
+    public static void main(String[] args) {
+        if (args.length == 0) {
+            System.out.println("Please provide a number as a command line argument.");
+            return;
+        }
+        
+        int n = Integer.parseInt(args[0]);
+        MyNumber myNum = new MyNumber(n);
+        
+        System.out.println("Number: " + n);
+        System.out.println("isNegative: " + myNum.isNegative());
+        System.out.println("isPositive: " + myNum.isPositive());
+        System.out.println("isZero: " + myNum.isZero());
+        System.out.println("isOdd: " + myNum.isOdd());
+        System.out.println("isEven: " + myNum.isEven());
+    }
+}
+</code></pre>
+        <h4>Output:</h4>
+        <pre>&gt; javac MyNumber.java
+&gt; java MyNumber -5
+Number: -5
+isNegative: true
+isPositive: false
+isZero: false
+isOdd: true
+isEven: false</pre>
+    </div>
+
+
+
+    
+
+    <!-- StringOperationDemo.java -->
+     <h2>Package Program</h2>
+    <div class="question-highlight"><strong>Question:</strong> Write a package for String operation which has two classes Con and Comp. Con class has to concatenate two strings and comp class compares two strings. Also display proper messages on execution.</div>
+        
+    <div class="program-container">
+        <h2>string_operation/Con.java</h2>
+        <pre><code>package string_operation;
+
+public class Con {
+    public void concatenate(String str1, String str2) {
+        String result = str1 + str2;
+        System.out.println("Concatenated String: " + result);
+    }
+}
+</code></pre>
+
+        <h2>string_operation/Comp.java</h2>
+        <pre><code>package string_operation;
+
+public class Comp {
+    public void compare(String str1, String str2) {
+        if (str1.equals(str2)) {
+            System.out.println("Comparison Result: The strings are equal.");
+        } else {
+            System.out.println("Comparison Result: The strings are not equal.");
+        }
+    }
+}
+</code></pre>
+
+        <h2>StringOperationDemo.java</h2>
+        <pre><code>import string_operation.Con;
+import string_operation.Comp;
+import java.util.Scanner;
+
+public class StringOperationDemo {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        
+        System.out.print("Enter the first string: ");
+        String s1 = sc.nextLine();
+        
+        System.out.print("Enter the second string: ");
+        String s2 = sc.nextLine();
+        
+        System.out.println("\n--- String Operations ---");
+        
+        // Use the Con class from the string_operation package
+        Con conObj = new Con();
+        conObj.concatenate(s1, s2);
+        
+        // Use the Comp class from the string_operation package
+        Comp compObj = new Comp();
+        compObj.compare(s1, s2);
+        
+        sc.close();
+    }
+}
+</code></pre>
+        <h4>Output:</h4>
+        <pre>
+$ javac StringOperationDemo.java
+$ java StringOperationDemo
+Enter the first string: Hello
+Enter the second string: World
+
+--- String Operations ---
+Concatenated String: HelloWorld
+Comparison Result: The strings are not equal.</pre>
+    </div>
+
+    <!-- EmployeeMaxSalary.java -->
+    <div class="program-container">
+        <h2>EmployeeMaxSalary.java</h2>
+        <div class="question-highlight"><strong>Question:</strong> Write a program which define class Employee with data member as id, name and salary 
+Store the information of 'n' employees and display the name of employee having maximum salary (Use array of object)</div>
+        <pre><code>import java.util.Scanner;
+
+class Employee {
+    int id;
+    String name;
+    double salary;
+
+    // Constructor to initialize the employee details
+    public Employee(int id, String name, double salary) {
+        this.id = id;
+        this.name = name;
+        this.salary = salary;
+    }
+}
+
+public class EmployeeMaxSalary {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        
+        System.out.print("Enter the number of employees (n): ");
+        int n = sc.nextInt();
+        
+        // Create an array of objects to store 'n' Employees
+        Employee[] emps = new Employee[n];
+        
+        // Loop to accept information for 'n' employees
+        for (int i = 0; i &lt; n; i++) {
+            System.out.println("\nEnter details for Employee " + (i + 1) + ":");
+            
+            System.out.print("ID: ");
+            int id = sc.nextInt();
+            
+            // Consume the newline character left by nextInt() so nextLine() works properly
+            sc.nextLine(); 
+            
+            System.out.print("Name: ");
+            String name = sc.nextLine();
+            
+            System.out.print("Salary: ");
+            double salary = sc.nextDouble();
+            
+            // Create the object and store it in the array
+            emps[i] = new Employee(id, name, salary);
+        }
+        
+        // Logic to find the employee with the maximum salary
+        // Start by assuming the first employee has the highest salary
+        Employee maxSalaryEmp = emps[0];
+        
+        for (int i = 1; i &lt; n; i++) {
+            if (emps[i].salary &gt; maxSalaryEmp.salary) {
+                maxSalaryEmp = emps[i]; // Update if we find a higher salary
+            }
+        }
+        
+        // Display the name of the employee with the maximum salary
+        System.out.println("\n-------------------------------------------------");
+        System.out.println("Employee with the MAXIMUM salary is: " + maxSalaryEmp.name);
+        System.out.println("Maximum Salary amount: " + maxSalaryEmp.salary);
+        System.out.println("-------------------------------------------------");
+        
+        sc.close();
+    }
+}
+</code></pre>
+        <h4>Output:</h4>
+        <pre>&gt; javac EmployeeMaxSalary.java
+&gt; java EmployeeMaxSalary
+Enter the number of employees (n): 2
+
+Enter details for Employee 1:
+ID: 101
+Name: Alice
+Salary: 55000
+
+Enter details for Employee 2:
+ID: 102
+Name: Bob
+Salary: 65000
+
+-------------------------------------------------
+Employee with the MAXIMUM salary is: Bob
+Maximum Salary amount: 65000.0
+-------------------------------------------------</pre>
+    </div>
+
+    <!-- Clock.java -->
+    <div class="program-container">
+        <h2>Clock.java</h2>
+        <div class="question-highlight"><strong>Question:</strong> Define a “Clock” class that does the following: 
+a. Accept Hours, Minutes and Seconds 
+b. Check the validity of numbers 
+c. Set the time to AM/PM mode 
+Use the necessary constructors and methods to do the above task</div>
+        <pre><code>public class Clock {
+    // Meaningful variable names are easier for beginners to understand
+    int hours;
+    int minutes;
+    int seconds;
+
+    // Constructor to set the initial time when a new Clock object is created
+    public Clock(int h, int m, int s) {
+        hours = h; 
+        minutes = m; 
+        seconds = s;
+    }
+
+    // Method to check if the time entered is valid
+    public boolean isValid() {
+        // Hours must be between 0 and 23. Minutes and seconds must be between 0 and 59.
+        if (hours &gt;= 0 &amp;&amp; hours &lt; 24 &amp;&amp; minutes &gt;= 0 &amp;&amp; minutes &lt; 60 &amp;&amp; seconds &gt;= 0 &amp;&amp; seconds &lt; 60) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    // Method to convert 24-hour time to 12-hour AM/PM format and print it
+    public void showAMPM() {
+        // Step 1: Check if the time is valid first
+        if (isValid() == false) {
+            System.out.println("Invalid Time");
+            return; // Stop the method here if time is invalid
+        }
+        
+        String period;
+        int displayHours = hours;
+
+        // Step 2: Determine if it is AM or PM
+        if (hours &gt;= 12) {
+            period = "PM";
+        } else {
+            period = "AM";
+        }
+
+        // Step 3: Convert 24-hour format to 12-hour format
+        if (hours == 0) {
+            displayHours = 12;         // Midnight is 12 AM, not 0 AM
+        } else if (hours &gt; 12) {
+            displayHours = hours - 12; // Example: 14 - 12 = 2 PM
+        }
+        
+        // Step 4: Print the final result
+        System.out.println(displayHours + ":" + minutes + ":" + seconds + " " + period);
+    }
+
+    // Main method to test our Clock class
+    public static void main(String[] args) {
+        // Test Case 1: A valid time (14:30:45 is 2:30:45 PM)
+        Clock validClock = new Clock(14, 30, 45); 
+        System.out.print("Time 1 (14:30:45): ");
+        validClock.showAMPM();
+        
+        // Test Case 2: An invalid time (25 hours is not possible)
+        Clock invalidClock = new Clock(25, 0, 0); 
+        System.out.print("Time 2 (25:00:00): ");
+        invalidClock.showAMPM();
+    }
+}
+</code></pre>
+        <h4>Output:</h4>
+        <pre>&gt; javac Clock.java
+&gt; java Clock
+Time 1 (14:30:45): 2:30:45 PM
+Time 2 (25:00:00): Invalid Time</pre>
+    </div>
+
+    <!-- PersonDemo.java -->
+    <!-- <div class="program-container">
+        <h2>PersonDemo.java</h2>
+        <pre><code class="language-java">import java.util.Scanner;
+
+/*
+ Write a program to define class Person with data members as Personname, Aadharno, Panno. 
+ Accept information for 5 objects and display appropriate information (use this keyword).
+*/
+class Person {
+
+    String Personname;
+    String Aadharno;
+    String Panno;
+
+    public Person(String personname, String aadharno, String panno) {
+        this.Personname = personname;
+        this.Aadharno = aadharno;
+        this.Panno = panno;
+    }
+
+    public void display() {
+        System.out.println("Name: " + Personname);
+        System.out.println("Aadhar No: " + Aadharno);
+        System.out.println("PAN No: " + Panno);
+    }
+}
+
+public class PersonDemo {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        Person[] p = new Person[5];
+
+        for (int i = 0; i &lt; 5; i++) {
+            System.out.println("Enter information for Person " + (i + 1) + ":");
+            System.out.print("Name: ");
+            String name = sc.nextLine();
+            System.out.print("Aadhar No: ");
+            String aadhar = sc.nextLine();
+            System.out.print("PAN No: ");
+            String pan = sc.nextLine();
+
+            p[i] = new Person(name, aadhar, pan);
+        }
+
+        System.out.println("\n--- Person Information ---");
+        for (int i = 0; i &lt; 5; i++) {
+            p[i].display();
+        }
+
+        sc.close();
+    }
+}
+</code></pre>
+        <h4>Output:</h4>
+        <pre>&gt; javac PersonDemo.java
+&gt; java PersonDemo
+Enter information for Person 1:
+Name: John Doe
+Aadhar No: 123412341234
+PAN No: ABCDE1234F
+Enter information for Person 2:
+Name: Jane Smith
+Aadhar No: 432143214321
+PAN No: XYZAB9876C
+... (input continues for 5 persons) ...
+
+--- Person Information ---
+Name: John Doe
+Aadhar No: 123412341234
+PAN No: ABCDE1234F
+Name: Jane Smith
+Aadhar No: 432143214321
+PAN No: XYZAB9876C
+... (output continues for 5 persons) ...</pre>
+    </div> -->
+
+
+
+    
+
+    <!-- AccountDetail.java -->
+    <div class="program-container">
+        <h2>AccountDetail.java</h2>
+        <div class="question-highlight"><strong>Question:</strong> Write a program to define a class Account having members custname, accno. 
+Define default and parameterized constructor. Create a subclass called SavingAccount 
+with members savingbal, minbal. Create a derived class AccountDetail that extends 
+the class SavingAccount with members, depositamt and withdrawalamt. Write a appropriate 
+method to display customer details.</div>
+        <pre><code>// Base Class
+class Account {
+    String customerName;
+    int accountNumber;
+
+    // Default constructor
+    public Account() {
+        customerName = "Unknown";
+        accountNumber = 0;
+    }
+
+    // Parameterized constructor
+    public Account(String name, int number) {
+        customerName = name;
+        accountNumber = number;
+    }
+}
+
+// Subclass 1
+class SavingAccount extends Account {
+    double savingBalance;
+    double minimumBalance;
+
+    // Default constructor
+    public SavingAccount() {
+        super(); 
+        savingBalance = 0.0;
+        minimumBalance = 0.0;
+    }
+
+    // Parameterized constructor
+    public SavingAccount(String name, int number, double balance, double minBalance) {
+        super(name, number); 
+        savingBalance = balance;
+        minimumBalance = minBalance;
+    }
+}
+
+// Subclass 2 (Final derived class)
+public class AccountDetail extends SavingAccount {
+    double depositAmount;
+    double withdrawalAmount;
+
+    // Default constructor
+    public AccountDetail() {
+        super(); 
+        depositAmount = 0.0;
+        withdrawalAmount = 0.0;
+    }
+
+    // Parameterized constructor
+    public AccountDetail(String name, int number, double balance, double minBalance, double deposit, double withdraw) {
+        super(name, number, balance, minBalance); 
+        depositAmount = deposit;
+        withdrawalAmount = withdraw;
+        
+        // Calculate the final balance
+        savingBalance = savingBalance + depositAmount - withdrawalAmount;
+    }
+
+    // Display details
+    public void displayDetails() {
+        System.out.println("Name: " + customerName);
+        System.out.println("Account No: " + accountNumber);
+        System.out.println("Current Balance: Rs. " + savingBalance);
+    }
+
+    public static void main(String[] args) {
+        // Create customer object
+        AccountDetail cust = new AccountDetail("Radha", 101, 5000.0, 1000.0, 2000.0, 1500.0);
+        
+        // Display details
+        cust.displayDetails();
+    }
+}
+</code></pre>
+        <h4>Output:</h4>
+        <pre>&gt; javac AccountDetail.java
+&gt; java AccountDetail
+Name: Radha
+Account No: 101
+Current Balance: Rs. 5500.0</pre>
+    </div>
+
+    <!-- PlaceDemo.java -->
+    <div class="program-container">
+        <h2>PlaceDemo.java</h2>
+        <div class="question-highlight"><strong>Question:</strong> Write a program for multilevel inheritance such that Country is inherited 
+from Continent. State is inherited from Country. Display the place, State, 
+Country and Continent.</div>
+        <pre><code>// Level 1
+class Continent {
+    String continentName;
+
+    public Continent(String name) {
+        continentName = name;
+    }
+}
+
+// Level 2
+class Country extends Continent {
+    String countryName;
+
+    public Country(String continent, String country) {
+        super(continent); 
+        countryName = country;
+    }
+}
+
+// Level 3
+class State extends Country {
+    String stateName;
+
+    public State(String continent, String country, String state) {
+        super(continent, country);
+        stateName = state;
+    }
+}
+
+// Level 4
+class Place extends State {
+    String placeName;
+
+    public Place(String continent, String country, String state, String place) {
+        super(continent, country, state);
+        placeName = place;
+    }
+
+    public void displayLocation() {
+        System.out.println("Continent: " + continentName);
+        System.out.println("Country: " + countryName);
+        System.out.println("State: " + stateName);
+        System.out.println("Place: " + placeName);
+    }
+}
+
+public class PlaceDemo {
+    public static void main(String[] args) {
+        Place myPlace = new Place("Asia", "India", "Maharashtra", "Pune");
+        myPlace.displayLocation();
+    }
+}
+</code></pre>
+        <h4>Output:</h4>
+        <pre>&gt; javac PlaceDemo.java
+&gt; java PlaceDemo
+Continent: Asia
+Country: India
+State: Maharashtra
+Place: Pune</pre>
+    </div>
+
+    <!-- ProductDemo.java -->
+    <!-- <div class="program-container">
+        <h2>ProductDemo.java</h2>
+        <div class="question-highlight"><strong>Question 10:</strong> Write a program using interface, create a class Product (product_id, 
+product_name, product_cost, product_quantity) default and parameterized 
+constructor. Create objects of class product and display the contents of each 
+object and Also display the object count.</div>
+        <pre><code>// Interface
+interface Displayable {
+    void display();
+}
+
+// Class implementing the interface
+class Product implements Displayable {
+    int id;
+    String name;
+    double cost;
+    int quantity;
+    
+    // To count objects
+    static int count = 0;
+
+    // Default Constructor
+    public Product() {
+        id = 0;
+        name = "Unknown";
+        cost = 0.0;
+        quantity = 0;
+        count++; 
+    }
+
+    // Parameterized Constructor
+    public Product(int i, String n, double c, int q) {
+        id = i;
+        name = n;
+        cost = c;
+        quantity = q;
+        count++; 
+    }
+
+    // Implementing interface method
+    public void display() {
+        System.out.println("ID: " + id + ", Name: " + name + ", Cost: " + cost + ", Qty: " + quantity);
+    }
+
+    // Static method for counting
+    public static void displayCount() {
+        System.out.println("Total Objects: " + count);
+    }
+}
+
+public class ProductDemo {
+    public static void main(String[] args) {
+        Product p1 = new Product(101, "Laptop", 45000.0, 5);
+        Product p2 = new Product(102, "Mobile", 15000.0, 10);
+        Product p3 = new Product(); // Default
+
+        p1.display();
+        p2.display();
+        p3.display();
+
+        Product.displayCount();
+    }
+}
+</code></pre>
+        <h4>Output:</h4>
+        <pre>&gt; javac ProductDemo.java
+&gt; java ProductDemo
+ID: 101, Name: Laptop, Cost: 45000.0, Qty: 5
+ID: 102, Name: Mobile, Cost: 15000.0, Qty: 10
+ID: 0, Name: Unknown, Cost: 0.0, Qty: 0
+Total Objects: 3</pre>
+    </div> -->
+
+    <!-- ShapeDemo.java -->
+    <div class="program-container">
+        <h2>ShapeDemo.java</h2>
+        <div class="question-highlight"><strong>Question:</strong> Write a program to create an abstract class named Shape that contains 
+two integers and an empty method named printArea(). Provide three classes named 
+Rectangle, Triangle and Circle such that each one of the classes extends the class 
+Shape. Each one of the classes contain only the method printArea() that prints 
+the area of the given shape. (use method overriding).</div>
+        <pre><code>// Abstract Class
+abstract class Shape {
+    int dim1;
+    int dim2;
+
+    abstract void printArea();
+}
+
+// Rectangle
+class Rectangle extends Shape {
+    public Rectangle(int length, int width) {
+        dim1 = length;
+        dim2 = width;
+    }
+
+    void printArea() {
+        int area = dim1 * dim2;
+        System.out.println("Area of Rectangle is: " + area);
+    }
+}
+
+// Triangle
+class Triangle extends Shape {
+    public Triangle(int base, int height) {
+        dim1 = base;
+        dim2 = height;
+    }
+
+    void printArea() {
+        double area = 0.5 * dim1 * dim2;
+        System.out.println("Area of Triangle is: " + area);
+    }
+}
+
+// Circle
+class Circle extends Shape {
+    public Circle(int radius) {
+        dim1 = radius;
+        dim2 = 0; // Not used
+    }
+
+    void printArea() {
+        double area = 3.14 * dim1 * dim1;
+        System.out.println("Area of Circle is: " + area);
+    }
+}
+
+public class ShapeDemo {
+    public static void main(String[] args) {
+        Shape rect = new Rectangle(10, 5);
+        rect.printArea();
+
+        Shape tri = new Triangle(10, 8);
+        tri.printArea();
+
+        Shape circ = new Circle(7);
+        circ.printArea();
+    }
+}
+</code></pre>
+        <h4>Output:</h4>
+        <pre>&gt; javac ShapeDemo.java
+&gt; java ShapeDemo
+Area of Rectangle is: 50
+Area of Triangle is: 40.0
+Area of Circle is: 153.86</pre>
+    </div>
+
+    <!-- SimpleCalcDemo.java -->
+    <div class="program-container">
+        <h2>SimpleCalcDemo.java</h2>
+        <div class="question-highlight"><strong>Question:</strong> Write a Java program that defines an interface Calculator containing 
+methods add() and subtract() and implements it in class SimpleCalc.</div>
+        <pre><code>// Interface
+interface Calculator {
+    int add(int a, int b);
+    int subtract(int a, int b);
+}
+
+// Class implementing interface
+class SimpleCalc implements Calculator {
+    
+    public int add(int a, int b) {
+        return a + b;
+    }
+
+    public int subtract(int a, int b) {
+        return a - b;
+    }
+}
+
+public class SimpleCalcDemo {
+    public static void main(String[] args) {
+        SimpleCalc calc = new SimpleCalc();
+
+        int sum = calc.add(50, 15);
+        int diff = calc.subtract(50, 15);
+
+        System.out.println("Addition: " + sum);
+        System.out.println("Subtraction: " + diff);
+    }
+}
+</code></pre>
+        <h4>Output:</h4>
+        <pre>&gt; javac SimpleCalcDemo.java
+&gt; java SimpleCalcDemo
+Addition: 65
+Subtraction: 35</pre>
+    </div>
+
+
+
+    
+    <p style="font-size: 16px; color: #d84315;">
+        <!-- Main.java -->
+    <div class="program-container">
+        <h2>Main.java</h2>
+        <div class="question-highlight"><strong>Question:</strong> Write a class Driver with attributes license_no, name, address and age. 
+Initialize values through the parameterized constructor. If age of Driver 
+is less than 18 then user-defined exception should be generated —Age 
+is below 18 years— </div>
+        <pre><code>class AgeException extends Exception {
+    AgeException(String msg) {
+        super(msg);
+    }
+}
+class Driver {
+    int license_no, age;
+    String name, address;
+    Driver(int l, String n, String addr, int a) throws AgeException {
+        if (a < 18) {
+            throw new AgeException("Age is below 18 years");
+        }
+        license_no = l;
+        name = n;
+        address = addr;
+        age = a;
+        System.out.println("Driver " + name + " created successfully.");
+    }
+}
+public class Main {
+    public static void main(String[] args) {
+        try {
+            Driver d1 = new Driver(123, "Raju", "Pune", 16);
+        } catch (AgeException e) {
+            System.out.println("Exception: " + e.getMessage());
+        }
+    }
+}</code></pre>
+        <h3>Steps to Run:</h3>
+        <pre><code>javac Main.java
+java Main</code></pre>
+        <h3>Output:</h3>
+        <pre><code >Exception: Age is below 18 years</code></pre>
+    </div>
+
+    <!-- ReadUpperCase.java -->
+    <div class="program-container">
+        <h2>ReadUpperCase.java</h2>
+        <div class="question-highlight"><strong>Question:</strong> Write a program to read the contents of “abc.txt” file. Display the contents of file in uppercase as output.</div>
+        <pre><code>import java.io.File;
+import java.util.Scanner;
+public class ReadUpperCase {
+    public static void main(String[] args) throws Exception {
+        Scanner fileSc = new Scanner(new File("abc.txt"));
+        while (fileSc.hasNextLine()) {
+            System.out.println(fileSc.nextLine().toUpperCase());
+        }
+    }
+}</code></pre>
+        <h3>Steps to Run:</h3>
+        <pre><code>javac ReadUpperCase.java
+java ReadUpperCase</code></pre>
+        <h3>Output:</h3>
+        <pre><code>THIS IS JAVA PROGRAMMING</code></pre>
+    </div>
+
+
+
+    
+    
+
+    <!-- CollegeHomepage.html -->
+    <div class="program-container">
+        <h2>CollegeHomepage.html</h2>
+        <div class="question-highlight"><strong>Question:</strong> Create a responsive webpage using CSS Flexbox for a college homepage containing header, 
+navigation, content and footer. Use appropriate Flexbox alignment and distribution properties.</div>
+        <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;College Homepage&lt;/title&gt;
+    &lt;style&gt;
+        /* ONLY essential Flexbox CSS layout properties are used below */
+
+        body {
+            /* 1. Flexbox to stack the sections vertically */
+            display: flex;
+            flex-direction: column;
+            
+            /* Required so the body takes up the whole screen height */
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        header {
+            /* 2. Flexbox to center the header text */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        nav ul {
+            /* 3. Flexbox to align navigation links in a row */
+            display: flex;
+            justify-content: center;
+            
+            /* flex-wrap makes it responsive (links move to next line if screen is small) */
+            flex-wrap: wrap; 
+        }
+
+        nav li {
+            /* Basic spacing for the links */
+            margin: 0 15px; 
+            list-style: none;
+        }
+
+        main {
+            /* flex: 1 makes the main area grow, pushing the footer to the bottom */
+            flex: 1;
+            
+            /* 4. Flexbox inside the main area to center its content */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        footer {
+            /* 5. Flexbox to center the footer text */
+            display: flex;
+            justify-content: center;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+    &lt;header&gt;
+        &lt;h1&gt;My College Name&lt;/h1&gt;
+    &lt;/header&gt;
+
+    &lt;nav&gt;
+        &lt;ul&gt;
+            &lt;li&gt;&lt;a href="#"&gt;Home&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#"&gt;About Us&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#"&gt;Courses&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#"&gt;Contact Us&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/nav&gt;
+
+    &lt;main&gt;
+        &lt;h2&gt;Welcome to Our College&lt;/h2&gt;
+        &lt;p&gt;This is a responsive college homepage created using only CSS Flexbox properties.&lt;/p&gt;
+    &lt;/main&gt;
+
+    &lt;footer&gt;
+        &lt;p&gt;Copyright 2026. All rights reserved.&lt;/p&gt;
+    &lt;/footer&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+        <h4>Output:</h4>
+        <pre>&gt; Open CollegeHomepage.html directly in your web browser to view the webpage.</pre>
+    </div>
+
+    <!-- HoverEffects.html -->
+    <div class="program-container">
+        <h2>HoverEffects.html</h2>
+        <div class="question-highlight"><strong>Question:</strong> Create a webpage containing a button and link. Change their appearance when the mouse pointer moves over them. (Use :hover Pseudo-Class)</div>
+        <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Hover Pseudo-Class&lt;/title&gt;
+    &lt;style&gt;
+        /* 
+           This is the normal look for our link (the &lt;a&gt; tag).
+        */
+        a {
+            color: blue; /* Make the text blue */
+            text-decoration: underline; /* Put a line under the text */
+        }
+
+        /* 
+           The :hover part tells the browser to change the style ONLY when 
+           the mouse pointer moves over the link.
+        */
+        a:hover {
+            color: red; /* Change the text color to red */
+            background-color: yellow; /* Put a yellow box behind the text */
+            text-decoration: none; /* Remove the underline */
+        }
+
+        /* 
+           This is the normal look for our button (the &lt;button&gt; tag).
+        */
+        button {
+            background-color: lightgray; /* Make the button gray */
+            color: black; /* Make the text inside the button black */
+            padding: 10px; /* Add some space inside the button so it looks bigger */
+        }
+
+        /* 
+           This tells the browser to change the style ONLY when 
+           the mouse pointer moves over the button.
+        */
+        button:hover {
+            background-color: green; /* Change the button color to green */
+            color: white; /* Change the text color to white */
+            cursor: pointer; /* Change the mouse arrow to a pointing hand */
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+    &lt;h2&gt;Hover Effects Example&lt;/h2&gt;
+    
+    &lt;!-- This creates the link on the page --&gt;
+    &lt;p&gt;
+        Here is a link: &lt;a href="#"&gt;Move your mouse over me!&lt;/a&gt;
+    &lt;/p&gt;
+
+    &lt;br&gt;
+
+    &lt;!-- This creates the button on the page --&gt;
+    &lt;p&gt;
+        Here is a button: &lt;button&gt;Move your mouse over me!&lt;/button&gt;
+    &lt;/p&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+        <h4>Output:</h4>
+        <pre>&gt; Open HoverEffects.html directly in your web browser to view the webpage.</pre>
+    </div>
+
+    <!-- ImageGallery.html -->
+    <div class="program-container">
+        <h2>ImageGallery.html</h2>
+        <div class="question-highlight"><strong>Question:</strong> Create an image gallery using HTML5 and CSS3 with hover effects, responsive images and Flexbox/Grid layout.</div>
+        <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Responsive Image Gallery&lt;/title&gt;
+    &lt;style&gt;
+        /* 1. Flexbox layout */
+        .gallery-container {
+            display: flex;
+            flex-wrap: wrap; /* Makes it responsive */
+        }
+
+        .gallery-item {
+            margin: 5px;
+        }
+
+        /* 2. Responsive Images */
+        img {
+            width: 250px; 
+            max-width: 100%; /* Ensures image doesn't overflow container */
+        }
+
+        /* 3. Hover Effect */
+        img:hover {
+            opacity: 0.7; /* Fades the image slightly on hover */
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+    &lt;h2&gt;My Image Gallery&lt;/h2&gt;
+    
+    &lt;div class="gallery-container"&gt;
+        &lt;div class="gallery-item"&gt;
+            &lt;img src="https://picsum.photos/id/10/400/300" alt="Image 1"&gt;
+        &lt;/div&gt;
+        &lt;div class="gallery-item"&gt;
+            &lt;img src="https://picsum.photos/id/11/400/300" alt="Image 2"&gt;
+        &lt;/div&gt;
+        &lt;div class="gallery-item"&gt;
+            &lt;img src="https://picsum.photos/id/12/400/300" alt="Image 3"&gt;
+        &lt;/div&gt;
+        &lt;div class="gallery-item"&gt;
+            &lt;img src="https://picsum.photos/id/13/400/300" alt="Image 4"&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+        <h4>Output:</h4>
+        <pre>&gt; Open ImageGallery.html directly in your web browser to view the webpage.</pre>
+    </div>
+
+    <!-- ListStyles.html -->
+    <div class="program-container">
+        <h2>ListStyles.html</h2>
+        <div class="question-highlight"><strong>Question:</strong> Create an unordered list of Programming Language names and apply different styles to the first and last list items.(Use :first-child and :last-child)</div>
+        <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;First and Last Child Styling&lt;/title&gt;
+    &lt;style&gt;
+        /* 
+           This is the normal look for ALL list items (the &lt;li&gt; tag). 
+        */
+        li {
+            font-size: 20px;
+            color: black;
+            margin-bottom: 10px; /* Add some space between each item */
+        }
+
+        /* 
+           The :first-child tells the browser to change the style 
+           ONLY for the very FIRST item in the list.
+        */
+        li:first-child {
+            color: red; /* Change the first item's text color to red */
+            font-weight: bold; /* Make the text bold */
+            background-color: yellow; /* Put a yellow box behind the text */
+        }
+
+        /* 
+           The :last-child tells the browser to change the style 
+           ONLY for the very LAST item in the list.
+        */
+        li:last-child {
+            color: blue; /* Change the last item's text color to blue */
+            font-style: italic; /* Make the text slanted (italic) */
+            text-decoration: underline; /* Put a line under the text */
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+    &lt;h2&gt;List of Programming Languages&lt;/h2&gt;
+    
+    &lt;!-- This creates an unordered (bulleted) list --&gt;
+    &lt;ul&gt;
+        &lt;li&gt;Java&lt;/li&gt;
+        &lt;li&gt;Python&lt;/li&gt;
+        &lt;li&gt;C++&lt;/li&gt;
+        &lt;li&gt;JavaScript&lt;/li&gt;
+        &lt;li&gt;Ruby&lt;/li&gt;
+    &lt;/ul&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+        <h4>Output:</h4>
+        <pre>&gt; Open ListStyles.html directly in your web browser to view the webpage.</pre>
+    </div>
+
+    <!-- RegistrationForm.html -->
+    <div class="program-container">
+        <h2>RegistrationForm.html</h2>
+        <div class="question-highlight">
+            <strong>Question:</strong> Design a College/School Registration Form using HTML5 and CSS3 and apply appropriate HTML5 validation attributes.
+            </div>
+            <br/>
+            <strong>Expected Output:</strong><br/>
+            <img src="chapter6/RegistrationFormOutput.png" alt="Registration Form Output" style="max-width: 30%; border: 1px solid #ccc; margin-top: 10px; border-radius: 4px;">
+        
+        <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;College Registration Form&lt;/title&gt;
+    &lt;style&gt;
+        body {
+            background-color: #ffffe0; /* Pale yellow */
+            font-family: "Times New Roman", Times, serif;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 5px;
+            font-size: 28px;
+        }
+
+        p {
+            text-align: center;
+            font-size: 14px;
+            margin-top: 5px;
+            margin-bottom: 30px;
+        }
+
+        table {
+            margin: 0 auto;
+            border-spacing: 0 15px; /* Spacing between rows */
+        }
+
+        td.label {
+            text-align: left;
+            font-size: 16px;
+            width: 140px;
+        }
+
+        /* Style the input boxes */
+        input[type="text"], 
+        input[type="date"], 
+        input[type="number"], 
+        input[type="email"], 
+        input[type="password"], 
+        input[type="time"],
+        select,
+        textarea {
+            width: 320px;
+            padding: 4px;
+            border: 1px solid #a9a9a9;
+        }
+
+        select {
+            width: 330px; /* Select needs slightly more width to match due to box-sizing */
+        }
+
+        /* Error styling */
+        td.error {
+            color: red;
+            font-size: 13px;
+            text-align: left;
+            visibility: hidden;
+            padding-left: 10px;
+        }
+
+        .buttons-row {
+            text-align: center;
+            padding-top: 15px;
+        }
+
+        button {
+            padding: 5px 25px;
+            background-color: #efefef;
+            border: 1px solid #777;
+            cursor: pointer;
+            margin: 0 10px;
+            font-family: Arial, sans-serif;
+            font-size: 13px;
+        }
+
+        .declaration {
+            padding-top: 25px;
+            padding-bottom: 10px;
+            padding-left: 10px;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+    &lt;h2&gt;My-Future College / School&lt;/h2&gt;
+    &lt;p&gt;Please Fill Below Detail In Student Registration Form&lt;/p&gt;
+
+    &lt;form action="#" id="regForm"&gt;
+        &lt;table&gt;
+            &lt;tr&gt;
+                &lt;td class="label"&gt;Student name :&lt;/td&gt;
+                &lt;td&gt;&lt;input type="text" required minlength="3" maxlength="10"&gt;&lt;/td&gt;
+                &lt;td class="error"&gt;Min 3 &amp; Max 10 letter is allow&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;td class="label"&gt;Date of birth :&lt;/td&gt;
+                &lt;td&gt;&lt;input type="date" required&gt;&lt;/td&gt;
+                &lt;td class="error"&gt;Valid Date is allow&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;td class="label"&gt;Mobile no. :&lt;/td&gt;
+                &lt;td&gt;&lt;input type="number" required&gt;&lt;/td&gt;
+                &lt;td class="error"&gt;Only integer is allow&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;td class="label"&gt;Email id :&lt;/td&gt;
+                &lt;td&gt;&lt;input type="email" required&gt;&lt;/td&gt;
+                &lt;td class="error"&gt;Valid Email Id is allow&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;td class="label"&gt;Password :&lt;/td&gt;
+                &lt;td&gt;&lt;input type="password" required minlength="8"&gt;&lt;/td&gt;
+                &lt;td class="error"&gt;Min 8 digit is allow&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;td class="label"&gt;Gender :&lt;/td&gt;
+                &lt;td&gt;
+                    &lt;input type="radio" name="gender" value="Male" required&gt; Male &amp;nbsp;
+                    &lt;input type="radio" name="gender" value="Female" required&gt; Female
+                &lt;/td&gt;
+                &lt;td class="error"&gt;&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;td class="label"&gt;Hobbies :&lt;/td&gt;
+                &lt;td&gt;
+                    &lt;input type="checkbox" name="hobbies" value="Drawing"&gt; Drawing
+                    &lt;input type="checkbox" name="hobbies" value="Singing"&gt; Singing
+                    &lt;input type="checkbox" name="hobbies" value="Dancing"&gt; Dancing
+                    &lt;input type="checkbox" name="hobbies" value="Sketch"&gt; Sketch
+                    &lt;input type="checkbox" name="hobbies" value="Sports"&gt; Sports
+                &lt;/td&gt;
+                &lt;td class="error"&gt;&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;td class="label"&gt;Course :&lt;/td&gt;
+                &lt;td&gt;
+                    &lt;select required&gt;
+                        &lt;option value=""&gt;------------- Select Admission Course's -------------&lt;/option&gt;
+                        &lt;option value="Science"&gt;Science&lt;/option&gt;
+                        &lt;option value="Commerce"&gt;Commerce&lt;/option&gt;
+                        &lt;option value="Arts"&gt;Arts&lt;/option&gt;
+                    &lt;/select&gt;
+                &lt;/td&gt;
+                &lt;td class="error"&gt;&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;td class="label"&gt;Student photo :&lt;/td&gt;
+                &lt;td&gt;
+                    &lt;input type="file" required style="width: auto; border: none;"&gt;
+                &lt;/td&gt;
+                &lt;td class="error"&gt;&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;td class="label"&gt;Register Time:&lt;/td&gt;
+                &lt;td&gt;&lt;input type="time" required&gt;&lt;/td&gt;
+                &lt;td class="error"&gt;&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;td class="label" style="vertical-align: top;"&gt;Address :&lt;/td&gt;
+                &lt;td&gt;&lt;textarea required rows="4"&gt;&lt;/textarea&gt;&lt;/td&gt;
+                &lt;td class="error"&gt;&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;td colspan="3" class="declaration"&gt;
+                    &lt;input type="checkbox" required&gt; I hereby declare that above information provided is correct
+                &lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;td colspan="3" class="buttons-row"&gt;
+                    &lt;button type="submit" onclick="showErrors()"&gt;Register&lt;/button&gt;
+                    &lt;button type="reset" onclick="hideErrors()"&gt;Reset&lt;/button&gt;
+                &lt;/td&gt;
+            &lt;/tr&gt;
+        &lt;/table&gt;
+    &lt;/form&gt;
+
+    &lt;script&gt;
+        function showErrors() {
+            var rows = document.querySelectorAll("tr");
+            
+            for (var i = 0; i &lt; rows.length; i++) {
+                var input = rows[i].querySelector("input, select, textarea");
+                var errorTd = rows[i].querySelector(".error");
+                
+                if (input &amp;&amp; errorTd) {
+                    var isInvalid = rows[i].querySelector(":invalid");
+                    if (isInvalid) {
+                        errorTd.style.visibility = "visible";
+                    } else {
+                        errorTd.style.visibility = "hidden"; 
+                    }
+                }
+            }
+        }
+
+        function hideErrors() {
+            var errors = document.querySelectorAll(".error");
+            for (var i = 0; i &lt; errors.length; i++) {
+                errors[i].style.visibility = "hidden";
+            }
+        }
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+        <h4>Output:</h4>
+        <pre>&gt; Open RegistrationForm.html directly in your web browser to view the webpage.</pre>
+    </div>
+
+    <!-- StudentRegistrationForm.html -->
+    <div class="program-container">
+        <h2>StudentRegistrationForm.html</h2>
+        <div class="question-highlight">
+            <strong>Question:</strong> Design a Student Registration Form using HTML5 and CSS3 and apply appropriate HTML5 validation attributes.
+            </div>
+        <br>
+            <strong>Expected Output:</strong><br>
+            <img src="chapter6/StudentRegistrationFormOutput.png" alt="Student Registration Form Output" style="max-width: 30%; border: 1px solid #ccc; margin-top: 10px; border-radius: 4px;">
+        
+        <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+
+&lt;head&gt;
+    &lt;title&gt;Student Registration&lt;/title&gt;
+    &lt;style&gt;
+        body {
+            background-color:pink;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        table {
+            margin: 0 auto;
+        }
+
+        .center {
+            text-align: center;
+        }
+
+        /* Error styling like the previous form */
+        td.error {
+            color: red;
+            font-size: 13px;
+            text-align: left;
+            visibility: hidden;
+            padding-left: 5px;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+    &lt;h2&gt;Student Registration Form&lt;/h2&gt;
+
+    &lt;form action="#"&gt;
+        &lt;table&gt;
+            &lt;tr&gt;
+                &lt;td&gt;Roll no.:&lt;/td&gt;
+                &lt;td&gt;&lt;input type="text" required&gt;&lt;/td&gt;
+                &lt;td class="error"&gt;Roll no is required&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;td&gt;Student Name:&lt;/td&gt;
+                &lt;td&gt;&lt;input type="text" required&gt;&lt;/td&gt;
+                &lt;td class="error"&gt;Name is required&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;td&gt;Father's Name:&lt;/td&gt;
+                &lt;td&gt;&lt;input type="text" required&gt;&lt;/td&gt;
+                &lt;td class="error"&gt;Father's name is required&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;td&gt;Date of Birth:&lt;/td&gt;
+                &lt;td&gt;&lt;input type="date" required&gt;&lt;/td&gt;
+                &lt;td class="error"&gt;Date of birth is required&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;td&gt;Mobile no.:&lt;/td&gt;
+                &lt;td&gt;&lt;input type="tel" pattern="[0-9]{10}" title="10 digit number" required&gt;&lt;/td&gt;
+                &lt;td class="error"&gt;10 digit mobile is required&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;td&gt;Email:&lt;/td&gt;
+                &lt;td&gt;&lt;input type="email" required&gt;&lt;/td&gt;
+                &lt;td class="error"&gt;Valid Email is required&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;td&gt;Password:&lt;/td&gt;
+                &lt;td&gt;&lt;input type="password" minlength="8" required&gt;&lt;/td&gt;
+                &lt;td class="error"&gt;Min 8 characters required&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;td&gt;Gender:&lt;/td&gt;
+                &lt;td&gt;
+                    &lt;input type="radio" name="gender" value="Male" required&gt; Male
+                    &lt;input type="radio" name="gender" value="Female" required&gt; Female
+                &lt;/td&gt;
+                &lt;td class="error"&gt;Gender is required&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;td&gt;Department:&lt;/td&gt;
+                &lt;td&gt;
+                    &lt;input type="checkbox" name="dept" value="CSE"&gt; CSE
+                    &lt;input type="checkbox" name="dept" value="IT"&gt; IT
+                    &lt;input type="checkbox" name="dept" value="ECE"&gt; ECE
+                &lt;/td&gt;
+                &lt;td class="error"&gt;Select a department&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;td&gt;Course:&lt;/td&gt;
+                &lt;td&gt;
+                    &lt;select required&gt;
+                        &lt;option value=""&gt;--Select--&lt;/option&gt;
+                        &lt;option value="BCA"&gt;BCA&lt;/option&gt;
+                        &lt;option value="BSc CS"&gt;BSc CS&lt;/option&gt;
+                        &lt;option value="BSc IT"&gt;BSc IT&lt;/option&gt;
+                    &lt;/select&gt;
+                &lt;/td&gt;
+                &lt;td class="error"&gt;Course is required&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;td&gt;Student Photo:&lt;/td&gt;
+                &lt;td&gt;&lt;input type="file" required&gt;&lt;/td&gt;
+                &lt;td class="error"&gt;Photo is required&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;td&gt;City:&lt;/td&gt;
+                &lt;td&gt;&lt;input type="text" required&gt;&lt;/td&gt;
+                &lt;td class="error"&gt;City is required&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;td style="vertical-align: top;"&gt;Address:&lt;/td&gt;
+                &lt;td&gt;&lt;textarea rows="3" required&gt;&lt;/textarea&gt;&lt;/td&gt;
+                &lt;td class="error"&gt;Address is required&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;td colspan="3" class="center"&gt;
+                    &lt;br&gt;
+                    &lt;!-- onclick calls the javascript below just like before --&gt;
+                    &lt;button type="submit" onclick="showErrors()"&gt;Register&lt;/button&gt;
+                    &lt;button type="reset" onclick="hideErrors()"&gt;Reset&lt;/button&gt;
+                &lt;/td&gt;
+            &lt;/tr&gt;
+        &lt;/table&gt;
+    &lt;/form&gt;
+
+    &lt;script&gt;
+        function showErrors() {
+            var rows = document.querySelectorAll("tr");
+
+            // Loop through every row in the table
+            for (var i = 0; i &lt; rows.length; i++) {
+                var input = rows[i].querySelector("input, select, textarea");
+                var errorTd = rows[i].querySelector(".error");
+
+                if (input &amp;&amp; errorTd) {
+                    // Check if the input breaks the HTML5 rules (like required)
+                    var isInvalid = rows[i].querySelector(":invalid");
+                    
+                    // Special check for department checkboxes
+                    if (input.type === "checkbox") {
+                        var checkedBoxes = rows[i].querySelectorAll('input[type="checkbox"]:checked');
+                        if (checkedBoxes.length === 0) {
+                            isInvalid = true;
+                        } else {
+                            isInvalid = false;
+                        }
+                    }
+
+                    if (isInvalid) {
+                        errorTd.style.visibility = "visible"; // Show red text
+                    } else {
+                        errorTd.style.visibility = "hidden"; // Hide red text
+                    }
+                }
+            }
+        }
+
+        function hideErrors() {
+            var errors = document.querySelectorAll(".error");
+            for (var i = 0; i &lt; errors.length; i++) {
+                errors[i].style.visibility = "hidden"; // Hide all on reset
+            }
+        }
+    &lt;/script&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;</code></pre>
+        <h4>Output:</h4>
+        <pre>&gt; Open StudentRegistrationForm.html directly in your web browser to view the webpage.</pre>
+    </div>
+
+
+    
+    <!--  -->
+
+    <!-- ChangeHeadingText.html -->
+    <div class="program-container">
+        <h2>ChangeHeadingText.html</h2>
+        <div class="question-highlight"><strong>Question:</strong> Create a webpage containing a heading and a button. When the button is clicked, change the heading text from “Hello! Welcome” to “Text Changed Successfully!”.</div>
+        <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Change Heading Text&lt;/title&gt;
+
+&lt;/head&gt;
+&lt;body&gt;
+
+    &lt;!-- 1. The heading. We give it an 'id' so JavaScript can find it easily --&gt;
+    &lt;h2 id="myHeading"&gt;Hello! Welcome&lt;/h2&gt;
+
+    &lt;!-- 2. The button. The 'onclick' attribute tells it to run our JavaScript function when clicked --&gt;
+    &lt;button onclick="changeText()"&gt;Click me to change the text&lt;/button&gt;
+
+    &lt;!-- 3. The JavaScript code --&gt;
+    &lt;script&gt;
+        // This function is triggered when the button is clicked
+        function changeText() {
+            
+            // Step 1: Find the heading using its id ("myHeading")
+            // Step 2: Change the text inside it using .innerText
+            document.getElementById("myHeading").innerText = "Text Changed Successfully!";
+            
+        }
+    &lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+    </div>
+
+    <!-- ChangeImage.html -->
+    <div class="program-container">
+        <h2>ChangeImage.html</h2>
+        <div class="question-highlight"><strong>Question:</strong> Create a webpage using JavaScript DOM manipulation and event handling with an image and a button. When the button is clicked, replace the displayed image with another image.</div>
+        <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Change Image with JavaScript&lt;/title&gt;
+    &lt;style&gt;
+        img {
+            width: 400px;
+            height: 300px;
+            display: block;
+            margin-bottom: 10px;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+    &lt;h2&gt;JavaScript Image Replacer&lt;/h2&gt;
+
+    &lt;!-- 1. The image. We give it an 'id' so JavaScript can find it easily --&gt;
+    &lt;!-- It starts by loading a random forest image from picsum.photos --&gt;
+    &lt;img id="myImage" src="https://picsum.photos/id/10/400/300" alt="First Image"&gt;
+
+    &lt;!-- 2. The button. The 'onclick' event handler tells it to run our function when clicked --&gt;
+    &lt;button onclick="changeImage()"&gt;Click to Change Image&lt;/button&gt;
+
+    &lt;!-- 3. The JavaScript code (DOM Manipulation) --&gt;
+    &lt;script&gt;
+        // This function runs when the button is clicked
+        function changeImage() {
+            
+            // Step 1: Find the image element using its id ("myImage")
+            var imgElement = document.getElementById("myImage");
+            
+            // Step 2: Replace the 'src' (source) attribute with a brand new image link
+            imgElement.src = "https://picsum.photos/id/11/400/300";
+            
+        }
+    &lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+    </div>
+
+
+
+    
+
+    <!-- ArrowFunctions.js -->
+    <div class="program-container">
+        <h2>ArrowFunctions.js</h2>
+        <div class="question-highlight"><strong>Question:</strong> Write a JavaScript program to demonstrate Arrow Functions for addition, subtraction, multiplication and division.</div>
+        <pre><code>// 1. Arrow function for Addition
+const add = (a, b) =&gt; a + b;
+
+// 2. Arrow function for Subtraction
+const subtract = (a, b) =&gt; a - b;
+
+// 3. Arrow function for Multiplication
+const multiply = (a, b) =&gt; a * b;
+
+// 4. Arrow function for Division
+const divide = (a, b) =&gt; a / b;
+
+// Let's test them with two numbers
+let num1 = 20;
+let num2 = 5;
+
+// Calculate results by calling the arrow functions
+let resultAdd = add(num1, num2);
+let resultSub = subtract(num1, num2);
+let resultMul = multiply(num1, num2);
+let resultDiv = divide(num1, num2);
+
+// Print the results to the console
+console.log("Addition (20 + 5) = " + resultAdd);
+console.log("Subtraction (20 - 5) = " + resultSub);
+console.log("Multiplication (20 * 5) = " + resultMul);
+console.log("Division (20 / 5) = " + resultDiv);
+</code></pre>
+        <h4>Output:</h4>
+        <pre>&gt; node ArrowFunctions.js
+Addition (20 + 5) = 25
+Subtraction (20 - 5) = 15
+Multiplication (20 * 5) = 100
+Division (20 / 5) = 4</pre>
+    </div>
+
+    <!-- Modules (mathOperations.mjs + MainApp.mjs) -->
+    <!-- <div class="program-container">
+        <h2>mathOperations.mjs &amp; MainApp.mjs</h2>
+        <div class="question-highlight"><strong>Question 24:</strong> Create a JavaScript module containing arithmetic operation functions. Export the function and import it into another JavaScript file to perform all operations.</div>
+        
+        <h3>mathOperations.mjs</h3>
+        <pre><code class="language-javascript">// 1. Define the arithmetic functions
+function add(a, b) {
+    return a + b;
+}
+
+function subtract(a, b) {
+    return a - b;
+}
+
+function multiply(a, b) {
+    return a * b;
+}
+
+function divide(a, b) {
+    return a / b;
+}
+
+// 2. Export them so other files can import and use them!
+// (We use .mjs file extension to tell Node.js we are using modern ES6 Modules)
+export { add, subtract, multiply, divide };
+</code></pre>
+
+        <h3>MainApp.mjs</h3>
+        <pre><code class="language-javascript">// 3. Import the functions from our module file
+import { add, subtract, multiply, divide } from './mathOperations.mjs';
+
+console.log("--- Testing Math Module ---");
+
+let num1 = 100;
+let num2 = 25;
+
+// 4. Perform all operations using the imported functions
+console.log("Addition (100 + 25) = " + add(num1, num2));
+console.log("Subtraction (100 - 25) = " + subtract(num1, num2));
+console.log("Multiplication (100 * 25) = " + multiply(num1, num2));
+console.log("Division (100 / 25) = " + divide(num1, num2));
+</code></pre>
+        <h4>Output:</h4>
+        <pre>&gt; node MainApp.mjs
+--- Testing Math Module ---
+Addition (100 + 25) = 125
+Subtraction (100 - 25) = 75
+Multiplication (100 * 25) = 2500
+Division (100 / 25) = 4</pre>
+    </div> -->
+<!-- SwapNumbers.js -->
+    <div class="program-container">
+        <h2>SwapNumbers.js</h2>
+        <div class="question-highlight"><strong>Question:</strong> Write a JavaScript program to swap two numbers without using a third variable using array destructuring.</div>
+        <pre><code>// 1. Initialize two variables
+let a = 10;
+let b = 25;
+
+console.log("Before swapping:");
+console.log("a = " + a + ", b = " + b);
+console.log("------------------");
+
+/* 
+   2. Swap the numbers using Array Destructuring 
+   The syntax [a, b] = [b, a] instantly swaps the values 
+   without needing a temporary third variable.
+*/
+[a, b] = [b, a];
+
+// 3. Display the final swapped results
+console.log("After swapping:");
+console.log("a = " + a + ", b = " + b);
+</code></pre>
+        <h4>Output:</h4>
+        <pre>&gt; node SwapNumbers.js
+Before swapping:
+a = 10, b = 25
+------------------
+After swapping:
+a = 25, b = 10</pre>
+    </div>
+    <!-- student_report.js -->
+    <div class="program-container">
+        <h2>student_report.js</h2>
+        <div class="question-highlight"><strong>Question:</strong> Write a JavaScript program to store student information and marks in variables and generate a formatted student report using template literals.</div>
+        <pre><code>const name = "Radha";
+const rollNo = 101;
+const math = 85;
+const science = 92;
+const english = 88;
+const total = math + science + english;
+const avg = total / 3;
+const report = `----- Student Report ----
+Name   : ${name}
+Roll No: ${rollNo}
+-------------------------
+Math   : ${math}
+Science: ${science}
+English: ${english}
+-------------------------
+Total  : ${total}
+Average: ${avg.toFixed(2)}
+`;
+console.log(report);</code></pre>
+        <h4>Output:</h4>
+        <pre>&gt; node student_report.js
+----- Student Report ----
+Name   : Radha
+Roll No: 101
+-------------------------
+Math   : 85
+Science: 92
+English: 88
+-------------------------
+Total  : 265
+Average: 88.33</pre>
+    </div>
+
+    <!-- RestParameterSum.js -->
+    <!-- <div class="program-container">
+        <h2>RestParameterSum.js</h2>
+        <div class="question-highlight"><strong>Question 27:</strong> Write a JavaScript program using a rest parameter to accept any number of values and calculate their sum.</div>
+        <pre><code class="language-javascript">/* 
+   1. Define a function with a Rest Parameter (...numbers)
+   The '...' in the function definition groups however many arguments 
+   you pass into a single array named 'numbers'.
+*/
+function calculateSum(...numbers) {
+    let total = 0;
+    
+    // 2. Loop through the 'numbers' array to add them all up
+    for (let i = 0; i &lt; numbers.length; i++) {
+        total += numbers[i];
+    }
+    
+    return total;
+}
+
+// 3. Test the function by passing completely different amounts of numbers!
+const sum1 = calculateSum(10, 20);
+const sum2 = calculateSum(5, 10, 15, 20, 25);
+const sum3 = calculateSum(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+
+// Display the results
+console.log("Sum of (10, 20) is: " + sum1);
+console.log("Sum of (5, 10, 15, 20, 25) is: " + sum2);
+console.log("Sum of 1 through 10 is: " + sum3);
+</code></pre>
+        <h4>Output:</h4>
+        <pre>&gt; node RestParameterSum.js
+Sum of (10, 20) is: 30
+Sum of (5, 10, 15, 20, 25) is: 75
+Sum of 1 through 10 is: 55</pre>
+    </div> -->
+
+    <!-- SpreadOperatorArray.js -->
+    <!-- <div class="program-container">
+        <h2>SpreadOperatorArray.js</h2>
+        <div class="question-highlight"><strong>Question 28:</strong> Write a JavaScript program to create a copy of an existing array using the spread operator and add a new element to the copied array.</div>
+        <pre><code class="language-javascript">// 1. Create our original array
+const originalArray = ["Apple", "Banana", "Cherry"];
+
+/* 
+   2. Use the Spread Operator (...) to make a copy.
+   The '...originalArray' takes all items from the first array and spreads 
+   them into this new array. We also add a new element ("Date") at the end!
+*/
+const copiedArray = [...originalArray, "Date"];
+
+// 3. Display the results to prove they are different
+console.log("Original Array:");
+console.log(originalArray);
+
+console.log("\nCopied Array (with new element added):");
+console.log(copiedArray);
+</code></pre>
+        <h4>Output:</h4>
+        <pre>&gt; node SpreadOperatorArray.js
+Original Array:
+[ 'Apple', 'Banana', 'Cherry' ]
+
+Copied Array (with new element added):
+[ 'Apple', 'Banana', 'Cherry', 'Date' ]</pre>
+    </div> -->
+
+    
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-java.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>
+</body>
+</html>
