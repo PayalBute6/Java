@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 1 Java Programs</title>
+
+    <!-- <style> 
+        .question-highlight{
+            color: rgb(7, 7, 7);
+            background-color: rgb(227, 207, 27);
+            border-radius: 2px;
+            padding: 2px;
+
+        }
+    
+        /* Override Prism.js grey background */
+        pre[class*="language-"],
+        code[class*="language-"] {
+            background: transparent !important;
+        }
+    
+        /* Make code comments italic and distinct */
+        .token.comment,
+        .token.block-comment,
+        .token.prolog,
+        .token.doctype,
+        .token.cdata {
+            font-style: italic !important;
+            color: #7a7a7a !important;
+        }
+    </style> -->
+
+    <!-- Prism.js for Syntax Highlighting -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-java.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>
+</head>
+
+<body>
+
+    <h1>Java Programs</h1>
+
+    <!-- ArmstrongRange.java -->
+    <div class="program-container">
+        <h2>ArmstrongRange.java</h2>
+        <div class="question-highlight"><strong>Question 1:</strong> Write a Java Program to Display Armstrong Numbers Between range. Accept range from user.</div>
+        <pre><code>import java.util.Scanner;
+
+public class ArmstrongRange {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        
+        System.out.print("Enter starting number: ");
+        int start = sc.nextInt();
+        
+        System.out.print("Enter ending number: ");
+        int end = sc.nextInt();
+        
+        System.out.println("Armstrong numbers between " + start + " and " + end + " are:");
+        
+        // Check every number in the range
+        for (int i = start; i &lt;= end; i++) {
+            
+            int temp = i;
+            int sum = 0;
+
+            while (temp &gt; 0) {
+                int remainder = temp % 10;
+                sum = sum + (remainder * remainder * remainder);
+                temp = temp / 10;
+            }
+            
+            // If the sum equals the original number, it is an Armstrong number
+            if (sum == i) {
+                System.out.print(i + " ");
+            }
+        }
+        
+        System.out.println();
+        sc.close();
+    }
+}
+</code></pre>
+        <h4>Output:</h4>
+        <pre>&gt; javac ArmstrongRange.java
+&gt; java ArmstrongRange
+Enter starting number: 1
+Enter ending number: 500
+Armstrong numbers between 1 and 500 are:
+1 153 370 371 407 </pre>
+    </div>
+
+    <!-- ArraySumAndSort.java -->
+    <div class="program-container">
+        <h2>ArraySumAndSort.java</h2>
+        <div class="question-highlight"><strong>Question 2:</strong> Write a Java program to print the sum of elements of the array. Also display array elements in ascending order.</div>
+        <pre><code>import java.util.Arrays;
+import java.util.Scanner;
+
+public class ArraySumAndSort {
+    public static void main(String[] args) {
+        // Step 1: Create a Scanner to read input from the user
+        Scanner sc = new Scanner(System.in);
+        
+        // Step 2: Ask the user for the number of elements
+        System.out.print("Enter the number of elements: ");
+        int n = sc.nextInt();
+        
+        // Step 3: Create an array of that size
+        int[] arr = new int[n];
+        
+        // Step 4: Ask the user to enter the elements
+        System.out.println("Enter " + n + " elements:");
+        for (int i = 0; i &lt; n; i++) {
+            arr[i] = sc.nextInt();
+        }
+        
+        // Step 5: Calculate the sum of all elements
+        int sum = 0;
+        for (int i = 0; i &lt; n; i++) {
+            sum = sum + arr[i];
+        }
+        System.out.println("\nSum of the elements: " + sum);
+        
+        // Step 6: Sort the array in ascending order
+        Arrays.sort(arr);
+        
+        // Step 7: Print the sorted array
+        System.out.println("Array elements in ascending order:");
+        for (int i = 0; i &lt; n; i++) {
+            System.out.print(arr[i] + " ");
+        }
+        System.out.println(); // Print a new line at the end
+        
+        // Close the sc when we are done
+        sc.close();
+    }
+}
+</code></pre>
+        <h4>Output:</h4>
+        <pre>&gt; javac ArraySumAndSort.java
+&gt; java ArraySumAndSort
+Enter the number of elements: 5
+Enter 5 elements:
+10
+5
+8
+20
+3
+
+Sum of the elements: 46
+Array elements in ascending order:
+3 5 8 10 20 </pre>
+    </div>
+
+    <!-- MatrixOperations.java -->
+    <div class="program-container">
+        <h2>MatrixOperations.java</h2>
+        <div><strong>Question 3:</strong> Write a menu driven program to perform the following operations on multidimensional array ie matrix:
+ 1. Addition
+ 2. Multiplication
+ 3. Transpose of any matrix
+ 4. Exit</div>
+        <pre><code>import java.util.Scanner;
+
+public class MatrixOperations {
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+        int choice;
+
+        do {
+            System.out.println("\n--- MATRIX MENU ---");
+            System.out.println("1. Addition");
+            System.out.println("2. Multiplication");
+            System.out.println("3. Transpose");
+            System.out.println("4. Exit");
+            System.out.print("Enter your choice: ");
+            choice = sc.nextInt();
+
+            switch (choice) {
+
+                case 1:
+                    // Matrix Addition
+                    System.out.print("Enter rows and columns: ");
+                    int r = sc.nextInt();
+                    int c = sc.nextInt();
+
+                    int[][] a = new int[r][c];
+                    int[][] b = new int[r][c];
+                    int[][] sum = new int[r][c];
+
+                    System.out.println("Enter Matrix A:");
+                    for (int i = 0; i &lt; r; i++)
+                        for (int j = 0; j &lt; c; j++)
+                            a[i][j] = sc.nextInt();
+
+                    System.out.println("Enter Matrix B:");
+                    for (int i = 0; i &lt; r; i++)
+                        for (int j = 0; j &lt; c; j++)
+                            b[i][j] = sc.nextInt();
+
+                    for (int i = 0; i &lt; r; i++)
+                        for (int j = 0; j &lt; c; j++)
+                            sum[i][j] = a[i][j] + b[i][j];
+
+                    System.out.println("Addition:");
+                    for (int i = 0; i &lt; r; i++) {
+                        for (int j = 0; j &lt; c; j++)
+                            System.out.print(sum[i][j] + "\t");
+                        System.out.println();
+                    }
+                    break;
+
+
+                case 2:
+                    // Matrix Multiplication
+                    System.out.print("Enter rows and columns of Matrix A: ");
+                    int r1 = sc.nextInt();
+                    int c1 = sc.nextInt();
+
+                    System.out.print("Enter rows and columns of Matrix B: ");
+                    int r2 = sc.nextInt();
+                    int c2 = sc.nextInt();
+
+                    if (c1 != r2) {
+                        System.out.println("Multiplication not possible.");
+                        break;
+                    }
+
+                    a = new int[r1][c1];
+                    b = new int[r2][c2];
+                    int[][] product = new int[r1][c2];
+
+                    System.out.println("Enter Matrix A:");
+                    for (int i = 0; i &lt; r1; i++)
+                        for (int j = 0; j &lt; c1; j++)
+                            a[i][j] = sc.nextInt();
+
+                    System.out.println("Enter Matrix B:");
+                    for (int i = 0; i &lt; r2; i++)
+                        for (int j = 0; j &lt; c2; j++)
+                            b[i][j] = sc.nextInt();
+
+                    for (int i = 0; i &lt; r1; i++) {
+                        for (int j = 0; j &lt; c2; j++) {
+                            for (int k = 0; k &lt; c1; k++)
+                                product[i][j] += a[i][k] * b[k][j];
+                        }
+                    }
+
+                    System.out.println("Multiplication:");
+                    for (int i = 0; i &lt; r1; i++) {
+                        for (int j = 0; j &lt; c2; j++)
+                            System.out.print(product[i][j] + "\t");
+                        System.out.println();
+                    }
+                    break;
+
+
+                case 3:
+                    // Matrix Transpose
+                    System.out.print("Enter rows and columns: ");
+                    r = sc.nextInt();
+                    c = sc.nextInt();
+
+                    a = new int[r][c];
+
+                    System.out.println("Enter Matrix:");
+                    for (int i = 0; i &lt; r; i++)
+                        for (int j = 0; j &lt; c; j++)
+                            a[i][j] = sc.nextInt();
+
+                    System.out.println("Transpose:");
+
+                    for (int j = 0; j &lt; c; j++) {
+                        for (int i = 0; i &lt; r; i++)
+                            System.out.print(a[i][j] + "\t");
+                        System.out.println();
+                    }
+                    break;
+
+
+                case 4:
+                    System.out.println("Exiting...");
+                    break;
+
+                default:
+                    System.out.println("Invalid choice!");
+            }
+
+        } while (choice != 4);
+
+        sc.close();
+    }
+}
+</code></pre>
+        <h4>Output:</h4>
+        <pre>&gt; javac MatrixOperations.java
+&gt; java MatrixOperations
+--- MATRIX MENU ---
+1. Addition
+2. Multiplication
+3. Transpose
+4. Exit
+Enter your choice: 1
+Enter rows and columns: 2 2
+Enter Matrix A:
+1 2
+3 4
+Enter Matrix B:
+5 6
+7 8
+Addition:
+6	8	
+10	12	
+
+--- MATRIX MENU ---
+1. Addition
+2. Multiplication
+3. Transpose
+4. Exit
+Enter your choice: 2
+Enter rows and columns of Matrix A: 2 2
+Enter rows and columns of Matrix B: 2 2
+Enter Matrix A:
+1 2
+3 4
+Enter Matrix B:
+5 6
+7 8
+Multiplication:
+19	22	
+43	50	
+
+--- MATRIX MENU ---
+1. Addition
+2. Multiplication
+3. Transpose
+4. Exit
+Enter your choice: 3
+Enter rows and columns: 2 2
+Enter Matrix:
+1 2
+3 4
+Transpose:
+1	3	
+2	4	
+
+--- MATRIX MENU ---
+1. Addition
+2. Multiplication
+3. Transpose
+4. Exit
+Enter your choice: 4
+Exiting...</pre>
+    </div>
+
+    <!-- MyNumber.java -->
+    <div class="program-container">
+        <h2>MyNumber.java</h2>
+        <div class="question-highlight"><strong>Question 4:</strong> Define a class MyNumber having one private int data member. Write a default constructor to initialize 
+it to 0 and another constructor to initialize it to a value (Use this). Write methods isNegative, isPositive, 
+isZero, isOdd, isEven. Create an object in main. Use command line arguments to pass a value to the 
+Object.</div>
+        <pre><code>public class MyNumber {
+    private int number;
+
+    public MyNumber() {
+        this.number = 0;
+    }
+
+    public MyNumber(int number) {
+        this.number = number;
+    }
+
+    public boolean isNegative() {
+        return this.number &lt; 0;
+    }
+
+    public boolean isPositive() {
+        return this.number &gt; 0;
+    }
+
+    public boolean isZero() {
+        return this.number == 0;
+    }
+
+    public boolean isOdd() {
+        return this.number % 2 != 0;
+    }
+
+    public boolean isEven() {
+        return this.number % 2 == 0;
+    }
+
+    public static void main(String[] args) {
+        if (args.length == 0) {
+            System.out.println("Please provide a number as a command line argument.");
+            return;
+        }
+        
+        int n = Integer.parseInt(args[0]);
+        MyNumber myNum = new MyNumber(n);
+        
+        System.out.println("Number: " + n);
+        System.out.println("isNegative: " + myNum.isNegative());
+        System.out.println("isPositive: " + myNum.isPositive());
+        System.out.println("isZero: " + myNum.isZero());
+        System.out.println("isOdd: " + myNum.isOdd());
+        System.out.println("isEven: " + myNum.isEven());
+    }
+}
+</code></pre>
+        <h4>Output:</h4>
+        <pre>&gt; javac MyNumber.java
+&gt; java MyNumber -5
+Number: -5
+isNegative: true
+isPositive: false
+isZero: false
+isOdd: true
+isEven: false</pre>
+    </div>
+
+</body>
+
+</html>
