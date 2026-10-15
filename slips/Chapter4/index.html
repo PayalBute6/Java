@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 4 Java Programs</title>
+
+    <!-- <style> 
+        .question-highlight{
+            color: rgb(7, 7, 7);
+            background-color: rgb(227, 207, 27);
+            border-radius: 2px;
+            padding: 2px;
+
+        }
+    
+        /* Override Prism.js grey background */
+        pre[class*="language-"],
+        code[class*="language-"] {
+            background: transparent !important;
+        }
+    
+        /* Make code comments italic and distinct */
+        .token.comment,
+        .token.block-comment,
+        .token.prolog,
+        .token.doctype,
+        .token.cdata {
+            font-style: italic !important;
+            color: #7a7a7a !important;
+        }
+    </style> -->
+
+
+    <!-- Prism.js for Syntax Highlighting -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-java.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>
+</head>
+
+<body>
+
+    <h1>Assignment 4: Java Programs</h1>
+    <p style="font-size: 16px; color: #d84315;">
+        <!-- Main.java -->
+    <div class="program-container">
+        <h2>Main.java</h2>
+        <div class="question-highlight"><strong>Question 1:</strong> Define a custom exception class called
+            `AgeException`. Write a Driver class with fields license_no, name, address, and age. If the age is below 18,
+            throw the `AgeException`. Handle this exception in the `Main` class.</div>
+        <pre><code>class AgeException extends Exception {
+    AgeException(String msg) {
+        super(msg);
+    }
+}
+class Driver {
+    int license_no, age;
+    String name, address;
+    Driver(int l, String n, String addr, int a) throws AgeException {
+        if (a < 18) {
+            throw new AgeException("Age is below 18 years");
+        }
+        license_no = l;
+        name = n;
+        address = addr;
+        age = a;
+        System.out.println("Driver " + name + " created successfully.");
+    }
+}
+public class Main {
+    public static void main(String[] args) {
+        try {
+            Driver d1 = new Driver(123, "Raju", "Pune", 16);
+        } catch (AgeException e) {
+            System.out.println("Exception: " + e.getMessage());
+        }
+    }
+}</code></pre>
+        <h3>Steps to Run:</h3>
+        <pre><code>javac Main.java
+java Main</code></pre>
+        <h3>Output:</h3>
+        <pre><code >Exception: Age is below 18 years</code></pre>
+    </div>
+
+    <!-- ReadUpperCase.java -->
+    <div class="program-container">
+        <h2>ReadUpperCase.java</h2>
+        <div class="question-highlight"><strong>Question 2:</strong> Write a Java program to read the contents of a text
+            file (e.g., "abc.txt") and print them to the console in uppercase letters.</div>
+        <pre><code>import java.io.File;
+import java.util.Scanner;
+public class ReadUpperCase {
+    public static void main(String[] args) throws Exception {
+        Scanner fileSc = new Scanner(new File("abc.txt"));
+        while (fileSc.hasNextLine()) {
+            System.out.println(fileSc.nextLine().toUpperCase());
+        }
+    }
+}</code></pre>
+        <h3>Steps to Run:</h3>
+        <pre><code>javac ReadUpperCase.java
+java ReadUpperCase</code></pre>
+        <h3>Output:</h3>
+        <pre><code>THIS IS JAVA PROGRAMMING</code></pre>
+    </div>
+
+</body>
+
+</html>
