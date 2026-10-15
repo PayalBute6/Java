@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment 2 - Set C Solutions</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 40px auto;
+            max-width: 1000px;
+            background-color: #f4f7f6;
+            color: #333;
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 40px;
+            font-size: 2.5em;
+        }
+        .question {
+            background: #fff;
+            padding: 15px 20px;
+            border-left: 5px solid #e74c3c;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            font-size: 1.1em;
+        }
+        .code-container {
+            background: #282c34;
+            color: #abb2bf;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin-bottom: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .command-block {
+            background: #eef2f5;
+            padding: 10px 15px;
+            border-left: 4px solid #3498db;
+            margin-bottom: 20px;
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: 0.95em;
+            color: #2c3e50;
+        }
+        .command-block strong {
+            color: #2980b9;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: block;
+            margin-bottom: 5px;
+        }
+        .filename {
+            font-weight: bold;
+            color: #98c379;
+            margin-bottom: 15px;
+            display: inline-block;
+            border-bottom: 1px solid #555;
+            padding-bottom: 5px;
+        }
+        pre {
+            margin: 0;
+        }
+        code {
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: 0.95em;
+        }
+        .keyword { color: #c678dd; }
+        .type { color: #e5c07b; }
+        .string { color: #98c379; }
+        .comment { color: #5c6370; font-style: italic; }
+    </style>
+</head>
+<body>
+
+    <h1>Assignment 2 - Set C Solutions</h1>
+
+    <!-- Set C - a -->
+    <div class="question">
+        <strong>a.</strong> Write a package for String operation which has two classes Con and Comp. Con class has to concatenate two strings and comp class compares two strings. Also display proper messages on execution.
+    </div>
+
+    <div class="code-container">
+        <span class="filename">SetC/string_operation/Con.java</span>
+        <pre><code><span class="keyword">package</span> string_operation;
+
+<span class="keyword">public class</span> <span class="type">Con</span> {
+    <span class="keyword">public void</span> concatenate(<span class="type">String</span> str1, <span class="type">String</span> str2) {
+        <span class="type">String</span> result = str1 + str2;
+        System.out.println(<span class="string">"Concatenated String: "</span> + result);
+    }
+}</code></pre>
+    </div>
+
+    <div class="code-container">
+        <span class="filename">SetC/string_operation/Comp.java</span>
+        <pre><code><span class="keyword">package</span> string_operation;
+
+<span class="keyword">public class</span> <span class="type">Comp</span> {
+    <span class="keyword">public void</span> compare(<span class="type">String</span> str1, <span class="type">String</span> str2) {
+        <span class="keyword">if</span> (str1.equals(str2)) {
+            System.out.println(<span class="string">"Strings are equal."</span>);
+        } <span class="keyword">else</span> {
+            System.out.println(<span class="string">"Strings are not equal."</span>);
+        }
+    }
+}</code></pre>
+    </div>
+
+    <div class="code-container">
+        <span class="filename">SetC/StringOperationDemo.java</span>
+        <pre><code><span class="keyword">import</span> java.util.Scanner;
+<span class="keyword">import</span> string_operation.Comp;
+<span class="keyword">import</span> string_operation.Con;
+
+<span class="keyword">public class</span> <span class="type">StringOperationDemo</span> {
+    <span class="keyword">public static void</span> main(<span class="type">String</span>[] args) {
+        Scanner sc = <span class="keyword">new</span> Scanner(System.in);
+        Con conObj = <span class="keyword">new</span> Con();
+        Comp compObj = <span class="keyword">new</span> Comp();
+
+        System.out.println(<span class="string">"--- Concatenation ---"</span>);
+        System.out.print(<span class="string">"Enter first string: "</span>);
+        <span class="type">String</span> str1 = sc.nextLine();
+        System.out.print(<span class="string">"Enter second string: "</span>);
+        <span class="type">String</span> str2 = sc.nextLine();
+        conObj.concatenate(str1, str2);
+
+        System.out.println(<span class="string">"\n--- Comparison ---"</span>);
+        System.out.print(<span class="string">"Enter first string to compare: "</span>);
+        <span class="type">String</span> cmp1 = sc.nextLine();
+        System.out.print(<span class="string">"Enter second string to compare: "</span>);
+        <span class="type">String</span> cmp2 = sc.nextLine();
+        compObj.compare(cmp1, cmp2);
+        
+        sc.close();
+    }
+}</code></pre>
+    </div>
+
+    <div class="command-block">
+        <strong>Commands to compile and run:</strong>
+        javac string_operation/Con.java<br>
+        javac string_operation/Comp.java<br>
+        javac StringOperationDemo.java<br>
+        java StringOperationDemo
+    </div>
+
+    <!-- Set C - b -->
+    <div class="question">
+        <strong>b.</strong> Create four member variables for Customer class. Assign public, private, protected and default access modifiers respectively to these variables. Try to access these variables from other classes (Same package and Different package).
+    </div>
+
+    <div class="code-container">
+        <span class="filename">SetC/CustomerPack/Customer.java</span>
+        <pre><code><span class="keyword">package</span> CustomerPack;
+
+<span class="keyword">public class</span> <span class="type">Customer</span> {
+    <span class="keyword">public</span> <span class="type">String</span> publicVar = <span class="string">"Public Variable"</span>;
+    <span class="keyword">private</span> <span class="type">String</span> privateVar = <span class="string">"Private Variable"</span>;
+    <span class="keyword">protected</span> <span class="type">String</span> protectedVar = <span class="string">"Protected Variable"</span>;
+    <span class="type">String</span> defaultVar = <span class="string">"Default Variable"</span>;
+
+    <span class="keyword">public void</span> display() {
+        System.out.println(<span class="string">"Inside Customer class:"</span>);
+        System.out.println(publicVar);
+        System.out.println(privateVar);
+        System.out.println(protectedVar);
+        System.out.println(defaultVar);
+    }
+}</code></pre>
+    </div>
+
+    <div class="code-container">
+        <span class="filename">SetC/CustomerPack/SamePackageDemo.java</span>
+        <pre><code><span class="keyword">package</span> CustomerPack;
+
+<span class="keyword">public class</span> <span class="type">SamePackageDemo</span> {
+    <span class="keyword">public static void</span> main(<span class="type">String</span>[] args) {
+        Customer c = <span class="keyword">new</span> Customer();
+        System.out.println(<span class="string">"--- Accessing from Same Package ---"</span>);
+        System.out.println(c.publicVar);
+        <span class="comment">// System.out.println(c.privateVar); // Not accessible</span>
+        System.out.println(c.protectedVar);
+        System.out.println(c.defaultVar);
+    }
+}</code></pre>
+    </div>
+
+    <div class="code-container">
+        <span class="filename">SetC/DifferentPackageDemo.java</span>
+        <pre><code><span class="keyword">import</span> CustomerPack.Customer;
+
+<span class="keyword">public class</span> <span class="type">DifferentPackageDemo</span> <span class="keyword">extends</span> <span class="type">Customer</span> {
+    <span class="keyword">public static void</span> main(<span class="type">String</span>[] args) {
+        Customer c = <span class="keyword">new</span> Customer();
+        System.out.println(<span class="string">"--- Accessing from Different Package (Non-subclass) ---"</span>);
+        System.out.println(c.publicVar);
+        <span class="comment">// System.out.println(c.privateVar); // Not accessible</span>
+        <span class="comment">// System.out.println(c.protectedVar); // Not accessible using object reference</span>
+        <span class="comment">// System.out.println(c.defaultVar); // Not accessible</span>
+
+        System.out.println(<span class="string">"\n--- Accessing from Different Package (Subclass) ---"</span>);
+        DifferentPackageDemo d = <span class="keyword">new</span> DifferentPackageDemo();
+        System.out.println(d.publicVar);
+        System.out.println(d.protectedVar); <span class="comment">// Accessible via inheritance</span>
+    }
+}</code></pre>
+    </div>
+
+    <div class="command-block">
+        <strong>Commands to compile and run:</strong>
+        javac CustomerPack/Customer.java<br>
+        javac CustomerPack/SamePackageDemo.java<br>
+        java CustomerPack.SamePackageDemo<br><br>
+        javac DifferentPackageDemo.java<br>
+        java DifferentPackageDemo
+    </div>
+
+    <!-- Set C - c -->
+    <div class="question">
+        <strong>c.</strong> Write a program to create a package name student. Define class StudentInfo with a method to display information about students such as rollno, class, and percentage. Create another class StudentPer with a method to find the percentage of the student. Accept student details like rollno, name, class and marks of 6 subjects from the user.
+    </div>
+
+    <div class="code-container">
+        <span class="filename">SetC/student/StudentInfo.java</span>
+        <pre><code><span class="keyword">package</span> student;
+
+<span class="keyword">public class</span> <span class="type">StudentInfo</span> {
+    <span class="keyword">public void</span> displayInfo(<span class="type">int</span> rollno, <span class="type">String</span> className, <span class="type">double</span> percentage) {
+        System.out.println(<span class="string">"Roll No: "</span> + rollno);
+        System.out.println(<span class="string">"Class: "</span> + className);
+        System.out.println(<span class="string">"Percentage: "</span> + percentage + <span class="string">"%"</span>);
+    }
+}</code></pre>
+    </div>
+
+    <div class="code-container">
+        <span class="filename">SetC/student/StudentPer.java</span>
+        <pre><code><span class="keyword">package</span> student;
+
+<span class="keyword">public class</span> <span class="type">StudentPer</span> {
+    <span class="keyword">public double</span> calculatePercentage(<span class="type">int</span>[] marks) {
+        <span class="type">int</span> total = 0;
+        <span class="keyword">for</span> (<span class="type">int</span> mark : marks) {
+            total += mark;
+        }
+        <span class="keyword">return</span> (<span class="type">double</span>) total / marks.length;
+    }
+}</code></pre>
+    </div>
+
+    <div class="code-container">
+        <span class="filename">SetC/StudentPackageDemo.java</span>
+        <pre><code><span class="keyword">import</span> student.StudentInfo;
+<span class="keyword">import</span> student.StudentPer;
+<span class="keyword">import</span> java.util.Scanner;
+
+<span class="keyword">public class</span> <span class="type">StudentPackageDemo</span> {
+    <span class="keyword">public static void</span> main(<span class="type">String</span>[] args) {
+        Scanner sc = <span class="keyword">new</span> Scanner(System.in);
+        
+        System.out.print(<span class="string">"Enter Roll No: "</span>);
+        <span class="type">int</span> rollno = sc.nextInt();
+        sc.nextLine(); <span class="comment">// consume newline</span>
+        
+        System.out.print(<span class="string">"Enter Name: "</span>);
+        <span class="type">String</span> name = sc.nextLine();
+        
+        System.out.print(<span class="string">"Enter Class: "</span>);
+        <span class="type">String</span> className = sc.nextLine();
+        
+        <span class="type">int</span>[] marks = <span class="keyword">new int</span>[6];
+        System.out.println(<span class="string">"Enter marks for 6 subjects:"</span>);
+        <span class="keyword">for</span> (<span class="type">int</span> i = 0; i &lt; 6; i++) {
+            System.out.print(<span class="string">"Subject "</span> + (i + 1) + <span class="string">": "</span>);
+            marks[i] = sc.nextInt();
+        }
+        
+        StudentPer sp = <span class="keyword">new</span> StudentPer();
+        <span class="type">double</span> percentage = sp.calculatePercentage(marks);
+        
+        StudentInfo si = <span class="keyword">new</span> StudentInfo();
+        System.out.println(<span class="string">"\n--- Student Details ---"</span>);
+        System.out.println(<span class="string">"Name: "</span> + name);
+        si.displayInfo(rollno, className, percentage);
+        
+        sc.close();
+    }
+}</code></pre>
+    </div>
+
+    <div class="command-block">
+        <strong>Commands to compile and run:</strong>
+        javac student/StudentInfo.java<br>
+        javac student/StudentPer.java<br>
+        javac StudentPackageDemo.java<br>
+        java StudentPackageDemo
+    </div>
+
+</body>
+</html>
