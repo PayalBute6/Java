@@ -46,4 +46,4 @@ public class BankDemo
         // Calls the overridden method in SBI class
         System.out.println("SBI Rate of Interest: " + b.getRateOfInterest() + "%");
     }
-}
+} 
