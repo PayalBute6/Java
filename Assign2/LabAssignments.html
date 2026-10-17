@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab Assignments - Java</title>
+    <style>
+        body { font-family: sans-serif; }
+        h2 { color: #e74c3c; } /* Red color for Sets */
+        h3 { color: #2980b9; } /* Blue color for Questions */
+        p { color: #db2a2a; } /* Dark blue-grey color for Paragraphs */
+    </style>
+</head>
+<body>
+    <h1>Lab Assignments</h1>
+
+
+
+    <h2>Set A</h2>
+
+    <div class="question">
+        <h3>a. Employee Class with Count</h3>
+        <p>Create an employee class (id,name,deptname,salary). Define a default and parameterized constructor. Use ‘this’ keyword to initialize instance variables. Keep a count of objects created. Create objects using parameterized constructors and display the object count after each object is created. (Use static member and method). Also display the contents of each object.</p>
+        <div>
+            <h5>Main Program</h5>
+            <pre><code>// EmployeeDemo1.java
+import java.util.Scanner;
+
+class Employee {
+    int id;
+    String name;
+    String deptname;
+    double salary;
+    static int objectCount = 0;
+
+    Employee() {
+        this.id = 0;
+        this.name = "";
+        this.deptname = "";
+        this.salary = 0.0;
+        objectCount++;
+    }
+
+    Employee(int id, String name, String deptname, double salary) {
+        this.id = id;
+        this.name = name;
+        this.deptname = deptname;
+        this.salary = salary;
+        objectCount++;
+    }
+
+    void displayObjectCount() {
+        System.out.println("Object count: " + objectCount);
+    }
+
+    void display() {
+        System.out.println("ID: " + this.id);
+        System.out.println("Name: " + this.name);
+        System.out.println("Dept: " + this.deptname);
+        System.out.println("Salary: " + this.salary);
+    }
+}
+
+public class EmployeeDemo1 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        
+        System.out.println("--- Enter Employee 1 Details ---");
+        System.out.print("ID: ");
+        int id1 = sc.nextInt();
+        //sc.nextLine(); // consume the leftover newline
+        System.out.print("Name: ");
+        String name1 = sc.next();
+        System.out.print("Department: ");
+        String dept1 = sc.next();
+        System.out.print("Salary: ");
+        double salary1 = sc.nextDouble();
+        
+        Employee e1 = new Employee(id1, name1, dept1, salary1);
+        e1.displayObjectCount();
+        e1.display();
+
+        System.out.println("\n--- Enter Employee 2 Details ---");
+        System.out.print("ID: ");
+        int id2 = sc.nextInt();
+        //sc.nextLine(); // consume the leftover newline
+        System.out.print("Name: ");
+        String name2 = sc.next();
+        System.out.print("Department: ");
+        String dept2 = sc.next();
+        System.out.print("Salary: ");
+        double salary2 = sc.nextDouble();
+        
+        Employee e2 = new Employee(id2, name2, dept2, salary2);
+        e2.displayObjectCount();
+        e2.display();
+        
+        Employee e3 = new Employee(id2, name2, dept2, salary2);
+        e3.displayObjectCount();
+        e3.display();
+
+        Employee e4 = new Employee(id2, name2, dept2, salary2);
+        e4.displayObjectCount();
+        e4.display();
+
+        Employee e5 = new Employee(id2, name2, dept2, salary2);
+        e5.displayObjectCount();
+        e5.display();
+
+        sc.close();
+    }
+}</code></pre>
+        </div>
+        <div>
+            <h4>How to Run:</h4>
+            <ol>
+                <li><strong>Compile the program</strong>:
+                    <pre><code>javac EmployeeDemo1.java</code></pre>
+                </li>
+                <li><strong>Run the program</strong>:
+                    <pre><code>java EmployeeDemo1</code></pre>
+                </li>
+            </ol>
+        </div>
+
+    </div>
+
+    <div class="question">
+        <h3>b. Employee with toString()</h3>
+        <p>Write a program to display the Employee(Empid, Empname, Empdesignation, Empsal) information using toString().</p>
+        <div>
+            <h5>Main Program</h5>
+            <pre><code>// EmployeeDemo2.java
+import java.util.Scanner;
+
+class Employee {
+    int Empid;
+    String Empname;
+    String Empdesignation;
+    double Empsal;
+
+    public Employee(int empid, String empname, String empdesignation, double empsal) {
+        this.Empid = empid;
+        this.Empname = empname;
+        this.Empdesignation = empdesignation;
+        this.Empsal = empsal;
+    }
+
+    @Override
+    public String toString() {
+        return "Employee [Empid=" + Empid + ", Empname=" + Empname + ", Empdesignation=" + Empdesignation + ", Empsal=" + Empsal + "]";
+    }
+}
+
+public class EmployeeDemo2 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("--- Enter Employee Details ---");
+        System.out.print("ID: ");
+        int id = sc.nextInt();
+        sc.nextLine(); // consume the leftover newline
+        System.out.print("Name: ");
+        String name = sc.nextLine();
+        System.out.print("Designation: ");
+        String designation = sc.nextLine();
+        System.out.print("Salary: ");
+        double salary = sc.nextDouble();
+        
+        Employee emp = new Employee(id, name, designation, salary);
+        System.out.println("\nEmployee Info: ");
+        System.out.println(emp.toString());
+        sc.close();
+    }
+}</code></pre>
+        </div>
+        <div>
+            <h4>How to Run:</h4>
+            <ol>
+                <li><strong>Compile the program</strong>:
+                    <pre><code>javac EmployeeDemo2.java</code></pre>
+                </li>
+                <li><strong>Run the program</strong>:
+                    <pre><code>java EmployeeDemo2</code></pre>
+                </li>
+            </ol>
+        </div>
+
+    </div>
+
+    <div class="question">
+        <h3>c. MyNumber Class</h3>
+        <p>Define a class MyNumber having one private int data member. Write a default constructor to initialize it to 0 and another constructor to initialize it to a value (Use this). Write methods isNegative, isPositive, isZero, isOdd, isEven. Create an object in main. Use command line arguments to pass a value to the Object.</p>
+        <div>
+            <h5>Main Program</h5>
+            <pre><code>// MyNumber.java
+public class MyNumber {
+    private int number;
+
+    public MyNumber() {
+        this.number = 0;
+    }
+
+    public MyNumber(int number) {
+        this.number = number;
+    }
+
+    public boolean isNegative() {
+        return this.number < 0;
+    }
+
+    public boolean isPositive() {
+        return this.number > 0;
+    }
+
+    public boolean isZero() {
+        return this.number == 0;
+    }
+
+    public boolean isOdd() {
+        return this.number % 2 != 0;
+    }
+
+    public boolean isEven() {
+        return this.number % 2 == 0;
+    }
+
+    public static void main(String[] args) {
+        if (args.length == 0) {
+            System.out.println("Please provide a number as a command line argument.");
+            return;
+        }
+        
+        int n = Integer.parseInt(args[0]);
+        MyNumber myNum = new MyNumber(n);
+        
+        System.out.println("Number: " + n);
+        System.out.println("isNegative: " + myNum.isNegative());
+        System.out.println("isPositive: " + myNum.isPositive());
+        System.out.println("isZero: " + myNum.isZero());
+        System.out.println("isOdd: " + myNum.isOdd());
+        System.out.println("isEven: " + myNum.isEven());
+    }
+}</code></pre>
+        </div>
+        <div>
+            <h4>How to Run:</h4>
+            <ol>
+                <li><strong>Compile the program</strong>:
+                    <pre><code>javac MyNumber.java</code></pre>
+                </li>
+                <li><strong>Run the program</strong>:
+                    <pre><code>java MyNumber</code></pre>
+                </li>
+            </ol>
+        </div>
+
+    </div>
+
+    <div class="question">
+        <h3>d. Person Class</h3>
+        <p>Write a program to define class Person with data members as Personname,Aadharno, Panno. Accept information for 5 objects and display appropriate information (use this keyword).</p>
+        <div>
+            <h5>Main Program</h5>
+            <pre><code>// PersonDemo.java
+import java.util.Scanner;
+
+class Person {
+    String Personname;
+    String Aadharno;
+    String Panno;
+
+    public Person(String personname, String aadharno, String panno) {
+        this.Personname = personname;
+        this.Aadharno = aadharno;
+        this.Panno = panno;
+    }
+
+    public void display() {
+        System.out.println("Name: " + Personname);
+        System.out.println("Aadhar No: " + Aadharno);
+        System.out.println("PAN No: " + Panno);
+    }
+}
+
+public class PersonDemo {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        Person[] p = new Person[5];
+
+        for (int i = 0; i < 5; i++) {
+            System.out.println("Enter information for Person " + (i + 1) + ":");
+            System.out.print("Name: ");
+            String name = sc.nextLine();
+            System.out.print("Aadhar No: ");
+            String aadhar = sc.nextLine();
+            System.out.print("PAN No: ");
+            String pan = sc.nextLine();
+
+            p[i] = new Person(name, aadhar, pan);
+        }
+
+        System.out.println("\n--- Person Information ---");
+        for (int i = 0; i < 5; i++) {
+            p[i].display();
+        }
+
+        sc.close();
+    }
+}</code></pre>
+        </div>
+        <div>
+            <h4>How to Run:</h4>
+            <ol>
+                <li><strong>Compile the program</strong>:
+                    <pre><code>javac PersonDemo.java</code></pre>
+                </li>
+                <li><strong>Run the program</strong>:
+                    <pre><code>java PersonDemo</code></pre>
+                </li>
+            </ol>
+        </div>
+
+    </div>
+
+    <div class="question">
+        <h3>e. Sphere Class</h3>
+        <p>Create a class Sphere, to calculate the volume and surface area of the sphere.<br>(Hint : Surface area=4*3.14(r*r), Volume=(4/3)3.14(r*r*r))</p>
+        <div>
+            <h5>Main Program</h5>
+            <pre><code>// Sphere.java
+import java.util.Scanner;
+
+class Sphere {
+    double radius;
+    final double PI = 3.14;
+
+    Sphere(double radius) {
+        this.radius = radius;
+    }
+
+    double calculateSurfaceArea() {
+        return 4 * PI * (radius * radius);
+    }
+
+    double calculateVolume() {
+        return (4.0 / 3.0) * PI * (radius * radius * radius);
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter the radius of the sphere: ");
+        double r = sc.nextDouble();
+
+        Sphere sphere = new Sphere(r);
+        
+        System.out.println("Surface Area: " + sphere.calculateSurfaceArea());
+        System.out.println("Volume: " + sphere.calculateVolume());
+        
+        sc.close();
+    }
+}</code></pre>
+        </div>
+        <div>
+            <h4>How to Run:</h4>
+            <ol>
+                <li><strong>Compile the program</strong>:
+                    <pre><code>javac Sphere.java</code></pre>
+                </li>
+                <li><strong>Run the program</strong>:
+                    <pre><code>java Sphere</code></pre>
+                </li>
+            </ol>
+        </div>
+
+    </div>
+
+    <h2>Set B</h2>
+
+    <div class="question">
+        <h3>a. Student Grade Calculation using Packages</h3>
+        <p>Write a Java program to create a Package “SY” which has a class SYMarks (members ComputerTotal, MathsTotal, and ElectronicsTotal). Create another package TY which has a class TYMarks (members Theory, Practicals). Create n objects of Student class (having rollNumber, name, SYMarks and TYMarks). Add the marks of SY and TY computer subjects and calculate the Grade(‘A’ for >= 70, ‘B’ for >= 60, ‘C’for >= 50 , Pass Class for > =40 else “FAIL”) and display the result of the student in proper format.</p>
+        <div>
+            <h5>Package Class</h5>
+            <pre><code>// SY/SYMarks.java
+package SY;
+
+public class SYMarks {
+    public int ComputerTotal;
+    public int MathsTotal;
+    public int ElectronicsTotal;
+
+    public SYMarks(int computerTotal, int mathsTotal, int electronicsTotal) {
+        this.ComputerTotal = computerTotal;
+        this.MathsTotal = mathsTotal;
+        this.ElectronicsTotal = electronicsTotal;
+    }
+}</code></pre>
+        </div>
+        <div>
+            <h5>Package Class</h5>
+            <pre><code>// TY/TYMarks.java
+package TY;
+
+public class TYMarks {
+    public int Theory;
+    public int Practicals;
+
+    public TYMarks(int theory, int practicals) {
+        this.Theory = theory;
+        this.Practicals = practicals;
+    }
+}</code></pre>
+        </div>
+        <div>
+            <h5>Main Program</h5>
+            <pre><code>// StudentDemo.java
+import SY.SYMarks;
+import TY.TYMarks;
+import java.util.Scanner;
+
+class Student {
+    private int rollNumber;
+    private String name;
+    private SYMarks syMarks;
+    private TYMarks tyMarks;
+
+    public Student(int rollNumber, String name, SYMarks syMarks, TYMarks tyMarks) {
+        this.rollNumber = rollNumber;
+        this.name = name;
+        this.syMarks = syMarks;
+        this.tyMarks = tyMarks;
+    }
+
+    public void displayResult() {
+        int totalComputerMarks = syMarks.ComputerTotal + tyMarks.Theory + tyMarks.Practicals; 
+        
+        double percentage = (double) totalComputerMarks / 3; 
+        String grade = "";
+        
+        if (percentage >= 70) {
+            grade = "A";
+        } else if (percentage >= 60) {
+            grade = "B";
+        } else if (percentage >= 50) {
+            grade = "C";
+        } else if (percentage >= 40) {
+            grade = "Pass Class";
+        } else {
+            grade = "FAIL";
+        }
+
+        System.out.println("Roll Number: " + rollNumber);
+        System.out.println("Name: " + name);
+        System.out.println("Computer Total: " + totalComputerMarks);
+        System.out.println("Grade: " + grade);
+        System.out.println("-------------------------");
+    }
+}
+
+public class StudentDemo {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        System.out.print("Enter number of students: ");
+        int n = scanner.nextInt();
+        scanner.nextLine();
+        
+        Student[] students = new Student[n];
+        
+        for (int i = 0; i < n; i++) {
+            System.out.println("Enter details for Student " + (i + 1) + ":");
+            System.out.print("Roll Number: ");
+            int roll = scanner.nextInt();
+            scanner.nextLine();
+            System.out.print("Name: ");
+            String name = scanner.nextLine();
+            
+            System.out.println("Enter SY Marks (Computer, Maths, Electronics):");
+            SYMarks sy = new SYMarks(scanner.nextInt(), scanner.nextInt(), scanner.nextInt());
+            
+            System.out.println("Enter TY Marks (Theory, Practicals):");
+            TYMarks ty = new TYMarks(scanner.nextInt(), scanner.nextInt());
+            scanner.nextLine();
+            
+            students[i] = new Student(roll, name, sy, ty);
+        }
+        
+        System.out.println("\n--- Student Results ---");
+        for (Student s : students) {
+            s.displayResult();
+        }
+        
+        scanner.close();
+    }
+}</code></pre>
+        </div>
+        <div>
+            <h4>How to Run:</h4>
+            <ol>
+                <li><strong>Compile the packages</strong>:
+                    <pre><code>javac -d . SYMarks.java TYMarks.java</code></pre>
+                </li>
+                <li><strong>Compile the program</strong>:
+                    <pre><code>javac StudentDemo.java</code></pre>
+                </li>
+                <li><strong>Run the program</strong>:
+                    <pre><code>java StudentDemo</code></pre>
+                </li>
+            </ol>
+        </div>
+
+    </div>
+
+    <div class="question">
+        <h3>c. CricketPlayer Sorting</h3>
+        <p>Define a class CricketPlayer (name,no_of_innings, no_of_times_notout total total runs, bat_avg). Create an array of n player objects .Calculate the batting average for each player using static method avg(). Define a static sort method which sorts the array on the basis of average. Display the player details in sorted order.</p>
+        <div>
+            <h5>Main Program</h5>
+            <pre><code>// CricketPlayerDemo.java
+import java.util.Scanner;
+
+class CricketPlayer {
+    String name;
+    int no_of_innings;
+    int no_of_times_notout;
+    int total_runs;
+    double bat_avg;
+
+    public CricketPlayer(String name, int no_of_innings, int no_of_times_notout, int total_runs) {
+        this.name = name;
+        this.no_of_innings = no_of_innings;
+        this.no_of_times_notout = no_of_times_notout;
+        this.total_runs = total_runs;
+        this.bat_avg = 0.0;
+    }
+
+    public static void avg(CricketPlayer p) {
+        int times_out = p.no_of_innings - p.no_of_times_notout;
+        if (times_out > 0) {
+            p.bat_avg = (double) p.total_runs / times_out;
+        } else {
+            p.bat_avg = p.total_runs;
+        }
+    }
+
+    public static void sort(CricketPlayer[] players) {
+        for (int i = 0; i < players.length - 1; i++) {
+            for (int j = 0; j < players.length - i - 1; j++) {
+                if (players[j].bat_avg > players[j + 1].bat_avg) {
+                    CricketPlayer temp = players[j];
+                    players[j] = players[j + 1];
+                    players[j + 1] = temp;
+                }
+            }
+        }
+    }
+
+    public void display() {
+        System.out.printf("Name: %-15s Innings: %-5d NotOut: %-5d Runs: %-5d Avg: %.2f\n", 
+                          name, no_of_innings, no_of_times_notout, total_runs, bat_avg);
+    }
+}
+
+public class CricketPlayerDemo {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter number of players: ");
+        int n = sc.nextInt();
+        sc.nextLine();
+
+        CricketPlayer[] players = new CricketPlayer[n];
+
+        for (int i = 0; i < n; i++) {
+            System.out.println("Enter details for Player " + (i + 1) + ":");
+            System.out.print("Name: ");
+            String name = sc.nextLine();
+            System.out.print("No of innings: ");
+            int innings = sc.nextInt();
+            System.out.print("No of times not out: ");
+            int notOut = sc.nextInt();
+            System.out.print("Total runs: ");
+            int runs = sc.nextInt();
+            sc.nextLine();
+
+            players[i] = new CricketPlayer(name, innings, notOut, runs);
+            CricketPlayer.avg(players[i]);
+        }
+
+        CricketPlayer.sort(players);
+
+        System.out.println("\n--- Player Details (Sorted by Batting Average) ---");
+        for (CricketPlayer p : players) {
+            p.display();
+        }
+
+        sc.close();
+    }
+}</code></pre>
+        </div>
+        <div>
+            <h4>How to Run:</h4>
+            <ol>
+                <li><strong>Compile the program</strong>:
+                    <pre><code>javac CricketPlayerDemo.java</code></pre>
+                </li>
+                <li><strong>Run the program</strong>:
+                    <pre><code>java CricketPlayerDemo</code></pre>
+                </li>
+            </ol>
+        </div>
+
+    </div>
+
+    <div class="question">
+        <h3>d. Clock Class</h3>
+        <p>Define a “Clock” class that does the following;<br>
+a. Accept Hours, Minutes and Seconds<br>
+b. Check the validity of numbers<br>
+c. Set the time to AM/PM mode<br>
+Use the necessary constructors and methods to do the above task</p>
+        <div>
+            <h5>Main Program</h5>
+            <pre><code>// Clock.java
+import java.util.Scanner;
+
+public class Clock {
+    private int hours;
+    private int minutes;
+    private int seconds;
+    private String mode; // AM or PM
+
+    public Clock(int hours, int minutes, int seconds) {
+        if (isValid(hours, minutes, seconds)) {
+            this.hours = hours;
+            this.minutes = minutes;
+            this.seconds = seconds;
+            setTimeMode();
+        } else {
+            System.out.println("Invalid time entered!");
+            this.hours = 0;
+            this.minutes = 0;
+            this.seconds = 0;
+            this.mode = "AM";
+        }
+    }
+
+    private boolean isValid(int h, int m, int s) {
+        return (h >= 0 && h < 24) && (m >= 0 && m < 60) && (s >= 0 && s < 60);
+    }
+
+    private void setTimeMode() {
+        if (this.hours >= 12) {
+            this.mode = "PM";
+            if (this.hours > 12) {
+                this.hours -= 12;
+            }
+        } else {
+            this.mode = "AM";
+            if (this.hours == 0) {
+                this.hours = 12;
+            }
+        }
+    }
+
+    public void display() {
+        System.out.printf("Time: %02d:%02d:%02d %s\n", this.hours, this.minutes, this.seconds, this.mode);
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter time in 24-hour format:");
+        System.out.print("Hours: ");
+        int h = sc.nextInt();
+        System.out.print("Minutes: ");
+        int m = sc.nextInt();
+        System.out.print("Seconds: ");
+        int s = sc.nextInt();
+
+        Clock clock = new Clock(h, m, s);
+        clock.display();
+        
+        sc.close();
+    }
+}</code></pre>
+        </div>
+        <div>
+            <h4>How to Run:</h4>
+            <ol>
+                <li><strong>Compile the program</strong>:
+                    <pre><code>javac Clock.java</code></pre>
+                </li>
+                <li><strong>Run the program</strong>:
+                    <pre><code>java Clock</code></pre>
+                </li>
+            </ol>
+        </div>
+
+    </div>
+
+    <div class="question">
+        <h3>e. Operation Package</h3>
+        <p>Write a package for Operation, which has two classes, Addition and Maximum. Addition has two methods add () and subtract (), which are used to add two integers and subtract two, float values respectively. Maximum has a method max () to display the maximum of two Integers</p>
+        <div>
+            <h5>Package Class</h5>
+            <pre><code>// Operation/Addition.java
+package Operation;
+
+public class Addition {
+    public int add(int a, int b) {
+        return a + b;
+    }
+
+    public float subtract(float a, float b) {
+        return a - b;
+    }
+}</code></pre>
+        </div>
+        <div>
+            <h5>Package Class</h5>
+            <pre><code>// Operation/Maximum.java
+package Operation;
+
+public class Maximum {
+    public void max(int a, int b) {
+        if (a > b) {
+            System.out.println("Maximum is: " + a);
+        } else {
+            System.out.println("Maximum is: " + b);
+        }
+    }
+}</code></pre>
+        </div>
+        <div>
+            <h5>Main Program</h5>
+            <pre><code>// OperationDemo.java
+import Operation.Addition;
+import Operation.Maximum;
+import java.util.Scanner;
+
+public class OperationDemo {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        Addition addObj = new Addition();
+        Maximum maxObj = new Maximum();
+
+        System.out.println("Enter two integers for addition:");
+        int a = scanner.nextInt();
+        int b = scanner.nextInt();
+        System.out.println("Addition of " + a + " and " + b + ": " + addObj.add(a, b));
+
+        System.out.println("Enter two floats for subtraction:");
+        float f1 = scanner.nextFloat();
+        float f2 = scanner.nextFloat();
+        System.out.println("Subtraction of " + f1 + " and " + f2 + ": " + addObj.subtract(f1, f2));
+
+        System.out.println("Enter two integers to find maximum:");
+        int m1 = scanner.nextInt();
+        int m2 = scanner.nextInt();
+        System.out.print("Maximum of " + m1 + " and " + m2 + ": ");
+        maxObj.max(m1, m2);
+        
+        scanner.close();
+    }
+}</code></pre>
+        </div>
+        <div>
+            <h4>How to Run:</h4>
+            <ol>
+                <li><strong>Compile the packages</strong>:
+                    <pre><code>javac -d . Addition.java Maximum.java</code></pre>
+                </li>
+                <li><strong>Compile the program</strong>:
+                    <pre><code>javac OperationDemo.java</code></pre>
+                </li>
+                <li><strong>Run the program</strong>:
+                    <pre><code>java OperationDemo</code></pre>
+                </li>
+            </ol>
+        </div>
+
+    </div>
+
+    <h2>Set C</h2>
+
+    <div class="question">
+        <h3>a. String Operation Package</h3>
+        <p>Write a package for String operation which has two classes Con and Comp. Con class has to concatenate two strings and comp class compares two strings. Also display proper messages on execution.</p>
+        <div>
+            <h5>Package Class</h5>
+            <pre><code>// string_operation/Con.java
+package string_operation;
+
+public class Con {
+    public void concatenate(String str1, String str2) {
+        String result = str1 + str2;
+        System.out.println("Concatenated String: " + result);
+    }
+}</code></pre>
+        </div>
+        <div>
+            <h5>Package Class</h5>
+            <pre><code>// string_operation/Comp.java
+package string_operation;
+
+public class Comp {
+    public void compare(String str1, String str2) {
+        if (str1.equals(str2)) {
+            System.out.println("Strings are equal.");
+        } else {
+            System.out.println("Strings are not equal.");
+        }
+    }
+}</code></pre>
+        </div>
+        <div>
+            <h5>Main Program</h5>
+            <pre><code>// StringOperationDemo.java
+import java.util.Scanner;
+import string_operation.Comp;
+import string_operation.Con;
+
+public class StringOperationDemo {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        Con conObj = new Con();
+        Comp compObj = new Comp();
+
+        System.out.println("--- Concatenation ---");
+        System.out.print("Enter first string: ");
+        String str1 = sc.nextLine();
+        System.out.print("Enter second string: ");
+        String str2 = sc.nextLine();
+        conObj.concatenate(str1, str2);
+
+        System.out.println("\n--- Comparison ---");
+        System.out.print("Enter first string to compare: ");
+        String cmp1 = sc.nextLine();
+        System.out.print("Enter second string to compare: ");
+        String cmp2 = sc.nextLine();
+        compObj.compare(cmp1, cmp2);
+        
+        sc.close();
+    }
+}</code></pre>
+        </div>
+        <div>
+            <h4>How to Run:</h4>
+            <ol>
+                <li><strong>Compile the packages</strong>:
+                    <pre><code>javac -d . Con.java Comp.java</code></pre>
+                </li>
+                <li><strong>Compile the program</strong>:
+                    <pre><code>javac StringOperationDemo.java</code></pre>
+                </li>
+                <li><strong>Run the program</strong>:
+                    <pre><code>java StringOperationDemo</code></pre>
+                </li>
+            </ol>
+        </div>
+
+    </div>
+
+    <div class="question">
+        <h3>b. Customer Class Access Modifiers</h3>
+        <p>Create four member variables for Customer class. Assign public, private, protected and default access modifiers respectively to these variables. Try to access these variables from other classes (Same package and Different package)</p>
+        <div>
+            <h5>Package Class</h5>
+            <pre><code>// CustomerPack/Customer.java
+package CustomerPack;
+
+public class Customer {
+    public String publicVar = "Public Variable";
+    private String privateVar = "Private Variable";
+    protected String protectedVar = "Protected Variable";
+    String defaultVar = "Default Variable";
+
+    public void display() {
+        System.out.println("Inside Customer class:");
+        System.out.println(publicVar);
+        System.out.println(privateVar);
+        System.out.println(protectedVar);
+        System.out.println(defaultVar);
+    }
+}</code></pre>
+        </div>
+        <div>
+            <h5>Main Program</h5>
+            <pre><code>// DifferentPackageDemo.java
+import CustomerPack.Customer;
+
+public class DifferentPackageDemo extends Customer {
+    public static void main(String[] args) {
+        Customer c = new Customer();
+        System.out.println("--- Accessing from Different Package (Non-subclass) ---");
+        System.out.println(c.publicVar);
+        // System.out.println(c.privateVar); // Not accessible
+        // System.out.println(c.protectedVar); // Not accessible using object reference
+        // System.out.println(c.defaultVar); // Not accessible
+
+        System.out.println("\n--- Accessing from Different Package (Subclass) ---");
+        DifferentPackageDemo d = new DifferentPackageDemo();
+        System.out.println(d.publicVar);
+        System.out.println(d.protectedVar); // Accessible via inheritance
+    }
+}</code></pre>
+        </div>
+        <div>
+            <h4>How to Run:</h4>
+            <ol>
+                <li><strong>Compile the packages</strong>:
+                    <pre><code>javac -d . Customer.java</code></pre>
+                </li>
+                <li><strong>Compile the program</strong>:
+                    <pre><code>javac DifferentPackageDemo.java</code></pre>
+                </li>
+                <li><strong>Run the program</strong>:
+                    <pre><code>java DifferentPackageDemo</code></pre>
+                </li>
+            </ol>
+        </div>
+
+    </div>
+
+    <div class="question">
+        <h3>c. Student Package</h3>
+        <p>Write a program to create a package name student. Define class StudentInfo with a method to display information about students such as rollno, class, and percentage. Create another class StudentPer with a method to find the percentage of the student. Accept student details like rollno, name, class and marks of 6 subjects from the user.</p>
+        <div>
+            <h5>Package Class</h5>
+            <pre><code>// student/StudentInfo.java
+package student;
+
+public class StudentInfo {
+    public void displayInfo(int rollno, String className, double percentage) {
+        System.out.println("Roll No: " + rollno);
+        System.out.println("Class: " + className);
+        System.out.println("Percentage: " + percentage + "%");
+    }
+}</code></pre>
+        </div>
+        <div>
+            <h5>Package Class</h5>
+            <pre><code>// student/StudentPer.java
+package student;
+
+public class StudentPer {
+    public double calculatePercentage(int[] marks) {
+        int total = 0;
+        for (int mark : marks) {
+            total += mark;
+        }
+        return (double) total / marks.length;
+    }
+}</code></pre>
+        </div>
+        <div>
+            <h5>Main Program</h5>
+            <pre><code>// StudentPackageDemo.java
+import student.StudentInfo;
+import student.StudentPer;
+import java.util.Scanner;
+
+public class StudentPackageDemo {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        
+        System.out.print("Enter Roll No: ");
+        int rollno = sc.nextInt();
+        sc.nextLine(); // consume newline
+        
+        System.out.print("Enter Name: ");
+        String name = sc.nextLine();
+        
+        System.out.print("Enter Class: ");
+        String className = sc.nextLine();
+        
+        int[] marks = new int[6];
+        System.out.println("Enter marks for 6 subjects:");
+        for (int i = 0; i < 6; i++) {
+            System.out.print("Subject " + (i + 1) + ": ");
+            marks[i] = sc.nextInt();
+        }
+        
+        StudentPer sp = new StudentPer();
+        double percentage = sp.calculatePercentage(marks);
+        
+        StudentInfo si = new StudentInfo();
+        System.out.println("\n--- Student Details ---");
+        System.out.println("Name: " + name);
+        si.displayInfo(rollno, className, percentage);
+        
+        sc.close();
+    }
+}</code></pre>
+        </div>
+        <div>
+            <h4>How to Run:</h4>
+            <ol>
+                <li><strong>Compile the packages</strong>:
+                    <pre><code>javac -d . StudentInfo.java StudentPer.java</code></pre>
+                </li>
+                <li><strong>Compile the program</strong>:
+                    <pre><code>javac StudentPackageDemo.java</code></pre>
+                </li>
+                <li><strong>Run the program</strong>:
+                    <pre><code>java StudentPackageDemo</code></pre>
+                </li>
+            </ol>
+        </div>
+
+    </div>
+
+</body>
+</html>
