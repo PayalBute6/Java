@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abstract Class in Java</title>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --text-color: #e2e8f0;
+            --primary-color: #38bdf8;
+            --secondary-color: #818cf8;
+            --card-bg: #1e293b;
+            --code-bg: #0f172a;
+            --accent-color: #f472b6;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            color: var(--secondary-color);
+            border-bottom: 2px solid var(--card-bg);
+            padding-bottom: 0.5rem;
+            margin-top: 2.5rem;
+        }
+
+        h3 {
+            font-size: 1.4rem;
+            color: var(--text-color);
+            margin-top: 2rem;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: fadeInUp 0.8s ease-out;
+            animation-fill-mode: both;
+        }
+        
+        .card:nth-child(2) { animation-delay: 0.1s; }
+        .card:nth-child(3) { animation-delay: 0.2s; }
+        .card:nth-child(4) { animation-delay: 0.3s; }
+        .card:nth-child(5) { animation-delay: 0.4s; }
+        .card:nth-child(6) { animation-delay: 0.5s; }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.6);
+        }
+
+        pre {
+            background-color: var(--code-bg);
+            color: #a5b4fc;
+            padding: 1.5rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            border: 1px solid #334155;
+            font-family: 'Fira Code', monospace;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.3);
+            margin: 1.5rem 0;
+            font-size: 0.95rem;
+        }
+
+        code {
+            font-family: 'Fira Code', monospace;
+            color: var(--accent-color);
+            background-color: rgba(244, 114, 182, 0.1);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+        }
+
+        .tree-diagram {
+            font-family: monospace;
+            white-space: pre;
+            background-color: var(--code-bg);
+            padding: 1.5rem;
+            border-radius: 8px;
+            color: var(--primary-color);
+            text-align: center;
+            margin: 1.5rem 0;
+            border: 1px dashed #334155;
+        }
+
+        ul {
+            list-style-type: none;
+            padding-left: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        li {
+            margin-bottom: 0.8rem;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        li::before {
+            content: '•';
+            color: var(--secondary-color);
+            position: absolute;
+            left: 0;
+            font-size: 1.2rem;
+            line-height: 1;
+        }
+
+        .highlight {
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+
+        blockquote {
+            border-left: 4px solid var(--primary-color);
+            background-color: rgba(56, 189, 248, 0.1);
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 8px 8px 0;
+            font-style: italic;
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .tag {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: #0f172a;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .note {
+            font-size: 0.9rem;
+            color: #94a3b8;
+            background: rgba(148, 163, 184, 0.1);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1.5rem;
+            border-left: 3px solid #94a3b8;
+        }
+
+    </style>
+    <!-- Add Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <span class="tag">Java OOP Concepts</span>
+        <h1>Understanding Abstract Classes</h1>
+        <p>A comprehensive guide to abstract classes and methods in Java.</p>
+    </header>
+
+    <div class="card">
+        <h2>1. Use of Abstract Class</h2>
+        <p>An abstract class is mainly used as a base class for other classes.</p>
+        
+        <h3>Main uses:</h3>
+        
+        <h4>1. To provide a common base for subclasses</h4>
+        <p>Suppose we have different banks:</p>
+        
+        <div class="tree-diagram">
+     Bank
+(Abstract Class)
+  /      \
+ /        \
+SBI       PNB
+        </div>
+        
+        <p>Both SBI and PNB are banks. So we can create a common abstract class:</p>
+        
+<pre>abstract class Bank {
+    abstract int getRateOfInterest();
+}</pre>
+
+        <p>Then:</p>
+        
+<pre>class SBI extends Bank {
+    int getRateOfInterest() {
+        return 7;
+    }
+}
+
+class PNB extends Bank {
+    int getRateOfInterest() {
+        return 8;
+    }
+}</pre>
+
+        <p>Here, <code>Bank</code> provides the common structure, while <code>SBI</code> and <code>PNB</code> provide their own specific implementations.</p>
+    </div>
+
+    <div class="card">
+        <h4>2. To prevent object creation of the base class</h4>
+        <p>An abstract class <strong>cannot be instantiated</strong>.</p>
+        
+        <p>For example:</p>
+<pre>abstract class Bank {
+}</pre>
+
+        <p>We cannot write:</p>
+<pre>Bank b = new Bank();   // ❌ Error: Bank is abstract</pre>
+
+        <p><strong>Why?</strong></p>
+        <p>Because <code>Bank</code> is only a general concept. We want objects of specific banks such as SBI or PNB.</p>
+<pre>SBI s = new SBI();     // ✅ Correct
+PNB p = new PNB();     // ✅ Correct</pre>
+
+        <div class="note">
+            <em>From the lab book:</em> An abstract class is defined as a class that cannot be instantiated and is used to create subclasses.
+        </div>
+    </div>
+
+    <div class="card">
+        <h4>3. To achieve abstraction</h4>
+        <p>An abstract class allows us to specify <strong>what</strong> a subclass must do, without specifying all the implementation.</p>
+        
+        <p>For example:</p>
+<pre>abstract class Bank {
+    abstract int getRateOfInterest();
+}</pre>
+
+        <p>Here, <code>Bank</code> says: <em>Every bank must provide getRateOfInterest().</em> But it does not specify the rate.</p>
+        
+        <ul>
+            <li><strong>SBI decides:</strong> <code>return 7;</code></li>
+            <li><strong>PNB decides:</strong> <code>return 8;</code></li>
+        </ul>
+        
+        <p>So in summary:</p>
+        <ul>
+            <li><span class="highlight">Bank</span> &rarr; tells <strong>WHAT</strong> to do</li>
+            <li><span class="highlight">SBI / PNB</span> &rarr; tell <strong>HOW</strong> to do it</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <h2>4. Use of Abstract Method</h2>
+        <p>An abstract method is used when the parent class knows that a method is required, but it does not know the exact implementation.</p>
+        
+        <h3>Example:</h3>
+<pre>abstract class Bank {
+    abstract int getRateOfInterest();
+}</pre>
+
+        <p>Here, <code>abstract int getRateOfInterest();</code> is an abstract method.</p>
+        
+        <p>It consists of:</p>
+        <ul>
+            <li><strong>return type</strong> &rarr; <code>int</code></li>
+            <li><strong>method name</strong> &rarr; <code>getRateOfInterest</code></li>
+            <li><strong>no body</strong> (No implementation details inside <code>{}</code>)</li>
+        </ul>
+        
+        <div class="note">
+            <em>From the lab book:</em> An abstract method is a method having no definition, where the definition is provided by the subclass.
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>5. Why do we use an Abstract Method?</h2>
+        <p>Suppose different banks have different interest rates.</p>
+        
+        <ul>
+            <li><strong>SBI</strong> &rarr; 7%</li>
+            <li><strong>PNB</strong> &rarr; 8%</li>
+        </ul>
+        
+        <p>If we write:</p>
+<pre>abstract class Bank {
+    abstract int getRateOfInterest();
+}</pre>
+
+        <p>We are essentially saying:</p>
+        <blockquote>
+            "Every bank must have a method to return its interest rate, but each bank can implement it differently."
+        </blockquote>
+        
+        <p>This flexibility and enforcement is the main purpose of an abstract method.</p>
+    </div>
+
+</div>
+
+</body>
+</html>
