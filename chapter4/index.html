@@ -1,0 +1,1795 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 4: Exception and File Handling</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px auto;
+            max-width: 900px;
+            padding: 0 15px;
+            color: #222;
+        }
+        h1 {
+            color: #000;
+            border-bottom: 2px solid #333;
+            padding-bottom: 8px;
+            margin-bottom: 20px;
+        }
+        h2 {
+            color: #1a237e;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 5px;
+            margin-top: 35px;
+        }
+        h3 {
+            color: #283593;
+            margin-top: 25px;
+        }
+        h4 {
+            color: #333;
+            margin-top: 18px;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 15px 0;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px 12px;
+            text-align: left;
+            vertical-align: top;
+        }
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+        tr:nth-child(even) {
+            background-color: #fafafa;
+        }
+        pre {
+            background-color: #f5f5f5;
+            border: 1px solid #ddd;
+            padding: 12px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-family: Consolas, "Courier New", monospace;
+            font-size: 13.5px;
+            line-height: 1.45;
+        }
+        code {
+            font-family: Consolas, "Courier New", monospace;
+            background-color: #f0f0f0;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-size: 13.5px;
+        }
+        pre code {
+            background-color: transparent;
+            padding: 0;
+        }
+        ul, ol {
+            padding-left: 25px;
+        }
+        li {
+            margin-bottom: 5px;
+        }
+        .exam-note {
+            background-color: #e8f5e9;
+            border-left: 4px solid #2e7d32;
+            padding: 10px 14px;
+            margin: 15px 0;
+        }
+        .output-box {
+            background-color: #fcfcfc;
+            border: 1px dashed #999;
+            padding: 10px 14px;
+            margin: 10px 0 15px 0;
+            font-family: Consolas, "Courier New", monospace;
+            font-size: 13px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Chapter 4: Exception and File Handling</h1>
+
+    <h2>4.1 Dealing with Errors</h2>
+
+    <h3>1. What is an error?</h3>
+    <p>An error is a problem that occurs in a program and prevents it from working as expected.</p>
+    <p>For example, a program may contain incorrect syntax, attempt an invalid operation, or produce an incorrect result.</p>
+    <p>There are three common categories of programming errors:</p>
+
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 25%;">Type</th>
+                <th style="width: 45%;">Meaning</th>
+                <th style="width: 30%;">Example</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Compile-time error</strong></td>
+                <td>Detected by the compiler before running the program.</td>
+                <td>Missing semicolon, misspelled keyword.</td>
+            </tr>
+            <tr>
+                <td><strong>Runtime error</strong></td>
+                <td>Occurs while the program is executing.</td>
+                <td>Dividing an integer by zero (<code>10 / 0</code>).</td>
+            </tr>
+            <tr>
+                <td><strong>Logical error</strong></td>
+                <td>The program runs but produces the wrong result.</td>
+                <td>Using <code>a - b</code> instead of <code>a + b</code>.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>2. Examples of errors</h3>
+
+    <h4>Compile-time error</h4>
+    <pre><code>class Demo {
+    public static void main(String[] args) {
+        System.out.println("Hello")
+    }
+}</code></pre>
+    <p>The semicolon is missing after the <code>println()</code> statement, so the program will not compile.</p>
+
+    <h4>Runtime error</h4>
+    <pre><code>class Demo {
+    public static void main(String[] args) {
+        int a = 10;
+        int b = 0;
+        System.out.println(a / b);
+    }
+}</code></pre>
+    <p><strong>Output:</strong> The program throws an <code>ArithmeticException</code> because integer division by zero is invalid.</p>
+
+    <h4>Logical error</h4>
+    <pre><code>class Demo {
+    public static void main(String[] args) {
+        int a = 10, b = 5;
+        System.out.println(a - b);
+    }
+}</code></pre>
+    <p><strong>Output:</strong></p>
+    <div class="output-box">5</div>
+    <p>If the requirement was to add the numbers, the program is logically incorrect even though it compiles and runs.</p>
+
+    <h3>3. What is an exception?</h3>
+    <p>An exception is an event that occurs during program execution and disrupts the normal flow of instructions.</p>
+    <p>Examples include:</p>
+    <ul>
+        <li>Dividing an integer by zero.</li>
+        <li>Accessing an invalid array index.</li>
+        <li>Trying to open a file that does not exist.</li>
+        <li>Attempting to use a method on a <code>null</code> reference.</li>
+    </ul>
+
+    <h3>4. What is exception handling?</h3>
+    <p>Exception handling is a mechanism used to detect and handle exceptional conditions so that the program can respond appropriately and continue executing without abruptly crashing.</p>
+    <p>Java provides five important keywords:</p>
+
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 20%;">Keyword</th>
+                <th style="width: 80%;">Purpose</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>try</code></td>
+                <td>Encloses code that may throw an exception.</td>
+            </tr>
+            <tr>
+                <td><code>catch</code></td>
+                <td>Handles a matching exception.</td>
+            </tr>
+            <tr>
+                <td><code>finally</code></td>
+                <td>Runs after <code>try</code>/<code>catch</code> in ordinary control flow, whether or not an exception occurred.</td>
+            </tr>
+            <tr>
+                <td><code>throw</code></td>
+                <td>Explicitly throws an exception object.</td>
+            </tr>
+            <tr>
+                <td><code>throws</code></td>
+                <td>Declares exceptions that a method or constructor may pass to its caller.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>5. Simple exception-handling program</h3>
+    <pre><code>class ExceptionDemo {
+    public static void main(String[] args) {
+        try {
+            int a = 10;
+            int b = 0;
+            System.out.println(a / b);
+        } catch (ArithmeticException e) {
+            System.out.println("Cannot divide by zero.");
+        }
+
+        System.out.println("Program continues.");
+    }
+}</code></pre>
+
+    <p><strong>Output:</strong></p>
+    <div class="output-box">
+Cannot divide by zero.<br>
+Program continues.
+    </div>
+
+    <p><strong>Explanation:</strong> The division causes an <code>ArithmeticException</code>. The <code>catch</code> block handles it, allowing execution to continue with the statement after the <code>try-catch</code> structure.</p>
+
+    <div class="exam-note">
+        <strong>Exam points:</strong>
+        <ul>
+            <li>Exception handling helps a program respond to runtime problems.</li>
+            <li><code>try</code> and <code>catch</code> are commonly used together.</li>
+            <li><code>throw</code> throws an exception; <code>throws</code> declares it.</li>
+            <li>Logical errors are not automatically handled by Java's exception mechanism.</li>
+        </ul>
+    </div>
+
+    <hr>
+
+    <h2>4.2 Exception Class</h2>
+
+    <h3>1. Exception hierarchy</h3>
+    <p>Java's exception hierarchy begins with the <code>Throwable</code> class under <code>java.lang.Object</code>. The diagram below illustrates the complete hierarchy of Java exceptions and errors:</p>
+
+    <!-- Visual Hierarchy of Java Exceptions Diagram -->
+    <div style="text-align: center; margin: 25px 0;">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 830 435" width="100%" height="auto" style="max-width: 820px; display: block; margin: 0 auto; background-color: #ffffff; border: 1px solid #dcdcdc; border-radius: 6px; padding: 15px 10px;">
+            <defs>
+                <marker id="hier-arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                    <path d="M 0 1 L 10 5 L 0 9 z" fill="#222" />
+                </marker>
+            </defs>
+
+            <!-- Title Header -->
+            <text x="415" y="30" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#b71c1c">Hierarchy of Java Exceptions</text>
+
+            <!-- Level 1: Throwable -->
+            <rect x="345" y="48" width="140" height="36" rx="4" fill="#90caf9" stroke="#1565c0" stroke-width="2"/>
+            <text x="415" y="71" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#0d47a1">Throwable</text>
+
+            <!-- Connecting Lines from Throwable to Exception & Error -->
+            <line x1="415" y1="84" x2="415" y2="106" stroke="#222" stroke-width="1.8"/>
+            <line x1="240" y1="106" x2="640" y2="106" stroke="#222" stroke-width="1.8"/>
+            <line x1="240" y1="106" x2="240" y2="124" stroke="#222" stroke-width="1.8" marker-end="url(#hier-arrow)"/>
+            <line x1="640" y1="106" x2="640" y2="124" stroke="#222" stroke-width="1.8" marker-end="url(#hier-arrow)"/>
+
+            <!-- Level 2: Exception & Error -->
+            <!-- Exception Box -->
+            <rect x="160" y="124" width="160" height="38" rx="4" fill="#e65100" stroke="#b23c00" stroke-width="2"/>
+            <text x="240" y="148" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#ffffff">Exception</text>
+
+            <!-- Error Box -->
+            <rect x="560" y="124" width="160" height="38" rx="4" fill="#0288d1" stroke="#01579b" stroke-width="2"/>
+            <text x="640" y="148" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#ffffff">Error</text>
+
+            <!-- Connecting Lines from Exception to Subclasses -->
+            <line x1="240" y1="162" x2="240" y2="178" stroke="#222" stroke-width="1.8"/>
+            <line x1="68" y1="178" x2="410" y2="178" stroke="#222" stroke-width="1.8"/>
+            <line x1="68" y1="178" x2="68" y2="194" stroke="#222" stroke-width="1.8" marker-end="url(#hier-arrow)"/>
+            <line x1="182" y1="178" x2="182" y2="194" stroke="#222" stroke-width="1.8" marker-end="url(#hier-arrow)"/>
+            <line x1="296" y1="178" x2="296" y2="194" stroke="#222" stroke-width="1.8" marker-end="url(#hier-arrow)"/>
+            <line x1="410" y1="178" x2="410" y2="194" stroke="#222" stroke-width="1.8" marker-end="url(#hier-arrow)"/>
+
+            <!-- Level 3: Exception Subclasses -->
+            <!-- I/O Exception -->
+            <rect x="16" y="194" width="104" height="44" rx="3" fill="#ffffff" stroke="#e65100" stroke-width="1.8"/>
+            <text x="68" y="221" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#bf360c">I/O Exception</text>
+
+            <!-- SQL Exception -->
+            <rect x="130" y="194" width="104" height="44" rx="3" fill="#ffffff" stroke="#e65100" stroke-width="1.8"/>
+            <text x="182" y="221" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#bf360c">SQL Exception</text>
+
+            <!-- ClassNotFound Exception -->
+            <rect x="244" y="194" width="104" height="44" rx="3" fill="#ffffff" stroke="#e65100" stroke-width="1.8"/>
+            <text x="296" y="213" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#bf360c">ClassNotFound</text>
+            <text x="296" y="229" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#bf360c">Exception</text>
+
+            <!-- Runtime Exception -->
+            <rect x="358" y="194" width="104" height="44" rx="3" fill="#ffffff" stroke="#e65100" stroke-width="1.8"/>
+            <text x="410" y="213" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#bf360c">Runtime</text>
+            <text x="410" y="229" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#bf360c">Exception</text>
+
+            <!-- Connecting Lines from Error to Subclasses -->
+            <line x1="640" y1="162" x2="640" y2="178" stroke="#222" stroke-width="1.8"/>
+            <line x1="530" y1="178" x2="750" y2="178" stroke="#222" stroke-width="1.8"/>
+            <line x1="530" y1="178" x2="530" y2="194" stroke="#222" stroke-width="1.8" marker-end="url(#hier-arrow)"/>
+            <line x1="640" y1="178" x2="640" y2="194" stroke="#222" stroke-width="1.8" marker-end="url(#hier-arrow)"/>
+            <line x1="750" y1="178" x2="750" y2="194" stroke="#222" stroke-width="1.8" marker-end="url(#hier-arrow)"/>
+
+            <!-- Level 3: Error Subclasses -->
+            <!-- Stack Overflow Error -->
+            <rect x="478" y="194" width="104" height="44" rx="3" fill="#ffffff" stroke="#0288d1" stroke-width="1.8"/>
+            <text x="530" y="212" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#01579b">Stack</text>
+            <text x="530" y="228" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#01579b">Overflow Error</text>
+
+            <!-- Virtual Machine Error -->
+            <rect x="588" y="194" width="104" height="44" rx="3" fill="#ffffff" stroke="#0288d1" stroke-width="1.8"/>
+            <text x="640" y="212" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#01579b">Virtual Machine</text>
+            <text x="640" y="228" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#01579b">Error</text>
+
+            <!-- Out of Memory Error -->
+            <rect x="698" y="194" width="104" height="44" rx="3" fill="#ffffff" stroke="#0288d1" stroke-width="1.8"/>
+            <text x="750" y="212" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#01579b">Out of</text>
+            <text x="750" y="228" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#01579b">Memory Error</text>
+
+            <!-- Connecting Lines from Runtime Exception to its Subclasses -->
+            <line x1="410" y1="238" x2="410" y2="266" stroke="#222" stroke-width="1.8"/>
+            <line x1="216" y1="266" x2="645" y2="266" stroke="#222" stroke-width="1.8"/>
+            <line x1="216" y1="266" x2="216" y2="284" stroke="#222" stroke-width="1.8" marker-end="url(#hier-arrow)"/>
+            <line x1="359" y1="266" x2="359" y2="284" stroke="#222" stroke-width="1.8" marker-end="url(#hier-arrow)"/>
+            <line x1="502" y1="266" x2="502" y2="284" stroke="#222" stroke-width="1.8" marker-end="url(#hier-arrow)"/>
+            <line x1="645" y1="266" x2="645" y2="284" stroke="#222" stroke-width="1.8" marker-end="url(#hier-arrow)"/>
+
+            <!-- Level 4: RuntimeException Subclasses -->
+            <!-- Arithmetic Exception -->
+            <rect x="151" y="284" width="130" height="44" rx="3" fill="#ffffff" stroke="#e65100" stroke-width="1.8"/>
+            <text x="216" y="303" text-anchor="middle" font-family="Arial, sans-serif" font-size="11.5" font-weight="bold" fill="#bf360c">Arithmetic</text>
+            <text x="216" y="319" text-anchor="middle" font-family="Arial, sans-serif" font-size="11.5" font-weight="bold" fill="#bf360c">Exception</text>
+
+            <!-- NullPointer Exception -->
+            <rect x="294" y="284" width="130" height="44" rx="3" fill="#ffffff" stroke="#e65100" stroke-width="1.8"/>
+            <text x="359" y="303" text-anchor="middle" font-family="Arial, sans-serif" font-size="11.5" font-weight="bold" fill="#bf360c">NullPointer</text>
+            <text x="359" y="321" text-anchor="middle" font-family="Arial, sans-serif" font-size="11.5" font-weight="bold" fill="#bf360c">Exception</text>
+
+            <!-- NumberFormat Exception -->
+            <rect x="437" y="284" width="130" height="44" rx="3" fill="#ffffff" stroke="#e65100" stroke-width="1.8"/>
+            <text x="502" y="303" text-anchor="middle" font-family="Arial, sans-serif" font-size="11.5" font-weight="bold" fill="#bf360c">NumberFormat</text>
+            <text x="502" y="319" text-anchor="middle" font-family="Arial, sans-serif" font-size="11.5" font-weight="bold" fill="#bf360c">Exception</text>
+
+            <!-- IndexOutOfBounds Exception -->
+            <rect x="580" y="284" width="130" height="44" rx="3" fill="#ffffff" stroke="#e65100" stroke-width="1.8"/>
+            <text x="645" y="303" text-anchor="middle" font-family="Arial, sans-serif" font-size="11.5" font-weight="bold" fill="#bf360c">IndexOutOfBounds</text>
+            <text x="645" y="319" text-anchor="middle" font-family="Arial, sans-serif" font-size="11.5" font-weight="bold" fill="#bf360c">Exception</text>
+
+            <!-- Connecting Lines from IndexOutOfBounds to Subclasses -->
+            <line x1="645" y1="328" x2="645" y2="354" stroke="#222" stroke-width="1.8"/>
+            <line x1="575" y1="354" x2="715" y2="354" stroke="#222" stroke-width="1.8"/>
+            <line x1="575" y1="354" x2="575" y2="372" stroke="#222" stroke-width="1.8" marker-end="url(#hier-arrow)"/>
+            <line x1="715" y1="354" x2="715" y2="372" stroke="#222" stroke-width="1.8" marker-end="url(#hier-arrow)"/>
+
+            <!-- Level 5: IndexOutOfBounds Subclasses -->
+            <!-- ArrayIndexOutOfBounds -->
+            <rect x="510" y="372" width="130" height="46" rx="3" fill="#ffffff" stroke="#e65100" stroke-width="1.8"/>
+            <text x="575" y="392" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#bf360c">Array</text>
+            <text x="575" y="408" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#bf360c">IndexOutOfBounds</text>
+
+            <!-- StringIndexOutOfBounds -->
+            <rect x="650" y="372" width="130" height="46" rx="3" fill="#ffffff" stroke="#e65100" stroke-width="1.8"/>
+            <text x="715" y="392" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#bf360c">String</text>
+            <text x="715" y="408" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#bf360c">IndexOutOfBounds</text>
+        </svg>
+    </div>
+
+    <ul>
+        <li><code>Throwable</code> is the superclass of <code>Error</code> and <code>Exception</code>.</li>
+        <li><code>Error</code> represents serious problems such as <code>OutOfMemoryError</code> (usually non-recoverable).</li>
+        <li><code>Exception</code> represents conditions that an application can handle.</li>
+        <li><code>RuntimeException</code> is a subclass of <code>Exception</code> and represents unchecked exceptions caused by programming defects.</li>
+    </ul>
+
+    <h3>2. Common exception classes</h3>
+
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 35%;">Exception</th>
+                <th style="width: 65%;">When it occurs</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>ArithmeticException</code></td>
+                <td>An invalid arithmetic operation, such as integer division by zero.</td>
+            </tr>
+            <tr>
+                <td><code>ArrayIndexOutOfBoundsException</code></td>
+                <td>An array index is outside the valid range (&lt; 0 or &ge; array length).</td>
+            </tr>
+            <tr>
+                <td><code>NullPointerException</code></td>
+                <td>Code tries to use a <code>null</code> reference in an operation that requires an object.</td>
+            </tr>
+            <tr>
+                <td><code>NumberFormatException</code></td>
+                <td>A string cannot be converted to the requested numeric type (e.g., <code>Integer.parseInt("abc")</code>).</td>
+            </tr>
+            <tr>
+                <td><code>FileNotFoundException</code></td>
+                <td>A requested file cannot be opened because it does not exist.</td>
+            </tr>
+            <tr>
+                <td><code>IOException</code></td>
+                <td>A general input/output operation fails.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>3. Exception object and its methods</h3>
+    <p>When an exception occurs, Java creates or receives an exception object containing information about the problem.</p>
+    <p>Useful methods include:</p>
+    <ul>
+        <li><code>getMessage()</code> — returns the detail message, if one was provided.</li>
+        <li><code>toString()</code> — returns a textual representation of the exception (class name + message).</li>
+        <li><code>printStackTrace()</code> — prints information showing the stack trace and where the exception occurred.</li>
+    </ul>
+
+    <p><strong>Example:</strong></p>
+    <pre><code>class Demo {
+    public static void main(String[] args) {
+        try {
+            int n = 10 / 0;
+        } catch (ArithmeticException e) {
+            System.out.println(e.getMessage());
+            System.out.println(e.toString());
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+
+    <p>The first two statements show the exception's message and type; the last prints diagnostic stack information showing the file name and line number.</p>
+
+    <hr>
+
+    <h2>4.2.1 Checked and Unchecked Exceptions</h2>
+
+    <h3>Checked exceptions</h3>
+    <p>Checked exceptions are checked by the compiler. A method must handle them using <code>try-catch</code> or declare them using <code>throws</code>, unless they are handled at a higher level.</p>
+    <p>Examples: <code>IOException</code>, <code>FileNotFoundException</code>, <code>SQLException</code>.</p>
+
+    <h3>Unchecked exceptions</h3>
+    <p>Unchecked exceptions are not required to be caught or declared by the compiler. These include <code>RuntimeException</code> and its subclasses.</p>
+    <p>Examples: <code>ArithmeticException</code>, <code>NullPointerException</code>, <code>ArrayIndexOutOfBoundsException</code>.</p>
+
+    <h3>Difference between checked and unchecked exceptions</h3>
+
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 50%;">Checked</th>
+                <th style="width: 50%;">Unchecked</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Compiler requires handling (<code>try-catch</code>) or declaration (<code>throws</code>).</td>
+                <td>Compiler does not require handling or declaration.</td>
+            </tr>
+            <tr>
+                <td>Usually subclasses of <code>Exception</code> other than <code>RuntimeException</code>.</td>
+                <td><code>RuntimeException</code> and its subclasses.</td>
+            </tr>
+            <tr>
+                <td>Example: <code>IOException</code>, <code>FileNotFoundException</code>.</td>
+                <td>Example: <code>ArithmeticException</code>, <code>NullPointerException</code>.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>Example of a checked exception</h3>
+    <pre><code>import java.io.FileReader;
+import java.io.IOException;
+
+class CheckedDemo {
+    public static void main(String[] args) {
+        try {
+            FileReader fr = new FileReader("data.txt");
+            fr.close();
+            System.out.println("File opened successfully.");
+        } catch (IOException e) {
+            System.out.println("File operation failed.");
+        }
+    }
+}</code></pre>
+    <p>If the file is missing or a file operation fails, the <code>catch</code> block handles the <code>IOException</code> or its subclass.</p>
+
+    <h3>Example of an unchecked exception</h3>
+    <pre><code>class UncheckedDemo {
+    public static void main(String[] args) {
+        int a = 10;
+        int b = 0;
+
+        try {
+            System.out.println(a / b);
+        } catch (ArithmeticException e) {
+            System.out.println("Division by zero is not allowed.");
+        }
+    }
+}</code></pre>
+
+    <p><strong>Output:</strong></p>
+    <div class="output-box">Division by zero is not allowed.</div>
+
+    <hr>
+
+    <h2>4.2.2 Logger Class</h2>
+
+    <h3>1. What is a Logger?</h3>
+    <p>The <code>Logger</code> class belongs to the <code>java.util.logging</code> package. It is used to record messages about program execution, warnings, and errors.</p>
+    <p>Logging helps programmers understand what happened when a program was running.</p>
+    <p>Import statements:</p>
+    <pre><code>import java.util.logging.Logger;
+import java.util.logging.Level;</code></pre>
+
+    <h3>2. Common logging levels</h3>
+
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 30%;">Level</th>
+                <th style="width: 70%;">Purpose</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>Level.SEVERE</code></td>
+                <td>Serious failures.</td>
+            </tr>
+            <tr>
+                <td><code>Level.WARNING</code></td>
+                <td>Potential problems.</td>
+            </tr>
+            <tr>
+                <td><code>Level.INFO</code></td>
+                <td>General information.</td>
+            </tr>
+            <tr>
+                <td><code>Level.FINE</code></td>
+                <td>Detailed debugging information.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>3. Example program</h3>
+    <pre><code>import java.util.logging.Logger;
+import java.util.logging.Level;
+
+class LoggerDemo {
+    private static final Logger log =
+        Logger.getLogger(LoggerDemo.class.getName());
+
+    public static void main(String[] args) {
+        log.info("Program started.");
+
+        try {
+            int result = 10 / 0;
+            System.out.println(result);
+        } catch (ArithmeticException e) {
+            log.log(Level.SEVERE, "Division failed.", e);
+        }
+
+        log.info("Program finished.");
+    }
+}</code></pre>
+
+    <p><strong>Explanation:</strong></p>
+    <ul>
+        <li><code>Logger.getLogger()</code> obtains a logger instance for the class.</li>
+        <li><code>log.info()</code> records an informational message.</li>
+        <li><code>log.log(Level.SEVERE, ..., e)</code> records a serious problem along with exception details.</li>
+    </ul>
+
+    <div class="exam-note">
+        <strong>Exam point:</strong> <code>System.out.println()</code> displays simple console output, whereas a logger records diagnostic messages with timestamp, class, and specified log levels.
+    </div>
+
+    <hr>
+
+    <h2>4.2.3 Catching Exceptions</h2>
+    <p>An exception can be caught by placing potentially failing code inside a <code>try</code> block and providing a suitable <code>catch</code> block.</p>
+
+    <h3>Syntax</h3>
+    <pre><code>try {
+    // Code that may cause an exception
+} catch (ExceptionType e) {
+    // Exception-handling code
+}</code></pre>
+
+    <h3>Example</h3>
+    <pre><code>class CatchDemo {
+    public static void main(String[] args) {
+        try {
+            int a = 20;
+            int b = 0;
+            int c = a / b;
+            System.out.println(c);
+        } catch (ArithmeticException e) {
+            System.out.println("Arithmetic error occurred.");
+        }
+
+        System.out.println("End of program.");
+    }
+}</code></pre>
+
+    <p><strong>Output:</strong></p>
+    <div class="output-box">
+Arithmetic error occurred.<br>
+End of program.
+    </div>
+
+    <h3>Role of <code>finally</code></h3>
+    <p>The <code>finally</code> block is commonly used for cleanup, such as closing resources.</p>
+
+    <pre><code>class FinallyDemo {
+    public static void main(String[] args) {
+        try {
+            int a = 10 / 0;
+        } catch (ArithmeticException e) {
+            System.out.println("Exception handled.");
+        } finally {
+            System.out.println("Finally block executed.");
+        }
+    }
+}</code></pre>
+
+    <p><strong>Output:</strong></p>
+    <div class="output-box">
+Exception handled.<br>
+Finally block executed.
+    </div>
+    <p>The <code>finally</code> block normally executes whether or not an exception occurs. It may not execute if the JVM terminates abruptly (e.g. <code>System.exit(0)</code>).</p>
+
+    <hr>
+
+    <h2>4.2.4 Multiple Catch Block</h2>
+
+    <h3>Definition</h3>
+    <p>A multiple catch structure has more than one <code>catch</code> block associated with a single <code>try</code> block. Each catch handles a different type of exception.</p>
+
+    <h3>Syntax</h3>
+    <pre><code>try {
+    // Risky code
+} catch (ArithmeticException e) {
+    // Handle arithmetic exception
+} catch (ArrayIndexOutOfBoundsException e) {
+    // Handle array exception
+} catch (Exception e) {
+    // Handle other matching exceptions
+}</code></pre>
+
+    <p><strong>Important:</strong> A general exception such as <code>Exception</code> must come after its more specific subclasses. Otherwise, the later catch block will be unreachable and cause a compile-time error.</p>
+
+    <h3>Example program</h3>
+    <pre><code>class MultipleCatchDemo {
+    public static void main(String[] args) {
+        int choice = 2;
+
+        try {
+            switch (choice) {
+                case 1:
+                    System.out.println(10 / 0);
+                    break;
+
+                case 2:
+                    int arr[] = {10, 20, 30};
+                    System.out.println(arr[5]);
+                    break;
+
+                default:
+                    System.out.println("Valid choice.");
+            }
+        } catch (ArithmeticException e) {
+            System.out.println("Arithmetic exception occurred.");
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("Invalid array index.");
+        }
+
+        System.out.println("Program completed.");
+    }
+}</code></pre>
+
+    <p><strong>Output:</strong></p>
+    <div class="output-box">
+Invalid array index.<br>
+Program completed.
+    </div>
+    <p>The value of <code>choice</code> is <code>2</code>, so the array exception occurs and is handled by the second catch block.</p>
+
+    <h3>Difference: Single catch and multiple catch</h3>
+
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 50%;">Single catch</th>
+                <th style="width: 50%;">Multiple catch</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>One catch block handles a matching exception.</td>
+                <td>Several catch blocks can handle different exception types.</td>
+            </tr>
+            <tr>
+                <td>Suitable for a simple exception-handling case.</td>
+                <td>Suitable when different failures require different responses.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <hr>
+
+    <h2>4.2.5 Nested try Block</h2>
+
+    <h3>Definition</h3>
+    <p>A nested <code>try</code> block is a <code>try</code> block placed inside another <code>try</code> block.</p>
+    <p>It is useful when separate sections of code require separate exception handling.</p>
+
+    <h3>Example</h3>
+    <pre><code>class NestedTryDemo {
+    public static void main(String[] args) {
+        try {
+            System.out.println("Outer try started.");
+
+            try {
+                int a = 10 / 0;
+            } catch (ArithmeticException e) {
+                System.out.println("Division by zero.");
+            }
+
+            int arr[] = {10, 20, 30};
+            System.out.println(arr[5]);
+
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("Invalid array index.");
+        }
+
+        System.out.println("Program completed.");
+    }
+}</code></pre>
+
+    <p><strong>Output:</strong></p>
+    <div class="output-box">
+Outer try started.<br>
+Division by zero.<br>
+Invalid array index.<br>
+Program completed.
+    </div>
+
+    <h3>Explanation</h3>
+    <ol>
+        <li>The outer <code>try</code> starts.</li>
+        <li>The inner <code>try</code> attempts division by zero.</li>
+        <li>The inner <code>catch</code> handles the arithmetic exception.</li>
+        <li>Execution continues inside the outer <code>try</code>.</li>
+        <li>Accessing <code>arr[5]</code> causes an array-index exception.</li>
+        <li>The outer <code>catch</code> handles that exception.</li>
+    </ol>
+
+    <hr>
+
+    <h2>4.2.6 Creating User-Defined Exception</h2>
+    <p>A user-defined exception is an exception class created by the programmer to represent a specific application rule.</p>
+
+    <h3>Steps</h3>
+    <ol>
+        <li>Create a class for the exception.</li>
+        <li>Extend <code>Exception</code> for a checked exception.</li>
+        <li>Define a constructor for the message.</li>
+        <li>Use <code>throw</code> to throw an exception object.</li>
+        <li>Use <code>throws</code> to declare the checked exception.</li>
+        <li>Handle it using <code>try-catch</code>.</li>
+    </ol>
+
+    <h3>Example: Driver age validation</h3>
+    <pre><code>class AgeException extends Exception {
+    AgeException(String msg) {
+        super(msg);
+    }
+}
+
+class Driver {
+    int license_no, age;
+    String name, address;
+
+    Driver(int l, String n, String addr, int a)
+            throws AgeException {
+
+        if (a &lt; 18) {
+            throw new AgeException("Age is below 18 years");
+        }
+
+        license_no = l;
+        name = n;
+        address = addr;
+        age = a;
+
+        System.out.println(
+            "Driver " + name + " created successfully."
+        );
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        try {
+            Driver d1 =
+                new Driver(123, "Raju", "Pune", 16);
+        } catch (AgeException e) {
+            System.out.println(
+                "Exception: " + e.getMessage()
+            );
+        }
+    }
+}</code></pre>
+
+    <p><strong>Output:</strong></p>
+    <div class="output-box">Exception: Age is below 18 years</div>
+
+    <h3>Important keywords</h3>
+    <ul>
+        <li><code>extends Exception</code>: creates a checked custom exception.</li>
+        <li><code>super(msg)</code>: passes the message to the superclass constructor.</li>
+        <li><code>throw</code>: explicitly throws the exception object.</li>
+        <li><code>throws</code>: declares a possible exception in the constructor or method.</li>
+        <li><code>getMessage()</code>: returns the exception message.</li>
+    </ul>
+
+    <hr>
+
+    <h1>Part II — File Handling</h1>
+
+    <h2>4.3 Introduction to Files and Streams</h2>
+
+    <h3>1. What is a file?</h3>
+    <p>A file is a named location used to store related information permanently on a storage device.</p>
+    <p>Examples: <code>student.txt</code>, <code>marks.txt</code>, <code>photo.jpg</code>.</p>
+    <p>A file allows information to remain available even after a program terminates.</p>
+
+    <h3>2. What is file handling?</h3>
+    <p>File handling is the process of creating, reading, writing, appending, and deleting files through a program.</p>
+    <p>Java provides many file-handling classes in the <code>java.io</code> package.</p>
+
+    <h3>3. What is a stream?</h3>
+    <p>A stream is a sequence or flow of data between a source and a destination.</p>
+    <ul>
+        <li>An input stream reads data from a source into memory.</li>
+        <li>An output stream writes data from memory to a destination.</li>
+    </ul>
+    <p>Examples of sources and destinations include files, consoles, arrays, and sockets.</p>
+
+    <h3>4. Sequential and random access</h3>
+    <p><strong>Sequential access:</strong> Data is processed in sequence, usually from the beginning towards the end.</p>
+    <p><strong>Random access:</strong> Data can be accessed at a specific position using a file pointer. Java provides <code>RandomAccessFile</code> for random access.</p>
+
+    <h3>5. File class</h3>
+    <p>The <code>File</code> class represents a file or directory path. It can be used to inspect and manage file-system entries.</p>
+
+    <pre><code>import java.io.File;
+
+class FileClass {
+    public static void main(String[] args) {
+        File f = new File("sample.txt");
+
+        System.out.println("Name = " + f.getName());
+        System.out.println("Path = " + f.getPath());
+        System.out.println("Is file = " + f.isFile());
+        System.out.println("Size = " + f.length());
+    }
+}</code></pre>
+
+    <p>The result depends on whether <code>sample.txt</code> exists and its contents.</p>
+
+    <h3>Common File class methods</h3>
+
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 35%;">Method</th>
+                <th style="width: 65%;">Purpose</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>getName()</code></td>
+                <td>Returns the name of the file or directory.</td>
+            </tr>
+            <tr>
+                <td><code>getParent()</code></td>
+                <td>Returns the parent path, or <code>null</code>.</td>
+            </tr>
+            <tr>
+                <td><code>length()</code></td>
+                <td>Returns file size in bytes.</td>
+            </tr>
+            <tr>
+                <td><code>isFile()</code></td>
+                <td>Checks whether the path represents a normal file.</td>
+            </tr>
+            <tr>
+                <td><code>getPath()</code></td>
+                <td>Returns the path.</td>
+            </tr>
+            <tr>
+                <td><code>isDirectory()</code></td>
+                <td>Checks whether the path represents a directory.</td>
+            </tr>
+            <tr>
+                <td><code>isAbsolute()</code></td>
+                <td>Checks whether the path is absolute.</td>
+            </tr>
+            <tr>
+                <td><code>isHidden()</code></td>
+                <td>Checks whether the file is hidden.</td>
+            </tr>
+            <tr>
+                <td><code>createNewFile()</code></td>
+                <td>Creates a new empty file if absent.</td>
+            </tr>
+            <tr>
+                <td><code>delete()</code></td>
+                <td>Attempts to delete a file or directory.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>Creating a file</h3>
+    <pre><code>import java.io.File;
+import java.io.IOException;
+
+class CreateFileDemo {
+    public static void main(String[] args) {
+        try {
+            File f = new File("test.txt");
+
+            if (f.createNewFile()) {
+                System.out.println("File created.");
+            } else {
+                System.out.println("File already exists.");
+            }
+        } catch (IOException e) {
+            System.out.println("File creation failed.");
+        }
+    }
+}</code></pre>
+
+    <h3>Deleting a file</h3>
+    <pre><code>import java.io.File;
+
+class DeleteFileDemo {
+    public static void main(String[] args) {
+        File f = new File("test.txt");
+
+        if (f.delete()) {
+            System.out.println("File deleted.");
+        } else {
+            System.out.println("Unable to delete file.");
+        }
+    }
+}</code></pre>
+    <p><em>Note: Run deletion programs only on test files that you intend to remove.</em></p>
+
+    <hr>
+
+    <h2>4.5 Input-Output Streams</h2>
+    <p>A <strong>stream</strong> in Java is a sequence of data flowing from a source to a destination.</p>
+
+    <h3>1. Input Stream</h3>
+    <p>An <strong>Input Stream</strong> is used to read data from a file, keyboard, or another source into a Java program.<br>
+    <em>In simple words: It brings data into the program.</em></p>
+
+    <h3>2. Output Stream</h3>
+    <p>An <strong>Output Stream</strong> is used to write data from a Java program to a file or another destination.<br>
+    <em>In simple words: It sends data out of the program.</em></p>
+
+    <h3>3. Byte Streams</h3>
+    <p><strong>Byte Streams</strong> are used to read and write data in the form of bytes. They are mainly used for files such as images, audio, videos, and other binary files.<br>
+    Main abstract classes: <code>InputStream</code> and <code>OutputStream</code>.<br>
+    Examples: <code>FileInputStream</code>, <code>FileOutputStream</code>, <code>BufferedInputStream</code>, <code>BufferedOutputStream</code>.</p>
+
+    <h3>4. Character Streams</h3>
+    <p><strong>Character Streams</strong> are used to read and write data in the form of characters. They are mainly used for handling text files.<br>
+    Main abstract classes: <code>Reader</code> and <code>Writer</code>.<br>
+    Examples: <code>FileReader</code>, <code>FileWriter</code>, <code>BufferedReader</code>, <code>BufferedWriter</code>.</p>
+
+    <h3>Standard streams</h3>
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 30%;">Stream</th>
+                <th style="width: 70%;">Purpose</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>System.in</code></td>
+                <td>Standard input, usually the keyboard.</td>
+            </tr>
+            <tr>
+                <td><code>System.out</code></td>
+                <td>Standard output, usually the console.</td>
+            </tr>
+            <tr>
+                <td><code>System.err</code></td>
+                <td>Standard error output.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <hr>
+
+    <h2>4.5.1 InputStream</h2>
+    <p>An <strong>Input Stream</strong> is used to read data from a file, keyboard, or another source into a Java program.<br>
+    <em>In simple words: It brings data into the program.</em></p>
+    <p><code>InputStream</code> is an abstract class used to read raw bytes of data from a source.</p>
+
+    <h3>Important methods</h3>
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 40%;">Method</th>
+                <th style="width: 60%;">Purpose</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>read()</code></td>
+                <td>Reads one byte; returns <code>-1</code> at end of stream.</td>
+            </tr>
+            <tr>
+                <td><code>read(byte[] arr)</code></td>
+                <td>Reads bytes into an array.</td>
+            </tr>
+            <tr>
+                <td><code>read(byte[] arr, int off, int len)</code></td>
+                <td>Reads bytes into a selected array range.</td>
+            </tr>
+            <tr>
+                <td><code>available()</code></td>
+                <td>Estimates bytes readable without blocking.</td>
+            </tr>
+            <tr>
+                <td><code>reset()</code></td>
+                <td>Returns to a marked position if supported.</td>
+            </tr>
+            <tr>
+                <td><code>close()</code></td>
+                <td>Closes the stream and releases system resources.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <hr>
+
+    <h2>4.5.3 FileInputStream</h2>
+    <p><strong>FileInputStream</strong> is a Java class used to read data from a file in the form of bytes.</p>
+
+    <h3>Example: Reading a file</h3>
+    <p>Create <code>abc.txt</code> containing: <code>Sachin is my favourite player</code></p>
+
+    <pre><code>import java.io.*;
+
+class SimpleRead {
+    public static void main(String[] args) {
+        try {
+            FileInputStream fin =
+                new FileInputStream("abc.txt");
+
+            int i;
+
+            while ((i = fin.read()) != -1) {
+                System.out.print((char) i);
+            }
+
+            fin.close();
+        } catch (IOException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+}</code></pre>
+
+    <p><strong>Output:</strong></p>
+    <div class="output-box">Sachin is my favourite player</div>
+
+    <p><strong>Explanation:</strong></p>
+    <ul>
+        <li><code>FileInputStream</code> opens the file for reading.</li>
+        <li><code>read()</code> returns one byte at a time as an integer.</li>
+        <li><code>-1</code> indicates the end of the stream (EOF).</li>
+        <li><code>close()</code> closes the stream.</li>
+    </ul>
+
+    <hr>
+
+    <h2>4.5.2 OutputStream</h2>
+    <p>An <strong>Output Stream</strong> is used to write data from a Java program to a file or another destination.<br>
+    <em>In simple words: It sends data out of the program.</em></p>
+    <p><code>OutputStream</code> is an abstract class used to write bytes to a destination.</p>
+
+    <h3>Important methods</h3>
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 40%;">Method</th>
+                <th style="width: 60%;">Purpose</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>write(int b)</code></td>
+                <td>Writes a single byte.</td>
+            </tr>
+            <tr>
+                <td><code>write(byte[] arr)</code></td>
+                <td>Writes an array of bytes.</td>
+            </tr>
+            <tr>
+                <td><code>write(byte[] arr, int off, int len)</code></td>
+                <td>Writes part of a byte array.</td>
+            </tr>
+            <tr>
+                <td><code>flush()</code></td>
+                <td>Forces buffered output to be passed to the underlying destination.</td>
+            </tr>
+            <tr>
+                <td><code>close()</code></td>
+                <td>Closes the stream.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <hr>
+
+    <h2>4.5.4 FileOutputStream</h2>
+    <p><strong>FileOutputStream</strong> is a Java class used to write data into a file in the form of bytes.</p>
+
+    <h3>Example: Writing to a file</h3>
+    <pre><code>import java.io.*;
+
+class WriteFileDemo {
+    public static void main(String[] args) {
+        try {
+            FileOutputStream fout =
+                new FileOutputStream("abc.txt");
+
+            String s = "Sachin Tendulkar is my favourite player";
+            byte[] b = s.getBytes();
+
+            fout.write(b);
+            fout.close();
+
+            System.out.println("Successfully written.");
+        } catch (IOException e) {
+            System.out.println("File error.");
+        }
+    }
+}</code></pre>
+
+    <p><strong>Output:</strong></p>
+    <div class="output-box">Successfully written.</div>
+    <p>The text is written into <code>abc.txt</code>.</p>
+
+    <p><strong>Important:</strong> <code>new FileOutputStream("abc.txt")</code> overwrites existing contents. To append, pass <code>true</code>:</p>
+    <pre><code>FileOutputStream fout = new FileOutputStream("abc.txt", true);</code></pre>
+
+    <hr>
+
+    <h2>4.5.5 BufferedInputStream</h2>
+    <p><strong>BufferedInputStream</strong> is a Java class used to read bytes efficiently by temporarily storing data in a memory buffer.</p>
+
+    <h3>Constructors</h3>
+    <pre><code>BufferedInputStream(InputStream in)
+BufferedInputStream(InputStream in, int size)</code></pre>
+
+    <h3>Example</h3>
+    <pre><code>import java.io.*;
+
+class BufferedReadDemo {
+    public static void main(String[] args) {
+        try {
+            FileInputStream fin =
+                new FileInputStream("abc.txt");
+
+            BufferedInputStream bin =
+                new BufferedInputStream(fin);
+
+            int ch;
+
+            while ((ch = bin.read()) != -1) {
+                System.out.print((char) ch);
+            }
+
+            bin.close();
+        } catch (IOException e) {
+            System.out.println("File error.");
+        }
+    }
+}</code></pre>
+
+    <hr>
+
+    <h2>4.5.6 BufferedOutputStream</h2>
+    <p><strong>BufferedOutputStream</strong> is a Java class used to write bytes efficiently by temporarily storing data in a memory buffer.</p>
+
+    <h3>Example</h3>
+    <pre><code>import java.io.*;
+
+class BufferedWriteDemo {
+    public static void main(String[] args) {
+        try {
+            FileOutputStream fout =
+                new FileOutputStream("output.txt");
+
+            BufferedOutputStream bout =
+                new BufferedOutputStream(fout);
+
+            String s = "Welcome to Java";
+            bout.write(s.getBytes());
+
+            bout.close();
+
+            System.out.println("Data written successfully.");
+        } catch (IOException e) {
+            System.out.println("File error.");
+        }
+    }
+}</code></pre>
+
+    <p><strong>Output:</strong></p>
+    <div class="output-box">Data written successfully.</div>
+    <p>Closing the buffered stream flushes pending output and closes its underlying stream.</p>
+
+    <hr>
+
+    <h2>4.5.7 DataInputStream</h2>
+    <p><strong>Data Streams:</strong> Data Streams are used to read and write Java primitive data types, such as integers, floating-point numbers, and booleans, in binary form.</p>
+    <p><strong>DataInputStream</strong> is a Java class used to read primitive data types such as int, float, double, and boolean from an input stream.</p>
+
+    <h3>Important methods</h3>
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 35%;">Method</th>
+                <th style="width: 65%;">Purpose</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>readInt()</code></td>
+                <td>Reads an integer (4 bytes).</td>
+            </tr>
+            <tr>
+                <td><code>readDouble()</code></td>
+                <td>Reads a double (8 bytes).</td>
+            </tr>
+            <tr>
+                <td><code>readFloat()</code></td>
+                <td>Reads a float (4 bytes).</td>
+            </tr>
+            <tr>
+                <td><code>readLong()</code></td>
+                <td>Reads a long (8 bytes).</td>
+            </tr>
+            <tr>
+                <td><code>readBoolean()</code></td>
+                <td>Reads a boolean (1 byte).</td>
+            </tr>
+            <tr>
+                <td><code>readChar()</code></td>
+                <td>Reads a character (2 bytes).</td>
+            </tr>
+            <tr>
+                <td><code>readUTF()</code></td>
+                <td>Reads a string in Java's modified UTF-8 format.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <hr>
+
+    <h2>4.5.8 DataOutputStream</h2>
+    <p><strong>DataOutputStream</strong> is a Java class used to write primitive data types such as int, float, double, and boolean to an output stream.</p>
+    <p>Methods include: <code>writeInt()</code>, <code>writeDouble()</code>, <code>writeFloat()</code>, <code>writeLong()</code>, <code>writeBoolean()</code>, <code>writeChar()</code>, and <code>writeUTF()</code>.</p>
+
+    <h3>Complete example: Writing and reading data</h3>
+    <pre><code>import java.io.*;
+
+class DataStreamDemo {
+    public static void main(String[] args) {
+        try {
+            DataOutputStream out =
+                new DataOutputStream(
+                    new FileOutputStream("data.dat")
+                );
+
+            out.writeInt(101);
+            out.writeDouble(85.5);
+            out.writeUTF("Payal");
+            out.close();
+
+            DataInputStream in =
+                new DataInputStream(
+                    new FileInputStream("data.dat")
+                );
+
+            int id = in.readInt();
+            double marks = in.readDouble();
+            String name = in.readUTF();
+            in.close();
+
+            System.out.println("ID: " + id);
+            System.out.println("Marks: " + marks);
+            System.out.println("Name: " + name);
+
+        } catch (IOException e) {
+            System.out.println("File error.");
+        }
+    }
+}</code></pre>
+
+    <p><strong>Output:</strong></p>
+    <div class="output-box">
+ID: 101<br>
+Marks: 85.5<br>
+Name: Payal
+    </div>
+    <p><strong>Important rule:</strong> Data must be read in the exact same order and with the exact same types in which it was written.</p>
+
+    <hr>
+
+    <h2>4.6 Reader and Writer</h2>
+    <p><strong>Character Streams</strong> are used to read and write data in the form of characters. They are mainly used for handling text files.</p>
+
+    <h3>1. What is Reader?</h3>
+    <p><code>Reader</code> is an abstract class used for character-based input (16-bit characters). Subclasses include:</p>
+    <ul>
+        <li><code>FileReader</code></li>
+        <li><code>BufferedReader</code></li>
+        <li><code>InputStreamReader</code></li>
+        <li><code>CharArrayReader</code></li>
+        <li><code>StringReader</code></li>
+    </ul>
+
+    <h3>2. What is Writer?</h3>
+    <p><code>Writer</code> is an abstract class used for character-based output. Subclasses include:</p>
+    <ul>
+        <li><code>FileWriter</code></li>
+        <li><code>BufferedWriter</code></li>
+        <li><code>OutputStreamWriter</code></li>
+        <li><code>CharArrayWriter</code></li>
+        <li><code>StringWriter</code></li>
+    </ul>
+
+    <h3>Difference between Reader/Writer and InputStream/OutputStream</h3>
+
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 50%;">Reader and Writer</th>
+                <th style="width: 50%;">InputStream and OutputStream</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Character-oriented (16-bit).</td>
+                <td>Byte-oriented (8-bit).</td>
+            </tr>
+            <tr>
+                <td>Suitable for text processing and Unicode.</td>
+                <td>Suitable for raw bytes and binary data (images, audio).</td>
+            </tr>
+            <tr>
+                <td>Examples: <code>FileReader</code>, <code>FileWriter</code>.</td>
+                <td>Examples: <code>FileInputStream</code>, <code>FileOutputStream</code>.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <hr>
+
+    <h2>4.6.1 FileReader</h2>
+    <p><strong>FileReader</strong> is a Java class used to read characters from a text file.</p>
+
+    <h3>Example: Reading a file</h3>
+    <pre><code>import java.io.*;
+
+class FileReaderDemo {
+    public static void main(String[] args) {
+        try {
+            FileReader fr = new FileReader("input.txt");
+
+            int ch;
+
+            while ((ch = fr.read()) != -1) {
+                System.out.print((char) ch);
+            }
+
+            fr.close();
+        } catch (IOException e) {
+            System.out.println("Unable to read file.");
+        }
+    }
+}</code></pre>
+    <p>If <code>input.txt</code> contains <code>Hello Java</code>, the output is: <code>Hello Java</code>.</p>
+
+    <hr>
+
+    <h2>4.6.2 FileWriter</h2>
+    <p><strong>FileWriter</strong> is a Java class used to write characters or text into a file.</p>
+
+    <h3>Example: Writing a file</h3>
+    <pre><code>import java.io.*;
+
+class FileWriterDemo {
+    public static void main(String[] args) {
+        try {
+            FileWriter fw = new FileWriter("output.txt");
+
+            fw.write("I love Java programming.");
+            fw.close();
+
+            System.out.println("Data written successfully.");
+        } catch (IOException e) {
+            System.out.println("Unable to write file.");
+        }
+    }
+}</code></pre>
+
+    <p><strong>Output:</strong></p>
+    <div class="output-box">Data written successfully.</div>
+    <p>To append text rather than overwrite: <code>FileWriter fw = new FileWriter("output.txt", true);</code></p>
+
+    <hr>
+
+    <h2>4.6.3 BufferedReader</h2>
+    <p><strong>BufferedReader</strong> is a Java class used to read text efficiently using a buffer. It can also read an entire line at a time.</p>
+
+    <h3>Important methods</h3>
+    <ul>
+        <li><code>read()</code> — reads one character.</li>
+        <li><code>readLine()</code> — reads a line of text, or returns <code>null</code> at end of file.</li>
+        <li><code>close()</code> — closes the reader.</li>
+    </ul>
+
+    <h3>Example: Reading line by line</h3>
+    <pre><code>import java.io.*;
+
+class BufferedReaderDemo {
+    public static void main(String[] args) {
+        try {
+            BufferedReader br =
+                new BufferedReader(
+                    new FileReader("input.txt")
+                );
+
+            String line;
+
+            while ((line = br.readLine()) != null) {
+                System.out.println(line);
+            }
+
+            br.close();
+        } catch (IOException e) {
+            System.out.println("Unable to read file.");
+        }
+    }
+}</code></pre>
+
+    <p>If the file contains:</p>
+    <div class="output-box">
+Welcome to Java<br>
+File handling is useful
+    </div>
+    <p>The program will print each line as read.</p>
+
+    <hr>
+
+    <h2>4.6.4 BufferedWriter</h2>
+    <p><strong>BufferedWriter</strong> is a Java class used to write text efficiently using a buffer.</p>
+
+    <h3>Important methods</h3>
+    <ul>
+        <li><code>write(String s)</code> — writes a string.</li>
+        <li><code>newLine()</code> — writes a platform-independent line separator.</li>
+        <li><code>flush()</code> — flushes buffered characters.</li>
+        <li><code>close()</code> — flushes and closes the writer.</li>
+    </ul>
+
+    <h3>Example</h3>
+    <pre><code>import java.io.*;
+
+class BufferedWriterDemo {
+    public static void main(String[] args) {
+        try {
+            BufferedWriter bw =
+                new BufferedWriter(
+                    new FileWriter("output.txt")
+                );
+
+            bw.write("Welcome to Java");
+            bw.newLine();
+            bw.write("Learn file handling");
+
+            bw.close();
+
+            System.out.println("File written successfully.");
+        } catch (IOException e) {
+            System.out.println("File error.");
+        }
+    }
+}</code></pre>
+
+    <p><strong>Output:</strong></p>
+    <div class="output-box">File written successfully.</div>
+
+    <hr>
+
+    <h2>4.6.5 InputStreamReader</h2>
+    <p><strong>Conversion Streams:</strong> Conversion streams act as a bridge between byte streams and character streams.</p>
+    <p><strong>InputStreamReader</strong> is a Java class used to convert byte data into character data while reading.</p>
+
+    <h3>Example</h3>
+    <pre><code>import java.io.*;
+import java.nio.charset.StandardCharsets;
+
+class InputStreamReaderDemo {
+    public static void main(String[] args) {
+        try {
+            InputStreamReader reader =
+                new InputStreamReader(
+                    new FileInputStream("input.txt"),
+                    StandardCharsets.UTF_8
+                );
+
+            int ch;
+
+            while ((ch = reader.read()) != -1) {
+                System.out.print((char) ch);
+            }
+
+            reader.close();
+        } catch (IOException e) {
+            System.out.println("Input error.");
+        }
+    }
+}</code></pre>
+
+    <hr>
+
+    <h2>4.6.6 OutputStreamWriter</h2>
+    <p><strong>OutputStreamWriter</strong> is a Java class used to convert character data into byte data while writing.</p>
+
+    <h3>Example</h3>
+    <pre><code>import java.io.*;
+import java.nio.charset.StandardCharsets;
+
+class OutputStreamWriterDemo {
+    public static void main(String[] args) {
+        try {
+            OutputStreamWriter writer =
+                new OutputStreamWriter(
+                    new FileOutputStream("output.txt"),
+                    StandardCharsets.UTF_8
+                );
+
+            writer.write("Hello Java");
+            writer.close();
+
+            System.out.println("File written successfully.");
+        } catch (IOException e) {
+            System.out.println("Output error.");
+        }
+    }
+}</code></pre>
+
+    <p><strong>Output:</strong></p>
+    <div class="output-box">File written successfully.</div>
+
+    <hr>
+
+    <h2>Additional Important Topic: RandomAccessFile</h2>
+    <p><code>RandomAccessFile</code> allows reading and writing at specific byte positions in a file using a movable file pointer.</p>
+
+    <h3>Access modes</h3>
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 25%;">Mode</th>
+                <th style="width: 75%;">Meaning</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>"r"</code></td>
+                <td>Read-only mode.</td>
+            </tr>
+            <tr>
+                <td><code>"rw"</code></td>
+                <td>Read and write mode.</td>
+            </tr>
+            <tr>
+                <td><code>"rws"</code></td>
+                <td>Read and write, with content and metadata updates synchronously written.</td>
+            </tr>
+            <tr>
+                <td><code>"rwd"</code></td>
+                <td>Read and write, with content updates synchronously written.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>Important methods</h3>
+    <ul>
+        <li><code>seek(long pos)</code> — moves the file pointer to a byte position.</li>
+        <li><code>read()</code> — reads the next byte.</li>
+        <li><code>write(int b)</code> — writes a byte.</li>
+        <li><code>length()</code> — returns the file length.</li>
+    </ul>
+
+    <h3>Example</h3>
+    <pre><code>import java.io.*;
+
+class RandomAccessDemo {
+    public static void main(String[] args) {
+        try (RandomAccessFile f =
+                 new RandomAccessFile("sample.txt", "rw")) {
+
+            f.writeUTF("Java Programming");
+
+            f.seek(0);
+
+            System.out.println(f.readUTF());
+
+        } catch (IOException e) {
+            System.out.println("File error.");
+        }
+    }
+}</code></pre>
+
+    <p><strong>Output:</strong></p>
+    <div class="output-box">Java Programming</div>
+
+    <hr>
+
+    <h1>Chapter 4 — Quick Revision Tables</h1>
+
+    <h2>1. Most Important Classes</h2>
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 35%;">Class</th>
+                <th style="width: 65%;">Main purpose</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>File</code></td>
+                <td>Represents a file or directory path.</td>
+            </tr>
+            <tr>
+                <td><code>FileInputStream</code></td>
+                <td>Reads bytes from a file.</td>
+            </tr>
+            <tr>
+                <td><code>FileOutputStream</code></td>
+                <td>Writes bytes to a file.</td>
+            </tr>
+            <tr>
+                <td><code>BufferedInputStream</code></td>
+                <td>Buffers byte input.</td>
+            </tr>
+            <tr>
+                <td><code>BufferedOutputStream</code></td>
+                <td>Buffers byte output.</td>
+            </tr>
+            <tr>
+                <td><code>DataInputStream</code></td>
+                <td>Reads primitive data types.</td>
+            </tr>
+            <tr>
+                <td><code>DataOutputStream</code></td>
+                <td>Writes primitive data types.</td>
+            </tr>
+            <tr>
+                <td><code>FileReader</code></td>
+                <td>Reads character data from a file.</td>
+            </tr>
+            <tr>
+                <td><code>FileWriter</code></td>
+                <td>Writes character data to a file.</td>
+            </tr>
+            <tr>
+                <td><code>BufferedReader</code></td>
+                <td>Buffers character input and reads lines.</td>
+            </tr>
+            <tr>
+                <td><code>BufferedWriter</code></td>
+                <td>Buffers character output.</td>
+            </tr>
+            <tr>
+                <td><code>InputStreamReader</code></td>
+                <td>Decodes bytes into characters.</td>
+            </tr>
+            <tr>
+                <td><code>OutputStreamWriter</code></td>
+                <td>Encodes characters into bytes.</td>
+            </tr>
+            <tr>
+                <td><code>RandomAccessFile</code></td>
+                <td>Reads or writes at selected file positions.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>2. Important Differences to Prepare for Exams</h2>
+    <ol>
+        <li>Checked vs unchecked exceptions.</li>
+        <li><code>throw</code> vs <code>throws</code>.</li>
+        <li>Multiple catch vs nested <code>try</code>.</li>
+        <li>Byte streams vs character streams.</li>
+        <li><code>FileInputStream</code> vs <code>FileReader</code>.</li>
+        <li><code>FileOutputStream</code> vs <code>FileWriter</code>.</li>
+        <li><code>BufferedInputStream</code> vs <code>BufferedReader</code>.</li>
+        <li><code>DataInputStream</code> vs <code>DataOutputStream</code>.</li>
+        <li>Sequential access vs random access.</li>
+        <li><code>InputStreamReader</code> vs <code>OutputStreamWriter</code>.</li>
+    </ol>
+
+    <h2>3. Important Practical Programs</h2>
+    <ul>
+        <li>Display file name, path, length, and status using the <code>File</code> class.</li>
+        <li>Create and delete a file.</li>
+        <li>Read a text file using <code>FileInputStream</code>.</li>
+        <li>Write text using <code>FileOutputStream</code>.</li>
+        <li>Read a file line by line using <code>BufferedReader</code>.</li>
+        <li>Write multiple lines using <code>BufferedWriter</code>.</li>
+        <li>Read and write primitive values using <code>DataInputStream</code> and <code>DataOutputStream</code>.</li>
+        <li>Copy one file to another.</li>
+        <li>Read text using <code>FileReader</code> and write text using <code>FileWriter</code>.</li>
+        <li>Demonstrate random access using <code>RandomAccessFile</code>.</li>
+        <li>Handle file-related exceptions using <code>try-catch</code>.</li>
+    </ul>
+
+    <h2>4. Viva Questions</h2>
+    <ol>
+        <li><strong>What is an exception?</strong><br>An exception is an abnormal event during program execution that disrupts normal instruction flow.</li>
+        <li><strong>What is exception handling?</strong><br>A mechanism to handle runtime errors so the program can respond properly without crashing.</li>
+        <li><strong>What is the purpose of finally?</strong><br>It executes cleanup code (like closing resources), running whether an exception occurred or not.</li>
+        <li><strong>What is the difference between throw and throws?</strong><br><code>throw</code> explicitly throws an exception object; <code>throws</code> declares exceptions on a method signature.</li>
+        <li><strong>What is a user-defined exception?</strong><br>A custom exception class created by extending <code>java.lang.Exception</code>.</li>
+        <li><strong>What is a checked exception?</strong><br>An exception checked at compile-time that must be caught or declared.</li>
+        <li><strong>What is a stream?</strong><br>A sequence or flow of data between a source and a destination.</li>
+        <li><strong>What is the java.io package?</strong><br>A Java package containing classes for reading and writing data through streams and files.</li>
+        <li><strong>What is the difference between byte and character streams?</strong><br>Byte streams handle 8-bit bytes (binary data); character streams handle 16-bit Unicode characters (text).</li>
+        <li><strong>What is the use of FileInputStream?</strong><br>To read raw binary bytes from a file.</li>
+        <li><strong>What is the use of FileOutputStream?</strong><br>To write raw bytes to a file.</li>
+        <li><strong>Why do we use buffered streams?</strong><br>To improve efficiency by reducing direct disk read/write operations via an internal buffer.</li>
+        <li><strong>What is the use of readLine()?</strong><br>To read an entire line of text at once in <code>BufferedReader</code>.</li>
+        <li><strong>What is the purpose of DataInputStream?</strong><br>To read primitive data types (<code>int</code>, <code>double</code>, etc.) in binary format.</li>
+        <li><strong>What is the purpose of DataOutputStream?</strong><br>To write primitive data types in binary format.</li>
+        <li><strong>What is the use of RandomAccessFile?</strong><br>To read and write data at any byte position in a file using a movable file pointer.</li>
+        <li><strong>What is the purpose of InputStreamReader?</strong><br>To bridge a byte stream to a character stream by decoding bytes into characters.</li>
+        <li><strong>What is the purpose of OutputStreamWriter?</strong><br>To bridge a character stream to a byte stream by encoding characters into bytes.</li>
+        <li><strong>What happens when read() returns -1?</strong><br>It indicates the End of File (EOF).</li>
+        <li><strong>Why should a stream be closed after use?</strong><br>To flush data and free up operating system file resources and avoid memory leaks.</li>
+    </ol>
+
+    <h2>Final Teaching Guidance</h2>
+    <p>For your students, teach the chapter in this sequence:</p>
+    <ol>
+        <li><strong>First:</strong> Errors, exception hierarchy, <code>try-catch-finally</code>, and the exception keywords.</li>
+        <li><strong>Second:</strong> Checked and unchecked exceptions, Logger, multiple catch, nested <code>try</code>, and custom exceptions.</li>
+        <li><strong>Third:</strong> File concepts, <code>File</code> class, creating and deleting files.</li>
+        <li><strong>Fourth:</strong> Byte streams and file input/output.</li>
+        <li><strong>Fifth:</strong> Buffered streams and data streams.</li>
+        <li><strong>Sixth:</strong> Reader/Writer classes and bridge streams.</li>
+        <li><strong>Finally:</strong> Random access, practical programs, differences, and viva revision.</li>
+    </ol>
+
+</body>
+</html>
