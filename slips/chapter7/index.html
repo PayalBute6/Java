@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 7 HTML/JS Programs</title>
+       
+    <!-- <style> 
+        .question-highlight{
+            color: rgb(7, 7, 7);
+            background-color: rgb(227, 207, 27);
+            border-radius: 2px;
+            padding: 2px;
+
+        }
+    
+        /* Override Prism.js grey background */
+        pre[class*="language-"],
+        code[class*="language-"] {
+            background: transparent !important;
+        }
+    
+        /* Make code comments italic and distinct */
+        .token.comment,
+        .token.block-comment,
+        .token.prolog,
+        .token.doctype,
+        .token.cdata {
+            font-style: italic !important;
+            color: #7a7a7a !important;
+        }
+    </style> -->
+    
+
+    <!-- Prism.js for Syntax Highlighting -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-java.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>
+</head>
+
+<body>
+
+    <h1>Assignment 7: HTML & JavaScript Programs</h1>
+    <!-- <p style="font-size: 16px; color: #d84315;"><strong>Note:</strong> Please add your own styling for each webpage.</p> -->
+
+    <!-- ChangeHeadingText.html -->
+    <div class="program-container">
+        <h2>ChangeHeadingText.html</h2>
+        <div class="question-highlight"><strong>Question 1:</strong> Create a webpage containing a heading and a button. When the button is clicked, change the heading text from “Hello! Welcome” to “Text Changed Successfully!”.</div>
+        <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Change Heading Text&lt;/title&gt;
+
+&lt;/head&gt;
+&lt;body&gt;
+
+    &lt;!-- 1. The heading. We give it an 'id' so JavaScript can find it easily --&gt;
+    &lt;h2 id="myHeading"&gt;Hello! Welcome&lt;/h2&gt;
+
+    &lt;!-- 2. The button. The 'onclick' attribute tells it to run our JavaScript function when clicked --&gt;
+    &lt;button onclick="changeText()"&gt;Click me to change the text&lt;/button&gt;
+
+    &lt;!-- 3. The JavaScript code --&gt;
+    &lt;script&gt;
+        // This function is triggered when the button is clicked
+        function changeText() {
+            
+            // Step 1: Find the heading using its id ("myHeading")
+            // Step 2: Change the text inside it using .innerText
+            document.getElementById("myHeading").innerText = "Text Changed Successfully!";
+            
+        }
+    &lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+    </div>
+
+    <!-- ChangeImage.html -->
+    <div class="program-container">
+        <h2>ChangeImage.html</h2>
+        <div class="question-highlight"><strong>Question 2:</strong> Create a webpage using JavaScript DOM manipulation and event handling with an image and a button. When the button is clicked, replace the displayed image with another image.</div>
+        <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Change Image with JavaScript&lt;/title&gt;
+    &lt;style&gt;
+        img {
+            width: 400px;
+            height: 300px;
+            display: block;
+            margin-bottom: 10px;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+    &lt;h2&gt;JavaScript Image Replacer&lt;/h2&gt;
+
+    &lt;!-- 1. The image. We give it an 'id' so JavaScript can find it easily --&gt;
+    &lt;!-- It starts by loading a random forest image from picsum.photos --&gt;
+    &lt;img id="myImage" src="https://picsum.photos/id/10/400/300" alt="First Image"&gt;
+
+    &lt;!-- 2. The button. The 'onclick' event handler tells it to run our function when clicked --&gt;
+    &lt;button onclick="changeImage()"&gt;Click to Change Image&lt;/button&gt;
+
+    &lt;!-- 3. The JavaScript code (DOM Manipulation) --&gt;
+    &lt;script&gt;
+        // This function runs when the button is clicked
+        function changeImage() {
+            
+            // Step 1: Find the image element using its id ("myImage")
+            var imgElement = document.getElementById("myImage");
+            
+            // Step 2: Replace the 'src' (source) attribute with a brand new image link
+            imgElement.src = "https://picsum.photos/id/11/400/300";
+            
+        }
+    &lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+    </div>
+
+</body>
+</html>
