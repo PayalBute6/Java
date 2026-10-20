@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 6 HTML Programs</title>
+
+    <!-- <style> 
+        .question-highlight{
+            color: rgb(7, 7, 7);
+            background-color: rgb(227, 207, 27);
+            border-radius: 2px;
+            padding: 2px;
+
+        }
+    
+        /* Override Prism.js grey background */
+        pre[class*="language-"],
+        code[class*="language-"] {
+            background: transparent !important;
+        }
+    
+        /* Make code comments italic and distinct */
+        .token.comment,
+        .token.block-comment,
+        .token.prolog,
+        .token.doctype,
+        .token.cdata {
+            font-style: italic !important;
+            color: #7a7a7a !important;
+        }
+    </style> -->
+
+
+    <!-- Prism.js for Syntax Highlighting -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-java.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>
+</head>
+
+<body>
+
+    <h1>Assignment 6: HTML Programs</h1>
+    
+
+    <!-- CollegeHomepage.html -->
+    <div class="program-container">
+        <h2>CollegeHomepage.html</h2>
+        <div class="question-highlight"><strong>Question 1:</strong> Create a responsive webpage using CSS Flexbox for a college homepage containing header, 
+navigation, content and footer. Use appropriate Flexbox alignment and distribution properties.</div>
+        <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;College Homepage&lt;/title&gt;
+    &lt;style&gt;
+        /* ONLY essential Flexbox CSS layout properties are used below */
+
+        body {
+            /* 1. Flexbox to stack the sections vertically */
+            display: flex;
+            flex-direction: column;
+            
+            /* Required so the body takes up the whole screen height */
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        header {
+            /* 2. Flexbox to center the header text */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        nav ul {
+            /* 3. Flexbox to align navigation links in a row */
+            display: flex;
+            justify-content: center;
+            
+            /* flex-wrap makes it responsive (links move to next line if screen is small) */
+            flex-wrap: wrap; 
+        }
+
+        nav li {
+            /* Basic spacing for the links */
+            margin: 0 15px; 
+            list-style: none;
+        }
+
+        main {
+            /* flex: 1 makes the main area grow, pushing the footer to the bottom */
+            flex: 1;
+            
+            /* 4. Flexbox inside the main area to center its content */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        footer {
+            /* 5. Flexbox to center the footer text */
+            display: flex;
+            justify-content: center;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+    &lt;header&gt;
+        &lt;h1&gt;My College Name&lt;/h1&gt;
+    &lt;/header&gt;
+
+    &lt;nav&gt;
+        &lt;ul&gt;
+            &lt;li&gt;&lt;a href="#"&gt;Home&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#"&gt;About Us&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#"&gt;Courses&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#"&gt;Contact Us&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/nav&gt;
+
+    &lt;main&gt;
+        &lt;h2&gt;Welcome to Our College&lt;/h2&gt;
+        &lt;p&gt;This is a responsive college homepage created using only CSS Flexbox properties.&lt;/p&gt;
+    &lt;/main&gt;
+
+    &lt;footer&gt;
+        &lt;p&gt;Copyright 2026. All rights reserved.&lt;/p&gt;
+    &lt;/footer&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+        <h4>Output:</h4>
+        <pre>&gt; Open CollegeHomepage.html directly in your web browser to view the webpage.</pre>
+    </div>
+
+    <!-- HoverEffects.html -->
+    <div class="program-container">
+        <h2>HoverEffects.html</h2>
+        <div class="question-highlight"><strong>Question 2:</strong> Create a webpage containing a button and link. Change their appearance when the mouse pointer moves over them. (Use :hover Pseudo-Class)</div>
+        <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Hover Pseudo-Class&lt;/title&gt;
+    &lt;style&gt;
+        /* 
+           This is the normal look for our link (the &lt;a&gt; tag).
+        */
+        a {
+            color: blue; /* Make the text blue */
+            text-decoration: underline; /* Put a line under the text */
+        }
+
+        /* 
+           The :hover part tells the browser to change the style ONLY when 
+           the mouse pointer moves over the link.
+        */
+        a:hover {
+            color: red; /* Change the text color to red */
+            background-color: yellow; /* Put a yellow box behind the text */
+            text-decoration: none; /* Remove the underline */
+        }
+
+        /* 
+           This is the normal look for our button (the &lt;button&gt; tag).
+        */
+        button {
+            background-color: lightgray; /* Make the button gray */
+            color: black; /* Make the text inside the button black */
+            padding: 10px; /* Add some space inside the button so it looks bigger */
+        }
+
+        /* 
+           This tells the browser to change the style ONLY when 
+           the mouse pointer moves over the button.
+        */
+        button:hover {
+            background-color: green; /* Change the button color to green */
+            color: white; /* Change the text color to white */
+            cursor: pointer; /* Change the mouse arrow to a pointing hand */
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+    &lt;h2&gt;Hover Effects Example&lt;/h2&gt;
+    
+    &lt;!-- This creates the link on the page --&gt;
+    &lt;p&gt;
+        Here is a link: &lt;a href="#"&gt;Move your mouse over me!&lt;/a&gt;
+    &lt;/p&gt;
+
+    &lt;br&gt;
+
+    &lt;!-- This creates the button on the page --&gt;
+    &lt;p&gt;
+        Here is a button: &lt;button&gt;Move your mouse over me!&lt;/button&gt;
+    &lt;/p&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+        <h4>Output:</h4>
+        <pre>&gt; Open HoverEffects.html directly in your web browser to view the webpage.</pre>
+    </div>
+
+    <!-- ImageGallery.html -->
+    <div class="program-container">
+        <h2>ImageGallery.html</h2>
+        <div class="question-highlight"><strong>Question 3:</strong> Create an image gallery using HTML5 and CSS3 with hover effects, responsive images and Flexbox/Grid layout.</div>
+        <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Responsive Image Gallery&lt;/title&gt;
+    &lt;style&gt;
+        /* 1. Flexbox layout */
+        .gallery-container {
+            display: flex;
+            flex-wrap: wrap; /* Makes it responsive */
+        }
+
+        .gallery-item {
+            margin: 5px;
+        }
+
+        /* 2. Responsive Images */
+        img {
+            width: 250px; 
+            max-width: 100%; /* Ensures image doesn't overflow container */
+        }
+
+        /* 3. Hover Effect */
+        img:hover {
+            opacity: 0.7; /* Fades the image slightly on hover */
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+    &lt;h2&gt;My Image Gallery&lt;/h2&gt;
+    
+    &lt;div class="gallery-container"&gt;
+        &lt;div class="gallery-item"&gt;
+            &lt;img src="https://picsum.photos/id/10/400/300" alt="Image 1"&gt;
+        &lt;/div&gt;
+        &lt;div class="gallery-item"&gt;
+            &lt;img src="https://picsum.photos/id/11/400/300" alt="Image 2"&gt;
+        &lt;/div&gt;
+        &lt;div class="gallery-item"&gt;
+            &lt;img src="https://picsum.photos/id/12/400/300" alt="Image 3"&gt;
+        &lt;/div&gt;
+        &lt;div class="gallery-item"&gt;
+            &lt;img src="https://picsum.photos/id/13/400/300" alt="Image 4"&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+        <h4>Output:</h4>
+        <pre>&gt; Open ImageGallery.html directly in your web browser to view the webpage.</pre>
+    </div>
+
+    <!-- ListStyles.html -->
+    <div class="program-container">
+        <h2>ListStyles.html</h2>
+        <div class="question-highlight"><strong>Question 4:</strong> Create an unordered list of Programming Language names and apply different styles to the first and last list items.(Use :first-child and :last-child)</div>
+        <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;First and Last Child Styling&lt;/title&gt;
+    &lt;style&gt;
+        /* 
+           This is the normal look for ALL list items (the &lt;li&gt; tag). 
+        */
+        li {
+            font-size: 20px;
+            color: black;
+            margin-bottom: 10px; /* Add some space between each item */
+        }
+
+        /* 
+           The :first-child tells the browser to change the style 
+           ONLY for the very FIRST item in the list.
+        */
+        li:first-child {
+            color: red; /* Change the first item's text color to red */
+            font-weight: bold; /* Make the text bold */
+            background-color: yellow; /* Put a yellow box behind the text */
+        }
+
+        /* 
+           The :last-child tells the browser to change the style 
+           ONLY for the very LAST item in the list.
+        */
+        li:last-child {
+            color: blue; /* Change the last item's text color to blue */
+            font-style: italic; /* Make the text slanted (italic) */
+            text-decoration: underline; /* Put a line under the text */
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+    &lt;h2&gt;List of Programming Languages&lt;/h2&gt;
+    
+    &lt;!-- This creates an unordered (bulleted) list --&gt;
+    &lt;ul&gt;
+        &lt;li&gt;Java&lt;/li&gt;
+        &lt;li&gt;Python&lt;/li&gt;
+        &lt;li&gt;C++&lt;/li&gt;
+        &lt;li&gt;JavaScript&lt;/li&gt;
+        &lt;li&gt;Ruby&lt;/li&gt;
+    &lt;/ul&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+        <h4>Output:</h4>
+        <pre>&gt; Open ListStyles.html directly in your web browser to view the webpage.</pre>
+    </div>
+
+    <!-- RegistrationForm.html -->
+    <div class="program-container">
+        <h2>RegistrationForm.html</h2>
+        <div class="question-highlight">
+            <strong>Question 5:</strong> Design a College/School Registration Form using HTML5 and CSS3 and apply appropriate HTML5 validation attributes.
+            </div>
+            <br/>
+            <strong>Expected Output:</strong><br/>
+            <img src="RegistrationFormOutput.png" alt="Registration Form Output" style="max-width: 30%; border: 1px solid #ccc; margin-top: 10px; border-radius: 4px;">
+        
+        <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;College Registration Form&lt;/title&gt;
+    &lt;style&gt;
+        body {
+            background-color: #ffffe0; /* Pale yellow */
+            font-family: "Times New Roman", Times, serif;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 5px;
+            font-size: 28px;
+        }
+
+        p {
+            text-align: center;
+            font-size: 14px;
+            margin-top: 5px;
+            margin-bottom: 30px;
+        }
+
+        table {
+            margin: 0 auto;
+            border-spacing: 0 15px; /* Spacing between rows */
+        }
+
+        td.label {
+            text-align: left;
+            font-size: 16px;
+            width: 140px;
+        }
+
+        /* Style the input boxes */
+        input[type="text"], 
+        input[type="date"], 
+        input[type="number"], 
+        input[type="email"], 
+        input[type="password"], 
+        input[type="time"],
+        select,
+        textarea {
+            width: 320px;
+            padding: 4px;
+            border: 1px solid #a9a9a9;
+        }
+
+        select {
+            width: 330px; /* Select needs slightly more width to match due to box-sizing */
+        }
+
+        /* Error styling */
+        td.error {
+            color: red;
+            font-size: 13px;
+            text-align: left;
+            visibility: hidden;
+            padding-left: 10px;
+        }
+
+        .buttons-row {
+            text-align: center;
+            padding-top: 15px;
+        }
+
+        button {
+            padding: 5px 25px;
+            background-color: #efefef;
+            border: 1px solid #777;
+            cursor: pointer;
+            margin: 0 10px;
+            font-family: Arial, sans-serif;
+            font-size: 13px;
+        }
+
+        .declaration {
+            padding-top: 25px;
+            padding-bottom: 10px;
+            padding-left: 10px;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+    &lt;h2&gt;My-Future College / School&lt;/h2&gt;
+    &lt;p&gt;Please Fill Below Detail In Student Registration Form&lt;/p&gt;
+
+    &lt;form action="#" id="regForm"&gt;
+        &lt;table&gt;
+            &lt;tr&gt;
+                &lt;td class="label"&gt;Student name :&lt;/td&gt;
+                &lt;td&gt;&lt;input type="text" required minlength="3" maxlength="10"&gt;&lt;/td&gt;
+                &lt;td class="error"&gt;Min 3 &amp; Max 10 letter is allow&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;td class="label"&gt;Date of birth :&lt;/td&gt;
+                &lt;td&gt;&lt;input type="date" required&gt;&lt;/td&gt;
+                &lt;td class="error"&gt;Valid Date is allow&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;td class="label"&gt;Mobile no. :&lt;/td&gt;
+                &lt;td&gt;&lt;input type="number" required&gt;&lt;/td&gt;
+                &lt;td class="error"&gt;Only integer is allow&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;td class="label"&gt;Email id :&lt;/td&gt;
+                &lt;td&gt;&lt;input type="email" required&gt;&lt;/td&gt;
+                &lt;td class="error"&gt;Valid Email Id is allow&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;td class="label"&gt;Password :&lt;/td&gt;
+                &lt;td&gt;&lt;input type="password" required minlength="8"&gt;&lt;/td&gt;
+                &lt;td class="error"&gt;Min 8 digit is allow&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;td class="label"&gt;Gender :&lt;/td&gt;
+                &lt;td&gt;
+                    &lt;input type="radio" name="gender" value="Male" required&gt; Male &amp;nbsp;
+                    &lt;input type="radio" name="gender" value="Female" required&gt; Female
+                &lt;/td&gt;
+                &lt;td class="error"&gt;&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;td class="label"&gt;Hobbies :&lt;/td&gt;
+                &lt;td&gt;
+                    &lt;input type="checkbox" name="hobbies" value="Drawing"&gt; Drawing
+                    &lt;input type="checkbox" name="hobbies" value="Singing"&gt; Singing
+                    &lt;input type="checkbox" name="hobbies" value="Dancing"&gt; Dancing
+                    &lt;input type="checkbox" name="hobbies" value="Sketch"&gt; Sketch
+                    &lt;input type="checkbox" name="hobbies" value="Sports"&gt; Sports
+                &lt;/td&gt;
+                &lt;td class="error"&gt;&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;td class="label"&gt;Course :&lt;/td&gt;
+                &lt;td&gt;
+                    &lt;select required&gt;
+                        &lt;option value=""&gt;------------- Select Admission Course's -------------&lt;/option&gt;
+                        &lt;option value="Science"&gt;Science&lt;/option&gt;
+                        &lt;option value="Commerce"&gt;Commerce&lt;/option&gt;
+                        &lt;option value="Arts"&gt;Arts&lt;/option&gt;
+                    &lt;/select&gt;
+                &lt;/td&gt;
+                &lt;td class="error"&gt;&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;td class="label"&gt;Student photo :&lt;/td&gt;
+                &lt;td&gt;
+                    &lt;input type="file" required style="width: auto; border: none;"&gt;
+                &lt;/td&gt;
+                &lt;td class="error"&gt;&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;td class="label"&gt;Register Time:&lt;/td&gt;
+                &lt;td&gt;&lt;input type="time" required&gt;&lt;/td&gt;
+                &lt;td class="error"&gt;&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;td class="label" style="vertical-align: top;"&gt;Address :&lt;/td&gt;
+                &lt;td&gt;&lt;textarea required rows="4"&gt;&lt;/textarea&gt;&lt;/td&gt;
+                &lt;td class="error"&gt;&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;td colspan="3" class="declaration"&gt;
+                    &lt;input type="checkbox" required&gt; I hereby declare that above information provided is correct
+                &lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;td colspan="3" class="buttons-row"&gt;
+                    &lt;button type="submit" onclick="showErrors()"&gt;Register&lt;/button&gt;
+                    &lt;button type="reset" onclick="hideErrors()"&gt;Reset&lt;/button&gt;
+                &lt;/td&gt;
+            &lt;/tr&gt;
+        &lt;/table&gt;
+    &lt;/form&gt;
+
+    &lt;script&gt;
+        function showErrors() {
+            var rows = document.querySelectorAll("tr");
+            
+            for (var i = 0; i &lt; rows.length; i++) {
+                var input = rows[i].querySelector("input, select, textarea");
+                var errorTd = rows[i].querySelector(".error");
+                
+                if (input &amp;&amp; errorTd) {
+                    var isInvalid = rows[i].querySelector(":invalid");
+                    if (isInvalid) {
+                        errorTd.style.visibility = "visible";
+                    } else {
+                        errorTd.style.visibility = "hidden"; 
+                    }
+                }
+            }
+        }
+
+        function hideErrors() {
+            var errors = document.querySelectorAll(".error");
+            for (var i = 0; i &lt; errors.length; i++) {
+                errors[i].style.visibility = "hidden";
+            }
+        }
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+        <h4>Output:</h4>
+        <pre>&gt; Open RegistrationForm.html directly in your web browser to view the webpage.</pre>
+    </div>
+
+    <!-- StudentRegistrationForm.html -->
+    <div class="program-container">
+        <h2>StudentRegistrationForm.html</h2>
+        <div class="question-highlight">
+            <strong>Question 6:</strong> Design a Student Registration Form using HTML5 and CSS3 and apply appropriate HTML5 validation attributes.
+            </div>
+        <br>
+            <strong>Expected Output:</strong><br>
+            <img src="StudentRegistrationFormOutput.png" alt="Student Registration Form Output" style="max-width: 30%; border: 1px solid #ccc; margin-top: 10px; border-radius: 4px;">
+        
+        <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+
+&lt;head&gt;
+    &lt;title&gt;Student Registration&lt;/title&gt;
+    &lt;style&gt;
+        body {
+            background-color:pink;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        table {
+            margin: 0 auto;
+        }
+
+        .center {
+            text-align: center;
+        }
+
+        /* Error styling like the previous form */
+        td.error {
+            color: red;
+            font-size: 13px;
+            text-align: left;
+            visibility: hidden;
+            padding-left: 5px;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+    &lt;h2&gt;Student Registration Form&lt;/h2&gt;
+
+    &lt;form action="#"&gt;
+        &lt;table&gt;
+            &lt;tr&gt;
+                &lt;td&gt;Roll no.:&lt;/td&gt;
+                &lt;td&gt;&lt;input type="text" required&gt;&lt;/td&gt;
+                &lt;td class="error"&gt;Roll no is required&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;td&gt;Student Name:&lt;/td&gt;
+                &lt;td&gt;&lt;input type="text" required&gt;&lt;/td&gt;
+                &lt;td class="error"&gt;Name is required&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;td&gt;Father's Name:&lt;/td&gt;
+                &lt;td&gt;&lt;input type="text" required&gt;&lt;/td&gt;
+                &lt;td class="error"&gt;Father's name is required&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;td&gt;Date of Birth:&lt;/td&gt;
+                &lt;td&gt;&lt;input type="date" required&gt;&lt;/td&gt;
+                &lt;td class="error"&gt;Date of birth is required&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;td&gt;Mobile no.:&lt;/td&gt;
+                &lt;td&gt;&lt;input type="tel" pattern="[0-9]{10}" title="10 digit number" required&gt;&lt;/td&gt;
+                &lt;td class="error"&gt;10 digit mobile is required&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;td&gt;Email:&lt;/td&gt;
+                &lt;td&gt;&lt;input type="email" required&gt;&lt;/td&gt;
+                &lt;td class="error"&gt;Valid Email is required&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;td&gt;Password:&lt;/td&gt;
+                &lt;td&gt;&lt;input type="password" minlength="8" required&gt;&lt;/td&gt;
+                &lt;td class="error"&gt;Min 8 characters required&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;td&gt;Gender:&lt;/td&gt;
+                &lt;td&gt;
+                    &lt;input type="radio" name="gender" value="Male" required&gt; Male
+                    &lt;input type="radio" name="gender" value="Female" required&gt; Female
+                &lt;/td&gt;
+                &lt;td class="error"&gt;Gender is required&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;td&gt;Department:&lt;/td&gt;
+                &lt;td&gt;
+                    &lt;input type="checkbox" name="dept" value="CSE"&gt; CSE
+                    &lt;input type="checkbox" name="dept" value="IT"&gt; IT
+                    &lt;input type="checkbox" name="dept" value="ECE"&gt; ECE
+                &lt;/td&gt;
+                &lt;td class="error"&gt;Select a department&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;td&gt;Course:&lt;/td&gt;
+                &lt;td&gt;
+                    &lt;select required&gt;
+                        &lt;option value=""&gt;--Select--&lt;/option&gt;
+                        &lt;option value="BCA"&gt;BCA&lt;/option&gt;
+                        &lt;option value="BSc CS"&gt;BSc CS&lt;/option&gt;
+                        &lt;option value="BSc IT"&gt;BSc IT&lt;/option&gt;
+                    &lt;/select&gt;
+                &lt;/td&gt;
+                &lt;td class="error"&gt;Course is required&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;td&gt;Student Photo:&lt;/td&gt;
+                &lt;td&gt;&lt;input type="file" required&gt;&lt;/td&gt;
+                &lt;td class="error"&gt;Photo is required&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;td&gt;City:&lt;/td&gt;
+                &lt;td&gt;&lt;input type="text" required&gt;&lt;/td&gt;
+                &lt;td class="error"&gt;City is required&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;td style="vertical-align: top;"&gt;Address:&lt;/td&gt;
+                &lt;td&gt;&lt;textarea rows="3" required&gt;&lt;/textarea&gt;&lt;/td&gt;
+                &lt;td class="error"&gt;Address is required&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;td colspan="3" class="center"&gt;
+                    &lt;br&gt;
+                    &lt;!-- onclick calls the javascript below just like before --&gt;
+                    &lt;button type="submit" onclick="showErrors()"&gt;Register&lt;/button&gt;
+                    &lt;button type="reset" onclick="hideErrors()"&gt;Reset&lt;/button&gt;
+                &lt;/td&gt;
+            &lt;/tr&gt;
+        &lt;/table&gt;
+    &lt;/form&gt;
+
+    &lt;script&gt;
+        function showErrors() {
+            var rows = document.querySelectorAll("tr");
+
+            // Loop through every row in the table
+            for (var i = 0; i &lt; rows.length; i++) {
+                var input = rows[i].querySelector("input, select, textarea");
+                var errorTd = rows[i].querySelector(".error");
+
+                if (input &amp;&amp; errorTd) {
+                    // Check if the input breaks the HTML5 rules (like required)
+                    var isInvalid = rows[i].querySelector(":invalid");
+                    
+                    // Special check for department checkboxes
+                    if (input.type === "checkbox") {
+                        var checkedBoxes = rows[i].querySelectorAll('input[type="checkbox"]:checked');
+                        if (checkedBoxes.length === 0) {
+                            isInvalid = true;
+                        } else {
+                            isInvalid = false;
+                        }
+                    }
+
+                    if (isInvalid) {
+                        errorTd.style.visibility = "visible"; // Show red text
+                    } else {
+                        errorTd.style.visibility = "hidden"; // Hide red text
+                    }
+                }
+            }
+        }
+
+        function hideErrors() {
+            var errors = document.querySelectorAll(".error");
+            for (var i = 0; i &lt; errors.length; i++) {
+                errors[i].style.visibility = "hidden"; // Hide all on reset
+            }
+        }
+    &lt;/script&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;</code></pre>
+        <h4>Output:</h4>
+        <pre>&gt; Open StudentRegistrationForm.html directly in your web browser to view the webpage.</pre>
+    </div>
+</body>
+</html>
