@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 8 JavaScript Programs</title>
+
+    <!-- <style> 
+        .question-highlight{
+            color: rgb(7, 7, 7);
+            background-color: rgb(227, 207, 27);
+            border-radius: 2px;
+            padding: 2px;
+
+        }
+    
+        /* Override Prism.js grey background */
+        pre[class*="language-"],
+        code[class*="language-"] {
+            background: transparent !important;
+        }
+    
+        /* Make code comments italic and distinct */
+        .token.comment,
+        .token.block-comment,
+        .token.prolog,
+        .token.doctype,
+        .token.cdata {
+            font-style: italic !important;
+            color: #7a7a7a !important;
+        }
+    </style> -->
+
+    <!-- Prism.js for Syntax Highlighting -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+</head>
+
+<body>
+
+    <h1>Assignment 8: NodeJS Programs</h1>
+
+    <!-- ArrowFunctions.js -->
+    <div class="program-container">
+        <h2>ArrowFunctions.js</h2>
+        <div class="question-highlight"><strong>Question 1:</strong> Write a JavaScript program to demonstrate Arrow Functions for addition, subtraction, multiplication and division.</div>
+        <pre><code>// 1. Arrow function for Addition
+const add = (a, b) =&gt; a + b;
+
+// 2. Arrow function for Subtraction
+const subtract = (a, b) =&gt; a - b;
+
+// 3. Arrow function for Multiplication
+const multiply = (a, b) =&gt; a * b;
+
+// 4. Arrow function for Division
+const divide = (a, b) =&gt; a / b;
+
+// Let's test them with two numbers
+let num1 = 20;
+let num2 = 5;
+
+// Calculate results by calling the arrow functions
+let resultAdd = add(num1, num2);
+let resultSub = subtract(num1, num2);
+let resultMul = multiply(num1, num2);
+let resultDiv = divide(num1, num2);
+
+// Print the results to the console
+console.log("Addition (20 + 5) = " + resultAdd);
+console.log("Subtraction (20 - 5) = " + resultSub);
+console.log("Multiplication (20 * 5) = " + resultMul);
+console.log("Division (20 / 5) = " + resultDiv);
+</code></pre>
+        <h4>Output:</h4>
+        <pre>&gt; node ArrowFunctions.js
+Addition (20 + 5) = 25
+Subtraction (20 - 5) = 15
+Multiplication (20 * 5) = 100
+Division (20 / 5) = 4</pre>
+    </div>
+
+    <!-- Modules (mathOperations.mjs + MainApp.mjs) -->
+    <!-- <div class="program-container">
+        <h2>mathOperations.mjs &amp; MainApp.mjs</h2>
+        <div class="question-highlight"><strong>Question 2:</strong> Create a JavaScript module containing arithmetic operation functions. Export the function and import it into another JavaScript file to perform all operations.</div>
+        
+        <h3>mathOperations.mjs</h3>
+        <pre><code class="language-javascript">// 1. Define the arithmetic functions
+function add(a, b) {
+    return a + b;
+}
+
+function subtract(a, b) {
+    return a - b;
+}
+
+function multiply(a, b) {
+    return a * b;
+}
+
+function divide(a, b) {
+    return a / b;
+}
+
+// 2. Export them so other files can import and use them!
+// (We use .mjs file extension to tell Node.js we are using modern ES6 Modules)
+export { add, subtract, multiply, divide };
+</code></pre>
+
+        <h3>MainApp.mjs</h3>
+        <pre><code class="language-javascript">// 3. Import the functions from our module file
+import { add, subtract, multiply, divide } from './mathOperations.mjs';
+
+console.log("--- Testing Math Module ---");
+
+let num1 = 100;
+let num2 = 25;
+
+// 4. Perform all operations using the imported functions
+console.log("Addition (100 + 25) = " + add(num1, num2));
+console.log("Subtraction (100 - 25) = " + subtract(num1, num2));
+console.log("Multiplication (100 * 25) = " + multiply(num1, num2));
+console.log("Division (100 / 25) = " + divide(num1, num2));
+</code></pre>
+        <h4>Output:</h4>
+        <pre>&gt; node MainApp.mjs
+--- Testing Math Module ---
+Addition (100 + 25) = 125
+Subtraction (100 - 25) = 75
+Multiplication (100 * 25) = 2500
+Division (100 / 25) = 4</pre>
+    </div> -->
+<!-- SwapNumbers.js -->
+    <div class="program-container">
+        <h2>SwapNumbers.js</h2>
+        <div class="question-highlight"><strong>Question 2:</strong> Write a JavaScript program to swap two numbers without using a third variable using array destructuring.</div>
+        <pre><code>// 1. Initialize two variables
+let a = 10;
+let b = 25;
+
+console.log("Before swapping:");
+console.log("a = " + a + ", b = " + b);
+console.log("------------------");
+
+/* 
+   2. Swap the numbers using Array Destructuring 
+   The syntax [a, b] = [b, a] instantly swaps the values 
+   without needing a temporary third variable.
+*/
+[a, b] = [b, a];
+
+// 3. Display the final swapped results
+console.log("After swapping:");
+console.log("a = " + a + ", b = " + b);
+</code></pre>
+        <h4>Output:</h4>
+        <pre>&gt; node SwapNumbers.js
+Before swapping:
+a = 10, b = 25
+------------------
+After swapping:
+a = 25, b = 10</pre>
+    </div>
+    <!-- student_report.js -->
+    <div class="program-container">
+        <h2>student_report.js</h2>
+        <div class="question-highlight"><strong>Question 3:</strong> Write a JavaScript program to store student information and marks in variables and generate a formatted student report using template literals.</div>
+        <pre><code>const name = "Radha";
+const rollNo = 101;
+const math = 85;
+const science = 92;
+const english = 88;
+const total = math + science + english;
+const avg = total / 3;
+const report = `----- Student Report ----
+Name   : ${name}
+Roll No: ${rollNo}
+-------------------------
+Math   : ${math}
+Science: ${science}
+English: ${english}
+-------------------------
+Total  : ${total}
+Average: ${avg.toFixed(2)}
+`;
+console.log(report);</code></pre>
+        <h4>Output:</h4>
+        <pre>&gt; node student_report.js
+----- Student Report ----
+Name   : Radha
+Roll No: 101
+-------------------------
+Math   : 85
+Science: 92
+English: 88
+-------------------------
+Total  : 265
+Average: 88.33</pre>
+    </div>
+
+    <!-- RestParameterSum.js -->
+    <!-- <div class="program-container">
+        <h2>RestParameterSum.js</h2>
+        <div class="question-highlight"><strong>Question 4:</strong> Write a JavaScript program using a rest parameter to accept any number of values and calculate their sum.</div>
+        <pre><code class="language-javascript">/* 
+   1. Define a function with a Rest Parameter (...numbers)
+   The '...' in the function definition groups however many arguments 
+   you pass into a single array named 'numbers'.
+*/
+function calculateSum(...numbers) {
+    let total = 0;
+    
+    // 2. Loop through the 'numbers' array to add them all up
+    for (let i = 0; i &lt; numbers.length; i++) {
+        total += numbers[i];
+    }
+    
+    return total;
+}
+
+// 3. Test the function by passing completely different amounts of numbers!
+const sum1 = calculateSum(10, 20);
+const sum2 = calculateSum(5, 10, 15, 20, 25);
+const sum3 = calculateSum(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+
+// Display the results
+console.log("Sum of (10, 20) is: " + sum1);
+console.log("Sum of (5, 10, 15, 20, 25) is: " + sum2);
+console.log("Sum of 1 through 10 is: " + sum3);
+</code></pre>
+        <h4>Output:</h4>
+        <pre>&gt; node RestParameterSum.js
+Sum of (10, 20) is: 30
+Sum of (5, 10, 15, 20, 25) is: 75
+Sum of 1 through 10 is: 55</pre>
+    </div> -->
+
+    <!-- SpreadOperatorArray.js -->
+    <!-- <div class="program-container">
+        <h2>SpreadOperatorArray.js</h2>
+        <div class="question-highlight"><strong>Question 5:</strong> Write a JavaScript program to create a copy of an existing array using the spread operator and add a new element to the copied array.</div>
+        <pre><code class="language-javascript">// 1. Create our original array
+const originalArray = ["Apple", "Banana", "Cherry"];
+
+/* 
+   2. Use the Spread Operator (...) to make a copy.
+   The '...originalArray' takes all items from the first array and spreads 
+   them into this new array. We also add a new element ("Date") at the end!
+*/
+const copiedArray = [...originalArray, "Date"];
+
+// 3. Display the results to prove they are different
+console.log("Original Array:");
+console.log(originalArray);
+
+console.log("\nCopied Array (with new element added):");
+console.log(copiedArray);
+</code></pre>
+        <h4>Output:</h4>
+        <pre>&gt; node SpreadOperatorArray.js
+Original Array:
+[ 'Apple', 'Banana', 'Cherry' ]
+
+Copied Array (with new element added):
+[ 'Apple', 'Banana', 'Cherry', 'Date' ]</pre>
+    </div> -->
+
+    
+
+</body>
+</html>
