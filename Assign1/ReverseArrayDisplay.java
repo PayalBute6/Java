@@ -23,6 +23,7 @@ public class ReverseArrayDisplay {
         }
         System.out.println();
 
+
         sc.close();
     }
 }
