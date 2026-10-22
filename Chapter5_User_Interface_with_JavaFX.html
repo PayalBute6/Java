@@ -1,0 +1,3374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 5: User Interface with JavaFX</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.2;
+            margin: 20px auto;
+            max-width: 900px;
+            padding: 0 15px;
+            color: #222;
+        }
+        h1 {
+            color: #000;
+            border-bottom: 2px solid #333;
+            padding-bottom: 8px;
+            margin-bottom: 18px;
+            font-size: 24px;
+        }
+        h2 {
+            color: #1a237e;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 5px;
+            margin-top: 35px;
+            font-size: 18px;
+        }
+        h3 {
+            color: #283593;
+            margin-top: 25px;
+            font-size: 15px;
+        }
+        h4 {
+            color: #333;
+            margin-top: 18px;
+            font-size: 14px;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 15px 0;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px 12px;
+            text-align: left;
+            vertical-align: top;
+        }
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+        tr:nth-child(even) {
+            background-color: #fafafa;
+        }
+        pre {
+            background-color: #f5f5f5;
+            border: 1px solid #ddd;
+            padding: 12px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-family: Consolas, "Courier New", monospace;
+            font-size: 12px;
+            line-height: 1.2;
+        }
+        code {
+            font-family: Consolas, "Courier New", monospace;
+            background-color: #f0f0f0;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-size: 13.5px;
+        }
+        pre code {
+            background-color: transparent;
+            padding: 0;
+        }
+        ul, ol {
+            padding-left: 25px;
+        }
+        li {
+            margin-bottom: 5px;
+        }
+        .exam-note {
+            background-color: #e8f5e9;
+            border-left: 4px solid #2e7d32;
+            padding: 10px 14px;
+            margin: 15px 0;
+        }
+        .output-box {
+            background-color: #fcfcfc;
+            border: 1px dashed #999;
+            padding: 10px 14px;
+            margin: 10px 0 15px 0;
+            font-family: Consolas, "Courier New", monospace;
+            font-size: 12px;
+            line-height: 1.2;
+        }
+        /* ================= JavaFX UI Window Simulation Styles ================= */
+        .fx-ui-card {
+            background-color: #fafbfc;
+            border: 1px solid #d0d7de;
+            border-radius: 8px;
+            padding: 16px;
+            margin: 18px 0 24px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            break-inside: avoid;
+            page-break-inside: avoid;
+        }
+        .fx-ui-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #e1e4e8;
+            font-size: 13px;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+        .fx-ui-title {
+            font-weight: bold;
+            color: #1a237e;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .fx-badge-ui {
+            background: #1a237e;
+            color: #ffffff;
+            font-size: 10.5px;
+            font-weight: bold;
+            padding: 2px 7px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .fx-badge-meta {
+            background: #eef2ff;
+            color: #3730a3;
+            font-size: 11px;
+            padding: 2px 7px;
+            border-radius: 4px;
+            border: 1px solid #c7d2fe;
+            font-family: Consolas, monospace;
+        }
+        /* Desktop Window Chrome */
+        .fx-window {
+            background-color: #f4f4f4;
+            border: 1px solid #8e9094;
+            border-radius: 6px;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.16);
+            overflow: hidden;
+            width: 100%;
+            margin: 8px auto;
+            font-family: "Segoe UI", Arial, sans-serif;
+            color: #222;
+            break-inside: avoid;
+            page-break-inside: avoid;
+            box-sizing: border-box;
+        }
+        .fx-window-titlebar {
+            background: linear-gradient(to bottom, #ffffff 0%, #ececec 100%);
+            border-bottom: 1px solid #cfcfcf;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 10px;
+            user-select: none;
+            box-sizing: border-box;
+        }
+        .fx-title-left {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            color: #333333;
+        }
+        .fx-stage-icon {
+            width: 14px;
+            height: 14px;
+            display: inline-block;
+        }
+        .fx-win-controls {
+            display: flex;
+            gap: 1px;
+        }
+        .fx-win-btn {
+            width: 26px;
+            height: 22px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            color: #555555;
+            border-radius: 2px;
+        }
+        .fx-win-btn.close {
+            color: #666;
+        }
+        /* Scene canvas */
+        .fx-scene {
+            background-color: #f4f4f4;
+            padding: 18px;
+            box-sizing: border-box;
+            position: relative;
+        }
+        /* JavaFX Static Controls (Non-Editable for Clean PDF Export) */
+        .fx-label {
+            font-size: 13px;
+            color: #222222;
+            line-height: 1.3;
+        }
+        .fx-btn {
+            background: linear-gradient(to bottom, #fcfcfc 0%, #ebebeb 50%, #e1e1e1 100%);
+            border: 1px solid #acacac;
+            border-radius: 3px;
+            padding: 5px 16px;
+            font-size: 12.5px;
+            font-family: inherit;
+            color: #222222;
+            display: inline-block;
+            text-align: center;
+            user-select: none;
+            cursor: default;
+            pointer-events: none;
+            box-shadow: 0 1px 1px rgba(0,0,0,0.06);
+            white-space: nowrap;
+        }
+        .fx-mock-field {
+            background-color: #ffffff;
+            border: 1px solid #b5b5b5;
+            border-radius: 3px;
+            padding: 5px 10px;
+            font-size: 12.5px;
+            font-family: inherit;
+            color: #111111;
+            box-sizing: border-box;
+            min-height: 28px;
+            display: flex;
+            align-items: center;
+            user-select: none;
+            cursor: default;
+            pointer-events: none;
+            box-shadow: inset 0 1px 2px rgba(0,0,0,0.05);
+        }
+        .fx-mock-area {
+            background-color: #ffffff;
+            border: 1px solid #b5b5b5;
+            border-radius: 3px;
+            padding: 7px 10px;
+            font-size: 12.5px;
+            font-family: inherit;
+            color: #111111;
+            box-sizing: border-box;
+            min-height: 64px;
+            line-height: 1.4;
+            user-select: none;
+            cursor: default;
+            pointer-events: none;
+            box-shadow: inset 0 1px 2px rgba(0,0,0,0.05);
+            white-space: pre-wrap;
+        }
+        .fx-mock-check {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            font-size: 12.5px;
+            color: #222222;
+            user-select: none;
+            cursor: default;
+            pointer-events: none;
+        }
+        .fx-mock-square {
+            width: 15px;
+            height: 15px;
+            border: 1px solid #7c7c7c;
+            border-radius: 2px;
+            background-color: #ffffff;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: bold;
+            line-height: 1;
+            box-sizing: border-box;
+        }
+        .fx-mock-square.checked {
+            background-color: #0078d7;
+            border-color: #005a9e;
+            color: #ffffff;
+        }
+        .fx-mock-radio {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            font-size: 12.5px;
+            color: #222222;
+            user-select: none;
+            cursor: default;
+            pointer-events: none;
+        }
+        .fx-mock-circle {
+            width: 15px;
+            height: 15px;
+            border: 1px solid #7c7c7c;
+            border-radius: 50%;
+            background-color: #ffffff;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            box-sizing: border-box;
+        }
+        .fx-mock-circle.checked {
+            border-color: #0078d7;
+        }
+        .fx-mock-circle.checked::after {
+            content: '';
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background-color: #0078d7;
+        }
+        .fx-mock-combo {
+            background: linear-gradient(to bottom, #ffffff 0%, #f0f0f0 100%);
+            border: 1px solid #acacac;
+            border-radius: 3px;
+            padding: 5px 12px;
+            font-size: 12.5px;
+            font-family: inherit;
+            color: #222222;
+            display: inline-flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            min-width: 140px;
+            box-sizing: border-box;
+            user-select: none;
+            cursor: default;
+            pointer-events: none;
+        }
+        .fx-menubar {
+            background: linear-gradient(to bottom, #f2f2f2, #e5e5e5);
+            border-bottom: 1px solid #d2d2d2;
+            padding: 3px 8px;
+            display: flex;
+            gap: 12px;
+            font-size: 12px;
+            user-select: none;
+            cursor: default;
+        }
+        .fx-result-label {
+            font-size: 12.5px;
+            font-weight: 600;
+            margin-top: 6px;
+            min-height: 18px;
+            line-height: 1.4;
+            white-space: pre-line;
+            user-select: none;
+        }
+        .fx-result-success {
+            color: #2e7d32;
+        }
+        .fx-result-error {
+            color: #c62828;
+        }
+        .fx-result-info {
+            color: #1565c0;
+        }
+        .fx-subtext {
+            font-size: 11.5px;
+            color: #555555;
+            margin-top: 6px;
+        }
+
+        /* PDF & Print Specific Optimizations */
+        @media print {
+            @page {
+                margin: 12mm 15mm;
+                size: A4 portrait;
+            }
+            body {
+                max-width: 100% !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                color: #000000 !important;
+                font-size: 11pt !important;
+            }
+            .fx-ui-card {
+                break-inside: avoid !important;
+                page-break-inside: avoid !important;
+                background: #ffffff !important;
+                border: 1px solid #cbd5e1 !important;
+                margin: 16px 0 !important;
+                padding: 14px 18px !important;
+                box-shadow: none !important;
+            }
+            .fx-window {
+                break-inside: avoid !important;
+                page-break-inside: avoid !important;
+                box-shadow: 0 0 0 1px #94a3b8 !important;
+                width: 100% !important;
+                max-width: 500px !important;
+                margin: 10px auto !important;
+            }
+            pre, table, .exam-note, .output-box {
+                break-inside: avoid !important;
+                page-break-inside: avoid !important;
+            }
+            .fx-interactive-tip {
+                display: none !important;
+            }
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Chapter 5: User Interface with JavaFX</h1>
+    <!-- <p>Complete classroom notes based on your textbook pages, organized according to the chapter sequence.</p>
+
+    <h2>Learning Objectives</h2>
+    <p>After studying this chapter, students should be able to:</p>
+    <ol>
+        <li>Understand the basic concepts and architecture of JavaFX.</li>
+        <li>Explain the life cycle of a JavaFX application.</li>
+        <li>Create user interfaces using JavaFX layouts.</li>
+        <li>Use containers and components such as buttons, labels, text fields, checkboxes, radio buttons, and combo boxes.</li>
+        <li>Create charts using JavaFX.</li>
+        <li>Understand and implement event handling in JavaFX.</li>
+    </ol> -->
+
+    <h2>5.1 Introduction</h2>
+
+    <!-- <h3>What is JavaFX?</h3> -->
+    <p>JavaFX is a Java-based platform used to develop graphical user interface (GUI) applications. It provides tools and libraries for creating interactive desktop applications with text, buttons, images, charts, animations, and other visual elements.</p>
+    <p>JavaFX is also known as <strong>OpenJFX</strong> in its open-source form.</p>
+    <p>A Graphical User Interface (GUI) allows users to interact with an application through visual controls (such as buttons, text boxes, and menus) instead of typing commands into a command-line terminal.</p>
+
+    <p><strong>Common examples of GUI applications:</strong></p>
+    <ul>
+        <li>Login and registration forms</li>
+        <li>Student management systems</li>
+        <li>Billing applications</li>
+        <li>Banking applications</li>
+        <li>Data visualization dashboards</li>
+    </ul>
+
+    <h3>Rich Internet Applications (RIAs)</h3>
+    <p>A <strong>Rich Internet Application (RIA)</strong> is an application that delivers a rich, responsive, and visually interactive user experience, similar to traditional desktop applications, but with modern multimedia, data visualization, and network connectivity capabilities.</p>
+    <p>JavaFX applications are classified as RIAs because they provide enhanced graphics, fast responsiveness, and interactive features compared with traditional static web pages.</p>
+    <p>In simple words, an RIA makes an application more interactive and convenient to use.</p>
+    <h4>Characteristics of RIAs:</h4>
+    <ol>
+        <li><strong>Rich user experience:</strong> Provides interactive controls, high-resolution graphics, and smooth animations.</li>
+        <li><strong>Responsiveness:</strong> Responds quickly and smoothly to user actions without page reloads.</li>
+        <li><strong>Connectivity:</strong> Connects and communicates seamlessly with network-based web services, databases, and remote APIs.</li>
+        <li><strong>Rich graphics:</strong> Supports modern visual elements including vector graphics, images, audio, and video playback.</li>
+        <li><strong>Security:</strong> Protects user data and restricts unauthorized access through standard security models.</li>
+        <li><strong>Easy development:</strong> Reusable GUI components, layout containers, and styling engines simplify application creation.</li>
+        <li><strong>Cross-platform support:</strong> JavaFX applications run on Windows, macOS, and Linux when the JavaFX runtime is available.</li>
+    </ol>
+
+    <h2>5.2 What is JavaFX?</h2>
+    <p>JavaFX is a modern Java library and GUI toolkit used to build rich client-side applications. It provides comprehensive facilities for creating windows, layouts, controls, graphics, animations, charts, and event-driven applications.</p>
+
+    <h3>Why JavaFX?</h3>
+    <ul>
+        <li>It provides a modern alternative to older Java GUI frameworks such as AWT and Swing.</li>
+        <li>It supports reusable and customizable UI controls.</li>
+        <li>It provides flexible layout containers for arranging components automatically.</li>
+        <li>It includes built-in charting components for visual data representation.</li>
+        <li>It provides a powerful event-handling mechanism to respond to user actions.</li>
+        <li>It supports CSS-like styling for separating design from application code.</li>
+        <li>It runs across multiple desktop operating systems.</li>
+    </ul>
+
+    <h3>Features of JavaFX</h3>
+    <ol>
+        <li><strong>Rich set of APIs:</strong> Extensive built-in classes and methods for controls, layouts, shapes, media, and charts.</li>
+        <li><strong>Scene Builder support:</strong> A drag-and-drop visual design tool that generates FXML layout code automatically.</li>
+        <li><strong>FXML:</strong> An XML-based declarative markup language used to define user interfaces separately from Java business logic.</li>
+        <li><strong>CSS-like styling:</strong> Allows developers to style controls, fonts, colors, and backgrounds using familiar CSS syntax.</li>
+        <li><strong>Integrated graphics:</strong> Built-in 2D and 3D graphics capabilities, including shapes, gradients, and visual effects.</li>
+        <li><strong>Animation and multimedia:</strong> High-performance timeline animations, transitions, and audio/video playback engines.</li>
+        <li><strong>Event handling:</strong> Robust event system to handle mouse clicks, keystrokes, window events, and touch gestures.</li>
+        <li><strong>Layout management:</strong> Built-in layout containers such as <code>HBox</code>, <code>VBox</code>, <code>BorderPane</code>, <code>GridPane</code>, <code>FlowPane</code>, and <code>StackPane</code>.</li>
+        <li><strong>Built-in charts:</strong> Native charting library including Pie Chart, Line Chart, Area Chart, and Bar Chart.</li>
+        <li><strong>Cross-platform development:</strong> Applications written in JavaFX can run on any platform supported by Java and JavaFX.</li>
+    </ol>
+
+    <h2>5.3 Architecture of JavaFX</h2>
+    <p>JavaFX architecture is layered to support the development of rich, cross-platform GUI and web applications. It is a complete software platform that allows developers to build various content-rich client applications that operate consistently across several platforms with high-performance graphics, multimedia, and UI controls.</p>
+    <p>Figure 5.1 shows the layered architecture of JavaFX, illustrating how the high-level application API connects with the internal rendering, windowing, and runtime engines.</p>
+
+    <!-- Visual Architecture Diagram Fig 5.1 -->
+    <div style="text-align: center; margin: 25px 0;">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 405" width="100%" height="auto" style="max-width: 630px; display: block; margin: 0 auto; background-color: #ffffff; border: 1px solid #d5d5d5; border-radius: 6px; padding: 12px 10px;">
+            <!-- Outer Boundary -->
+            <rect x="15" y="10" width="650" height="385" rx="8" fill="#fafafa" stroke="#9e9e9e" stroke-width="1.5" stroke-dasharray="4 2"/>
+
+            <!-- Layer 1: JavaFX API & Scene Graph -->
+            <rect x="30" y="24" width="400" height="56" rx="6" fill="#e8eaf6" stroke="#283593" stroke-width="2"/>
+            <text x="230" y="48" text-anchor="middle" font-family="Arial, sans-serif" font-size="14.5" font-weight="bold" fill="#1a237e">JavaFX API</text>
+            <text x="230" y="67" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#333">UI Controls, Layouts, 2D/3D Shapes, Charts, FXML &amp; CSS</text>
+
+            <rect x="445" y="24" width="205" height="56" rx="6" fill="#ede7f6" stroke="#512da8" stroke-width="2"/>
+            <text x="547" y="48" text-anchor="middle" font-family="Arial, sans-serif" font-size="14.5" font-weight="bold" fill="#4a148c">Scene Graph</text>
+            <text x="547" y="67" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#333">Tree of Visual Nodes</text>
+
+            <!-- Layer 2: Quantum Toolkit -->
+            <rect x="30" y="90" width="620" height="48" rx="6" fill="#e0f2f1" stroke="#00695c" stroke-width="2"/>
+            <text x="340" y="112" text-anchor="middle" font-family="Arial, sans-serif" font-size="14.5" font-weight="bold" fill="#004d40">Quantum Toolkit</text>
+            <text x="340" y="129" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#004d40">Coordinates Threading &amp; Binds JavaFX API / Scene Graph to Low-Level Engines</text>
+
+            <!-- Layer 3: Four Core Engine Columns -->
+            <!-- Column 1: Prism -->
+            <rect x="30" y="148" width="146" height="56" rx="5" fill="#e3f2fd" stroke="#1565c0" stroke-width="1.5"/>
+            <text x="103" y="172" text-anchor="middle" font-family="Arial, sans-serif" font-size="13.5" font-weight="bold" fill="#0d47a1">Prism</text>
+            <text x="103" y="191" text-anchor="middle" font-family="Arial, sans-serif" font-size="10.5" fill="#333">JavaFX Graphics Engine</text>
+
+            <rect x="30" y="212" width="146" height="48" rx="5" fill="#bbdefb" stroke="#1565c0" stroke-width="1.5"/>
+            <text x="103" y="233" text-anchor="middle" font-family="Arial, sans-serif" font-size="12.5" font-weight="bold" fill="#0d47a1">OpenGL | D3D</text>
+            <text x="103" y="249" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#333">Hardware 2D/3D Render</text>
+
+            <!-- Column 2: Glass -->
+            <rect x="188" y="148" width="146" height="56" rx="5" fill="#fff3e0" stroke="#e65100" stroke-width="1.5"/>
+            <text x="261" y="172" text-anchor="middle" font-family="Arial, sans-serif" font-size="13.5" font-weight="bold" fill="#bf360c">Glass</text>
+            <text x="261" y="191" text-anchor="middle" font-family="Arial, sans-serif" font-size="10.5" fill="#333">Windowing Toolkit</text>
+
+            <rect x="188" y="212" width="146" height="48" rx="5" fill="#ffe0b2" stroke="#e65100" stroke-width="1.5"/>
+            <text x="261" y="233" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#bf360c">Win32 | GTK | Mac</text>
+            <text x="261" y="249" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#333">Native OS Windowing</text>
+
+            <!-- Column 3: Web View -->
+            <rect x="346" y="148" width="146" height="56" rx="5" fill="#e8f5e9" stroke="#2e7d32" stroke-width="1.5"/>
+            <text x="419" y="172" text-anchor="middle" font-family="Arial, sans-serif" font-size="13.5" font-weight="bold" fill="#1b5e20">Web View</text>
+            <text x="419" y="191" text-anchor="middle" font-family="Arial, sans-serif" font-size="10.5" fill="#333">HTML5 Web Component</text>
+
+            <rect x="346" y="212" width="146" height="48" rx="5" fill="#c8e6c9" stroke="#2e7d32" stroke-width="1.5"/>
+            <text x="419" y="233" text-anchor="middle" font-family="Arial, sans-serif" font-size="12.5" font-weight="bold" fill="#1b5e20">WebKit</text>
+            <text x="419" y="249" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#333">Browser Rendering Engine</text>
+
+            <!-- Column 4: Media -->
+            <rect x="504" y="148" width="146" height="56" rx="5" fill="#fce4ec" stroke="#c2185b" stroke-width="1.5"/>
+            <text x="577" y="172" text-anchor="middle" font-family="Arial, sans-serif" font-size="13.5" font-weight="bold" fill="#880e4f">Media</text>
+            <text x="577" y="191" text-anchor="middle" font-family="Arial, sans-serif" font-size="10.5" fill="#333">Media Engine</text>
+
+            <rect x="504" y="212" width="146" height="48" rx="5" fill="#f8bbd0" stroke="#c2185b" stroke-width="1.5"/>
+            <text x="577" y="233" text-anchor="middle" font-family="Arial, sans-serif" font-size="12.5" font-weight="bold" fill="#880e4f">GStreamer</text>
+            <text x="577" y="249" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#333">Audio &amp; Video Pipeline</text>
+
+            <!-- Layer 4: JDK APIs and Tools -->
+            <rect x="30" y="270" width="620" height="46" rx="5" fill="#f5f5f5" stroke="#757575" stroke-width="1.5"/>
+            <text x="340" y="291" text-anchor="middle" font-family="Arial, sans-serif" font-size="13.5" font-weight="bold" fill="#424242">JDK APIs and Tools</text>
+            <text x="340" y="307" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#616161">Java 2D, Logging, Concurrency, Collections, File I/O</text>
+
+            <!-- Layer 5: Java Virtual Machine (JVM) -->
+            <rect x="30" y="326" width="620" height="48" rx="5" fill="#eceff1" stroke="#37474f" stroke-width="2"/>
+            <text x="340" y="348" text-anchor="middle" font-family="Arial, sans-serif" font-size="14.5" font-weight="bold" fill="#263238">Java Virtual Machine (JVM)</text>
+            <text x="340" y="365" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#37474f">Cross-Platform Execution Environment &amp; Memory Management</text>
+        </svg>
+        <div style="font-weight: bold; margin-top: 8px; color: #1a237e; font-size: 13.5px;">Fig. 5.1: Architecture of JavaFX</div>
+    </div>
+
+    <h3>Detailed Architecture Components (as shown in Fig. 5.1)</h3>
+
+    <h4>1. JavaFX API</h4>
+    <p>The <strong>JavaFX API</strong> is the top layer providing public classes and packages for animations, UI controls, CSS styling, scene graph, events, media, and application lifecycle. Important packages include:</p>
+    <ul>
+        <li><code>javafx.animation</code>: Contains classes to add transition-based animations such as fill, fade, rotate, scale, and translation to JavaFX nodes.</li>
+        <li><code>javafx.application</code>: Contains a set of classes responsible for the JavaFX application life cycle (e.g., <code>Application</code>).</li>
+        <li><code>javafx.css</code>: Contains classes to add CSS-like styling to JavaFX GUI applications.</li>
+        <li><code>javafx.event</code>: Contains classes and interfaces to deliver and handle JavaFX events (e.g., <code>ActionEvent</code>, <code>EventHandler</code>).</li>
+        <li><code>javafx.geometry</code>: Contains classes to define 2D objects, coordinates, insets, and alignments (e.g., <code>Insets</code>, <code>Pos</code>, <code>Point2D</code>).</li>
+        <li><code>javafx.scene</code>: Contains the core classes for the scene graph, such as <code>Scene</code>, <code>Node</code>, <code>Parent</code>, and <code>Group</code>.</li>
+        <li><code>javafx.scene.control</code>: Contains standard UI controls such as <code>Button</code>, <code>Label</code>, <code>TextField</code>, <code>CheckBox</code>, <code>RadioButton</code>, and <code>ComboBox</code>.</li>
+        <li><code>javafx.scene.layout</code>: Contains container layout panes such as <code>HBox</code>, <code>VBox</code>, <code>BorderPane</code>, <code>GridPane</code>, <code>FlowPane</code>, and <code>StackPane</code>.</li>
+        <li><code>javafx.scene.chart</code>: Provides built-in charting components including <code>PieChart</code>, <code>LineChart</code>, <code>AreaChart</code>, and <code>BarChart</code>.</li>
+        <li><code>javafx.stage</code>: Contains top-level window container classes such as <code>Stage</code> and file dialogs.</li>
+    </ul>
+
+    <h4>2. Stage and Scene</h4>
+    <ul>
+        <li><strong>Stage:</strong> Represents the top-level window of a JavaFX application (equivalent to a Frame in AWT/Swing). The primary stage is automatically created by the JavaFX runtime and passed to the <code>start(Stage primaryStage)</code> method.</li>
+        <li><strong>Scene:</strong> Represents the container holding all physical visual content displayed inside a stage. A stage can display only one scene at a time, but scenes can be changed dynamically.</li>
+    </ul>
+
+    <h4>3. Scene Graph</h4>
+    <p>The <strong>Scene Graph</strong> is a hierarchical, tree-like data structure of visual objects called <strong>nodes</strong>. Every visual element displayed on screen (layout container, button, label, shape) is a node in this tree:</p>
+    <ul>
+        <li><strong>Root node:</strong> The first and top-most container node added directly to the <code>Scene</code> (e.g., <code>VBox</code>, <code>BorderPane</code>, <code>GridPane</code>). It has no parent.</li>
+        <li><strong>Branch node:</strong> An intermediate node that can contain child nodes (containers like <code>HBox</code> or <code>StackPane</code>).</li>
+        <li><strong>Leaf node:</strong> A terminal node that cannot have children (controls such as <code>Button</code>, <code>Label</code>, <code>TextField</code>, or shapes like <code>Circle</code>, <code>Rectangle</code>).</li>
+    </ul>
+
+    <pre><code>Stage (Top-Level Window)
+ └── Scene (Content Container)
+      └── VBox (Root / Branch Node)
+           ├── Label (Leaf Node)
+           ├── TextField (Leaf Node)
+           └── Button (Leaf Node)</code></pre>
+
+    <h4>4. Quantum Toolkit</h4>
+    <p>The <strong>Quantum Toolkit</strong> connects the higher-level JavaFX APIs and Scene Graph with the lower-level graphics (Prism) and windowing (Glass) engines. It acts as the coordinator between the <strong>JavaFX Application Thread</strong> (which handles user events and updates the scene graph) and the <strong>Render Thread</strong> (which draws pixels via Prism), ensuring smooth performance and thread safety without stuttering.</p>
+
+    <h4>5. Prism (JavaFX Graphics Engine)</h4>
+    <p><strong>Prism</strong> is the high-performance, hardware-accelerated graphics rendering system in JavaFX. It renders both 2D and 3D graphics by communicating with native graphics hardware acceleration libraries:</p>
+    <ul>
+        <li>Uses <strong>Direct3D (D3D)</strong> on Microsoft Windows.</li>
+        <li>Uses <strong>OpenGL</strong> on macOS and Linux platforms.</li>
+        <li>If dedicated hardware acceleration is unavailable, Prism automatically falls back to a software rendering pipeline (Java 2D).</li>
+    </ul>
+
+    <h4>6. Glass Windowing Toolkit</h4>
+    <p>The <strong>Glass Windowing Toolkit</strong> is a platform-dependent layer that provides low-level windowing and event management. It interfaces directly with native operating system window managers:</p>
+    <ul>
+        <li><strong>Win32</strong> on Windows</li>
+        <li><strong>GTK+</strong> on Linux</li>
+        <li><strong>Mac OS X Cocoa</strong> on macOS</li>
+    </ul>
+    <p>Glass is responsible for creating native windows, dispatching mouse and keyboard input events from the operating system to JavaFX, and managing native system timers.</p>
+
+    <h4>7. WebView &amp; WebKit</h4>
+    <p><strong>WebView</strong> is an embedded web component powered by the open-source <strong>WebKit</strong> browser engine. It allows developers to embed full HTML5 web pages, execute JavaScript, apply CSS styles, and navigate web links directly inside a JavaFX desktop window.</p>
+
+    <h4>8. Media Engine &amp; GStreamer</h4>
+    <p>The <strong>Media Engine</strong> provides audio and video playback capabilities in JavaFX applications. It is powered by the <strong>GStreamer</strong> multimedia framework, supporting audio and video streaming, media controllers, and playback of supported multimedia formats.</p>
+
+    <h4>9. JDK APIs, Tools, and Java Virtual Machine (JVM)</h4>
+    <p>At the base of the architecture sits the Java Development Kit (JDK) and the Java Virtual Machine (JVM). They provide the execution environment, memory management, garbage collection, and core libraries (collections, I/O, concurrency) that allow JavaFX to run seamlessly across all supported platforms.</p>
+
+    <h2>5.4 Life Cycle of a JavaFX Application</h2>
+    <p>A JavaFX application entry class must extend the abstract class <code>javafx.application.Application</code>. The JavaFX runtime manages the application through three distinct lifecycle methods executed in a predefined order.</p>
+
+    <h3>Three Important Life-Cycle Methods</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Method</th>
+                <th>Description</th>
+                <th>Stage Available?</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>public void init()</code></td>
+                <td>Called first before the UI is loaded. Used to initialize background data, load files, and perform setup.</td>
+                <td>No (Cannot create UI components here)</td>
+            </tr>
+            <tr>
+                <td><code>public abstract void start(Stage primaryStage)</code></td>
+                <td>Main entry point for building and displaying the GUI. Must be overridden. Receives the primary stage created by the runtime.</td>
+                <td>Yes (Main UI configured and displayed here)</td>
+            </tr>
+            <tr>
+                <td><code>public void stop()</code></td>
+                <td>Called automatically when the application terminates (e.g., when the last window closes). Used to close database connections and release resources.</td>
+                <td>No (Cleanup phase)</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>Life-Cycle Execution Flow</h3>
+    <p>The life cycle of a JavaFX application describes the exact sequence of events from the moment the program begins until it terminates. The JavaFX runtime manages this lifecycle across different specialized threads (the <strong>Launcher Thread</strong> and the <strong>JavaFX Application Thread</strong>).</p>
+
+    <!-- Visual Life-Cycle Diagram -->
+    <div style="text-align: center; margin: 25px 0;">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 715" width="100%" height="auto" style="max-width: 620px; display: block; margin: 0 auto; background-color: #ffffff; border: 1px solid #e0e0e0; border-radius: 6px; padding: 15px 10px;">
+            <defs>
+                <marker id="flow-arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+                    <path d="M 0 1 L 10 5 L 0 9 z" fill="#1a237e" />
+                </marker>
+            </defs>
+
+            <!-- Step 1: Launch -->
+            <rect x="130" y="15" width="420" height="54" rx="6" fill="#e8eaf6" stroke="#283593" stroke-width="2"/>
+            <text x="340" y="37" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#1a237e">1. Application Launch: main() &#x2192; launch(args)</text>
+            <text x="340" y="55" text-anchor="middle" font-family="Arial, sans-serif" font-size="11.5" fill="#333">Entry point called; starts JavaFX runtime system</text>
+
+            <!-- Arrow 1 -->
+            <line x1="340" y1="69" x2="340" y2="97" stroke="#1a237e" stroke-width="2" marker-end="url(#flow-arrow)"/>
+
+            <!-- Step 2: Instance Created -->
+            <rect x="130" y="97" width="420" height="54" rx="6" fill="#ede7f6" stroke="#512da8" stroke-width="2"/>
+            <text x="340" y="119" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#4a148c">2. Application Instance Created</text>
+            <text x="340" y="137" text-anchor="middle" font-family="Arial, sans-serif" font-size="11.5" fill="#333">JavaFX runtime instantiates the Application subclass</text>
+
+            <!-- Arrow 2 -->
+            <line x1="340" y1="151" x2="340" y2="179" stroke="#1a237e" stroke-width="2" marker-end="url(#flow-arrow)"/>
+
+            <!-- Step 3: init() -->
+            <rect x="130" y="179" width="420" height="64" rx="6" fill="#fff3e0" stroke="#ef6c00" stroke-width="2"/>
+            <text x="340" y="202" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#e65100">3. init() Method</text>
+            <text x="340" y="219" text-anchor="middle" font-family="Arial, sans-serif" font-size="11.5" fill="#555">Executed on: JavaFX-Launcher Thread [Optional Override]</text>
+            <text x="340" y="234" text-anchor="middle" font-family="Arial, sans-serif" font-size="11.5" fill="#333">Pre-loads background data &amp; resources (Stage is NOT yet available)</text>
+
+            <!-- Arrow 3 -->
+            <line x1="340" y1="243" x2="340" y2="271" stroke="#1a237e" stroke-width="2" marker-end="url(#flow-arrow)"/>
+
+            <!-- Step 4: start() -->
+            <rect x="130" y="271" width="420" height="72" rx="6" fill="#e8f5e9" stroke="#2e7d32" stroke-width="2"/>
+            <text x="340" y="294" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#1b5e20">4. start(Stage primaryStage) Method</text>
+            <text x="340" y="312" text-anchor="middle" font-family="Arial, sans-serif" font-size="11.5" fill="#555">Executed on: JavaFX Application Thread [MANDATORY OVERRIDE]</text>
+            <text x="340" y="328" text-anchor="middle" font-family="Arial, sans-serif" font-size="11.5" fill="#333">Builds Scene Graph, sets Scene on Stage &amp; calls primaryStage.show()</text>
+
+            <!-- Arrow 4 -->
+            <line x1="340" y1="343" x2="340" y2="371" stroke="#1a237e" stroke-width="2" marker-end="url(#flow-arrow)"/>
+
+            <!-- Step 5: Application Runs -->
+            <rect x="130" y="371" width="420" height="70" rx="6" fill="#e1f5fe" stroke="#0288d1" stroke-width="2"/>
+            <text x="340" y="394" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#01579b">5. Application Runs (Event Loop)</text>
+            <text x="340" y="412" text-anchor="middle" font-family="Arial, sans-serif" font-size="11.5" fill="#555">Executed on: JavaFX Application Thread</text>
+            <text x="340" y="428" text-anchor="middle" font-family="Arial, sans-serif" font-size="11.5" fill="#333">Window is displayed; listens and responds to user interaction events</text>
+
+            <!-- Arrow 5 -->
+            <line x1="340" y1="441" x2="340" y2="469" stroke="#1a237e" stroke-width="2" marker-end="url(#flow-arrow)"/>
+
+            <!-- Step 6: User Closes Window / Platform.exit() -->
+            <rect x="130" y="469" width="420" height="54" rx="6" fill="#fce4ec" stroke="#c2185b" stroke-width="2"/>
+            <text x="340" y="491" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#880e4f">6. User Closes Window / Platform.exit()</text>
+            <text x="340" y="509" text-anchor="middle" font-family="Arial, sans-serif" font-size="11.5" fill="#333">Shutdown triggered: window closed or exit called programmatically</text>
+
+            <!-- Arrow 6 -->
+            <line x1="340" y1="523" x2="340" y2="551" stroke="#1a237e" stroke-width="2" marker-end="url(#flow-arrow)"/>
+
+            <!-- Step 7: stop() -->
+            <rect x="130" y="551" width="420" height="64" rx="6" fill="#fff8e1" stroke="#f57f17" stroke-width="2"/>
+            <text x="340" y="574" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#f57f17">7. stop() Method</text>
+            <text x="340" y="591" text-anchor="middle" font-family="Arial, sans-serif" font-size="11.5" fill="#555">Executed on: JavaFX Application Thread [Optional Override]</text>
+            <text x="340" y="606" text-anchor="middle" font-family="Arial, sans-serif" font-size="11.5" fill="#333">Cleanup phase: closes files, flushes data &amp; disconnects database</text>
+
+            <!-- Arrow 7 -->
+            <line x1="340" y1="615" x2="340" y2="643" stroke="#1a237e" stroke-width="2" marker-end="url(#flow-arrow)"/>
+
+            <!-- Step 8: Application Exits -->
+            <rect x="130" y="643" width="420" height="54" rx="6" fill="#ffebee" stroke="#c62828" stroke-width="2"/>
+            <text x="340" y="665" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#b71c1c">8. Application Exits</text>
+            <text x="340" y="683" text-anchor="middle" font-family="Arial, sans-serif" font-size="11.5" fill="#333">JavaFX runtime terminates and JVM process shuts down</text>
+        </svg>
+    </div>
+
+    <h4>Detailed Step-by-Step Execution Sequence</h4>
+    <ol>
+        <li>
+            <strong>Application Launch:</strong>
+            The program starts in the standard <code>public static void main(String[] args)</code> method. It calls <code>Application.launch(args)</code>, which bootstraps the JavaFX runtime system.
+        </li>
+        <li>
+            <strong>Application Instance Creation:</strong>
+            The JavaFX runtime automatically instantiates the specified <code>Application</code> subclass using its default no-argument constructor before calling any lifecycle methods.
+        </li>
+        <li>
+            <strong>Initialization Phase — <code>init()</code>:</strong>
+            The runtime invokes <code>init()</code> on the <strong>JavaFX-Launcher thread</strong> before any graphical window is created. This method is optional and is used to load configuration files, parse parameters, or establish network connections. <em>Note:</em> Attempting to construct a <code>Scene</code> or modify a <code>Stage</code> here will cause an exception.
+        </li>
+        <li>
+            <strong>UI Construction Phase — <code>start(Stage primaryStage)</code>:</strong>
+            The runtime switches to the <strong>JavaFX Application Thread</strong> and calls <code>start(primaryStage)</code>. This is the only <strong>abstract method</strong> in <code>Application</code> and must always be overridden. The primary stage is passed as a parameter. Here, controls (buttons, labels) and layouts are added to a <code>Scene</code>, attached to the stage via <code>primaryStage.setScene(scene)</code>, and displayed using <code>primaryStage.show()</code>.
+        </li>
+        <li>
+            <strong>Active Running Phase (Event Loop):</strong>
+            The application enters the running state. The JavaFX Application Thread executes an internal event loop that listens for user actions such as mouse clicks, button taps, and keyboard inputs, dispatching them to registered event handlers.
+        </li>
+        <li>
+            <strong>Shutdown Trigger (User Closes Window / <code>Platform.exit()</code>):</strong>
+            The termination sequence is initiated when the user closes the last application window (or clicks the window close button [X]), or code explicitly invokes <code>Platform.exit()</code> or <code>System.exit(0)</code>.
+        </li>
+        <li>
+            <strong>Cleanup Phase — <code>stop()</code>:</strong>
+            The runtime invokes <code>stop()</code> on the <strong>JavaFX Application Thread</strong>. This optional method is the designated location for releasing resources, saving user settings, writing pending data, and closing database or file connections.
+        </li>
+        <li>
+            <strong>Process Exit:</strong>
+            The JavaFX runtime finishes releasing native operating system windowing and graphics handles, shuts down all background threads, and terminates the JVM process.
+        </li>
+    </ol>
+
+    <h4>Life-Cycle Methods Summary Table</h4>
+    <table>
+        <thead>
+            <tr>
+                <th>Step #</th>
+                <th>Phase / Method</th>
+                <th>Execution Thread</th>
+                <th>Must Override?</th>
+                <th>Primary Stage Available?</th>
+                <th>Main Responsibility</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td><code>main()</code> / <code>launch()</code></td>
+                <td>Main Thread</td>
+                <td>Mandatory (to run)</td>
+                <td>No</td>
+                <td>Initializes runtime and begins application bootstrap.</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Instance Creation</td>
+                <td>JavaFX-Launcher Thread</td>
+                <td>Automatic (calls constructor)</td>
+                <td>No</td>
+                <td>Constructs an instance of the <code>Application</code> subclass.</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td><code>public void init()</code></td>
+                <td>JavaFX-Launcher Thread</td>
+                <td>Optional (default empty)</td>
+                <td>No</td>
+                <td>Non-GUI setup, background data loading, resource preparation.</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td><code>public abstract void start(Stage)</code></td>
+                <td>JavaFX Application Thread</td>
+                <td><strong>Mandatory (Abstract)</strong></td>
+                <td><strong>Yes</strong></td>
+                <td>Constructs UI, scene graph, and shows the primary window.</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>Active Running (Event Loop)</td>
+                <td>JavaFX Application Thread</td>
+                <td>Automatic</td>
+                <td>Yes</td>
+                <td>Processes GUI events, animation timers, and user interactions.</td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td>Window Close / <code>Platform.exit()</code></td>
+                <td>User Action / Application Code</td>
+                <td>Event Trigger</td>
+                <td>Yes &#x2192; Closing</td>
+                <td>Initiates the application shutdown procedure.</td>
+            </tr>
+            <tr>
+                <td>7</td>
+                <td><code>public void stop()</code></td>
+                <td>JavaFX Application Thread</td>
+                <td>Optional (default empty)</td>
+                <td>No (Stage closing)</td>
+                <td>Cleanly releases resources, saves state, and closes connections.</td>
+            </tr>
+            <tr>
+                <td>8</td>
+                <td>Application Exit</td>
+                <td>JVM / OS</td>
+                <td>Automatic</td>
+                <td>No</td>
+                <td>Native resources freed; JVM process terminates.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="exam-note">
+        <strong>Important Points on JavaFX Life Cycle:</strong>
+        <ul>
+            <li><strong>Which method is abstract in <code>Application</code>?</strong> Only <code>start(Stage primaryStage)</code> is abstract. <code>init()</code> and <code>stop()</code> have default empty implementations.</li>
+            <li><strong>Can we create UI components inside <code>init()</code>?</strong> No. UI components must be created and updated on the JavaFX Application Thread, not the Launcher thread.</li>
+            <li><strong>Which thread executes <code>start()</code> and <code>stop()</code>?</strong> Both execute on the <strong>JavaFX Application Thread</strong>.</li>
+            <li><strong>How to programmatically exit a JavaFX application?</strong> Call <code>Platform.exit()</code>, which cleanly invokes the <code>stop()</code> lifecycle method before closing.</li>
+        </ul>
+    </div>
+
+    <h3>Basic JavaFX Program: HelloJavaFX.java</h3>
+    <pre><code>import javafx.application.Application;
+import javafx.stage.Stage;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.layout.StackPane;
+
+public class HelloJavaFX extends Application {
+
+    @Override
+    public void init() {
+        System.out.println("init() method called: Initializing resources...");
+    }
+
+    @Override
+    public void start(Stage primaryStage) {
+        System.out.println("start() method called: Building user interface...");
+
+        // 1. Create a UI component (node)
+        Label label = new Label("Welcome to JavaFX");
+
+        // 2. Create a layout container and add the node
+        StackPane root = new StackPane(label);
+
+        // 3. Create a scene with dimensions (width: 400, height: 200)
+        Scene scene = new Scene(root, 400, 200);
+
+        // 4. Configure the stage
+        primaryStage.setTitle("My First JavaFX App");
+        primaryStage.setScene(scene);
+        primaryStage.show(); // Display the window
+    }
+
+    @Override
+    public void stop() {
+        System.out.println("stop() method called: Cleaning up resources...");
+    }
+
+    public static void main(String[] args) {
+        launch(args); // Launches the JavaFX application
+    }
+}</code></pre>
+
+    <!-- Program Output UI: HelloJavaFX -->
+    <div class="fx-ui-card">
+        <div class="fx-ui-header">
+            <div class="fx-ui-title">
+                <span class="fx-badge-ui">Output UI</span>
+                <span>Graphical Window Output &mdash; HelloJavaFX.java</span>
+            </div>
+            <span class="fx-badge-meta">Stage Size: 400 &times; 200 px | Layout: StackPane</span>
+        </div>
+
+        <!-- Simulated JavaFX Stage Window -->
+        <div class="fx-window" style="max-width: 440px;">
+            <div class="fx-window-titlebar">
+                <div class="fx-title-left">
+                    <svg class="fx-stage-icon" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="16" height="16" rx="3" fill="#ea580c"/>
+                        <path d="M4 11V5h2.5a2.5 2.5 0 0 1 0 5H4m5-5h3m-3 3h2" stroke="#ffffff" stroke-width="1.3" stroke-linecap="round"/>
+                    </svg>
+                    <span>My First JavaFX App</span>
+                </div>
+                <div class="fx-win-controls">
+                    <span class="fx-win-btn">&#x2212;</span>
+                    <span class="fx-win-btn">&#x25A2;</span>
+                    <span class="fx-win-btn close">&#x2715;</span>
+                </div>
+            </div>
+            <div class="fx-scene" style="height: 150px; display: flex; align-items: center; justify-content: center; background-color: #f4f4f4;">
+                <span class="fx-label" style="font-size: 16px; font-weight: 500; color: #111111; letter-spacing: 0.3px;">Welcome to JavaFX</span>
+            </div>
+        </div>
+
+        <div style="margin-top: 14px;">
+            <div style="font-size: 12px; font-weight: bold; color: #555; margin-bottom: 4px;">Console Output:</div>
+            <div class="output-box" style="margin: 0; background-color: #1e1e1e; color: #d4d4d4; border: 1px solid #333; border-radius: 4px; padding: 10px 12px; font-size: 11.5px;">
+<span style="color: #6a9955;">// When application launches:</span>
+init() method called: Initializing resources...
+start() method called: Building user interface...
+
+<span style="color: #6a9955;">// When user closes the GUI window:</span>
+stop() method called: Cleaning up resources...
+            </div>
+        </div>
+    </div>
+
+    <h3>Detailed Program Explanation</h3>
+    <ul>
+        <li><code>extends Application</code>: Inherits core JavaFX application functionality.</li>
+        <li><code>launch(args)</code>: Static method called from <code>main()</code> that initializes the JavaFX runtime and starts the lifecycle sequence.</li>
+        <li><code>start(Stage primaryStage)</code>: Abstract method that must be overridden; receives the application's main window (the primary stage).</li>
+        <li><code>new Label(...)</code>: Creates a read-only text control node.</li>
+        <li><code>new StackPane(label)</code>: Layout pane that places its children stacked at the center.</li>
+        <li><code>new Scene(root, 400, 200)</code>: Creates a scene containing the layout root with width 400 pixels and height 200 pixels.</li>
+        <li><code>primaryStage.setTitle(...)</code>: Sets the title displayed in the window title bar.</li>
+        <li><code>primaryStage.setScene(scene)</code>: Attaches the scene to the primary stage.</li>
+        <li><code>primaryStage.show()</code>: Makes the stage visible to the user.</li>
+    </ul>
+
+    <div class="exam-note">
+        <strong></strong> In modern Java (Java 11 and later), JavaFX is unbundled from the standard JDK. It is supplied as separate OpenJFX modules. When compiling and running via command line, you specify module paths:
+        <code>--module-path /path/to/javafx-sdk/lib --add-modules javafx.controls,javafx.fxml</code>.
+    </div>
+
+    <h2>5.5 Common JavaFX Layouts</h2>
+    <p>A layout container (or layout pane) automatically calculates the size and position of child nodes inside a scene. Instead of specifying manual pixel coordinates for every button and label, layout panes arrange components automatically according to specific rules and adapt when the window is resized.</p>
+
+    <h3>1. HBox Layout</h3>
+    <p><code>HBox</code> arranges its child nodes horizontally in a single row from left to right.</p>
+
+    <pre><code>┌──────────┬──────────┬──────────┐
+│ Button 1 │ Button 2 │ Button 3 │
+└──────────┴──────────┴──────────┘
+      Horizontal Arrangement</code></pre>
+
+    <pre><code>import javafx.scene.layout.HBox;
+import javafx.scene.control.Button;
+
+Button b1 = new Button("Add");
+Button b2 = new Button("Edit");
+Button b3 = new Button("Delete");
+
+HBox hbox = new HBox(10); // 10 pixels spacing between children
+hbox.getChildren().addAll(b1, b2, b3);</code></pre>
+
+    <!-- Output UI: HBox -->
+    <div class="fx-ui-card">
+        <div class="fx-ui-header">
+            <div class="fx-ui-title">
+                <span class="fx-badge-ui">Output UI</span>
+                <span>HBox Layout Visual Output</span>
+            </div>
+            <span class="fx-badge-meta">Layout: HBox(10) | Single Row</span>
+        </div>
+        <div class="fx-window" style="max-width: 440px;">
+            <div class="fx-window-titlebar">
+                <div class="fx-title-left">
+                    <span style="display:inline-block; width:10px; height:10px; background:#ea580c; border-radius:2px;"></span>
+                    <span>HBox Demo Window</span>
+                </div>
+                <div class="fx-win-controls">
+                    <span class="fx-win-btn">&#x2212;</span>
+                    <span class="fx-win-btn">&#x25A2;</span>
+                    <span class="fx-win-btn close">&#x2715;</span>
+                </div>
+            </div>
+            <div class="fx-scene" style="display: flex; flex-direction: row; gap: 12px; align-items: center; justify-content: center; padding: 22px 14px; background: #f4f4f4;">
+                <div class="fx-btn">Add</div>
+                <div class="fx-btn">Edit</div>
+                <div class="fx-btn">Delete</div>
+            </div>
+        </div>
+        <div class="fx-subtext" style="text-align: center;">Child buttons arranged horizontally in one row with 10px spacing.</div>
+    </div>
+
+    <h3>2. VBox Layout</h3>
+    <p><code>VBox</code> arranges its child nodes vertically in a single column from top to bottom.</p>
+
+    <pre><code>┌──────────┐
+│ Button 1 │
+├──────────┤
+│ Button 2 │
+├──────────┤
+│ Button 3 │
+└──────────┘
+Vertical Arrangement</code></pre>
+
+    <pre><code>import javafx.scene.layout.VBox;
+import javafx.scene.control.Button;
+
+Button b1 = new Button("Open");
+Button b2 = new Button("Save");
+Button b3 = new Button("Exit");
+
+VBox vbox = new VBox(10); // 10 pixels spacing between children
+vbox.getChildren().addAll(b1, b2, b3);</code></pre>
+
+    <!-- Output UI: VBox -->
+    <div class="fx-ui-card">
+        <div class="fx-ui-header">
+            <div class="fx-ui-title">
+                <span class="fx-badge-ui">Output UI</span>
+                <span>VBox Layout Visual Output</span>
+            </div>
+            <span class="fx-badge-meta">Layout: VBox(10) | Single Column</span>
+        </div>
+        <div class="fx-window" style="max-width: 380px;">
+            <div class="fx-window-titlebar">
+                <div class="fx-title-left">
+                    <span style="display:inline-block; width:10px; height:10px; background:#ea580c; border-radius:2px;"></span>
+                    <span>VBox Demo Window</span>
+                </div>
+                <div class="fx-win-controls">
+                    <span class="fx-win-btn">&#x2212;</span>
+                    <span class="fx-win-btn">&#x25A2;</span>
+                    <span class="fx-win-btn close">&#x2715;</span>
+                </div>
+            </div>
+            <div class="fx-scene" style="display: flex; flex-direction: column; gap: 10px; align-items: center; justify-content: center; padding: 20px 14px; background: #f4f4f4;">
+                <div class="fx-btn" style="width: 120px;">Open</div>
+                <div class="fx-btn" style="width: 120px;">Save</div>
+                <div class="fx-btn" style="width: 120px;">Exit</div>
+            </div>
+        </div>
+        <div class="fx-subtext" style="text-align: center;">Child buttons arranged vertically in a single column with 10px spacing.</div>
+    </div>
+
+    <h3>3. BorderPane Layout</h3>
+    <p><code>BorderPane</code> divides the available screen space into five distinct regions: <strong>Top</strong>, <strong>Bottom</strong>, <strong>Left</strong>, <strong>Right</strong>, and <strong>Center</strong>.</p>
+
+    <pre><code>┌───────────────────────────────────────┐
+│                 TOP                   │
+├─────────┬───────────────────┬─────────┤
+│         │                   │         │
+│  LEFT   │      CENTER       │  RIGHT  │
+│         │                   │         │
+├─────────┴───────────────────┴─────────┤
+│                BOTTOM                 │
+└───────────────────────────────────────┘</code></pre>
+
+    <pre><code>import javafx.scene.layout.BorderPane;
+import javafx.scene.control.Button;
+
+BorderPane bp = new BorderPane();
+
+bp.setTop(new Button("Top Header"));
+bp.setBottom(new Button("Bottom Footer / Status Bar"));
+bp.setLeft(new Button("Left Navigation"));
+bp.setRight(new Button("Right Sidebar"));
+bp.setCenter(new Button("Center Main Content"));</code></pre>
+
+    <!-- Output UI: BorderPane -->
+    <div class="fx-ui-card">
+        <div class="fx-ui-header">
+            <div class="fx-ui-title">
+                <span class="fx-badge-ui">Output UI</span>
+                <span>BorderPane Layout Visual Output</span>
+            </div>
+            <span class="fx-badge-meta">Layout: BorderPane | 5 Spatial Regions</span>
+        </div>
+        <div class="fx-window" style="max-width: 520px;">
+            <div class="fx-window-titlebar">
+                <div class="fx-title-left">
+                    <span style="display:inline-block; width:10px; height:10px; background:#ea580c; border-radius:2px;"></span>
+                    <span>BorderPane Demo Window</span>
+                </div>
+                <div class="fx-win-controls">
+                    <span class="fx-win-btn">&#x2212;</span>
+                    <span class="fx-win-btn">&#x25A2;</span>
+                    <span class="fx-win-btn close">&#x2715;</span>
+                </div>
+            </div>
+            <div class="fx-scene" style="padding: 10px; background: #f4f4f4; display: flex; flex-direction: column; gap: 6px;">
+                <div class="fx-btn" style="width: 100%; padding: 8px;">Top Header</div>
+                <div style="display: flex; gap: 6px; min-height: 100px;">
+                    <div class="fx-btn" style="width: 110px; display: flex; align-items: center; justify-content: center;">Left Navigation</div>
+                    <div class="fx-btn" style="flex: 1; display: flex; align-items: center; justify-content: center; background: #fff; font-weight: bold; color: #1a237e;">Center Main Content</div>
+                    <div class="fx-btn" style="width: 100px; display: flex; align-items: center; justify-content: center;">Right Sidebar</div>
+                </div>
+                <div class="fx-btn" style="width: 100%; padding: 8px;">Bottom Footer / Status Bar</div>
+            </div>
+        </div>
+        <div class="fx-subtext" style="text-align: center;">Demonstrates 5 dedicated regions: Top, Bottom, Left, Right, and Center (which expands to fill available space).</div>
+    </div>
+    <p>Each region can hold at most one node. If a region is omitted, the remaining regions expand to fill the available space.</p>
+
+    <h3>4. GridPane Layout</h3>
+    <p><code>GridPane</code> arranges components in a flexible grid of rows and columns. It is the most commonly used layout for forms, dialog boxes, and structured inputs.</p>
+
+    <pre><code>import javafx.scene.layout.GridPane;
+import javafx.scene.control.*;
+
+GridPane grid = new GridPane();
+grid.setHgap(10); // Horizontal spacing between columns
+grid.setVgap(10); // Vertical spacing between rows
+
+// grid.add(node, columnIndex, rowIndex);
+grid.add(new Label("Username:"), 0, 0); // Col 0, Row 0
+grid.add(new TextField(), 1, 0);        // Col 1, Row 0
+
+grid.add(new Label("Password:"), 0, 1); // Col 0, Row 1
+grid.add(new PasswordField(), 1, 1);    // Col 1, Row 1
+
+grid.add(new Button("Login"), 1, 2);     // Col 1, Row 2</code></pre>
+
+    <!-- Output UI: GridPane -->
+    <div class="fx-ui-card">
+        <div class="fx-ui-header">
+            <div class="fx-ui-title">
+                <span class="fx-badge-ui">Output UI</span>
+                <span>GridPane Layout Visual Output</span>
+            </div>
+            <span class="fx-badge-meta">Layout: GridPane | (hgap=10, vgap=10)</span>
+        </div>
+        <div class="fx-window" style="max-width: 440px;">
+            <div class="fx-window-titlebar">
+                <div class="fx-title-left">
+                    <span style="display:inline-block; width:10px; height:10px; background:#ea580c; border-radius:2px;"></span>
+                    <span>GridPane Demo Window</span>
+                </div>
+                <div class="fx-win-controls">
+                    <span class="fx-win-btn">&#x2212;</span>
+                    <span class="fx-win-btn">&#x25A2;</span>
+                    <span class="fx-win-btn close">&#x2715;</span>
+                </div>
+            </div>
+            <div class="fx-scene" style="padding: 22px 20px; background: #f4f4f4;">
+                <div style="display: grid; grid-template-columns: 85px 1fr; gap: 10px; align-items: center; max-width: 320px; margin: 0 auto;">
+                    <span class="fx-label" style="text-align: right; font-weight: 500;">Username:</span>
+                    <div class="fx-mock-field" style="width: 100%; color: #666;">col 1, row 0 (TextField)</div>
+                    
+                    <span class="fx-label" style="text-align: right; font-weight: 500;">Password:</span>
+                    <div class="fx-mock-field" style="width: 100%; color: #666;">&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull; (PasswordField)</div>
+                    
+                    <div></div>
+                    <div><div class="fx-btn">Login</div></div>
+                </div>
+            </div>
+        </div>
+        <div class="fx-subtext" style="text-align: center;">Column 0 holds Labels; Column 1 holds Input fields and Button with 10px horizontal and vertical gaps.</div>
+    </div>
+
+    <div class="exam-note">
+        <strong>Important Note on GridPane Coordinates:</strong> In <code>grid.add(node, col, row)</code>, the first index is the <strong>column</strong> (horizontal position) and the second index is the <strong>row</strong> (vertical position). Both start at index <code>0</code>.
+    </div>
+
+    <h3>5. FlowPane Layout</h3>
+    <p><code>FlowPane</code> arranges child nodes sequentially one after another. When there is insufficient space in the current row or column, the remaining components automatically wrap to the next line.</p>
+
+    <pre><code>import javafx.scene.layout.FlowPane;
+import javafx.scene.control.Button;
+
+FlowPane flow = new FlowPane();
+flow.setHgap(10);
+flow.setVgap(10);
+
+flow.getChildren().addAll(
+    new Button("Add"),
+    new Button("Subtract"),
+    new Button("Multiply"),
+    new Button("Divide")
+);</code></pre>
+
+    <!-- Output UI: FlowPane -->
+    <div class="fx-ui-card">
+        <div class="fx-ui-header">
+            <div class="fx-ui-title">
+                <span class="fx-badge-ui">Output UI</span>
+                <span>FlowPane Layout Visual Output</span>
+            </div>
+            <span class="fx-badge-meta">Layout: FlowPane | Wrapping Flow</span>
+        </div>
+        <div class="fx-window" style="max-width: 440px;">
+            <div class="fx-window-titlebar">
+                <div class="fx-title-left">
+                    <span style="display:inline-block; width:10px; height:10px; background:#ea580c; border-radius:2px;"></span>
+                    <span>FlowPane Demo Window</span>
+                </div>
+                <div class="fx-win-controls">
+                    <span class="fx-win-btn">&#x2212;</span>
+                    <span class="fx-win-btn">&#x25A2;</span>
+                    <span class="fx-win-btn close">&#x2715;</span>
+                </div>
+            </div>
+            <div class="fx-scene" style="padding: 18px 20px; background: #f4f4f4;">
+                <div style="display: flex; flex-wrap: wrap; gap: 10px; max-width: 260px; margin: 0 auto; padding: 12px; border: 1px dashed #bbb; border-radius: 4px; background: #eaeaea;">
+                    <div class="fx-btn">Add</div>
+                    <div class="fx-btn">Subtract</div>
+                    <div class="fx-btn">Multiply</div>
+                    <div class="fx-btn">Divide</div>
+                </div>
+            </div>
+        </div>
+        <div class="fx-subtext" style="text-align: center;">When items exceed container width (dashed border), remaining components automatically wrap to the next line.</div>
+    </div>
+
+    <h3>6. StackPane Layout</h3>
+    <p><code>StackPane</code> places its child nodes on top of one another in a stack (back-to-front). The most recently added child appears above previously added nodes.</p>
+
+    <pre><code>import javafx.scene.layout.StackPane;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Circle;
+import javafx.scene.paint.Color;
+
+StackPane stack = new StackPane();
+Rectangle rect = new Rectangle(300, 200, Color.LIGHTBLUE);
+Circle circle = new Circle(60, Color.CORAL);
+
+stack.getChildren().addAll(rect, circle); // Circle is rendered on top of Rectangle</code></pre>
+
+    <!-- Output UI: StackPane -->
+    <div class="fx-ui-card">
+        <div class="fx-ui-header">
+            <div class="fx-ui-title">
+                <span class="fx-badge-ui">Output UI</span>
+                <span>StackPane Layout Visual Output</span>
+            </div>
+            <span class="fx-badge-meta">Layout: StackPane | Back-to-Front Stacking</span>
+        </div>
+        <div class="fx-window" style="max-width: 400px;">
+            <div class="fx-window-titlebar">
+                <div class="fx-title-left">
+                    <span style="display:inline-block; width:10px; height:10px; background:#ea580c; border-radius:2px;"></span>
+                    <span>StackPane Demo Window</span>
+                </div>
+                <div class="fx-win-controls">
+                    <span class="fx-win-btn">&#x2212;</span>
+                    <span class="fx-win-btn">&#x25A2;</span>
+                    <span class="fx-win-btn close">&#x2715;</span>
+                </div>
+            </div>
+            <div class="fx-scene" style="padding: 20px; background: #f4f4f4; display: flex; align-items: center; justify-content: center;">
+                <div style="position: relative; width: 260px; height: 140px; background-color: #add8e6; border: 1px solid #7eaec0; border-radius: 4px; display: flex; align-items: center; justify-content: center;">
+                    <span style="position: absolute; bottom: 6px; right: 8px; font-size: 10.5px; color: #1e5f74; font-weight: bold;">Rectangle (LIGHTBLUE)</span>
+                    <div style="width: 70px; height: 70px; border-radius: 50%; background-color: #ff7f50; border: 1px solid #d9531e; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 5px rgba(0,0,0,0.2);">
+                        <span style="font-size: 9.5px; color: #ffffff; font-weight: bold; text-align: center; line-height: 1.1;">Circle<br>(CORAL)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="fx-subtext" style="text-align: center;">Circle node (added second) renders directly on top of the Rectangle node (added first) centered in the StackPane.</div>
+    </div>
+
+    <h3>Comparison of JavaFX Layouts</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Layout Pane</th>
+                <th>Arrangement Style</th>
+                <th>Common Real-World Use Case</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>HBox</code></td>
+                <td>Single horizontal row</td>
+                <td>Toolbars, button rows (e.g., OK and Cancel buttons)</td>
+            </tr>
+            <tr>
+                <td><code>VBox</code></td>
+                <td>Single vertical column</td>
+                <td>Sidebar menus, vertical control stacks, stacked forms</td>
+            </tr>
+            <tr>
+                <td><code>BorderPane</code></td>
+                <td>5 regions (Top, Bottom, Left, Right, Center)</td>
+                <td>Main application window structure</td>
+            </tr>
+            <tr>
+                <td><code>GridPane</code></td>
+                <td>Flexible rows and columns</td>
+                <td>Data entry forms, login/registration dialogs</td>
+            </tr>
+            <tr>
+                <td><code>FlowPane</code></td>
+                <td>Sequential flow with auto-wrapping</td>
+                <td>Tag clouds, dynamic toolbars, responsive image galleries</td>
+            </tr>
+            <tr>
+                <td><code>StackPane</code></td>
+                <td>Layered back-to-front</td>
+                <td>Overlaying text or icons on shapes and images</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>5.6 Containers and Components</h2>
+    <p>In JavaFX:</p>
+    <ul>
+        <li><strong>Component (Control):</strong> A visual interactive node that displays information or accepts user input (e.g., <code>Label</code>, <code>Button</code>, <code>TextField</code>).</li>
+        <li><strong>Container (Pane):</strong> A parent node designed to hold, group, and position multiple child components (e.g., <code>VBox</code>, <code>GridPane</code>).</li>
+    </ul>
+
+    <h3>1. Button</h3>
+    <p>A <code>Button</code> is a clickable control that triggers an action event when clicked by the user.</p>
+
+    <h4>Constructors:</h4>
+    <pre><code>Button b1 = new Button();                       // Empty button
+Button b2 = new Button("Submit");               // Button with text
+Button b3 = new Button("Login", new Label("L")); // Button with text and graphic node</code></pre>
+
+    <h4>Common Methods:</h4>
+    <table>
+        <thead>
+            <tr>
+                <th>Method</th>
+                <th>Return Type</th>
+                <th>Purpose</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>setText(String text)</code></td>
+                <td><code>void</code></td>
+                <td>Sets the label text displayed on the button.</td>
+            </tr>
+            <tr>
+                <td><code>getText()</code></td>
+                <td><code>String</code></td>
+                <td>Returns the current text of the button.</td>
+            </tr>
+            <tr>
+                <td><code>setDisable(boolean value)</code></td>
+                <td><code>void</code></td>
+                <td>Enables or disables the button.</td>
+            </tr>
+            <tr>
+                <td><code>setOnAction(EventHandler&lt;ActionEvent&gt; value)</code></td>
+                <td><code>void</code></td>
+                <td>Registers an event handler to run when the button is clicked.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <pre><code>Button button = new Button("Click Me");
+button.setOnAction(e -> System.out.println("Button Clicked!"));</code></pre>
+
+    <h3>2. Label</h3>
+    <p>A <code>Label</code> is a non-editable control used to display text, icons, or instructions to the user.</p>
+
+    <h4>Constructors:</h4>
+    <pre><code>Label l1 = new Label();
+Label l2 = new Label("Username:");</code></pre>
+
+    <h4>Common Methods:</h4>
+    <table>
+        <thead>
+            <tr>
+                <th>Method</th>
+                <th>Return Type</th>
+                <th>Purpose</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>setText(String text)</code></td>
+                <td><code>void</code></td>
+                <td>Sets the text of the label.</td>
+            </tr>
+            <tr>
+                <td><code>getText()</code></td>
+                <td><code>String</code></td>
+                <td>Returns the text of the label.</td>
+            </tr>
+            <tr>
+                <td><code>setFont(Font font)</code></td>
+                <td><code>void</code></td>
+                <td>Sets the font style and size of the text.</td>
+            </tr>
+            <tr>
+                <td><code>setTextFill(Paint paint)</code></td>
+                <td><code>void</code></td>
+                <td>Sets the text color (e.g., <code>Color.RED</code>).</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>3. TextField</h3>
+    <p>A <code>TextField</code> is a single-line input control that allows users to type plain text.</p>
+
+    <h4>Constructors:</h4>
+    <pre><code>TextField t1 = new TextField();
+TextField t2 = new TextField("Default Text");</code></pre>
+
+    <h4>Common Methods:</h4>
+    <table>
+        <thead>
+            <tr>
+                <th>Method</th>
+                <th>Return Type</th>
+                <th>Purpose</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>getText()</code></td>
+                <td><code>String</code></td>
+                <td>Retrieves the entered text.</td>
+            </tr>
+            <tr>
+                <td><code>setText(String text)</code></td>
+                <td><code>void</code></td>
+                <td>Sets the text content programmatically.</td>
+            </tr>
+            <tr>
+                <td><code>clear()</code></td>
+                <td><code>void</code></td>
+                <td>Removes all text from the field.</td>
+            </tr>
+            <tr>
+                <td><code>setPromptText(String text)</code></td>
+                <td><code>void</code></td>
+                <td>Sets a grayed-out placeholder prompt.</td>
+            </tr>
+            <tr>
+                <td><code>setEditable(boolean value)</code></td>
+                <td><code>void</code></td>
+                <td>Allows or restricts user typing.</td>
+            </tr>
+            <tr>
+                <td><code>setPrefColumnCount(int cols)</code></td>
+                <td><code>void</code></td>
+                <td>Sets the preferred width in characters.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <pre><code>TextField nameField = new TextField();
+nameField.setPromptText("Enter your name");
+
+Button btn = new Button("Greet");
+Label result = new Label();
+
+btn.setOnAction(e -> result.setText("Hello, " + nameField.getText()));</code></pre>
+
+    <!-- Output UI: TextField & Button Greet -->
+    <div class="fx-ui-card">
+        <div class="fx-ui-header">
+            <div class="fx-ui-title">
+                <span class="fx-badge-ui">Output UI</span>
+                <span>TextField &amp; Button Greeting Demo</span>
+            </div>
+            <span class="fx-badge-meta">Controls: TextField, Button, Label</span>
+        </div>
+        <div class="fx-window" style="max-width: 440px;">
+            <div class="fx-window-titlebar">
+                <div class="fx-title-left">
+                    <span style="display:inline-block; width:10px; height:10px; background:#ea580c; border-radius:2px;"></span>
+                    <span>Greeting App</span>
+                </div>
+                <div class="fx-win-controls">
+                    <span class="fx-win-btn">&#x2212;</span>
+                    <span class="fx-win-btn">&#x25A2;</span>
+                    <span class="fx-win-btn close">&#x2715;</span>
+                </div>
+            </div>
+            <div class="fx-scene" style="padding: 18px 20px; background: #f4f4f4;">
+                <div style="display: flex; gap: 10px; margin-bottom: 12px; align-items: center;">
+                    <div class="fx-mock-field" style="flex: 1;">Rahul</div>
+                    <div class="fx-btn">Greet</div>
+                </div>
+                <div class="fx-result-label fx-result-info">Hello, Rahul</div>
+            </div>
+        </div>
+        <div class="fx-subtext" style="text-align: center;">Output after entering "Rahul" and clicking "Greet" &mdash; ActionEvent updates the greeting Label.</div>
+    </div>
+
+    <h3>4. TextArea</h3>
+    <p>A <code>TextArea</code> is a multi-line text input control suitable for entering long paragraphs, feedback, comments, or mailing addresses.</p>
+
+    <h4>Constructors and Methods:</h4>
+    <pre><code>TextArea feedback = new TextArea();
+feedback.setPromptText("Enter your feedback here...");
+feedback.setWrapText(true); // Wraps text to next line automatically</code></pre>
+
+    <!-- Output UI: TextArea -->
+    <div class="fx-ui-card">
+        <div class="fx-ui-header">
+            <div class="fx-ui-title">
+                <span class="fx-badge-ui">Output UI</span>
+                <span>TextArea Multi-line Input Output</span>
+            </div>
+            <span class="fx-badge-meta">Control: TextArea | setWrapText(true)</span>
+        </div>
+        <div class="fx-window" style="max-width: 460px;">
+            <div class="fx-window-titlebar">
+                <div class="fx-title-left">
+                    <span style="display:inline-block; width:10px; height:10px; background:#ea580c; border-radius:2px;"></span>
+                    <span>Feedback Form</span>
+                </div>
+                <div class="fx-win-controls">
+                    <span class="fx-win-btn">&#x2212;</span>
+                    <span class="fx-win-btn">&#x25A2;</span>
+                    <span class="fx-win-btn close">&#x2715;</span>
+                </div>
+            </div>
+            <div class="fx-scene" style="padding: 18px 20px; background: #f4f4f4;">
+                <label class="fx-label" style="display: block; margin-bottom: 6px; font-weight: 500;">Your Feedback:</label>
+                <div class="fx-mock-area" style="width: 100%;">JavaFX is very powerful for desktop GUI development!</div>
+            </div>
+        </div>
+        <div class="fx-subtext" style="text-align: center;">Supports multiple lines of text with automated word-wrapping and scrollbars.</div>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Method</th>
+                <th>Return Type</th>
+                <th>Purpose</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>getText()</code></td>
+                <td><code>String</code></td>
+                <td>Retrieves all text in the text area.</td>
+            </tr>
+            <tr>
+                <td><code>setText(String text)</code></td>
+                <td><code>void</code></td>
+                <td>Replaces the entire content.</td>
+            </tr>
+            <tr>
+                <td><code>appendText(String text)</code></td>
+                <td><code>void</code></td>
+                <td>Appends text to the end of existing text.</td>
+            </tr>
+            <tr>
+                <td><code>clear()</code></td>
+                <td><code>void</code></td>
+                <td>Clears all content.</td>
+            </tr>
+            <tr>
+                <td><code>setWrapText(boolean value)</code></td>
+                <td><code>void</code></td>
+                <td>Enables or disables automatic word wrapping.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>5. CheckBox</h3>
+    <p>A <code>CheckBox</code> is a two-state or three-state selection control. Unlike radio buttons, each checkbox is independent: a user can select multiple checkboxes simultaneously.</p>
+
+    <pre><code>CheckBox music = new CheckBox("Music");
+CheckBox sports = new CheckBox("Sports");
+
+Button submit = new Button("Submit");
+submit.setOnAction(e -> {
+    if (music.isSelected()) {
+        System.out.println("Music selected");
+    }
+    if (sports.isSelected()) {
+        System.out.println("Sports selected");
+    }
+});</code></pre>
+
+    <!-- Output UI: CheckBox -->
+    <div class="fx-ui-card">
+        <div class="fx-ui-header">
+            <div class="fx-ui-title">
+                <span class="fx-badge-ui">Output UI</span>
+                <span>CheckBox Selection Output</span>
+            </div>
+            <span class="fx-badge-meta">Control: CheckBox | Multiple Selection</span>
+        </div>
+        <div class="fx-window" style="max-width: 440px;">
+            <div class="fx-window-titlebar">
+                <div class="fx-title-left">
+                    <span style="display:inline-block; width:10px; height:10px; background:#ea580c; border-radius:2px;"></span>
+                    <span>Hobbies App</span>
+                </div>
+                <div class="fx-win-controls">
+                    <span class="fx-win-btn">&#x2212;</span>
+                    <span class="fx-win-btn">&#x25A2;</span>
+                    <span class="fx-win-btn close">&#x2715;</span>
+                </div>
+            </div>
+            <div class="fx-scene" style="padding: 18px 20px; background: #f4f4f4;">
+                <div style="display: flex; gap: 16px; margin-bottom: 12px;">
+                    <div class="fx-mock-check"><span class="fx-mock-square checked">&#x2713;</span> Music</div>
+                    <div class="fx-mock-check"><span class="fx-mock-square checked">&#x2713;</span> Sports</div>
+                </div>
+                <div class="fx-btn">Submit</div>
+                <div style="margin-top: 10px; font-size: 11px; color: #555;">Console Output on Submit:</div>
+                <pre id="chkConsole" style="margin: 4px 0 0 0; padding: 6px 10px; background: #1e1e1e; color: #d4d4d4; border-radius: 3px; font-size: 11px;">Music selected
+Sports selected</pre>
+            </div>
+        </div>
+        <div class="fx-subtext" style="text-align: center;">Both checkboxes can be selected independently, triggering individual console statements on Submit.</div>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Method</th>
+                <th>Return Type</th>
+                <th>Purpose</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>isSelected()</code></td>
+                <td><code>boolean</code></td>
+                <td>Returns <code>true</code> if checked, <code>false</code> otherwise.</td>
+            </tr>
+            <tr>
+                <td><code>setSelected(boolean value)</code></td>
+                <td><code>void</code></td>
+                <td>Checks or unchecks the checkbox programmatically.</td>
+            </tr>
+            <tr>
+                <td><code>setAllowIndeterminate(boolean value)</code></td>
+                <td><code>void</code></td>
+                <td>Enables third indeterminate (neutral) state.</td>
+            </tr>
+            <tr>
+                <td><code>setIndeterminate(boolean value)</code></td>
+                <td><code>void</code></td>
+                <td>Sets the state to indeterminate.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>6. RadioButton</h3>
+    <p>A <code>RadioButton</code> is used when the user must select exactly one option from a mutually exclusive set. To make radio buttons mutually exclusive, they must be assigned to the same <code>ToggleGroup</code>.</p>
+
+    <pre><code>RadioButton male = new RadioButton("Male");
+RadioButton female = new RadioButton("Female");
+
+ToggleGroup group = new ToggleGroup();
+male.setToggleGroup(group);
+female.setToggleGroup(group);</code></pre>
+
+    <!-- Output UI: RadioButton -->
+    <div class="fx-ui-card">
+        <div class="fx-ui-header">
+            <div class="fx-ui-title">
+                <span class="fx-badge-ui">Output UI</span>
+                <span>RadioButton ToggleGroup Output</span>
+            </div>
+            <span class="fx-badge-meta">Control: RadioButton | ToggleGroup (Mutually Exclusive)</span>
+        </div>
+        <div class="fx-window" style="max-width: 420px;">
+            <div class="fx-window-titlebar">
+                <div class="fx-title-left">
+                    <span style="display:inline-block; width:10px; height:10px; background:#ea580c; border-radius:2px;"></span>
+                    <span>Gender Selection</span>
+                </div>
+                <div class="fx-win-controls">
+                    <span class="fx-win-btn">&#x2212;</span>
+                    <span class="fx-win-btn">&#x25A2;</span>
+                    <span class="fx-win-btn close">&#x2715;</span>
+                </div>
+            </div>
+            <div class="fx-scene" style="padding: 18px 20px; background: #f4f4f4;">
+                <div style="font-size: 12.5px; font-weight: 500; margin-bottom: 8px;">Select Gender:</div>
+                <div style="display: flex; gap: 18px;">
+                    <div class="fx-mock-radio"><span class="fx-mock-circle checked"></span> Male</div>
+                    <div class="fx-mock-radio"><span class="fx-mock-circle"></span> Female</div>
+                </div>
+            </div>
+        </div>
+        <div class="fx-subtext" style="text-align: center;">Enclosed in a ToggleGroup: selecting "Female" automatically deselects "Male".</div>
+    </div>
+
+    <h4>Difference Between CheckBox and RadioButton:</h4>
+    <table>
+        <thead>
+            <tr>
+                <th>Feature</th>
+                <th>CheckBox</th>
+                <th>RadioButton</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Selection count</strong></td>
+                <td>Multiple choices can be checked at the same time.</td>
+                <td>Only one choice can be selected per <code>ToggleGroup</code>.</td>
+            </tr>
+            <tr>
+                <td><strong>Grouping</strong></td>
+                <td>Independent; does not require a toggle group.</td>
+                <td>Requires a <code>ToggleGroup</code> to enforce exclusivity.</td>
+            </tr>
+            <tr>
+                <td><strong>Use case</strong></td>
+                <td>Hobbies, features, preferences, toppings.</td>
+                <td>Gender, payment method, single-choice answers.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>7. ComboBox</h3>
+    <p>A <code>ComboBox</code> is a drop-down list of items. It saves space by displaying only the selected item until the user clicks the drop-down arrow.</p>
+
+    <pre><code>ComboBox&lt;String&gt; combo = new ComboBox&lt;&gt;();
+combo.getItems().addAll("Red", "Green", "Blue", "Yellow");
+combo.setPromptText("Select a colour");
+
+Button btn = new Button("Show Colour");
+Label result = new Label();
+
+btn.setOnAction(e -> {
+    String selected = combo.getValue();
+    if (selected != null) {
+        result.setText("Selected: " + selected);
+    }
+});</code></pre>
+
+    <!-- Output UI: ComboBox -->
+    <div class="fx-ui-card">
+        <div class="fx-ui-header">
+            <div class="fx-ui-title">
+                <span class="fx-badge-ui">Output UI</span>
+                <span>ComboBox Dropdown Output</span>
+            </div>
+            <span class="fx-badge-meta">Control: ComboBox&lt;String&gt;</span>
+        </div>
+        <div class="fx-window" style="max-width: 440px;">
+            <div class="fx-window-titlebar">
+                <div class="fx-title-left">
+                    <span style="display:inline-block; width:10px; height:10px; background:#ea580c; border-radius:2px;"></span>
+                    <span>Colour Chooser</span>
+                </div>
+                <div class="fx-win-controls">
+                    <span class="fx-win-btn">&#x2212;</span>
+                    <span class="fx-win-btn">&#x25A2;</span>
+                    <span class="fx-win-btn close">&#x2715;</span>
+                </div>
+            </div>
+            <div class="fx-scene" style="padding: 18px 20px; background: #f4f4f4;">
+                <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 10px;">
+                    <div class="fx-mock-combo" style="min-width: 140px;">
+                        <span>Blue</span>
+                        <span style="font-size: 10px; color: #555;">&#9662;</span>
+                    </div>
+                    <div class="fx-btn">Show Colour</div>
+                </div>
+                <div class="fx-result-label fx-result-info">Selected: Blue</div>
+            </div>
+        </div>
+        <div class="fx-subtext" style="text-align: center;">Output after selecting "Blue" from the drop-down menu and clicking "Show Colour".</div>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Method</th>
+                <th>Return Type</th>
+                <th>Purpose</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>getItems()</code></td>
+                <td><code>ObservableList&lt;T&gt;</code></td>
+                <td>Returns the list of items in the combo box.</td>
+            </tr>
+            <tr>
+                <td><code>getValue()</code></td>
+                <td><code>T</code></td>
+                <td>Returns the currently selected item.</td>
+            </tr>
+            <tr>
+                <td><code>setValue(T value)</code></td>
+                <td><code>void</code></td>
+                <td>Sets the selected item programmatically.</td>
+            </tr>
+            <tr>
+                <td><code>getSelectionModel().select(int index)</code></td>
+                <td><code>void</code></td>
+                <td>Selects an item by its zero-based index.</td>
+            </tr>
+            <tr>
+                <td><code>getSelectionModel().clearSelection()</code></td>
+                <td><code>void</code></td>
+                <td>Clears any active selection.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>8. MenuBar, Menu, and MenuItem</h3>
+    <p>JavaFX provides standard desktop menu hierarchies:</p>
+    <ul>
+        <li><code>MenuBar</code>: The top horizontal container bar.</li>
+        <li><code>Menu</code>: A drop-down menu header (e.g., "File", "Edit").</li>
+        <li><code>MenuItem</code>: An individual command inside a menu (e.g., "New", "Save", "Exit").</li>
+    </ul>
+
+    <pre><code>MenuBar menuBar = new MenuBar();
+
+Menu fileMenu = new Menu("File");
+MenuItem newItem = new MenuItem("New");
+MenuItem exitItem = new MenuItem("Exit");
+
+exitItem.setOnAction(e -> System.exit(0));
+
+fileMenu.getItems().addAll(newItem, exitItem);
+menuBar.getMenus().add(fileMenu);</code></pre>
+
+    <!-- Output UI: MenuBar -->
+    <div class="fx-ui-card">
+        <div class="fx-ui-header">
+            <div class="fx-ui-title">
+                <span class="fx-badge-ui">Output UI</span>
+                <span>MenuBar, Menu, &amp; MenuItem Output</span>
+            </div>
+            <span class="fx-badge-meta">Hierarchy: MenuBar &rarr; Menu &rarr; MenuItem</span>
+        </div>
+        <div class="fx-window" style="max-width: 460px;">
+            <div class="fx-window-titlebar">
+                <div class="fx-title-left">
+                    <span style="display:inline-block; width:10px; height:10px; background:#ea580c; border-radius:2px;"></span>
+                    <span>Menu Application</span>
+                </div>
+                <div class="fx-win-controls">
+                    <span class="fx-win-btn">&#x2212;</span>
+                    <span class="fx-win-btn">&#x25A2;</span>
+                    <span class="fx-win-btn close">&#x2715;</span>
+                </div>
+            </div>
+            <!-- MenuBar -->
+            <div class="fx-menubar" style="background: linear-gradient(to bottom, #f2f2f2, #e5e5e5); border-bottom: 1px solid #d2d2d2; padding: 3px 8px; display: flex; gap: 12px; font-size: 12px;">
+                <div style="position: relative; display: inline-block;">
+                    <div style="padding: 2px 8px; border-radius: 2px; background-color: #cce8ff; font-weight: 500; cursor: default;">File &#9662;</div>
+                    <!-- Dropdown Menu -->
+                    <div style="position: absolute; top: 100%; left: 0; background: #ffffff; border: 1px solid #bfbfbf; box-shadow: 0 4px 10px rgba(0,0,0,0.18); min-width: 120px; z-index: 10; border-radius: 2px; padding: 3px 0;">
+                        <div style="padding: 4px 14px; font-size: 12px; cursor: default; color: #222; background: #e5f3ff;">New</div>
+                        <div style="height: 1px; background: #e0e0e0; margin: 2px 0;"></div>
+                        <div style="padding: 4px 14px; font-size: 12px; cursor: default; color: #222;">Exit</div>
+                    </div>
+                </div>
+                <div style="padding: 2px 8px; color: #666; cursor: default;">Edit</div>
+                <div style="padding: 2px 8px; color: #666; cursor: default;">Help</div>
+            </div>
+            <div class="fx-scene" style="height: 80px; display: flex; align-items: center; justify-content: center; background: #f9f9f9;">
+                <span style="font-size: 12px; color: #777;">Window Content Area</span>
+            </div>
+        </div>
+        <div class="fx-subtext" style="text-align: center;">Displays top MenuBar with "File" menu expanded showing "New" and "Exit" MenuItems.</div>
+    </div>
+
+    <h3>Practical Program: Login Form Using JavaFX</h3>
+    <p>This program demonstrates how to combine labels, a text field, a password field, a button, and a layout container into an interactive form.</p>
+
+    <pre><code>import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
+
+public class LoginForm extends Application {
+
+    @Override
+    public void start(Stage stage) {
+        // Create controls
+        Label userLabel = new Label("Username:");
+        TextField userField = new TextField();
+
+        Label passLabel = new Label("Password:");
+        PasswordField passField = new PasswordField();
+
+        Button loginButton = new Button("Login");
+        Label result = new Label();
+
+        // Event handling on button click
+        loginButton.setOnAction(e -> {
+            String username = userField.getText();
+            String password = passField.getText();
+
+            if (username.equals("admin") &amp;&amp; password.equals("1234")) {
+                result.setText("Login Successful");
+            } else {
+                result.setText("Invalid Username or Password");
+            }
+        });
+
+        // Arrange controls inside a GridPane
+        GridPane grid = new GridPane();
+        grid.setHgap(10);
+        grid.setVgap(10);
+
+        grid.add(userLabel, 0, 0);
+        grid.add(userField, 1, 0);
+        grid.add(passLabel, 0, 1);
+        grid.add(passField, 1, 1);
+        grid.add(loginButton, 1, 2);
+        grid.add(result, 1, 3);
+
+        Scene scene = new Scene(grid, 350, 200);
+
+        stage.setTitle("Login Form");
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+}</code></pre>
+
+    <!-- Program Output UI: LoginForm.java -->
+    <div class="fx-ui-card">
+        <div class="fx-ui-header">
+            <div class="fx-ui-title">
+                <span class="fx-badge-ui">Output UI</span>
+                <span>Graphical Window Output &mdash; LoginForm.java</span>
+            </div>
+            <span class="fx-badge-meta">Stage Size: 350 &times; 200 px | Layout: GridPane</span>
+        </div>
+
+        <!-- Simulated Stage Window -->
+        <div class="fx-window" style="max-width: 460px;">
+            <div class="fx-window-titlebar">
+                <div class="fx-title-left">
+                    <svg class="fx-stage-icon" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="16" height="16" rx="3" fill="#ea580c"/>
+                        <path d="M4 11V5h2.5a2.5 2.5 0 0 1 0 5H4m5-5h3m-3 3h2" stroke="#ffffff" stroke-width="1.3" stroke-linecap="round"/>
+                    </svg>
+                    <span>Login Form</span>
+                </div>
+                <div class="fx-win-controls">
+                    <span class="fx-win-btn">&#x2212;</span>
+                    <span class="fx-win-btn">&#x25A2;</span>
+                    <span class="fx-win-btn close">&#x2715;</span>
+                </div>
+            </div>
+            <div class="fx-scene" style="padding: 22px 24px; background-color: #f4f4f4;">
+                <div style="display: grid; grid-template-columns: 85px 1fr; gap: 12px; align-items: center; max-width: 320px; margin: 0 auto;">
+                    <label class="fx-label" style="text-align: right; font-weight: 500;">Username:</label>
+                    <div class="fx-mock-field" style="width: 100%;">admin</div>
+
+                    <label class="fx-label" style="text-align: right; font-weight: 500;">Password:</label>
+                    <div class="fx-mock-field" style="width: 100%;">&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;</div>
+
+                    <div></div>
+                    <div>
+                        <div class="fx-btn">Login</div>
+                    </div>
+
+                    <div></div>
+                    <div class="fx-result-label fx-result-success">Login Successful</div>
+                </div>
+            </div>
+        </div>
+
+        <div style="margin-top: 14px; font-size: 12px; color: #444; background: #fff; border: 1px solid #e1e4e8; border-radius: 4px; padding: 10px 14px;">
+            <strong>Execution Behavior &amp; Test Cases:</strong>
+            <ul style="margin: 6px 0 0 0; padding-left: 20px;">
+                <li><strong>Valid Case:</strong> Entering username <code>admin</code> and password <code>1234</code> &rarr; Displays <span style="color: #2e7d32; font-weight: bold;">"Login Successful"</span>.</li>
+                <li><strong>Invalid Case:</strong> Entering any other credentials &rarr; Displays <span style="color: #c62828; font-weight: bold;">"Invalid Username or Password"</span>.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="exam-note">
+        <strong></strong> <code>PasswordField</code> is a specialized subclass of <code>TextField</code> that masks entered characters with bullets or asterisks to protect sensitive passwords from being seen on the screen.
+    </div>
+
+    <h2>5.7 JavaFX Charts</h2>
+    <p>JavaFX provides rich chart controls in the package <code>javafx.scene.chart</code> to visualize data graphically. Charts make it easy to spot trends, compare values across categories, and observe proportions.</p>
+
+    <p>The four primary chart types are:</p>
+    <ol>
+        <li><strong>Pie Chart:</strong> Slices of a circle showing proportions of a whole (100%).</li>
+        <li><strong>Line Chart:</strong> Points connected by lines showing trends over time.</li>
+        <li><strong>Area Chart:</strong> Similar to a line chart, but the area below the line is colored/filled.</li>
+        <li><strong>Bar Chart:</strong> Rectangular bars showing categorical comparisons.</li>
+    </ol>
+
+    <h3>1. Pie Chart</h3>
+    <p>A <code>PieChart</code> divides data into circular slices. Each slice's angle represents its proportion of the total sum.</p>
+
+    <h4>Key Steps to Create a Pie Chart:</h4>
+    <ol>
+        <li>Create data items using <code>PieChart.Data(name, value)</code>.</li>
+        <li>Collect the items into an <code>ObservableList&lt;PieChart.Data&gt;</code>.</li>
+        <li>Create the <code>PieChart</code> object passing the list.</li>
+        <li>Set titles and properties (e.g., <code>setTitle()</code>).</li>
+        <li>Add the chart to a scene layout and display the stage.</li>
+    </ol>
+
+    <h4>Program: PieChartExample.java (Tata Motors Sales)</h4>
+    <pre><code>import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.Scene;
+import javafx.scene.chart.PieChart;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
+
+public class PieChartExample extends Application {
+
+    @Override
+    public void start(Stage stage) {
+        // 1. Prepare data
+        ObservableList&lt;PieChart.Data&gt; data =
+            FXCollections.observableArrayList(
+                new PieChart.Data("Nexon", 15),
+                new PieChart.Data("Swift", 22),
+                new PieChart.Data("Harrier", 12),
+                new PieChart.Data("Safari", 25),
+                new PieChart.Data("Altroz", 18)
+            );
+
+        // 2. Create chart
+        PieChart pc = new PieChart(data);
+        pc.setTitle("Tata Motors Sales");
+
+        // 3. Add to layout and scene
+        StackPane root = new StackPane(pc);
+        Scene scene = new Scene(root, 600, 400);
+
+        stage.setTitle("Pie Chart Example");
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+}</code></pre>
+
+    <!-- Program Output UI: PieChartExample.java -->
+    <div class="fx-ui-card">
+        <div class="fx-ui-header">
+            <div class="fx-ui-title">
+                <span class="fx-badge-ui">Output UI</span>
+                <span>Graphical Window Output &mdash; PieChartExample.java</span>
+            </div>
+            <span class="fx-badge-meta">Stage Size: 600 &times; 400 px | Chart: PieChart</span>
+        </div>
+
+        <div class="fx-window" style="max-width: 520px;">
+            <div class="fx-window-titlebar">
+                <div class="fx-title-left">
+                    <svg class="fx-stage-icon" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="16" height="16" rx="3" fill="#ea580c"/>
+                        <path d="M4 11V5h2.5a2.5 2.5 0 0 1 0 5H4m5-5h3m-3 3h2" stroke="#ffffff" stroke-width="1.3" stroke-linecap="round"/>
+                    </svg>
+                    <span>Pie Chart Example</span>
+                </div>
+                <div class="fx-win-controls">
+                    <span class="fx-win-btn">&#x2212;</span>
+                    <span class="fx-win-btn">&#x25A2;</span>
+                    <span class="fx-win-btn close">&#x2715;</span>
+                </div>
+            </div>
+            <div class="fx-scene" style="padding: 12px; background-color: #f4f4f4; text-align: center;">
+                <svg viewBox="0 0 460 300" width="100%" height="auto" style="max-width: 440px; display: block; margin: 0 auto; font-family: 'Segoe UI', Arial, sans-serif;">
+                    <!-- Chart Title -->
+                    <text x="230" y="22" text-anchor="middle" font-size="15" font-weight="bold" fill="#111111">Tata Motors Sales</text>
+                    
+                    <!-- Pie Slices (cx=230, cy=145, r=105) -->
+                    <!-- Nexon: 15 (16.3%, 58.7 deg): start -90° (230, 40) to -31.3° (319.7, 90.4) -->
+                    <path d="M 230 145 L 230 40 A 105 105 0 0 1 319.7 90.4 Z" fill="#f3622d" stroke="#ffffff" stroke-width="1.5"/>
+                    <!-- Swift: 22 (23.9%, 86.1 deg): -31.3° to 54.8° (290.5, 230.8) -->
+                    <path d="M 230 145 L 319.7 90.4 A 105 105 0 0 1 290.5 230.8 Z" fill="#fba71b" stroke="#ffffff" stroke-width="1.5"/>
+                    <!-- Harrier: 12 (13.0%, 47.0 deg): 54.8° to 101.8° (208.5, 247.8) -->
+                    <path d="M 230 145 L 290.5 230.8 A 105 105 0 0 1 208.5 247.8 Z" fill="#57b757" stroke="#ffffff" stroke-width="1.5"/>
+                    <!-- Safari: 25 (27.2%, 97.8 deg): 101.8° to 199.6° (131.1, 109.8) -->
+                    <path d="M 230 145 L 208.5 247.8 A 105 105 0 0 1 131.1 109.8 Z" fill="#41a9c9" stroke="#ffffff" stroke-width="1.5"/>
+                    <!-- Altroz: 18 (19.6%, 70.4 deg): 199.6° to 270° (230, 40) -->
+                    <path d="M 230 145 L 131.1 109.8 A 105 105 0 0 1 230 40 Z" fill="#4258c9" stroke="#ffffff" stroke-width="1.5"/>
+
+                    <!-- Percent Labels on slices -->
+                    <text x="265" y="88" text-anchor="middle" font-size="11" font-weight="bold" fill="#ffffff">16.3%</text>
+                    <text x="295" y="158" text-anchor="middle" font-size="11" font-weight="bold" fill="#ffffff">23.9%</text>
+                    <text x="245" y="210" text-anchor="middle" font-size="11" font-weight="bold" fill="#ffffff">13.0%</text>
+                    <text x="175" y="180" text-anchor="middle" font-size="11" font-weight="bold" fill="#ffffff">27.2%</text>
+                    <text x="190" y="95" text-anchor="middle" font-size="11" font-weight="bold" fill="#ffffff">19.6%</text>
+
+                    <!-- Legend Items at bottom -->
+                    <g transform="translate(15, 275)" font-size="11" fill="#333333">
+                        <rect x="0" y="0" width="10" height="10" rx="2" fill="#f3622d"/>
+                        <text x="14" y="9">Nexon (15)</text>
+
+                        <rect x="85" y="0" width="10" height="10" rx="2" fill="#fba71b"/>
+                        <text x="99" y="9">Swift (22)</text>
+
+                        <rect x="165" y="0" width="10" height="10" rx="2" fill="#57b757"/>
+                        <text x="179" y="9">Harrier (12)</text>
+
+                        <rect x="255" y="0" width="10" height="10" rx="2" fill="#41a9c9"/>
+                        <text x="269" y="9">Safari (25)</text>
+
+                        <rect x="345" y="0" width="10" height="10" rx="2" fill="#4258c9"/>
+                        <text x="359" y="9">Altroz (18)</text>
+                    </g>
+                </svg>
+            </div>
+        </div>
+        <div class="fx-subtext" style="text-align: center;">Each pie slice corresponds to its proportion of total car sales (Total: 92 units).</div>
+    </div>
+
+    <h3>2. Line Chart</h3>
+    <p>A <code>LineChart</code> plots data points on a Cartesian coordinate plane (X-axis and Y-axis) and connects consecutive points with straight lines. It is ideal for showing trends over continuous intervals such as time, years, or dates.</p>
+
+    <h4>Important Classes for Line Chart:</h4>
+    <ul>
+        <li><code>CategoryAxis</code>: X-axis displaying string categories (e.g., years, months).</li>
+        <li><code>NumberAxis</code>: Y-axis displaying numerical values.</li>
+        <li><code>LineChart&lt;X, Y&gt;</code>: The chart container linking both axes.</li>
+        <li><code>XYChart.Series&lt;X, Y&gt;</code>: A named set of data points.</li>
+        <li><code>XYChart.Data&lt;X, Y&gt;</code>: An individual point <code>(x, y)</code>.</li>
+    </ul>
+
+    <h4>Program: LineChartExample.java (Student Enrolment)</h4>
+    <pre><code>import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
+import javafx.stage.Stage;
+
+public class LineChartExample extends Application {
+
+    @Override
+    public void start(Stage stage) {
+        // 1. Define axes
+        CategoryAxis xAxis = new CategoryAxis();
+        NumberAxis yAxis = new NumberAxis();
+
+        xAxis.setLabel("Academic Year");
+        yAxis.setLabel("Number of Students");
+
+        // 2. Create Line Chart
+        LineChart&lt;String, Number&gt; chart = new LineChart&lt;&gt;(xAxis, yAxis);
+        chart.setTitle("Student Enrolment");
+
+        // 3. Create Data Series
+        XYChart.Series&lt;String, Number&gt; series = new XYChart.Series&lt;&gt;();
+        series.setName("Students");
+
+        series.getData().add(new XYChart.Data&lt;&gt;("2020-21", 3970));
+        series.getData().add(new XYChart.Data&lt;&gt;("2021-22", 3760));
+        series.getData().add(new XYChart.Data&lt;&gt;("2022-23", 3560));
+        series.getData().add(new XYChart.Data&lt;&gt;("2023-24", 3820));
+        series.getData().add(new XYChart.Data&lt;&gt;("2024-25", 4250));
+
+        // 4. Attach series to chart
+        chart.getData().add(series);
+
+        Scene scene = new Scene(chart, 600, 400);
+        stage.setTitle("Line Chart Example");
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+}</code></pre>
+
+    <!-- Program Output UI: LineChartExample.java -->
+    <div class="fx-ui-card">
+        <div class="fx-ui-header">
+            <div class="fx-ui-title">
+                <span class="fx-badge-ui">Output UI</span>
+                <span>Graphical Window Output &mdash; LineChartExample.java</span>
+            </div>
+            <span class="fx-badge-meta">Stage Size: 600 &times; 400 px | Chart: LineChart</span>
+        </div>
+
+        <div class="fx-window" style="max-width: 540px;">
+            <div class="fx-window-titlebar">
+                <div class="fx-title-left">
+                    <svg class="fx-stage-icon" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="16" height="16" rx="3" fill="#ea580c"/>
+                        <path d="M4 11V5h2.5a2.5 2.5 0 0 1 0 5H4m5-5h3m-3 3h2" stroke="#ffffff" stroke-width="1.3" stroke-linecap="round"/>
+                    </svg>
+                    <span>Line Chart Example</span>
+                </div>
+                <div class="fx-win-controls">
+                    <span class="fx-win-btn">&#x2212;</span>
+                    <span class="fx-win-btn">&#x25A2;</span>
+                    <span class="fx-win-btn close">&#x2715;</span>
+                </div>
+            </div>
+            <div class="fx-scene" style="padding: 12px; background-color: #f4f4f4; text-align: center;">
+                <svg viewBox="0 0 490 280" width="100%" height="auto" style="max-width: 480px; display: block; margin: 0 auto; font-family: 'Segoe UI', Arial, sans-serif;">
+                    <!-- Chart Title -->
+                    <text x="245" y="20" text-anchor="middle" font-size="14.5" font-weight="bold" fill="#111111">Student Enrolment</text>
+
+                    <!-- Y-Axis Label -->
+                    <text x="15" y="130" transform="rotate(-90 15,130)" text-anchor="middle" font-size="11" font-weight="bold" fill="#444444">Number of Students</text>
+
+                    <!-- Horizontal Grid lines & Y-ticks -->
+                    <!-- 4400 (y=40) -->
+                    <line x1="70" y1="40" x2="460" y2="40" stroke="#e0e0e0" stroke-width="1"/>
+                    <text x="62" y="44" text-anchor="end" font-size="10" fill="#666">4400</text>
+
+                    <!-- 4200 (y=78) -->
+                    <line x1="70" y1="78" x2="460" y2="78" stroke="#e0e0e0" stroke-width="1"/>
+                    <text x="62" y="82" text-anchor="end" font-size="10" fill="#666">4200</text>
+
+                    <!-- 4000 (y=116) -->
+                    <line x1="70" y1="116" x2="460" y2="116" stroke="#e0e0e0" stroke-width="1"/>
+                    <text x="62" y="120" text-anchor="end" font-size="10" fill="#666">4000</text>
+
+                    <!-- 3800 (y=154) -->
+                    <line x1="70" y1="154" x2="460" y2="154" stroke="#e0e0e0" stroke-width="1"/>
+                    <text x="62" y="158" text-anchor="end" font-size="10" fill="#666">3800</text>
+
+                    <!-- 3600 (y=192) -->
+                    <line x1="70" y1="192" x2="460" y2="192" stroke="#e0e0e0" stroke-width="1"/>
+                    <text x="62" y="196" text-anchor="end" font-size="10" fill="#666">3600</text>
+
+                    <!-- 3400 (y=230) -->
+                    <line x1="70" y1="230" x2="460" y2="230" stroke="#bbb" stroke-width="1.2"/>
+                    <text x="62" y="234" text-anchor="end" font-size="10" fill="#666">3400</text>
+
+                    <!-- Vertical Axis line -->
+                    <line x1="70" y1="40" x2="70" y2="230" stroke="#bbb" stroke-width="1.2"/>
+
+                    <!-- X-Axis categories -->
+                    <line x1="105" y1="230" x2="105" y2="234" stroke="#bbb" stroke-width="1"/>
+                    <text x="105" y="247" text-anchor="middle" font-size="10" fill="#444">2020-21</text>
+
+                    <line x1="185" y1="230" x2="185" y2="234" stroke="#bbb" stroke-width="1"/>
+                    <text x="185" y="247" text-anchor="middle" font-size="10" fill="#444">2021-22</text>
+
+                    <line x1="265" y1="230" x2="265" y2="234" stroke="#bbb" stroke-width="1"/>
+                    <text x="265" y="247" text-anchor="middle" font-size="10" fill="#444">2022-23</text>
+
+                    <line x1="345" y1="230" x2="345" y2="234" stroke="#bbb" stroke-width="1"/>
+                    <text x="345" y="247" text-anchor="middle" font-size="10" fill="#444">2023-24</text>
+
+                    <line x1="425" y1="230" x2="425" y2="234" stroke="#bbb" stroke-width="1"/>
+                    <text x="425" y="247" text-anchor="middle" font-size="10" fill="#444">2024-25</text>
+
+                    <!-- X-Axis Label -->
+                    <text x="265" y="263" text-anchor="middle" font-size="11" font-weight="bold" fill="#444444">Academic Year</text>
+
+                    <!-- Line Chart Series Line -->
+                    <polyline points="105,122 185,162 265,200 345,150 425,68" fill="none" stroke="#f3622d" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+                    <!-- Data Points & Value Badges -->
+                    <circle cx="105" cy="122" r="4.5" fill="#ffffff" stroke="#f3622d" stroke-width="2.5"/>
+                    <text x="105" y="113" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#c44111">3970</text>
+
+                    <circle cx="185" cy="162" r="4.5" fill="#ffffff" stroke="#f3622d" stroke-width="2.5"/>
+                    <text x="185" y="153" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#c44111">3760</text>
+
+                    <circle cx="265" cy="200" r="4.5" fill="#ffffff" stroke="#f3622d" stroke-width="2.5"/>
+                    <text x="265" y="191" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#c44111">3560</text>
+
+                    <circle cx="345" cy="150" r="4.5" fill="#ffffff" stroke="#f3622d" stroke-width="2.5"/>
+                    <text x="345" y="141" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#c44111">3820</text>
+
+                    <circle cx="425" cy="68" r="4.5" fill="#ffffff" stroke="#f3622d" stroke-width="2.5"/>
+                    <text x="425" y="59" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#c44111">4250</text>
+
+                    <!-- Legend -->
+                    <g transform="translate(385, 14)">
+                        <line x1="0" y1="5" x2="16" y2="5" stroke="#f3622d" stroke-width="2"/>
+                        <circle cx="8" cy="5" r="3" fill="#ffffff" stroke="#f3622d" stroke-width="2"/>
+                        <text x="22" y="8" font-size="10.5" fill="#333333">Students</text>
+                    </g>
+                </svg>
+            </div>
+        </div>
+        <div class="fx-subtext" style="text-align: center;">Line connects consecutive student enrolment counts across five academic years.</div>
+    </div>
+
+    <h3>3. Area Chart</h3>
+    <p>An <code>AreaChart</code> plots data points similarly to a line chart, but fills the area between the line and the zero horizontal axis with color. It emphasizes the magnitude of volume or cumulative change over time.</p>
+
+    <pre><code>CategoryAxis xAxis = new CategoryAxis();
+NumberAxis yAxis = new NumberAxis();
+
+AreaChart&lt;String, Number&gt; chart = new AreaChart&lt;&gt;(xAxis, yAxis);
+chart.setTitle("Monthly Sales Volume");
+
+XYChart.Series&lt;String, Number&gt; series = new XYChart.Series&lt;&gt;();
+series.setName("Sales");
+
+series.getData().add(new XYChart.Data&lt;&gt;("January", 20));
+series.getData().add(new XYChart.Data&lt;&gt;("February", 30));
+series.getData().add(new XYChart.Data&lt;&gt;("March", 25));
+
+chart.getData().add(series);</code></pre>
+
+    <!-- Output UI: AreaChart -->
+    <div class="fx-ui-card">
+        <div class="fx-ui-header">
+            <div class="fx-ui-title">
+                <span class="fx-badge-ui">Output UI</span>
+                <span>AreaChart Visual Output</span>
+            </div>
+            <span class="fx-badge-meta">Chart: AreaChart&lt;String, Number&gt;</span>
+        </div>
+        <div class="fx-window" style="max-width: 480px;">
+            <div class="fx-window-titlebar">
+                <div class="fx-title-left">
+                    <span style="display:inline-block; width:10px; height:10px; background:#ea580c; border-radius:2px;"></span>
+                    <span>Area Chart Demo</span>
+                </div>
+                <div class="fx-win-controls">
+                    <span class="fx-win-btn">&#x2212;</span>
+                    <span class="fx-win-btn">&#x25A2;</span>
+                    <span class="fx-win-btn close">&#x2715;</span>
+                </div>
+            </div>
+            <div class="fx-scene" style="padding: 12px; background: #f4f4f4; text-align: center;">
+                <svg viewBox="0 0 420 230" width="100%" height="auto" style="max-width: 400px; display: block; margin: 0 auto; font-family: 'Segoe UI', Arial, sans-serif;">
+                    <defs>
+                        <linearGradient id="areaFillGrad" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stop-color="#41a9c9" stop-opacity="0.55"/>
+                            <stop offset="100%" stop-color="#41a9c9" stop-opacity="0.08"/>
+                        </linearGradient>
+                    </defs>
+                    <text x="210" y="18" text-anchor="middle" font-size="13.5" font-weight="bold" fill="#111111">Monthly Sales Volume</text>
+
+                    <!-- Y ticks & grid (span: 0 to 35) -->
+                    <!-- 30 (y=56) -->
+                    <line x1="55" y1="56" x2="390" y2="56" stroke="#e0e0e0" stroke-width="1"/>
+                    <text x="48" y="60" text-anchor="end" font-size="9.5" fill="#666">30</text>
+                    <!-- 20 (y=99) -->
+                    <line x1="55" y1="99" x2="390" y2="99" stroke="#e0e0e0" stroke-width="1"/>
+                    <text x="48" y="103" text-anchor="end" font-size="9.5" fill="#666">20</text>
+                    <!-- 10 (y=142) -->
+                    <line x1="55" y1="142" x2="390" y2="142" stroke="#e0e0e0" stroke-width="1"/>
+                    <text x="48" y="146" text-anchor="end" font-size="9.5" fill="#666">10</text>
+                    <!-- 0 (y=185) -->
+                    <line x1="55" y1="185" x2="390" y2="185" stroke="#bbb" stroke-width="1.2"/>
+                    <text x="48" y="189" text-anchor="end" font-size="9.5" fill="#666">0</text>
+
+                    <!-- Y-axis -->
+                    <line x1="55" y1="35" x2="55" y2="185" stroke="#bbb" stroke-width="1.2"/>
+
+                    <!-- X ticks: Jan (110), Feb (220), Mar (330) -->
+                    <text x="110" y="202" text-anchor="middle" font-size="10" fill="#444">January</text>
+                    <text x="220" y="202" text-anchor="middle" font-size="10" fill="#444">February</text>
+                    <text x="330" y="202" text-anchor="middle" font-size="10" fill="#444">March</text>
+
+                    <!-- Points: Jan 20 (y=99), Feb 30 (y=56), Mar 25 (y=78) -->
+                    <!-- Area Polygon -->
+                    <polygon points="110,185 110,99 220,56 330,78 330,185" fill="url(#areaFillGrad)"/>
+                    <!-- Area Line -->
+                    <polyline points="110,99 220,56 330,78" fill="none" stroke="#258ca8" stroke-width="2.5"/>
+
+                    <!-- Points -->
+                    <circle cx="110" cy="99" r="4" fill="#ffffff" stroke="#258ca8" stroke-width="2"/>
+                    <text x="110" y="90" text-anchor="middle" font-size="9" font-weight="bold" fill="#1b6d85">20</text>
+
+                    <circle cx="220" cy="56" r="4" fill="#ffffff" stroke="#258ca8" stroke-width="2"/>
+                    <text x="220" y="47" text-anchor="middle" font-size="9" font-weight="bold" fill="#1b6d85">30</text>
+
+                    <circle cx="330" cy="78" r="4" fill="#ffffff" stroke="#258ca8" stroke-width="2"/>
+                    <text x="330" y="69" text-anchor="middle" font-size="9" font-weight="bold" fill="#1b6d85">25</text>
+
+                    <!-- Legend -->
+                    <g transform="translate(330, 12)">
+                        <rect x="0" y="2" width="12" height="7" fill="#41a9c9"/>
+                        <text x="16" y="8" font-size="10" fill="#333">Sales</text>
+                    </g>
+                </svg>
+            </div>
+        </div>
+        <div class="fx-subtext" style="text-align: center;">Shows cumulative volume with the colored area between line and axis.</div>
+    </div>
+
+    <h3>4. Bar Chart</h3>
+    <p>A <code>BarChart</code> displays data using rectangular vertical or horizontal bars. The height/length of each bar is proportional to its value. Bar charts are best for comparing values across separate categories.</p>
+
+    <h4>Program: BarChartExample.java (Sales Comparison 2024 vs 2025)</h4>
+    <pre><code>import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
+import javafx.stage.Stage;
+
+public class BarChartExample extends Application {
+
+    @Override
+    public void start(Stage stage) {
+        CategoryAxis xAxis = new CategoryAxis();
+        NumberAxis yAxis = new NumberAxis();
+
+        xAxis.setLabel("Items");
+        yAxis.setLabel("Sales (Units)");
+
+        BarChart&lt;String, Number&gt; chart = new BarChart&lt;&gt;(xAxis, yAxis);
+        chart.setTitle("Sales Comparison: 2024 vs 2025");
+
+        // Series 1: 2024
+        XYChart.Series&lt;String, Number&gt; series2024 = new XYChart.Series&lt;&gt;();
+        series2024.setName("2024");
+        series2024.getData().add(new XYChart.Data&lt;&gt;("Laptop", 350));
+        series2024.getData().add(new XYChart.Data&lt;&gt;("Mobile", 650));
+        series2024.getData().add(new XYChart.Data&lt;&gt;("Bluetooth", 525));
+        series2024.getData().add(new XYChart.Data&lt;&gt;("Smart Watch", 760));
+
+        // Series 2: 2025
+        XYChart.Series&lt;String, Number&gt; series2025 = new XYChart.Series&lt;&gt;();
+        series2025.setName("2025");
+        series2025.getData().add(new XYChart.Data&lt;&gt;("Laptop", 425));
+        series2025.getData().add(new XYChart.Data&lt;&gt;("Mobile", 730));
+        series2025.getData().add(new XYChart.Data&lt;&gt;("Bluetooth", 450));
+        series2025.getData().add(new XYChart.Data&lt;&gt;("Smart Watch", 675));
+
+        // Add both series for side-by-side grouped comparison
+        chart.getData().addAll(series2024, series2025);
+
+        Scene scene = new Scene(chart, 600, 400);
+        stage.setTitle("Bar Chart Example");
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+}</code></pre>
+
+    <!-- Program Output UI: BarChartExample.java -->
+    <div class="fx-ui-card">
+        <div class="fx-ui-header">
+            <div class="fx-ui-title">
+                <span class="fx-badge-ui">Output UI</span>
+                <span>Graphical Window Output &mdash; BarChartExample.java</span>
+            </div>
+            <span class="fx-badge-meta">Stage Size: 600 &times; 400 px | Chart: Grouped BarChart</span>
+        </div>
+
+        <div class="fx-window" style="max-width: 560px;">
+            <div class="fx-window-titlebar">
+                <div class="fx-title-left">
+                    <svg class="fx-stage-icon" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="16" height="16" rx="3" fill="#ea580c"/>
+                        <path d="M4 11V5h2.5a2.5 2.5 0 0 1 0 5H4m5-5h3m-3 3h2" stroke="#ffffff" stroke-width="1.3" stroke-linecap="round"/>
+                    </svg>
+                    <span>Bar Chart Example</span>
+                </div>
+                <div class="fx-win-controls">
+                    <span class="fx-win-btn">&#x2212;</span>
+                    <span class="fx-win-btn">&#x25A2;</span>
+                    <span class="fx-win-btn close">&#x2715;</span>
+                </div>
+            </div>
+            <div class="fx-scene" style="padding: 12px; background-color: #f4f4f4; text-align: center;">
+                <svg viewBox="0 0 520 290" width="100%" height="auto" style="max-width: 500px; display: block; margin: 0 auto; font-family: 'Segoe UI', Arial, sans-serif;">
+                    <!-- Title -->
+                    <text x="260" y="20" text-anchor="middle" font-size="14.5" font-weight="bold" fill="#111111">Sales Comparison: 2024 vs 2025</text>
+
+                    <!-- Y-Axis Label -->
+                    <text x="14" y="130" transform="rotate(-90 14,130)" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#444444">Sales (Units)</text>
+
+                    <!-- Grid & Y ticks (y: 35 to 225, max 800) -->
+                    <!-- 800 (y=35) -->
+                    <line x1="65" y1="35" x2="495" y2="35" stroke="#e0e0e0" stroke-width="1"/>
+                    <text x="58" y="39" text-anchor="end" font-size="9.5" fill="#666">800</text>
+
+                    <!-- 600 (y=82.5) -->
+                    <line x1="65" y1="82.5" x2="495" y2="82.5" stroke="#e0e0e0" stroke-width="1"/>
+                    <text x="58" y="86.5" text-anchor="end" font-size="9.5" fill="#666">600</text>
+
+                    <!-- 400 (y=130) -->
+                    <line x1="65" y1="130" x2="495" y2="130" stroke="#e0e0e0" stroke-width="1"/>
+                    <text x="58" y="134" text-anchor="end" font-size="9.5" fill="#666">400</text>
+
+                    <!-- 200 (y=177.5) -->
+                    <line x1="65" y1="177.5" x2="495" y2="177.5" stroke="#e0e0e0" stroke-width="1"/>
+                    <text x="58" y="181.5" text-anchor="end" font-size="9.5" fill="#666">200</text>
+
+                    <!-- 0 (y=225) -->
+                    <line x1="65" y1="225" x2="495" y2="225" stroke="#bbb" stroke-width="1.2"/>
+                    <text x="58" y="229" text-anchor="end" font-size="9.5" fill="#666">0</text>
+
+                    <!-- Y Axis line -->
+                    <line x1="65" y1="35" x2="65" y2="225" stroke="#bbb" stroke-width="1.2"/>
+
+                    <!-- BARS:
+                         Category 1: Laptop
+                         2024: 350 -> h = 83.1, y = 141.9. x=100
+                         2025: 425 -> h = 100.9, y = 124.1. x=126
+
+                         Category 2: Mobile
+                         2024: 650 -> h = 154.4, y = 70.6. x=200
+                         2025: 730 -> h = 173.4, y = 51.6. x=226
+
+                         Category 3: Bluetooth
+                         2024: 525 -> h = 124.7, y = 100.3. x=300
+                         2025: 450 -> h = 106.9, y = 118.1. x=326
+
+                         Category 4: Smart Watch
+                         2024: 760 -> h = 180.5, y = 44.5. x=400
+                         2025: 675 -> h = 160.3, y = 64.7. x=426
+                    -->
+                    <!-- Laptop -->
+                    <rect x="100" y="141.9" width="22" height="83.1" rx="2" fill="#f3622d"/>
+                    <text x="111" y="135" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#333">350</text>
+                    <rect x="126" y="124.1" width="22" height="100.9" rx="2" fill="#41a9c9"/>
+                    <text x="137" y="117" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#333">425</text>
+                    <text x="124" y="241" text-anchor="middle" font-size="10.5" fill="#333">Laptop</text>
+
+                    <!-- Mobile -->
+                    <rect x="200" y="70.6" width="22" height="154.4" rx="2" fill="#f3622d"/>
+                    <text x="211" y="64" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#333">650</text>
+                    <rect x="226" y="51.6" width="22" height="173.4" rx="2" fill="#41a9c9"/>
+                    <text x="237" y="45" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#333">730</text>
+                    <text x="224" y="241" text-anchor="middle" font-size="10.5" fill="#333">Mobile</text>
+
+                    <!-- Bluetooth -->
+                    <rect x="300" y="100.3" width="22" height="124.7" rx="2" fill="#f3622d"/>
+                    <text x="311" y="93" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#333">525</text>
+                    <rect x="326" y="118.1" width="22" height="106.9" rx="2" fill="#41a9c9"/>
+                    <text x="337" y="111" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#333">450</text>
+                    <text x="324" y="241" text-anchor="middle" font-size="10.5" fill="#333">Bluetooth</text>
+
+                    <!-- Smart Watch -->
+                    <rect x="400" y="44.5" width="22" height="180.5" rx="2" fill="#f3622d"/>
+                    <text x="411" y="38" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#333">760</text>
+                    <rect x="426" y="64.7" width="22" height="160.3" rx="2" fill="#41a9c9"/>
+                    <text x="437" y="58" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#333">675</text>
+                    <text x="424" y="241" text-anchor="middle" font-size="10.5" fill="#333">Smart Watch</text>
+
+                    <!-- X-Axis Label -->
+                    <text x="270" y="258" text-anchor="middle" font-size="11" font-weight="bold" fill="#444444">Items</text>
+
+                    <!-- Legend -->
+                    <g transform="translate(205, 273)" font-size="10.5" fill="#333333">
+                        <rect x="0" y="0" width="12" height="10" rx="2" fill="#f3622d"/>
+                        <text x="16" y="9">2024</text>
+
+                        <rect x="65" y="0" width="12" height="10" rx="2" fill="#41a9c9"/>
+                        <text x="81" y="9">2025</text>
+                    </g>
+                </svg>
+            </div>
+        </div>
+        <div class="fx-subtext" style="text-align: center;">Grouped bars show side-by-side product sales comparison between year 2024 (orange) and 2025 (cyan).</div>
+    </div>
+
+    <h3>Comparison of Chart Types</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Chart Type</th>
+                <th>Visual Representation</th>
+                <th>Best Suited For</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Pie Chart</strong></td>
+                <td>Circular proportional slices</td>
+                <td>Showing percentages and parts of a whole (market share, budget allocation)</td>
+            </tr>
+            <tr>
+                <td><strong>Line Chart</strong></td>
+                <td>Data points connected by lines</td>
+                <td>Showing continuous trends, performance, or changes over time</td>
+            </tr>
+            <tr>
+                <td><strong>Area Chart</strong></td>
+                <td>Line with filled shaded area underneath</td>
+                <td>Showing volume or cumulative quantity variations over time</td>
+            </tr>
+            <tr>
+                <td><strong>Bar Chart</strong></td>
+                <td>Individual vertical or horizontal bars</td>
+                <td>Comparing discrete categories or side-by-side multi-series comparisons</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>Important JavaFX Chart Methods</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Method</th>
+                <th>Applies To</th>
+                <th>Purpose</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>setTitle(String title)</code></td>
+                <td>All Charts</td>
+                <td>Sets the main title text displayed at top of chart.</td>
+            </tr>
+            <tr>
+                <td><code>setLabel(String label)</code></td>
+                <td><code>Axis</code></td>
+                <td>Sets descriptive label for X or Y axis.</td>
+            </tr>
+            <tr>
+                <td><code>setName(String name)</code></td>
+                <td><code>XYChart.Series</code></td>
+                <td>Sets the name of a data series in the legend.</td>
+            </tr>
+            <tr>
+                <td><code>getData().add(item)</code></td>
+                <td>All Charts / Series</td>
+                <td>Adds a data point or a series to the chart.</td>
+            </tr>
+            <tr>
+                <td><code>setLegendVisible(boolean)</code></td>
+                <td>All Charts</td>
+                <td>Shows or hides the legend panel.</td>
+            </tr>
+            <tr>
+                <td><code>setAnimated(boolean)</code></td>
+                <td>All Charts</td>
+                <td>Enables or disables animation when data changes.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>5.8 Event Handling</h2>
+
+    <h3>What is an Event?</h3>
+    <p>An <strong>event</strong> is an external occurrence or notification that something significant has happened in the application, usually triggered by user interaction or the system (such as clicking a button, typing a character, moving the mouse, or closing a window).</p>
+
+    <h3>What is Event Handling?</h3>
+    <p><strong>Event handling</strong> is the programming mechanism that captures an event and executes a designated block of code (an event handler) in response to that event.</p>
+
+    <h3>Important Event Handling Terms</h3>
+    <ol>
+        <li><strong>Event Source:</strong> The UI node that generates the event (e.g., a <code>Button</code> clicked by the user).</li>
+        <li><strong>Event Object:</strong> An instance of an event class (inheriting from <code>javafx.event.Event</code>) that stores information about the event (e.g., mouse coordinates, key code, target node).</li>
+        <li><strong>Event Target:</strong> The specific node in the scene graph at which the event is directed.</li>
+        <li><strong>Event Handler:</strong> The code or method implementation that processes the event and carries out the action. In JavaFX, event handlers implement <code>EventHandler&lt;T&gt;</code>.</li>
+        <li><strong>Event Registration:</strong> The act of connecting an event handler to a source node using methods such as <code>setOnAction()</code> or <code>addEventHandler()</code>.</li>
+    </ol>
+
+    <h3>Phases of Event Handling (Event Dispatch Chain)</h3>
+    <p>When an event occurs on a node, JavaFX processes it through four stages:</p>
+    <ol>
+        <li><strong>Event Targeting:</strong> The initial target node (e.g., the clicked button) is determined. An event dispatch chain is constructed from the Stage down through the scene graph to the target node.</li>
+        <li><strong>Event Capturing (Top-down):</strong> The event travels downwards from the root node (Stage/Scene) down to the target node. Filters registered at parent nodes can intercept and consume the event before it reaches the child.</li>
+        <li><strong>Event Bubbling (Bottom-up):</strong> The event travels upwards from the target node back toward the root node. Parent nodes can inspect and handle the event as it bubbles up.</li>
+        <li><strong>Event Handling:</strong> Registered event handlers on the target node execute their logic.</li>
+    </ol>
+
+    <pre><code>           Stage (Top)
+             │      ▲
+             │      │
+           Scene    │
+             │      │
+           VBox     │
+             │      │
+             ▼      │
+        Button (Target)
+   [Capturing Phase] [Bubbling Phase]
+      (Top-down)       (Bottom-up)</code></pre>
+
+    <h3>Common Types of Events</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Event Category</th>
+                <th>Class</th>
+                <th>Triggered By</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Action Events</strong></td>
+                <td><code>ActionEvent</code></td>
+                <td>Clicking a button, pressing Enter in a text field, selecting a menu item.</td>
+            </tr>
+            <tr>
+                <td><strong>Mouse Events</strong></td>
+                <td><code>MouseEvent</code></td>
+                <td>Clicking, dragging, pressing, moving, entering, or exiting a node.</td>
+            </tr>
+            <tr>
+                <td><strong>Keyboard Events</strong></td>
+                <td><code>KeyEvent</code></td>
+                <td>Pressing, releasing, or typing a key on the keyboard.</td>
+            </tr>
+            <tr>
+                <td><strong>Window Events</strong></td>
+                <td><code>WindowEvent</code></td>
+                <td>Showing, hiding, minimizing, or closing a Stage window.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>Three Ways to Implement Event Handlers</h3>
+
+    <h4>Method 1: Using a Lambda Expression (Modern &amp; Recommended)</h4>
+    <pre><code>Button button = new Button("Click Me");
+
+button.setOnAction(e -> {
+    System.out.println("Button Clicked using Lambda Expression");
+});</code></pre>
+
+    <h4>Method 2: Using an Anonymous Inner Class</h4>
+    <pre><code>import javafx.event.EventHandler;
+import javafx.event.ActionEvent;
+
+Button button = new Button("Click Me");
+
+button.setOnAction(new EventHandler&lt;ActionEvent&gt;() {
+    @Override
+    public void handle(ActionEvent e) {
+        System.out.println("Button Clicked using Anonymous Class");
+    }
+});</code></pre>
+
+    <h4>Method 3: Using a Named Handler Method</h4>
+    <pre><code>Button button = new Button("Click Me");
+button.setOnAction(e -> handleClick());
+
+private void handleClick() {
+    System.out.println("Button Clicked via Named Method");
+}</code></pre>
+
+    <h3>Registering and Removing Event Handlers</h3>
+    <p>Handlers can be registered directly with <code>setOnAction()</code> or the generic <code>addEventHandler()</code>:</p>
+    <pre><code>// 1. Generic registration
+EventHandler&lt;ActionEvent&gt; handler = e -> System.out.println("Handled");
+button.addEventHandler(ActionEvent.ACTION, handler);
+
+// 2. Removing the registered handler
+button.removeEventHandler(ActionEvent.ACTION, handler);
+
+// 3. Clearing handler registered via setOnAction
+button.setOnAction(null);</code></pre>
+
+    <h3>Mouse and Keyboard Event Handling</h3>
+
+    <h4>Mouse Event Example:</h4>
+    <pre><code>Button button = new Button("Mouse Target");
+
+button.setOnMouseClicked(e -> {
+    System.out.println("Mouse clicked at: (" + e.getX() + ", " + e.getY() + ")");
+});</code></pre>
+
+    <h4>Keyboard Event Example:</h4>
+    <pre><code>Scene scene = new Scene(root, 400, 200);
+
+scene.setOnKeyPressed(e -> {
+    System.out.println("Key pressed: " + e.getCode());
+});</code></pre>
+    <div class="exam-note">
+        <strong>Important Note on Keyboard Events:</strong> A node must have <strong>keyboard focus</strong> to receive keyboard events. Scenes receive keyboard events when no specific child node consumes them.
+    </div>
+
+    <h3>Practical Program 1: Login Form with Event Handling</h3>
+    <pre><code>import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
+
+public class LoginExample extends Application {
+
+    @Override
+    public void start(Stage stage) {
+        Label userLabel = new Label("Username:");
+        TextField t1 = new TextField();
+
+        Label passLabel = new Label("Password:");
+        PasswordField t2 = new PasswordField();
+
+        Button login = new Button("Login");
+        Button cancel = new Button("Cancel");
+        Label message = new Label();
+
+        // Login button event handler
+        login.setOnAction(e -> {
+            String username = t1.getText();
+            String password = t2.getText();
+
+            if (username.equals("admin") &amp;&amp; password.equals("admin")) {
+                message.setText("Login Successful");
+            } else {
+                message.setText("Invalid Username or Password");
+            }
+        });
+
+        // Cancel button clears fields
+        cancel.setOnAction(e -> {
+            t1.clear();
+            t2.clear();
+            message.setText("");
+        });
+
+        GridPane grid = new GridPane();
+        grid.setHgap(10);
+        grid.setVgap(10);
+
+        grid.add(userLabel, 0, 0);
+        grid.add(t1, 1, 0);
+        grid.add(passLabel, 0, 1);
+        grid.add(t2, 1, 1);
+        grid.add(login, 0, 2);
+        grid.add(cancel, 1, 2);
+        grid.add(message, 1, 3);
+
+        Scene scene = new Scene(grid, 360, 200);
+
+        stage.setTitle("Login Form");
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+}</code></pre>
+
+    <!-- Program Output UI: LoginExample.java -->
+    <div class="fx-ui-card">
+        <div class="fx-ui-header">
+            <div class="fx-ui-title">
+                <span class="fx-badge-ui">Output UI</span>
+                <span>Graphical Window Output &mdash; LoginExample.java</span>
+            </div>
+            <span class="fx-badge-meta">Stage Size: 360 &times; 200 px | Layout: GridPane</span>
+        </div>
+
+        <div class="fx-window" style="max-width: 460px;">
+            <div class="fx-window-titlebar">
+                <div class="fx-title-left">
+                    <svg class="fx-stage-icon" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="16" height="16" rx="3" fill="#ea580c"/>
+                        <path d="M4 11V5h2.5a2.5 2.5 0 0 1 0 5H4m5-5h3m-3 3h2" stroke="#ffffff" stroke-width="1.3" stroke-linecap="round"/>
+                    </svg>
+                    <span>Login Form</span>
+                </div>
+                <div class="fx-win-controls">
+                    <span class="fx-win-btn">&#x2212;</span>
+                    <span class="fx-win-btn">&#x25A2;</span>
+                    <span class="fx-win-btn close">&#x2715;</span>
+                </div>
+            </div>
+            <div class="fx-scene" style="padding: 22px 24px; background-color: #f4f4f4;">
+                <div style="display: grid; grid-template-columns: 85px 1fr; gap: 12px; align-items: center; max-width: 320px; margin: 0 auto;">
+                    <label class="fx-label" style="text-align: right; font-weight: 500;">Username:</label>
+                    <div class="fx-mock-field" style="width: 100%;">admin</div>
+
+                    <label class="fx-label" style="text-align: right; font-weight: 500;">Password:</label>
+                    <div class="fx-mock-field" style="width: 100%;">&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;</div>
+
+                    <!-- Col 0, Row 2: Login button | Col 1, Row 2: Cancel button -->
+                    <div style="text-align: right;">
+                        <div class="fx-btn">Login</div>
+                    </div>
+                    <div>
+                        <div class="fx-btn">Cancel</div>
+                    </div>
+
+                    <!-- Col 1, Row 3: Message -->
+                    <div></div>
+                    <div class="fx-result-label fx-result-success">Login Successful</div>
+                </div>
+            </div>
+        </div>
+
+        <div style="margin-top: 14px; font-size: 12px; color: #444; background: #fff; border: 1px solid #e1e4e8; border-radius: 4px; padding: 10px 14px;">
+            <strong>Event Actions Implemented:</strong>
+            <ul style="margin: 6px 0 0 0; padding-left: 20px;">
+                <li><strong>Login Button:</strong> Checks credentials against <code>admin</code> / <code>admin</code> and updates message.</li>
+                <li><strong>Cancel Button:</strong> Calls <code>t1.clear()</code>, <code>t2.clear()</code>, and clears the message label.</li>
+            </ul>
+        </div>
+    </div>
+
+    <h3>Practical Program 2: Student Registration Form</h3>
+    <pre><code>import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
+
+public class RegistrationForm extends Application {
+
+    @Override
+    public void start(Stage stage) {
+        Label nameLabel = new Label("Name:");
+        TextField nameField = new TextField();
+
+        Label genderLabel = new Label("Gender:");
+        RadioButton male = new RadioButton("Male");
+        RadioButton female = new RadioButton("Female");
+
+        ToggleGroup genderGroup = new ToggleGroup();
+        male.setToggleGroup(genderGroup);
+        female.setToggleGroup(genderGroup);
+
+        Label hobbyLabel = new Label("Hobbies:");
+        CheckBox reading = new CheckBox("Reading");
+        CheckBox sports = new CheckBox("Sports");
+        CheckBox music = new CheckBox("Music");
+
+        Label aboutLabel = new Label("About You:");
+        TextArea about = new TextArea();
+        about.setPrefRowCount(3);
+
+        Button register = new Button("Register");
+        Label result = new Label();
+
+        register.setOnAction(e -> {
+            String gender = "Not selected";
+            if (male.isSelected()) gender = "Male";
+            else if (female.isSelected()) gender = "Female";
+
+            String hobbies = "";
+            if (reading.isSelected()) hobbies += "Reading ";
+            if (sports.isSelected()) hobbies += "Sports ";
+            if (music.isSelected()) hobbies += "Music ";
+
+            result.setText(
+                "Name: " + nameField.getText()
+                + "\nGender: " + gender
+                + "\nHobbies: " + hobbies
+                + "\nAbout: " + about.getText()
+            );
+        });
+
+        GridPane grid = new GridPane();
+        grid.setHgap(10);
+        grid.setVgap(10);
+
+        grid.add(nameLabel, 0, 0);
+        grid.add(nameField, 1, 0);
+
+        grid.add(genderLabel, 0, 1);
+        grid.add(male, 1, 1);
+        grid.add(female, 2, 1);
+
+        grid.add(hobbyLabel, 0, 2);
+        grid.add(reading, 1, 2);
+        grid.add(sports, 2, 2);
+        grid.add(music, 3, 2);
+
+        grid.add(aboutLabel, 0, 3);
+        grid.add(about, 1, 3, 3, 1);
+
+        grid.add(register, 1, 4);
+        grid.add(result, 1, 5, 3, 1);
+
+        Scene scene = new Scene(grid, 600, 350);
+        stage.setTitle("Registration Form");
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+}</code></pre>
+
+    <!-- Program Output UI: RegistrationForm.java -->
+    <div class="fx-ui-card">
+        <div class="fx-ui-header">
+            <div class="fx-ui-title">
+                <span class="fx-badge-ui">Output UI</span>
+                <span>Graphical Window Output &mdash; RegistrationForm.java</span>
+            </div>
+            <span class="fx-badge-meta">Stage Size: 600 &times; 350 px | Layout: GridPane</span>
+        </div>
+
+        <div class="fx-window" style="max-width: 580px;">
+            <div class="fx-window-titlebar">
+                <div class="fx-title-left">
+                    <svg class="fx-stage-icon" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="16" height="16" rx="3" fill="#ea580c"/>
+                        <path d="M4 11V5h2.5a2.5 2.5 0 0 1 0 5H4m5-5h3m-3 3h2" stroke="#ffffff" stroke-width="1.3" stroke-linecap="round"/>
+                    </svg>
+                    <span>Registration Form</span>
+                </div>
+                <div class="fx-win-controls">
+                    <span class="fx-win-btn">&#x2212;</span>
+                    <span class="fx-win-btn">&#x25A2;</span>
+                    <span class="fx-win-btn close">&#x2715;</span>
+                </div>
+            </div>
+            <div class="fx-scene" style="padding: 20px 24px; background-color: #f4f4f4;">
+                <div style="display: grid; grid-template-columns: 85px auto auto 1fr; gap: 10px; align-items: center;">
+                    <!-- Row 0: Name -->
+                    <label class="fx-label" style="text-align: right; font-weight: 500;">Name:</label>
+                    <div class="fx-mock-field" style="grid-column: 2 / span 3; max-width: 280px;">Priya Sharma</div>
+
+                    <!-- Row 1: Gender -->
+                    <label class="fx-label" style="text-align: right; font-weight: 500;">Gender:</label>
+                    <div><div class="fx-mock-radio"><span class="fx-mock-circle"></span> Male</div></div>
+                    <div><div class="fx-mock-radio"><span class="fx-mock-circle checked"></span> Female</div></div>
+                    <div></div>
+
+                    <!-- Row 2: Hobbies -->
+                    <label class="fx-label" style="text-align: right; font-weight: 500;">Hobbies:</label>
+                    <div><div class="fx-mock-check"><span class="fx-mock-square checked">&#x2713;</span> Reading</div></div>
+                    <div><div class="fx-mock-check"><span class="fx-mock-square"></span> Sports</div></div>
+                    <div><div class="fx-mock-check"><span class="fx-mock-square checked">&#x2713;</span> Music</div></div>
+
+                    <!-- Row 3: About You -->
+                    <label class="fx-label" style="text-align: right; font-weight: 500; align-self: start; padding-top: 6px;">About You:</label>
+                    <div class="fx-mock-area" style="grid-column: 2 / span 3; width: 100%; max-width: 380px;">Final year student passionate about JavaFX and software engineering.</div>
+
+                    <!-- Row 4: Register Button -->
+                    <div></div>
+                    <div style="grid-column: 2 / span 3;">
+                        <div class="fx-btn">Register</div>
+                    </div>
+
+                    <!-- Row 5: Result Label -->
+                    <div></div>
+                    <div style="grid-column: 2 / span 3;">
+                        <div class="fx-result-label fx-result-info" style="background: #ffffff; border: 1px solid #dcdcdc; border-radius: 4px; padding: 10px 12px; margin-top: 4px; font-weight: normal; font-size: 12px;">Name: Priya Sharma
+Gender: Female
+Hobbies: Reading Music 
+About: Final year student passionate about JavaFX and software engineering.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="fx-subtext" style="text-align: center;">Graphical output on clicking "Register" &mdash; dynamically compiles form fields into student summary.</div>
+    </div>
+
+    <h3>Practical Program 3: Pizza Ordering System</h3>
+    <pre><code>import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
+public class PizzaOrder extends Application {
+
+    @Override
+    public void start(Stage stage) {
+        Label title = new Label("Select Pizza Toppings");
+
+        CheckBox cheese = new CheckBox("Extra Cheese");
+        CheckBox mushroom = new CheckBox("Mushroom");
+        CheckBox olives = new CheckBox("Olives");
+        CheckBox paneer = new CheckBox("Paneer");
+
+        Button order = new Button("Place Order");
+        Label result = new Label();
+
+        order.setOnAction(e -> {
+            String toppings = "";
+            if (cheese.isSelected()) toppings += "Extra Cheese, ";
+            if (mushroom.isSelected()) toppings += "Mushroom, ";
+            if (olives.isSelected()) toppings += "Olives, ";
+            if (paneer.isSelected()) toppings += "Paneer, ";
+
+            if (toppings.isEmpty()) {
+                result.setText("No toppings selected.");
+            } else {
+                result.setText("Selected toppings: " + toppings);
+            }
+        });
+
+        VBox root = new VBox(10, title, cheese, mushroom, olives, paneer, order, result);
+
+        Scene scene = new Scene(root, 350, 300);
+        stage.setTitle("Pizza Ordering System");
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+}</code></pre>
+
+    <!-- Program Output UI: PizzaOrder.java -->
+    <div class="fx-ui-card">
+        <div class="fx-ui-header">
+            <div class="fx-ui-title">
+                <span class="fx-badge-ui">Output UI</span>
+                <span>Graphical Window Output &mdash; PizzaOrder.java</span>
+            </div>
+            <span class="fx-badge-meta">Stage Size: 350 &times; 300 px | Layout: VBox(10)</span>
+        </div>
+
+        <div class="fx-window" style="max-width: 440px;">
+            <div class="fx-window-titlebar">
+                <div class="fx-title-left">
+                    <svg class="fx-stage-icon" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="16" height="16" rx="3" fill="#ea580c"/>
+                        <path d="M4 11V5h2.5a2.5 2.5 0 0 1 0 5H4m5-5h3m-3 3h2" stroke="#ffffff" stroke-width="1.3" stroke-linecap="round"/>
+                    </svg>
+                    <span>Pizza Ordering System</span>
+                </div>
+                <div class="fx-win-controls">
+                    <span class="fx-win-btn">&#x2212;</span>
+                    <span class="fx-win-btn">&#x25A2;</span>
+                    <span class="fx-win-btn close">&#x2715;</span>
+                </div>
+            </div>
+            <div class="fx-scene" style="padding: 20px 24px; background-color: #f4f4f4;">
+                <div style="display: flex; flex-direction: column; gap: 10px; align-items: flex-start;">
+                    <span class="fx-label" style="font-weight: bold; font-size: 14px; color: #111;">Select Pizza Toppings</span>
+
+                    <div class="fx-mock-check"><span class="fx-mock-square checked">&#x2713;</span> Extra Cheese</div>
+                    <div class="fx-mock-check"><span class="fx-mock-square"></span> Mushroom</div>
+                    <div class="fx-mock-check"><span class="fx-mock-square checked">&#x2713;</span> Olives</div>
+                    <div class="fx-mock-check"><span class="fx-mock-square checked">&#x2713;</span> Paneer</div>
+
+                    <div class="fx-btn" style="margin-top: 4px;">Place Order</div>
+
+                    <div class="fx-result-label fx-result-success" style="margin-top: 4px; font-size: 12px;">Selected toppings: Extra Cheese, Olives, Paneer, </div>
+                </div>
+            </div>
+        </div>
+        <div class="fx-subtext" style="text-align: center;">Graphical output after checking Extra Cheese, Olives, and Paneer, then clicking "Place Order".</div>
+    </div>
+
+    <!-- <h3>Quick Revision: Important JavaFX Methods</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Method</th>
+                <th>Target Class</th>
+                <th>Purpose</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>launch(args)</code></td>
+                <td><code>Application</code></td>
+                <td>Initializes runtime and starts the JavaFX application.</td>
+            </tr>
+            <tr>
+                <td><code>start(Stage stage)</code></td>
+                <td><code>Application</code></td>
+                <td>Main entry point where UI components are constructed.</td>
+            </tr>
+            <tr>
+                <td><code>setTitle(String title)</code></td>
+                <td><code>Stage</code></td>
+                <td>Sets the window title.</td>
+            </tr>
+            <tr>
+                <td><code>setScene(Scene scene)</code></td>
+                <td><code>Stage</code></td>
+                <td>Attaches a scene to the stage window.</td>
+            </tr>
+            <tr>
+                <td><code>show()</code></td>
+                <td><code>Stage</code></td>
+                <td>Displays the stage window on screen.</td>
+            </tr>
+            <tr>
+                <td><code>getChildren().add(node)</code></td>
+                <td><code>Pane</code> (Layouts)</td>
+                <td>Adds a child node to a layout container.</td>
+            </tr>
+            <tr>
+                <td><code>getText()</code></td>
+                <td><code>TextInputControl</code>, <code>Labeled</code></td>
+                <td>Retrieves text content from a control.</td>
+            </tr>
+            <tr>
+                <td><code>setText(String text)</code></td>
+                <td><code>TextInputControl</code>, <code>Labeled</code></td>
+                <td>Sets or changes the text displayed on a control.</td>
+            </tr>
+            <tr>
+                <td><code>clear()</code></td>
+                <td><code>TextInputControl</code></td>
+                <td>Clears all entered text from text fields.</td>
+            </tr>
+            <tr>
+                <td><code>isSelected()</code></td>
+                <td><code>CheckBox</code>, <code>RadioButton</code></td>
+                <td>Checks if the control is currently checked/selected.</td>
+            </tr>
+            <tr>
+                <td><code>setOnAction(handler)</code></td>
+                <td><code>ButtonBase</code>, <code>MenuItem</code></td>
+                <td>Registers an action handler for click/selection events.</td>
+            </tr>
+            <tr>
+                <td><code>setHgap(double gap)</code></td>
+                <td><code>GridPane</code>, <code>FlowPane</code></td>
+                <td>Sets horizontal spacing between columns/items.</td>
+            </tr>
+            <tr>
+                <td><code>setVgap(double gap)</code></td>
+                <td><code>GridPane</code>, <code>FlowPane</code></td>
+                <td>Sets vertical spacing between rows/items.</td>
+            </tr>
+            <tr>
+                <td><code>getData().add(series)</code></td>
+                <td><code>XYChart</code></td>
+                <td>Adds a data series or data point to a chart.</td>
+            </tr>
+        </tbody>
+    </table> -->
+
+    <!-- <h2>Important Examination Questions</h2>
+
+    <h3>Short-Answer Questions (with Answers)</h3>
+    <ol>
+        <li>
+            <strong>What is JavaFX?</strong><br>
+            JavaFX is a Java-based GUI library and toolkit used to build rich client-side desktop applications with interactive controls, charts, animations, and multimedia.
+        </li>
+        <li>
+            <strong>What is a Rich Internet Application (RIA)?</strong><br>
+            An RIA is an application that delivers a rich, highly responsive, and graphically rich user experience comparable to traditional desktop software, combined with network connectivity and multimedia capabilities.
+        </li>
+        <li>
+            <strong>List four key features of JavaFX.</strong><br>
+            Four key features are: built-in layout containers, CSS-like styling support, FXML separation of UI and logic, and built-in charting APIs.
+        </li>
+        <li>
+            <strong>Explain the role of Prism in JavaFX architecture.</strong><br>
+            Prism is the hardware-accelerated graphics rendering pipeline that uses Direct3D or OpenGL to render high-performance visual graphics.
+        </li>
+        <li>
+            <strong>What is the role of the Stage class?</strong><br>
+            <code>Stage</code> represents the top-level window of a JavaFX application, containing title bars, borders, and minimizing/closing controls.
+        </li>
+        <li>
+            <strong>What is the role of the Scene class?</strong><br>
+            <code>Scene</code> represents the container holding all physical visual content (the scene graph) displayed inside a <code>Stage</code>.
+        </li>
+        <li>
+            <strong>What is a Scene Graph?</strong><br>
+            A Scene Graph is a tree-like hierarchical data structure composed of visual elements called nodes (root, branch, and leaf nodes) that form the entire user interface.
+        </li>
+        <li>
+            <strong>Explain the three lifecycle methods of a JavaFX application.</strong><br>
+            The three methods are: <code>init()</code> (pre-UI initialization), <code>start(Stage)</code> (constructing and showing the UI), and <code>stop()</code> (cleanup before termination).
+        </li>
+        <li>
+            <strong>What is a layout container?</strong><br>
+            A layout container (e.g., <code>HBox</code>, <code>GridPane</code>) is a parent node that automatically positions and sizes its child components inside a scene.
+        </li>
+        <li>
+            <strong>Differentiate between HBox and VBox.</strong><br>
+            <code>HBox</code> arranges its child nodes in a single horizontal row from left to right, whereas <code>VBox</code> arranges child nodes in a single vertical column from top to bottom.
+        </li>
+        <li>
+            <strong>Explain BorderPane and its five regions.</strong><br>
+            <code>BorderPane</code> arranges components into five distinct regions: Top, Bottom, Left, Right, and Center.
+        </li>
+        <li>
+            <strong>What is the purpose of GridPane?</strong><br>
+            <code>GridPane</code> arranges components in a flexible grid of rows and columns using zero-based coordinate indexing: <code>add(node, columnIndex, rowIndex)</code>.
+        </li>
+        <li>
+            <strong>Differentiate between CheckBox and RadioButton.</strong><br>
+            Multiple <code>CheckBox</code> controls can be selected independently, while <code>RadioButton</code> controls inside a <code>ToggleGroup</code> are mutually exclusive (only one can be chosen).
+        </li>
+        <li>
+            <strong>What is the purpose of a ComboBox?</strong><br>
+            A <code>ComboBox</code> provides a compact drop-down list of choices, allowing the user to select one item from the menu.
+        </li>
+        <li>
+            <strong>What is event handling?</strong><br>
+            Event handling is the mechanism of detecting an event (like a button click or key press) and executing corresponding response code via an event handler.
+        </li>
+        <li>
+            <strong>Define event source, event object, event target, and event handler.</strong><br>
+            <em>Source:</em> the node generating the event; <em>Object:</em> contains event details; <em>Target:</em> the intended destination node; <em>Handler:</em> the code that responds to the event.
+        </li>
+        <li>
+            <strong>Explain event capturing and event bubbling.</strong><br>
+            <em>Capturing</em> is the top-down dispatch where the event travels from root to target; <em>Bubbling</em> is the bottom-up phase where the event travels back from target to root.
+        </li>
+        <li>
+            <strong>What is the purpose of setOnAction()?</strong><br>
+            <code>setOnAction()</code> registers an event handler to respond to primary action events, such as when a user clicks a button or presses enter in a text field.
+        </li>
+        <li>
+            <strong>Differentiate between a Pie Chart and a Bar Chart.</strong><br>
+            A <code>PieChart</code> shows proportions of a whole (slices of a circle), while a <code>BarChart</code> uses rectangular bars to compare quantities across distinct categories.
+        </li>
+        <li>
+            <strong>What is the purpose of XYChart.Series?</strong><br>
+            <code>XYChart.Series</code> represents a named set or series of two-dimensional <code>(x, y)</code> data points plotted on a two-axis chart (such as a Line, Area, or Bar chart).
+        </li>
+    </ol>
+
+    <h3>Long-Answer and Programming Questions</h3>
+    <ol>
+        <li>Explain JavaFX architecture in detail with a neat block diagram describing Prism, Glass, and Quantum Toolkit.</li>
+        <li>Explain the complete life cycle of a JavaFX application with an execution sequence diagram and program.</li>
+        <li>Explain common JavaFX layout containers (<code>HBox</code>, <code>VBox</code>, <code>BorderPane</code>, <code>GridPane</code>, <code>FlowPane</code>, <code>StackPane</code>) with code examples.</li>
+        <li>Write a complete JavaFX program to create a User Login Form using <code>GridPane</code> and handle login validation.</li>
+        <li>Write a JavaFX program demonstrating the use of <code>Label</code>, <code>TextField</code>, and <code>Button</code> to greet a user.</li>
+        <li>Explain various JavaFX controls (<code>Button</code>, <code>CheckBox</code>, <code>RadioButton</code>, <code>ComboBox</code>, <code>TextArea</code>) with their common methods and constructors.</li>
+        <li>Write a JavaFX program to create a Student Registration Form accepting name, gender, hobbies, and comments.</li>
+        <li>Explain JavaFX chart types and the steps required to construct and display a chart.</li>
+        <li>Write a JavaFX program to display product or vehicle sales using a <code>PieChart</code>.</li>
+        <li>Write a JavaFX program to display student enrolment over five academic years using a <code>LineChart</code>.</li>
+        <li>Write a JavaFX program to compare sales across two consecutive years using a grouped <code>BarChart</code>.</li>
+        <li>Explain the phases of JavaFX event handling (Targeting, Capturing, Bubbling, Handling) in detail.</li>
+        <li>Demonstrate three ways to write event handlers in JavaFX: lambda expressions, anonymous classes, and named methods.</li>
+        <li>Explain mouse and keyboard event handling in JavaFX with suitable code examples.</li>
+    </ol>
+
+    <h2>Practical Topics to Prioritize for Students</h2>
+    <ul>
+        <li><strong>Priority 1 — Basic GUI Essentials:</strong> Stage, Scene, extending <code>Application</code>, basic controls (<code>Label</code>, <code>TextField</code>, <code>Button</code>), and the <code>launch()</code> method.</li>
+        <li><strong>Priority 2 — Layouts and Forms:</strong> Mastering <code>VBox</code>, <code>HBox</code>, <code>BorderPane</code>, and <code>GridPane</code> to build clean login and registration forms.</li>
+        <li><strong>Priority 3 — Event Handling:</strong> Using <code>setOnAction()</code> with lambda expressions, reading values via <code>getText()</code> and <code>isSelected()</code>, and updating labels dynamically.</li>
+        <li><strong>Priority 4 — Charts:</strong> Creating <code>PieChart</code> and two-axis charts (<code>LineChart</code>, <code>BarChart</code>) using <code>XYChart.Series</code> and <code>XYChart.Data</code>.</li>
+    </ul>
+
+    <div class="exam-note">
+        <strong>Final Teaching Guidance:</strong> Teach students to build JavaFX applications in four sequential steps:
+        <ol>
+            <li>Create the window foundation (<code>Stage</code> and <code>Scene</code>).</li>
+            <li>Choose and configure an appropriate layout container (e.g., <code>GridPane</code> for forms, <code>VBox</code> for lists).</li>
+            <li>Instantiate and add UI controls (labels, fields, buttons).</li>
+            <li>Attach event handlers to make the application interactive.</li>
+        </ol>
+    </div> -->
+
+</body>
+</html>
