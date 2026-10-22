@@ -1,0 +1,1163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 3: Inheritance and Interfaces</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.2;
+            margin: 20px auto;
+            max-width: 900px;
+            padding: 0 15px;
+            color: #222;
+        }
+        h1 {
+            color: #000;
+            border-bottom: 2px solid #333;
+            padding-bottom: 8px;
+            margin-bottom: 18px;
+            font-size: 22px;
+        }
+        h2 {
+            color: #1a237e;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 5px;
+            margin-top: 35px;
+            font-size: 14px;
+        }
+        h3 {
+            color: #283593;
+            margin-top: 25px;
+            font-size: 14px;
+        }
+        h4 {
+            color: #333;
+            margin-top: 18px;
+            font-size: 13px;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 15px 0;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px 12px;
+            text-align: left;
+            vertical-align: top;
+        }
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+        tr:nth-child(even) {
+            background-color: #fafafa;
+        }
+        pre {
+            background-color: #f5f5f5;
+            border: 1px solid #ddd;
+            padding: 12px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-family: Consolas, "Courier New", monospace;
+            font-size: 12px;
+            line-height: 1.2;
+        }
+        code {
+            font-family: Consolas, "Courier New", monospace;
+            background-color: #f0f0f0;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-size: 13.5px;
+        }
+        pre code {
+            background-color: transparent;
+            padding: 0;
+        }
+        ul, ol {
+            padding-left: 25px;
+        }
+        li {
+            margin-bottom: 5px;
+        }
+        .exam-note {
+            background-color: #e8f5e9;
+            border-left: 4px solid #2e7d32;
+            padding: 10px 14px;
+            margin: 15px 0;
+        }
+        .output-box {
+            background-color: #fcfcfc;
+            border: 1px dashed #999;
+            padding: 10px 14px;
+            margin: 10px 0 15px 0;
+            font-family: Consolas, "Courier New", monospace;
+            font-size: 12px;
+            line-height: 1.2;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Chapter 3: Inheritance and Interfaces</h1>
+
+    <!-- <h2>Chapter Contents</h2>
+    <ol>
+        <li>Introduction to inheritance</li>
+        <li>Basic terminology and the <code>extends</code> keyword</li>
+        <li>Types of inheritance</li>
+        <li>Accessing superclass members</li>
+        <li>The <code>super</code> keyword</li>
+        <li>Method overriding</li>
+        <li>Dynamic method dispatch</li>
+        <li>Abstract classes and abstract methods</li>
+        <li>Interfaces and the <code>implements</code> keyword</li>
+        <li>Types and features of interfaces</li>
+        <li>Marker and functional interfaces</li>
+        <li>Important differences, programs, and viva questions</li>
+    </ol> -->
+
+    <!-- <hr> -->
+
+    <h2>3.1 Introduction to Inheritance</h2>
+
+    <h3>1. What is inheritance?</h3>
+    <p>Inheritance is an Object-Oriented Programming (OOP) feature in which one class acquires accessible fields and methods from another class.</p>
+    <p>The existing class is called the <strong>parent class</strong>, <strong>base class</strong>, or <strong>superclass</strong>. The new class is called the <strong>child class</strong>, <strong>derived class</strong>, or <strong>subclass</strong>.</p>
+    <p>Inheritance helps us reuse code and organize related classes into a clear hierarchy.</p>
+
+    <h3>Real-life example</h3>
+    <p>Consider a general class called <code>Vehicle</code>. A <code>Car</code> and a <code>Bike</code> are both types of vehicles:</p>
+    <ul>
+        <li><code>Vehicle</code> contains common properties and behaviours (e.g. speed, fuel capacity, start, stop).</li>
+        <li><code>Car</code> reuses the common features of <code>Vehicle</code> and defines its own features (e.g. air conditioning, number of doors).</li>
+        <li><code>Bike</code> also reuses the common features and adds its own features (e.g. kick start, helmet storage).</li>
+    </ul>
+
+    <pre><code>            Vehicle (Parent / Superclass)
+                    /        \
+                   /          \
+      Car (Child class)    Bike (Child class)</code></pre>
+
+    <h3>2. Advantages of inheritance</h3>
+    <ol>
+        <li><strong>Code reusability:</strong> Common code can be written once in the parent class.</li>
+        <li><strong>Less duplication:</strong> Child classes reuse inherited functionality instead of rewriting code.</li>
+        <li><strong>Easy maintenance:</strong> Common behaviour can be updated or fixed in one central place.</li>
+        <li><strong>Extensibility:</strong> Child classes can easily add specialized fields and methods.</li>
+        <li><strong>Polymorphism:</strong> Inheritance supports runtime polymorphism through method overriding.</li>
+    </ol>
+
+    <h3>3. Basic syntax</h3>
+    <pre><code>class Parent {
+    // Fields and methods
+}
+
+class Child extends Parent {
+    // Additional fields and methods
+}</code></pre>
+    <p>The keyword <code>extends</code> establishes class inheritance.</p>
+
+    <h3>4. First inheritance program</h3>
+    <pre><code>class Animal {
+    void eat() {
+        System.out.println("Animal is eating.");
+    }
+}
+
+class Dog extends Animal {
+    void bark() {
+        System.out.println("Dog is barking.");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Dog d = new Dog();
+
+        d.eat();
+        d.bark();
+    }
+}</code></pre>
+
+    <p><strong>Output:</strong></p>
+    <div class="output-box">
+Animal is eating.<br>
+Dog is barking.
+    </div>
+
+    <h3>Program explanation</h3>
+    <ul>
+        <li><code>Animal</code> is the superclass.</li>
+        <li><code>Dog</code> is the subclass.</li>
+        <li><code>extends Animal</code> allows <code>Dog</code> to inherit accessible members of <code>Animal</code>.</li>
+        <li><code>eat()</code> is defined in <code>Animal</code>.</li>
+        <li><code>bark()</code> is defined in <code>Dog</code>.</li>
+        <li>The object <code>d</code> can invoke both the inherited method <code>eat()</code> and its own method <code>bark()</code>.</li>
+    </ul>
+
+    <div class="exam-note">
+        <strong>Remember:</strong> Inheritance does not mean that the child class can directly access every member of the parent. Access depends strictly on the member's access modifier (e.g., <code>private</code> members cannot be accessed directly).
+    </div>
+
+    <hr>
+
+    <h2>3.2 Basic Terminology and the <code>extends</code> Keyword</h2>
+
+    <h3>Important terms</h3>
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 25%;">Term</th>
+                <th style="width: 75%;">Meaning</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Superclass</strong></td>
+                <td>The class being inherited from (Parent or Base class).</td>
+            </tr>
+            <tr>
+                <td><strong>Subclass</strong></td>
+                <td>The class that inherits from another class (Child or Derived class).</td>
+            </tr>
+            <tr>
+                <td><code>extends</code></td>
+                <td>Keyword used for class inheritance.</td>
+            </tr>
+            <tr>
+                <td><strong>Inherited member</strong></td>
+                <td>An accessible field or method obtained from the superclass.</td>
+            </tr>
+            <tr>
+                <td><strong>IS-A relationship</strong></td>
+                <td>A relationship in which the subclass represents a more specific type of the superclass.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>Example of an IS-A relationship</h3>
+    <p>A <code>Dog</code> <strong>IS-A</strong> <code>Animal</code>.</p>
+
+    <pre><code>class Animal {
+}
+
+class Dog extends Animal {
+}</code></pre>
+
+    <p>A <code>Dog</code> object can be assigned to an <code>Animal</code> reference variable:</p>
+    <pre><code>Animal a = new Dog();</code></pre>
+    <p>This is valid because <code>Dog</code> is a subclass of <code>Animal</code>.</p>
+    <p><em>However, the reverse assignment (<code>Dog d = new Animal();</code>) is not valid without an explicit cast, and that cast is safe only when the actual object at runtime is indeed a <code>Dog</code>.</em></p>
+
+    <h3>Important point about constructors</h3>
+    <p>Constructors are <strong>not</strong> inherited by subclasses. When a subclass object is created, a superclass constructor is invoked first as part of object construction.</p>
+
+    <pre><code>class Parent {
+    Parent() {
+        System.out.println("Parent constructor");
+    }
+}
+
+class Child extends Parent {
+    Child() {
+        System.out.println("Child constructor");
+    }
+}
+
+class Main {
+    public static void main(String[] args) {
+        new Child();
+    }
+}</code></pre>
+
+    <p><strong>Output:</strong></p>
+    <div class="output-box">
+Parent constructor<br>
+Child constructor
+    </div>
+    <p>The superclass constructor executes before the subclass constructor body runs.</p>
+
+    <hr>
+
+    <h2>3.3 Types of Inheritance</h2>
+    <p>Inheritance can be classified according to how classes are hierarchically related.</p>
+
+    <h3>1. Single inheritance</h3>
+    <p>One subclass inherits directly from one superclass.</p>
+    <pre><code>A (Parent)
+    │
+    ▼
+B (Child)</code></pre>
+
+    <pre><code>class A {
+    void showA() {
+        System.out.println("Class A");
+    }
+}
+
+class B extends A {
+    void showB() {
+        System.out.println("Class B");
+    }
+}
+
+class Main {
+    public static void main(String[] args) {
+        B obj = new B();
+        obj.showA();
+        obj.showB();
+    }
+}</code></pre>
+
+    <p><strong>Output:</strong></p>
+    <div class="output-box">
+Class A<br>
+Class B
+    </div>
+
+    <h3>2. Multilevel inheritance</h3>
+    <p>A class inherits from a class that itself inherits from another class.</p>
+    <pre><code>A
+│
+▼
+B extends A
+│
+▼
+C extends B</code></pre>
+
+    <pre><code>class A {
+    void displayA() {
+        System.out.println("Class A");
+    }
+}
+
+class B extends A {
+    void displayB() {
+        System.out.println("Class B");
+    }
+}
+
+class C extends B {
+    void displayC() {
+        System.out.println("Class C");
+    }
+}
+
+class Main {
+    public static void main(String[] args) {
+        C obj = new C();
+        obj.displayA();
+        obj.displayB();
+        obj.displayC();
+    }
+}</code></pre>
+
+    <p><strong>Output:</strong></p>
+    <div class="output-box">
+Class A<br>
+Class B<br>
+Class C
+    </div>
+    <p>Class <code>C</code> can access the accessible inherited methods from both <code>B</code> and <code>A</code>.</p>
+
+    <h3>3. Hierarchical inheritance</h3>
+    <p>Two or more subclasses inherit from the same superclass.</p>
+    <pre><code>          Animal
+          /    \
+         /      \
+       Dog      Cat</code></pre>
+
+    <pre><code>class Animal {
+    void eat() {
+        System.out.println("Animal eats food.");
+    }
+}
+
+class Dog extends Animal {
+    void bark() {
+        System.out.println("Dog barks.");
+    }
+}
+
+class Cat extends Animal {
+    void meow() {
+        System.out.println("Cat meows.");
+    }
+}
+
+class Main {
+    public static void main(String[] args) {
+        Dog d = new Dog();
+        Cat c = new Cat();
+
+        d.eat();
+        d.bark();
+
+        c.eat();
+        c.meow();
+    }
+}</code></pre>
+
+    <p><strong>Output:</strong></p>
+    <div class="output-box">
+Animal eats food.<br>
+Dog barks.<br>
+Animal eats food.<br>
+Cat meows.
+    </div>
+
+    <h3>4. Multiple inheritance</h3>
+    <p>Multiple inheritance means inheriting from more than one parent class.</p>
+    <p><strong>Java does not support multiple inheritance with classes.</strong> A class cannot directly extend two classes to avoid ambiguity (the Diamond Problem).</p>
+
+    <pre><code>// Invalid in Java: A class cannot extend two classes
+class C extends A, B { // Compile-time error
+}</code></pre>
+
+    <p>However, Java supports multiple inheritance of type through <strong>interfaces</strong>:</p>
+
+    <pre><code>interface Printable {
+    void print();
+}
+
+interface Showable {
+    void show();
+}
+
+class Demo implements Printable, Showable {
+    public void print() {
+        System.out.println("Printing");
+    }
+
+    public void show() {
+        System.out.println("Showing");
+    }
+}</code></pre>
+
+    <h3>5. Hybrid inheritance</h3>
+    <p>Hybrid inheritance combines two or more inheritance patterns. Java does not support hybrid inheritance through classes alone, but combinations can be created using interfaces.</p>
+
+    <h3>Summary of inheritance types</h3>
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 30%;">Type</th>
+                <th style="width: 70%;">Supported in Java?</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Single</strong></td>
+                <td>Yes, using classes (<code>class B extends A</code>).</td>
+            </tr>
+            <tr>
+                <td><strong>Multilevel</strong></td>
+                <td>Yes, using classes (<code>class C extends B</code> where <code>B extends A</code>).</td>
+            </tr>
+            <tr>
+                <td><strong>Hierarchical</strong></td>
+                <td>Yes, using classes (multiple classes extend one superclass).</td>
+            </tr>
+            <tr>
+                <td><strong>Multiple</strong></td>
+                <td>Not through classes; fully supported through interfaces.</td>
+            </tr>
+            <tr>
+                <td><strong>Hybrid</strong></td>
+                <td>Possible in supported combinations using classes and interfaces.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="exam-note">
+        <strong>Exam question:</strong> Explain the types of inheritance supported in Java with suitable diagrams and code examples.
+    </div>
+
+    <hr>
+
+    <h2>3.4 Accessing Superclass Members</h2>
+    <p>A subclass can access superclass members according to their access modifiers:</p>
+
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 30%;">Modifier</th>
+                <th style="width: 70%;">Access from subclass in another package?</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>public</code></td>
+                <td>Yes, accessible from any class.</td>
+            </tr>
+            <tr>
+                <td><code>protected</code></td>
+                <td>Yes, accessible in subclasses in any package through inheritance.</td>
+            </tr>
+            <tr>
+                <td><strong>Default (package-private)</strong></td>
+                <td>No, accessible only within the same package.</td>
+            </tr>
+            <tr>
+                <td><code>private</code></td>
+                <td>No direct access; accessible only within its declaring class.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>Example: Access modifiers in inheritance</h3>
+    <pre><code>class Parent {
+    public int a = 10;
+    protected int b = 20;
+    int c = 30;
+    private int d = 40;
+}
+
+class Child extends Parent {
+    void display() {
+        System.out.println(a); // Accessible
+        System.out.println(b); // Accessible
+        System.out.println(c); // Accessible (same package)
+
+        // System.out.println(d); // Compile-time error: d has private access
+    }
+}
+
+class Main {
+    public static void main(String[] args) {
+        Child obj = new Child();
+        obj.display();
+    }
+}</code></pre>
+
+    <p><strong>Output (when all classes are in the same package):</strong></p>
+    <div class="output-box">
+10<br>
+20<br>
+30
+    </div>
+    <p>The private member <code>d</code> is not directly accessible in <code>Child</code>. It can only be accessed through public or protected getter/setter methods in <code>Parent</code>.</p>
+
+    <div class="exam-note">
+        <strong>Teaching point:</strong> A subclass object contains the superclass portion in memory, but access modifiers still strictly control which members the subclass can reference directly.
+    </div>
+
+    <hr>
+
+    <h2>3.5 The <code>super</code> Keyword</h2>
+    <p>The <code>super</code> keyword refers to the immediate superclass part of the current object. It is commonly used to access superclass members and constructors.</p>
+
+    <h3>Primary uses of <code>super</code></h3>
+    <ol>
+        <li>Access a superclass field when shadowed by a subclass field.</li>
+        <li>Invoke a superclass method that has been overridden in the subclass.</li>
+        <li>Invoke a superclass constructor.</li>
+    </ol>
+
+    <h3>1. Accessing a superclass field</h3>
+    <pre><code>class Parent {
+    int x = 10;
+}
+
+class Child extends Parent {
+    int x = 20;
+
+    void display() {
+        System.out.println("Child x = " + x);
+        System.out.println("Parent x = " + super.x);
+    }
+}
+
+class Main {
+    public static void main(String[] args) {
+        Child obj = new Child();
+        obj.display();
+    }
+}</code></pre>
+
+    <p><strong>Output:</strong></p>
+    <div class="output-box">
+Child x = 20<br>
+Parent x = 10
+    </div>
+
+    <h3>2. Calling a superclass method</h3>
+    <pre><code>class Parent {
+    void display() {
+        System.out.println("Parent method");
+    }
+}
+
+class Child extends Parent {
+    void display() {
+        System.out.println("Child method");
+        super.display(); // Calls Parent's display method
+    }
+}
+
+class Main {
+    public static void main(String[] args) {
+        Child obj = new Child();
+        obj.display();
+    }
+}</code></pre>
+
+    <p><strong>Output:</strong></p>
+    <div class="output-box">
+Child method<br>
+Parent method
+    </div>
+
+    <h3>3. Calling a superclass constructor</h3>
+    <pre><code>class Parent {
+    Parent(String name) {
+        System.out.println("Parent: " + name);
+    }
+}
+
+class Child extends Parent {
+    Child() {
+        super("Java"); // Explicit call to superclass constructor
+        System.out.println("Child constructor");
+    }
+}
+
+class Main {
+    public static void main(String[] args) {
+        new Child();
+    }
+}</code></pre>
+
+    <p><strong>Output:</strong></p>
+    <div class="output-box">
+Parent: Java<br>
+Child constructor
+    </div>
+
+    <h3>Important rules for <code>super(...)</code></h3>
+    <ul>
+        <li>A constructor call using <code>super(...)</code> invokes the matching superclass constructor.</li>
+        <li>When explicitly used, <code>super(...)</code> must be the <strong>first statement</strong> in the constructor body.</li>
+        <li>If no superclass constructor call is written, Java automatically inserts <code>super()</code> with no arguments. This requires an accessible no-argument constructor in the superclass.</li>
+    </ul>
+
+    <hr>
+
+    <h2>3.6 Method Overriding</h2>
+
+    <h3>Definition</h3>
+    <p>Method overriding occurs when a subclass provides its own specific implementation of an instance method that is already defined in its superclass, using an identical method name, return type, and parameter list.</p>
+    <p>Overriding allows a subclass to customize or replace the default behaviour of its parent class.</p>
+
+    <h3>Example</h3>
+    <pre><code>class Animal {
+    void sound() {
+        System.out.println("Animal makes a sound.");
+    }
+}
+
+class Dog extends Animal {
+    @Override
+    void sound() {
+        System.out.println("Dog barks.");
+    }
+}
+
+class Main {
+    public static void main(String[] args) {
+        Dog d = new Dog();
+        d.sound();
+    }
+}</code></pre>
+
+    <p><strong>Output:</strong></p>
+    <div class="output-box">Dog barks.</div>
+
+    <h3>Rules of method overriding</h3>
+    <ol>
+        <li>The method must be inherited from a superclass.</li>
+        <li>The method signature (name and parameter types) must match exactly.</li>
+        <li>The return type must be the same, or covariant (a subclass type) for reference types.</li>
+        <li>The overriding method cannot reduce the access level (e.g., if parent method is <code>protected</code>, child cannot make it <code>private</code>).</li>
+        <li><code>private</code> methods cannot be overridden because they are not visible to subclasses.</li>
+        <li><code>static</code> methods cannot be overridden; they are hidden (method hiding).</li>
+        <li><code>final</code> methods cannot be overridden.</li>
+        <li>The <code>@Override</code> annotation ensures compile-time validation that overriding rules are met.</li>
+    </ol>
+
+    <h3>Method overloading vs. method overriding</h3>
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 50%;">Method Overloading</th>
+                <th style="width: 50%;">Method Overriding</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Same method name with different parameter lists.</td>
+                <td>Same method name and exact same parameter list.</td>
+            </tr>
+            <tr>
+                <td>Can occur within a single class.</td>
+                <td>Requires an inheritance relationship between classes.</td>
+            </tr>
+            <tr>
+                <td>Compile-time polymorphism (Static binding).</td>
+                <td>Runtime polymorphism (Dynamic binding).</td>
+            </tr>
+            <tr>
+                <td>Return type can be different.</td>
+                <td>Return type must be identical or covariant.</td>
+            </tr>
+            <tr>
+                <td>Example: <code>add(int, int)</code> and <code>add(double, double)</code>.</td>
+                <td>Example: <code>Animal.sound()</code> and <code>Dog.sound()</code>.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <hr>
+
+    <h2>3.7 Dynamic Method Dispatch</h2>
+    <p><strong>Dynamic method dispatch</strong> is the runtime mechanism by which an invocation of an overridden instance method is resolved at runtime based on the actual object being referenced, rather than the reference variable's declared type.</p>
+    <p>It is the core foundation of <strong>runtime polymorphism</strong> in Java.</p>
+
+    <h3>Example: Dynamic dispatch</h3>
+    <pre><code>class Animal {
+    void sound() {
+        System.out.println("Animal sound");
+    }
+}
+
+class Dog extends Animal {
+    @Override
+    void sound() {
+        System.out.println("Dog barks");
+    }
+}
+
+class Cat extends Animal {
+    @Override
+    void sound() {
+        System.out.println("Cat meows");
+    }
+}
+
+class Main {
+    public static void main(String[] args) {
+        Animal a; // Superclass reference variable
+
+        a = new Dog(); // Refers to Dog object
+        a.sound();     // Calls Dog's sound()
+
+        a = new Cat(); // Refers to Cat object
+        a.sound();     // Calls Cat's sound()
+    }
+}</code></pre>
+
+    <p><strong>Output:</strong></p>
+    <div class="output-box">
+Dog barks<br>
+Cat meows
+    </div>
+
+    <h3>Explanation</h3>
+    <ul>
+        <li><code>Animal a</code> declares a superclass reference variable.</li>
+        <li><code>a = new Dog()</code> assigns a <code>Dog</code> object to <code>a</code>. When <code>a.sound()</code> is executed, the JVM checks the actual object type (<code>Dog</code>) and runs <code>Dog</code>'s version.</li>
+        <li><code>a = new Cat()</code> assigns a <code>Cat</code> object. The next call invokes <code>Cat</code>'s version.</li>
+    </ul>
+
+    <hr>
+
+    <h2>3.8 Abstract Classes and Abstract Methods</h2>
+
+    <h3>1. What is an abstract class?</h3>
+    <p>An abstract class is a class declared with the <code>abstract</code> modifier. It serves as a base blueprint for subclasses and cannot be instantiated directly with <code>new</code>.</p>
+    <p>An abstract class can contain both abstract methods (without body) and concrete methods (with body).</p>
+
+    <h3>2. What is an abstract method?</h3>
+    <p>An abstract method is a method declared without an implementation (without curly braces), ending with a semicolon:</p>
+    <pre><code>abstract void calculateArea();</code></pre>
+    <p>Concrete subclasses are required to provide the implementation for all inherited abstract methods.</p>
+
+    <h3>3. Example program: Abstract Shape class</h3>
+    <pre><code>abstract class Shape {
+    abstract void calculateArea(); // Abstract method
+}
+
+class Rectangle extends Shape {
+    int length = 10;
+    int breadth = 5;
+
+    @Override
+    void calculateArea() {
+        System.out.println("Rectangle area = " + (length * breadth));
+    }
+}
+
+class Circle extends Shape {
+    double radius = 7;
+
+    @Override
+    void calculateArea() {
+        System.out.println("Circle area = " + (Math.PI * radius * radius));
+    }
+}
+
+class Main {
+    public static void main(String[] args) {
+        Shape s;
+
+        s = new Rectangle();
+        s.calculateArea();
+
+        s = new Circle();
+        s.calculateArea();
+    }
+}</code></pre>
+
+    <p><strong>Output:</strong></p>
+    <div class="output-box">
+Rectangle area = 50<br>
+Circle area = 153.93804002589985
+    </div>
+
+    <h3>4. Important points about abstract classes</h3>
+    <ol>
+        <li>An abstract class cannot be directly instantiated (cannot write <code>new Shape()</code>).</li>
+        <li>An abstract class can have constructors, which run when a subclass object is created.</li>
+        <li>An abstract class can contain instance variables, static variables, and constants.</li>
+        <li>It can contain both abstract and concrete methods.</li>
+        <li>A concrete subclass must implement all inherited abstract methods unless the subclass itself is declared <code>abstract</code>.</li>
+        <li>An abstract class can extend another class and implement interfaces.</li>
+    </ol>
+
+    <hr>
+
+    <h2>3.9 Interfaces in Java</h2>
+
+    <h3>1. What is an interface?</h3>
+    <p>An interface is a pure blueprint of a class that defines a contract of methods that implementing classes must follow. It is used to achieve total abstraction and to support multiple inheritance of type in Java.</p>
+
+    <h3>2. Syntax of an interface</h3>
+    <pre><code>interface Printable {
+    void print(); // Implicitly public abstract
+}
+
+class Document implements Printable {
+    public void print() {
+        System.out.println("Printing document");
+    }
+}</code></pre>
+
+    <h3>3. Example program</h3>
+    <pre><code>interface Animal {
+    void sound();
+}
+
+class Dog implements Animal {
+    public void sound() {
+        System.out.println("Dog barks");
+    }
+}
+
+class Cat implements Animal {
+    public void sound() {
+        System.out.println("Cat meows");
+    }
+}
+
+class Main {
+    public static void main(String[] args) {
+        Animal a = new Dog();
+        a.sound();
+
+        a = new Cat();
+        a.sound();
+    }
+}</code></pre>
+
+    <p><strong>Output:</strong></p>
+    <div class="output-box">
+Dog barks<br>
+Cat meows
+    </div>
+
+    <h3>4. Important rules of interfaces</h3>
+    <ol>
+        <li>An interface cannot be instantiated directly.</li>
+        <li>A class implements an interface using the <code>implements</code> keyword.</li>
+        <li>A class can implement multiple interfaces separated by commas (<code>implements A, B</code>).</li>
+        <li>A class can extend one superclass and implement multiple interfaces simultaneously:
+            <pre><code>class C extends Parent implements A, B</code></pre>
+        </li>
+        <li>All fields in an interface are implicitly <code>public static final</code> constants.</li>
+        <li>All abstract methods in an interface are implicitly <code>public abstract</code>.</li>
+        <li>Modern Java (Java 8+) permits <code>default</code> and <code>static</code> methods with bodies, and Java 9+ permits <code>private</code> helper methods in interfaces.</li>
+    </ol>
+
+    <h3>Multiple interfaces example</h3>
+    <pre><code>interface Printable {
+    void print();
+}
+
+interface Showable {
+    void show();
+}
+
+class Demo implements Printable, Showable {
+    public void print() {
+        System.out.println("Print method");
+    }
+
+    public void show() {
+        System.out.println("Show method");
+    }
+}
+
+class Main {
+    public static void main(String[] args) {
+        Demo d = new Demo();
+        d.print();
+        d.show();
+    }
+}</code></pre>
+
+    <p><strong>Output:</strong></p>
+    <div class="output-box">
+Print method<br>
+Show method
+    </div>
+
+    <hr>
+
+    <h2>3.10 Types of Interfaces</h2>
+
+    <h3>1. Normal interface</h3>
+    <p>A normal interface declares multiple abstract methods.</p>
+    <pre><code>interface Calculator {
+    int add(int a, int b);
+    int subtract(int a, int b);
+}</code></pre>
+
+    <h3>2. Marker interface</h3>
+    <p>A marker interface (also called a tagging interface) contains <strong>no methods or constants</strong>. It simply marks a class as having a specific property or capability for the JVM or compiler.</p>
+    <p>Standard Java examples: <code>Serializable</code>, <code>Cloneable</code>, <code>Remote</code>.</p>
+
+    <pre><code>import java.io.Serializable;
+
+class Student implements Serializable {
+    int id;
+    String name;
+}</code></pre>
+
+    <h3>3. Functional interface</h3>
+    <p>A functional interface contains <strong>exactly one abstract method</strong>. It can be annotated with <code>@FunctionalInterface</code> and can be implemented concisely using Lambda expressions (Java 8+).</p>
+
+    <pre><code>@FunctionalInterface
+interface Greeting {
+    void sayHello();
+}
+
+class Main {
+    public static void main(String[] args) {
+        // Implementing functional interface using Lambda expression
+        Greeting g = () -> System.out.println("Hello Students!");
+
+        g.sayHello();
+    }
+}</code></pre>
+
+    <p><strong>Output:</strong></p>
+    <div class="output-box">Hello Students!</div>
+
+    <hr>
+
+    <h2>3.11 Abstract Class vs. Interface</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 50%;">Abstract Class</th>
+                <th style="width: 50%;">Interface</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Declared using the <code>abstract class</code> keyword.</td>
+                <td>Declared using the <code>interface</code> keyword.</td>
+            </tr>
+            <tr>
+                <td>A class inherits it using <code>extends</code>.</td>
+                <td>A class implements it using <code>implements</code>.</td>
+            </tr>
+            <tr>
+                <td>Can have instance variables and constants.</td>
+                <td>Can only have <code>public static final</code> constants.</td>
+            </tr>
+            <tr>
+                <td>Can have constructors.</td>
+                <td>Cannot have constructors.</td>
+            </tr>
+            <tr>
+                <td>Can contain abstract and concrete methods.</td>
+                <td>Contains abstract methods (and default/static methods in Java 8+).</td>
+            </tr>
+            <tr>
+                <td>A class can extend only one abstract class (Single inheritance).</td>
+                <td>A class can implement multiple interfaces (Multiple inheritance).</td>
+            </tr>
+            <tr>
+                <td>Best for sharing code and state among closely related classes.</td>
+                <td>Best for defining standard contracts among unrelated classes.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <hr>
+
+    <h2>3.12 The <code>final</code> Keyword in Inheritance</h2>
+    <p>The <code>final</code> keyword is used to restrict inheritance, overriding, and reassignment:</p>
+
+    <h3>1. Final class</h3>
+    <p>A final class cannot be extended by any subclass:</p>
+    <pre><code>final class A {
+}
+
+// class B extends A { } // Compile-time error: cannot inherit from final A</code></pre>
+
+    <h3>2. Final method</h3>
+    <p>A final method cannot be overridden by a subclass:</p>
+    <pre><code>class Parent {
+    final void display() {
+        System.out.println("Parent display");
+    }
+}
+
+class Child extends Parent {
+    // void display() { } // Compile-time error: cannot override final method
+}</code></pre>
+
+    <h3>3. Final variable</h3>
+    <p>A final variable acts as a constant and cannot be reassigned after initialization:</p>
+    <pre><code>final int MAX = 100;
+// MAX = 200; // Compile-time error: cannot assign a value to final variable MAX</code></pre>
+
+    <div class="exam-note">
+        <strong>Remember:</strong> <code>final</code> class prevents inheritance, <code>final</code> method prevents overriding, and <code>final</code> variable prevents reassignment.
+    </div>
+
+    <hr>
+
+    <!-- <h2>Important Programs for Chapter 3</h2>
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 10%;">No.</th>
+                <th style="width: 45%;">Program</th>
+                <th style="width: 45%;">Main Concept</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td><code>Animal</code> and <code>Dog</code></td>
+                <td>Basic single inheritance</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td><code>Country</code>, <code>State</code>, <code>City</code></td>
+                <td>Multilevel inheritance</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td><code>Vehicle</code>, <code>Car</code>, <code>Bike</code></td>
+                <td>Hierarchical inheritance</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td><code>Parent</code> and <code>Child</code> using <code>super</code></td>
+                <td>Superclass constructor and method invocation</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td><code>Animal</code>, <code>Dog</code>, <code>Cat</code></td>
+                <td>Method overriding</td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td><code>Shape</code>, <code>Rectangle</code>, <code>Circle</code></td>
+                <td>Abstract class and dynamic method dispatch</td>
+            </tr>
+            <tr>
+                <td>7</td>
+                <td><code>Printable</code> and <code>Showable</code></td>
+                <td>Multiple interfaces implementation</td>
+            </tr>
+            <tr>
+                <td>8</td>
+                <td><code>Serializable</code> and <code>Student</code></td>
+                <td>Marker interface demonstration</td>
+            </tr>
+            <tr>
+                <td>9</td>
+                <td><code>Greeting</code> using a lambda</td>
+                <td>Functional interface implementation</td>
+            </tr>
+            <tr>
+                <td>10</td>
+                <td>Final class and final method</td>
+                <td>Restrictions on inheritance and overriding</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <hr>
+
+    <h2>Chapter 3 — Exam and Viva Questions</h2> -->
+
+    <!-- <h3>Short-Answer Questions</h3>
+    <ol>
+        <li><strong>What is inheritance?</strong><br>Inheritance is an OOP mechanism where a new class derives properties and methods from an existing class.</li>
+        <li><strong>What is a superclass?</strong><br>The parent class from which members are inherited.</li>
+        <li><strong>What is a subclass?</strong><br>The child class that inherits accessible members from a superclass.</li>
+        <li><strong>What is the purpose of the extends keyword?</strong><br>It is used in class declarations to establish an inheritance relationship.</li>
+        <li><strong>What is an IS-A relationship?</strong><br>An object relationship where a subclass object is a specialized type of its superclass.</li>
+        <li><strong>Name the types of inheritance.</strong><br>Single, Multilevel, Hierarchical, Multiple, and Hybrid inheritance.</li>
+        <li><strong>Does Java support multiple inheritance through classes?</strong><br>No, Java does not support multiple class inheritance to avoid ambiguity.</li>
+        <li><strong>What is the use of the super keyword?</strong><br>To refer to superclass fields, invoke superclass methods, or call superclass constructors.</li>
+        <li><strong>What is method overriding?</strong><br>When a subclass provides its own implementation of an inherited instance method with an identical signature.</li>
+        <li><strong>What is dynamic method dispatch?</strong><br>The mechanism that selects overridden methods at runtime based on the actual object type.</li>
+        <li><strong>What is an abstract class?</strong><br>A class declared with <code>abstract</code> that cannot be instantiated and can contain abstract methods.</li>
+        <li><strong>What is an abstract method?</strong><br>A method declared without a body, ending with a semicolon, to be implemented by subclasses.</li>
+        <li><strong>What is an interface?</strong><br>A contract containing abstract methods and static constants used to achieve abstraction and multiple inheritance.</li>
+        <li><strong>What is the use of the implements keyword?</strong><br>Used by a class to implement one or more interfaces.</li>
+        <li><strong>What is a marker interface?</strong><br>An interface with no methods or fields, used to mark a class with special capability (e.g. <code>Serializable</code>).</li>
+        <li><strong>What is a functional interface?</strong><br>An interface having exactly one abstract method, compatible with lambda expressions.</li>
+        <li><strong>What is the purpose of @Override?</strong><br>A compiler annotation ensuring that the method correctly overrides an inherited superclass method.</li>
+        <li><strong>What is the use of the final keyword?</strong><br>Prevents class inheritance, prevents method overriding, and makes variables constant.</li>
+        <li><strong>Can an abstract class have a constructor?</strong><br>Yes, it runs during subclass instantiation to initialize superclass state.</li>
+        <li><strong>Can a class implement multiple interfaces?</strong><br>Yes, Java fully supports multiple interface implementation using commas.</li>
+    </ol>
+
+    <h3>Long-Answer Questions</h3>
+    <ol>
+        <li>Explain inheritance and its key advantages with a complete Java program.</li>
+        <li>Explain the different types of inheritance supported in Java with diagrams and examples.</li>
+        <li>Explain the three uses of the <code>super</code> keyword with code examples.</li>
+        <li>Explain method overriding and dynamic method dispatch with a clear example.</li>
+        <li>Explain abstract classes and abstract methods using a <code>Shape</code> hierarchy program.</li>
+        <li>Explain interfaces and how a class implements multiple interfaces with a program.</li>
+        <li>Differentiate between abstract classes and interfaces in detail.</li>
+        <li>Explain marker interfaces and functional interfaces with code examples.</li>
+        <li>Explain the use of the <code>final</code> keyword in controlling inheritance.</li>
+        <li>Explain how Java achieves multiple inheritance of type using interfaces.</li>
+    </ol> -->
+
+</body>
+</html>
