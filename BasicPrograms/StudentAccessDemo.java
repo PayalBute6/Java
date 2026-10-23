@@ -1,4 +1,4 @@
-class Student
+public class StudentAccessDemo
 {
     private int rollNo = 101;
     String name = "Amit";       // default
@@ -15,7 +15,7 @@ class Student
 
     public static void main(String[] args)
     {
-        Student s = new Student();
+        StudentAccessDemo s = new StudentAccessDemo();
 
         s.display();
 
