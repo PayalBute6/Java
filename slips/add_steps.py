@@ -1,6 +1,11 @@
+import os
 import re
 
-with open(r"F:\1.Java Practice\Java\selected_slips.html", "r", encoding="utf-8") as f:
+script_dir = os.path.dirname(os.path.abspath(__file__))
+root_dir = os.path.dirname(script_dir)
+target_file = os.path.join(root_dir, "Notes", "selected_slips.html")
+
+with open(target_file, "r", encoding="utf-8") as f:
     content = f.read()
 
 # First, process Java programs
@@ -68,7 +73,7 @@ if html_section_match:
     content = content.replace(html_section, new_html_section)
 
 # Finally, write it back
-with open(r"F:\1.Java Practice\Java\selected_slips.html", "w", encoding="utf-8") as f:
+with open(target_file, "w", encoding="utf-8") as f:
     f.write(content)
 
 print("Applied steps formatting!")
