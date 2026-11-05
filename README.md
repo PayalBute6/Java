@@ -312,7 +312,6 @@ java BouncingBall
 
 ---
 
-
 ## 📜 License & Academic Integrity
 
 This repository is maintained for educational, reference, and self-study purposes. All assignments and slips are structured to adhere to academic curricula and industry programming standards.
