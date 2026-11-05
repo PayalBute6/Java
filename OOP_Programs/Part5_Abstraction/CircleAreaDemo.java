@@ -1,4 +1,4 @@
-package OOP_Programs.Part5_Abstraction;
+package Part5_Abstraction;
 
 import java.util.Scanner;
 
