@@ -1,3 +1,39 @@
+# Compiled Bytecode
 *.class
+
+# Package Files
+*.war
+*.ear
+
+# Virtual Machine Crash Logs
+hs_err_pid*
+replay_pid*
+
+# Build & Output Folders
+bin/
+build/
+out/
+target/
+
+# Log files
+*.log
+
+# OS-generated files
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+*.stackdump
+Desktop.ini
+.DS_Store
+.Spotlight-V100
+.Trashes
+
+# IDE & Editor Specific
+.idea/
+*.iml
+.vscode/
+
+# Windows-reserved filename safety
 Con.java
 **/Con.java
