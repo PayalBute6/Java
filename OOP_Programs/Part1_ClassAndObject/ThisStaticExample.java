@@ -1,4 +1,4 @@
-package OOP_Programs.Part1_ClassAndObject;
+package Part1_ClassAndObject;
 
 /**
  * Chapter 2.5 - this Keyword, Static Fields, Static Methods and Static Blocks
