@@ -183,15 +183,14 @@ cd BasicPrograms
 javac TwoSum.java
 java TwoSum
 
-# Example 2: Running an OOP demonstration
-cd ../OOP_Programs/Part1_ClassAndObject
-javac Program01_StudentClass.java
-java Program01_StudentClass
+# Example 2: Running an OOP demonstration (from OOP_Programs root)
+cd ../OOP_Programs
+javac Part1_ClassAndObject/Program01_StudentClass.java
+java Part1_ClassAndObject.Program01_StudentClass
 
 # Example 3: Running an abstraction example
-cd ../Part5_Abstraction
-javac Program14_AbstractVehicle.java
-java Program14_AbstractVehicle
+javac Part5_Abstraction/Program14_AbstractVehicle.java
+java Part5_Abstraction.Program14_AbstractVehicle
 ```
 
 ---
@@ -238,7 +237,7 @@ java ChatClient
 
 ### 4. GUI & AWT Frame Applications
 
-GUI programs run as standalone desktop frames:
+Standard AWT GUI programs run as standalone desktop frames:
 
 ```bash
 cd GUI_Applets
@@ -251,6 +250,12 @@ cd GUI_Applets
 javac BouncingBall.java
 java BouncingBall
 ```
+
+> **Note on JavaFX (`PrimeCheck.java`)**: If using JDK 11+, compile and run JavaFX applications with the OpenJFX SDK module path:
+> ```bash
+> javac --module-path <path-to-javafx-sdk>/lib --add-modules javafx.controls PrimeCheck.java
+> java --module-path <path-to-javafx-sdk>/lib --add-modules javafx.controls PrimeCheck
+> ```
 
 ---
 
