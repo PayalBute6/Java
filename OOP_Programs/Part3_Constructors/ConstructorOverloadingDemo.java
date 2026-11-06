@@ -1,4 +1,4 @@
-package OOP_Programs.Part3_Constructors;
+package Part3_Constructors;
 
 /**
  * Chapter 2.4 - Constructors and Constructor Overloading
