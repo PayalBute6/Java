@@ -1,33 +1,30 @@
 
 import java.util.Scanner;
 
-class Vehicle {
-
-    String company;
-    int price;
-
-    void displayVehicle() {
-        System.out.println("Company: " + company);
-        System.out.println("Price: " + price);
-    }
-}
-
-class Car extends Vehicle {
-
-    String model;
-    int seats;
-
-    void displayCar() {
-        displayVehicle();
-        System.out.println("Model: " + model);
-        System.out.println("Seats: " + seats);
-    }
-}
-
 public class VehicleDemo {
 
-    public static void main(String args[]) {
+    static class Vehicle {
+        String company;
+        int price;
 
+        void displayVehicle() {
+            System.out.println("Company: " + company);
+            System.out.println("Price  : " + price);
+        }
+    }
+
+    static class Car extends Vehicle {
+        String model;
+        int seats;
+
+        void displayCar() {
+            displayVehicle();
+            System.out.println("Model  : " + model);
+            System.out.println("Seats  : " + seats);
+        }
+    }
+
+    public static void main(String args[]) {
         Scanner sc = new Scanner(System.in);
         Car c = new Car();
 
@@ -36,6 +33,7 @@ public class VehicleDemo {
 
         System.out.print("Enter price: ");
         c.price = sc.nextInt();
+        sc.nextLine(); // Consume newline leftover from nextInt()
 
         System.out.print("Enter model: ");
         c.model = sc.nextLine();
@@ -49,3 +47,4 @@ public class VehicleDemo {
         sc.close();
     }
 }
+
